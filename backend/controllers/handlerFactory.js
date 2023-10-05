@@ -65,25 +65,28 @@ exports.getOne = (Model, popOptions) =>
         });
     });
 
-exports.getAll = Model =>
-    catchAsync(async (req, res, next) => {
-        let filter = {};
-        if (req.params.tourId) filter = { tour: req.params.tourId };
+exports.getAll = (Model, excludedFields = '') =>
+  catchAsync(async (req, res, next) => {
+    let filter = {};
+    if (req.params.tourId) filter = { tour: req.params.tourId };
 
-        const features = new APIFeatures(Model.find(filter), req.query)
-            .filter()
-            .sort()
-            .limitFields()
-            .paginate();
-        // const doc = await features.query.explain();
-        const doc = await features.query;
+    const features = new APIFeatures(Model.find(filter), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
+    
+    // Apply field exclusion using .select()
+    features.query = features.query.select(`${excludedFields}`);
 
-        // SEND RESPONSE
-        res.status(200).json({
-            status: 'success',
-            results: doc.length,
-            data: {
-                data: doc
-            }
-        });
+    const doc = await features.query;
+
+    // SEND RESPONSE
+    res.status(200).json({
+      status: 'success',
+      results: doc.length,
+      data: {
+        data: doc,
+      },
     });
+  });

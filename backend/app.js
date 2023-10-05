@@ -14,6 +14,8 @@ const globalErrorHandler = require('./controllers/errorController');
 const app = express();
 const adminRouter = require('./routes/adminRoutes.js');
 const userRouter = require('./routes/userRoutes.js');
+const patientRouter = require('./routes/patientRoutes.js');
+const pharmacistRouter = require('./routes/pharmacistRoutes.js');
 
 app.enable('trust proxy');
 
@@ -57,6 +59,9 @@ app.use(compression());
 //Please use the following format when adding new routers, this means that any request begining with this route  /api/v1/exampleRouter after the domain will be handled by the handlers of routes inside this router
 app.use('/api/v1/admin', adminRouter);
 app.use('/api/v1/user', userRouter);
+app.use('/api/v1/patient', patientRouter);
+app.use('/api/v1/pharmacist', pharmacistRouter);
+
 //404 Error , YOU MUST PUT YOUR ROUTERS ABOVE THAT COMMENT 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
