@@ -32,6 +32,10 @@ const medicineSchema = new mongoose.Schema({
         type: Number,
         required: [true, 'A medicine must have a quantity'],
     },
+    sales: {
+        type: Number,
+        default: 0,
+     },
     expiryDate: {
         type: Date,
         required: [true, 'A medicine must have a expiry date'],
