@@ -13,7 +13,7 @@ router.route('/getmedicines/pharmacist')
   router.route('/getmedicines/admin')
   .get(
     authController.protect,
-    authController.restrictTo('admin'),
+    authController.restrictTo('administrator'),
     medicineController.getAllMedicinesForUserAndAdmin
   );
 
