@@ -17,7 +17,7 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
     const role = user.role;
     await userModel.findByIdAndDelete(req.params.id);
 
-    if (role === 'doctor') {
+    if (role === 'pharmasict') {
         await pharmasictModel.findByIdAndDelete(req.params.id);
     }
     if (role === 'patient') {

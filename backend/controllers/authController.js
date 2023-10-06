@@ -70,7 +70,7 @@ exports.signup = catchAsync(async (req, res, next) => {
         if(req.body?.role === undefined || req.body?.role === enums.ROLE.PATIENT )
             await Patient.create(req.body)
 
-        if(req.body.role ===  enums.ROLE.DOCTOR) 
+        if(req.body.role ===  enums.ROLE.PHARMACIST) 
             await Pharmacist.create(req.body)
         createSendToken(newUser, 201, req, res);
         }
@@ -154,9 +154,7 @@ exports.restrictTo = (...roles) => {
     if (!username || ! (await user.correctPassword(password, user.password))) {
        return next(new AppError("Invalid Credentials",401));
     }
-    if((user.role === 'doctor') && (!doctor.find({user:user.id}).isApproved)){
-        return next(new AppError("Doctor is not approved",400));
-    }
+    
     createSendToken(user, 200, req, res);
     }
  );
