@@ -1,9 +1,9 @@
 const userModel = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
-const factory = require('./handlerFactory');
+// const fact= = require('./handlerFactory');
 const AppError = require('../utils/appError');
-const patientModel = require('../models/patientModel');
-const pharmasictModel = require("../models/pharmacistModel")
+const Patient = require('../models/patientModel');
+const Pharmacist = require("../models/pharmacistModel")
 
 
 exports.deleteUser = catchAsync(async (req, res, next) => {
@@ -17,11 +17,11 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
     const role = user.role;
     await userModel.findByIdAndDelete(req.params.id);
 
-    if (role === 'pharmasict') {
-        await pharmasictModel.findByIdAndDelete(req.params.id);
+    if (role === 'pharmacist') {
+        await Pharmacist.findOneAndDelete( {user: req.params.id});
     }
     if (role === 'patient') {
-        await patientModel.findByIdAndDelete(req.params.id);
+        await Patient.findOneAndDelete( {user: req.params.id});
     }
 
     res.status(204).json({

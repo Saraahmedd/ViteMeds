@@ -4,7 +4,7 @@ const patientController = require("../controllers/patientController");
 const authController = require("../controllers/authController");
 
 router
-  .route("/getpatient/:id")
+  .route("/:id")
   .get(
     authController.protect,
     authController.restrictTo("administrator"),

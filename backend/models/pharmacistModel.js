@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 
 const pharmacistSchema = new mongoose.Schema({
     user: {
@@ -6,6 +7,21 @@ const pharmacistSchema = new mongoose.Schema({
         ref: 'User',
         required: [true, 'Booking must belong to a User!']
     },
+    name: {
+        type: String,
+        required: [true, 'A pharmacist must have a name']
+
+    }, email: {
+        type: String,
+    required: true,
+    unique: true,
+    validate: [validator.isEmail, 'Please provide a valid email']
+
+    },dateOfBirth: {
+        type: Date,
+        required: true
+      },
+
     phoneNumber: {
         type: Number,
         required: [true, 'A pharmacist must have a phone number'],
@@ -19,22 +35,15 @@ const pharmacistSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    pharmacyDegree: {
+    educationalBackground: {
         type: String,
         required: [true, 'A pharmacist must have a pharmacy degree'],
-    },
-    pharmacyName: {
+    },affiliation: {
         type: String,
-        required: [true, 'A pharmacist must have a pharmacy name'],
+        required: [true, 'A pharmacist must have an affiliation'],
     },
-
-    workingLicense: {
-
-        type: String,
-        required: [true, 'A pharmacist must have a working license'],
-    },
-    workingHours: {
-        type: String,
+    hourlyRate: {
+        type: Number,
         required: [true, 'A pharmacist must have a working hours'],
     },
 

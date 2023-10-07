@@ -5,3 +5,5 @@ const AppError = require("../utils/appError");
 const factory = require("./handlerFactory");
 
 exports.getPharmacist = factory.getOne(Pharmacist);
+
+exports.getAllPharmacists = factory.getAll(Pharmacist);
