@@ -9,6 +9,8 @@ const compression = require('compression');
 const cors = require('cors');
 const AppError = require('./utils/appError')
 const globalErrorHandler = require('./controllers/errorController');
+const dotenv = require('dotenv');
+dotenv.config({ path: './config.env' });
 
 // Start express app
 const app = express();
