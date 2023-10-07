@@ -3,6 +3,10 @@ const router = express.Router();
 const authController = require('../controllers/authController');
 const medicineController = require('../controllers/medicineController');
 
+const { protect } = require('../controllers/authController');
+
+router.use(protect);
+
 router.route('/getmedicines/pharmacist')
   .get(
     authController.protect,
