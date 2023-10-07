@@ -7,16 +7,16 @@ const { protect } = require('../controllers/authController');
 
 router.use(protect);
 
+router.get('/:id', medicineController.getMedicineById)
+
 router.route('/getmedicines/pharmacist')
   .get(
-    authController.protect,
     authController.restrictTo('pharmacist'),
     medicineController.getAllMedicinesForPharmacist
   );
 
   router.route('/getmedicines/admin')
   .get(
-    authController.protect,
     authController.restrictTo('administrator'),
     medicineController.getAllMedicinesForUserAndAdmin
   );
@@ -27,13 +27,22 @@ router.route('/getmedicines/pharmacist')
   );
 
 
-router.post('/new-medicine',medicineController.createNewMedicine)
+router.route('/new-medicine')
+  .post(    
+  authController.restrictTo('pharmacist'),
+  medicineController.createNewMedicine
+);
 
-router.get('/:id', medicineController.getMedicineById)
+router.route('/update/:id')
+  .patch(    
+  authController.restrictTo('pharmacist'),
+  medicineController.updateMedicine
+);
 
-router.patch('/update/:id', medicineController.updateMedicine)
-
-router.delete('/delete/:id', medicineController.deleteMedicine)
-
+router.route('/delete/:id')
+  .delete(    
+  authController.restrictTo('pharmacist'),
+  medicineController.deleteMedicine
+  );
 
   module.exports = router;
