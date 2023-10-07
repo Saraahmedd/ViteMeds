@@ -23,4 +23,13 @@ router.route('/getmedicines/pharmacist')
   );
 
 
+router.post('/new-medicine',medicineController.createNewMedicine)
+
+router.get('/:id', medicineController.getMedicineById)
+
+router.patch('/update/:id', medicineController.updateMedicine)
+
+router.delete('/delete/:id', medicineController.deleteMedicine)
+
+
   module.exports = router;
