@@ -147,7 +147,6 @@ exports.restrictTo = (...roles) => {
           new AppError('You do not have permission to perform this action', 403)
         );
       }
-  
       next();
     };
   };
@@ -160,7 +159,7 @@ exports.restrictTo = (...roles) => {
     }
     const user= await User.findOne({username}).select('+password')
 
-    if (!username || ! (await user.correctPassword(password, user.password))) {
+    if (!user || ! (await user.correctPassword(password, user.password))) {
        return next(new AppError("Invalid Credentials",401));
     }
     
