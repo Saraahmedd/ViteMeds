@@ -7,7 +7,7 @@ const { protect } = require('../controllers/authController');
 
 router.use(protect);
 
-router.get('/:id', medicineController.getMedicineById)
+
 
 router.route('/getmedicines/pharmacist')
   .get(
@@ -44,5 +44,7 @@ router.route('/delete/:id')
   authController.restrictTo('pharmacist'),
   medicineController.deleteMedicine
   );
+
+router.get('/:id', medicineController.getMedicineById)
 
   module.exports = router;
