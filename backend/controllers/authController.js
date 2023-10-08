@@ -66,6 +66,15 @@ exports.signup = catchAsync(async (req, res, next) => {
       }); 
 
     req.body.user = newUser.id;
+    if(req.body.role === enums.ROLE.ADMIN) {
+        res.status(400).json({
+          status: "success",
+          data : {
+            data: newUser
+          }
+      })
+      return;
+    }
      try {
         if(req.body?.role === undefined || req.body?.role === enums.ROLE.PATIENT )
             await Patient.create(req.body)
