@@ -7,6 +7,13 @@ exports.getAllMedicinesForUserAndAdmin = factory.getAll(Medicine,'-sales -quanti
 exports.getAllMedicinesForPharmacist = factory.getAll(Medicine);
 
 exports.getMedicineById = factory.getOne(Medicine);
+
+exports.updateMedicine = catchAsync(async (req, res, next) => {
+        const excludedFields = ['name', 'description', 'medicinalUses', 'medicineIngredients'];
+        excludedFields.forEach(field => delete req.body[field]);
+        factory.updateOne(Medicine)(req, res, next);
+    });
+
+
 exports.createNewMedicine = factory.createOne(Medicine)
-exports.updateMedicine = factory.updateOne(Medicine)
 exports.deleteMedicine = factory.deleteOne(Medicine);
