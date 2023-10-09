@@ -1,13 +1,14 @@
 import axios from 'axios';
+import baseURL from '../baseURL';
 
 import {
     GET_PHARMACISTS_REQUEST,
     GET_PHARMACISTS_SUCCESS,
     GET_PHARMACISTS_FAIL,
-
     GET_PHARMACIST_REQUEST,
     GET_PHARMACIST_SUCCESS,
-    GET_PHARMACIST_FAIL,
+    GET_PHARMACIST_FAIL
+
 } from '../constants/pharmacistConstants';
 
 export const getPharmacists = () => async (dispatch) => {
@@ -15,8 +16,16 @@ export const getPharmacists = () => async (dispatch) => {
         dispatch({
             type: GET_PHARMACISTS_REQUEST,
         });
-
-        const { data } = await axios.get(`/api/v1/pharmacist`);
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true
+        };
+        const { data } = await axios.get(
+            `${baseURL}/api/v1/pharmacist`,
+            config
+        );
 
         dispatch({
             type: GET_PHARMACISTS_SUCCESS,
@@ -38,8 +47,17 @@ export const getPharmacist = (id) => async (dispatch) => {
             type: GET_PHARMACIST_REQUEST,
         });
 
-        const { data } = await axios.get(`/api/v1/pharmacist/${id}`);
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true
+        };
 
+        const { data } = await axios.get(
+            `${baseURL}/api/v1/pharmacist/${id}`,
+            config
+        );
         dispatch({
             type: GET_PHARMACIST_SUCCESS,
             payload: data.data,

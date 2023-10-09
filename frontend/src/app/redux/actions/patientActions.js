@@ -5,10 +5,10 @@ import {
     VIEW_PATIENTS_REQUEST,
     VIEW_PATIENTS_SUCCESS,
     VIEW_PATIENTS_FAIL,
-
     VIEW_PATIENT_REQUEST,
     VIEW_PATIENT_SUCCESS,
-    VIEW_PATIENT_FAIL,
+    VIEW_PATIENT_FAIL
+
 } from '../constants/patientConstants';
 
 export const viewPatients = () => async (dispatch) => {
@@ -21,6 +21,7 @@ export const viewPatients = () => async (dispatch) => {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials: true
         };
         const { data } = await axios.get(
             `${baseURL}/api/v1/patient`,
@@ -52,6 +53,7 @@ export const viewPatient = (id) => async (dispatch) => {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials: true
         };
         const { data } = await axios.get(
             `${baseURL}/api/v1/patient/${id}`,

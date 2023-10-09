@@ -1,26 +1,26 @@
 import axios from 'axios';
 import baseURL from '../baseURL';
 
+import { formulateQueryString } from '../queryStringBuilder';
+
+
 import {
     ADD_MEDICINE_REQUEST,
     ADD_MEDICINE_SUCCESS,
     ADD_MEDICINE_FAIL,
-
     MEDICINE_EDIT_REQUEST,
     MEDICINE_EDIT_SUCCESS,
     MEDICINE_EDIT_FAIL,
-
     MEDICINE_DELETE_REQUEST,
     MEDICINE_DELETE_SUCCESS,
     MEDICINE_DELETE_FAIL,
-
     MEDICINE_GET_BY_ID_REQUEST,
     MEDICINE_GET_BY_ID_SUCCESS,
     MEDICINE_GET_BY_ID_FAIL,
+    MEDICINES_VIEW_SUCCESS,
+    MEDICINES_VIEW_REQUEST,
+    MEDICINES_VIEW_FAIL
 
-    MEDICINE_GET_ALL_REQUEST,
-    MEDICINE_GET_ALL_SUCCESS,
-    MEDICINE_GET_ALL_FAIL,
 
 } from '../constants/medicineConstants';
 
@@ -29,17 +29,20 @@ export const addMedicine = (medicine) => async (dispatch) => {
         dispatch({
             type: ADD_MEDICINE_REQUEST,
         });
+        console.log(medicine)
 
         const config = {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials: true
         };
         const { data } = await axios.post(
             `${baseURL}/api/v1/medicines/new-medicine`,
             medicine,
             config
         );
+        console.log(data)
 
         dispatch({
             type: ADD_MEDICINE_SUCCESS,
@@ -47,6 +50,9 @@ export const addMedicine = (medicine) => async (dispatch) => {
         });
     }
     catch (error) {
+        // print error message 
+        console.log(error)
+
         dispatch({
             type: ADD_MEDICINE_FAIL,
             payload: error.response
@@ -66,6 +72,7 @@ export const editMedicine = (id, medicine) => async (dispatch) => {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials: true
         };
         const { data } = await axios.patch(
             `${baseURL}/api/v1/medicines/update/${id}`,
@@ -98,12 +105,12 @@ export const deleteMedicine = (id) => async (dispatch) => {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials: true
         };
         const { data } = await axios.delete(
             `${baseURL}/api/v1/medicines/delete/${id}`,
             config
         );
-
         dispatch({
             type: MEDICINE_DELETE_SUCCESS,
             payload: data.data,
@@ -130,12 +137,12 @@ export const getMedicineById = (id) => async (dispatch) => {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials: true
         };
         const { data } = await axios.get(
             `${baseURL}/api/v1/medicines/${id}`,
             config
         );
-
         dispatch({
             type: MEDICINE_GET_BY_ID_SUCCESS,
             payload: data.data,
@@ -151,75 +158,37 @@ export const getMedicineById = (id) => async (dispatch) => {
     }
 }
 
-export const getAllMedicines = () => async (dispatch) => {
+export const getMedicinesAction = (queryObj) => async (dispatch) => {
     try {
+
         dispatch({
-            type: MEDICINE_GET_ALL_REQUEST,
+            type: MEDICINES_VIEW_REQUEST,
         });
 
         const config = {
             headers: {
                 'Content-Type': 'application/json',
             },
+            withCredentials: true
         };
+
+        const queryStr = formulateQueryString(queryObj)
+
         const { data } = await axios.get(
-            `${baseURL}/api/v1/medicines/getmedicines`,
+            `${baseURL}/api/v1/medicines/getmedicines?${queryStr}`,
             config
         );
-
         dispatch({
-            type: MEDICINE_GET_ALL_SUCCESS,
+            type: MEDICINES_VIEW_SUCCESS,
             payload: data.data,
         });
-    }
-    catch (error) {
+
+    } catch (error) {
         dispatch({
-            type: MEDICINE_GET_ALL_FAIL,
+            type: MEDICINES_VIEW_FAIL,
             payload: error.response
                 ? error.response.data.message
-                : 'Get medicine failed. Please try again.',
+                : 'Error Retrieving medicines. Please try again.',
         });
     }
-}
-import {
-    MEDICINES_VIEW_FAIL,
-    MEDICINES_VIEW_SUCCESS,
-    MEDICINES_VIEW_REQUEST
-} from '../constants/medicineConstants';
-import { formulateQueryString } from '../queryStringBuilder';
-
-export const getMedicinesAction = (queryObj) => async (dispatch) => {
-  try {
-    
-    dispatch({
-      type: MEDICINES_VIEW_REQUEST,
-    });
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      withCredentials: true
-    };
-
-    const queryStr = formulateQueryString(queryObj)
-  
-    const { data } = await axios.get(
-      `${baseURL}/api/v1/medicines/getmedicines?${queryStr}`,
-      config
-    );
-
-    dispatch({
-      type: MEDICINES_VIEW_SUCCESS,
-      payload: data.data,
-    });
-
-  } catch (error) {
-    dispatch({
-      type: MEDICINES_VIEW_FAIL,
-      payload: error.response
-        ? error.response.data.message
-        : 'Error Retrieving medicines. Please try again.',
-    });
-  }
 };
