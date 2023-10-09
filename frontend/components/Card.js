@@ -1,10 +1,10 @@
 const { Button } = require("./Button");
 
-function Card ({ title, subtitle, text, image = "", buttonText = "", headerText = "", onClick, onClickButton, children }) {
+function Card ({ title, subtitle, text, className, image = "", buttonText = "", headerText = "", onClick, onClickButton, children }) {
 
     return (
         <>
-            <div className={`card ${onClick ? 'hover-button' : ''}`} role={onClick ? "button" : ""}>
+            <div className={`card ${onClick ? 'hover-button' : ''} ${className}`} role={onClick ? "button" : ""}>
                 {image}
                 {headerText && <div className="card-header">{headerText}</div>}
                 <div className="card-body">
