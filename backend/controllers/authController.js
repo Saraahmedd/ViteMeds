@@ -66,15 +66,6 @@ exports.signup = catchAsync(async (req, res, next) => {
       }); 
 
     req.body.user = newUser.id;
-    if(req.body.role === enums.ROLE.ADMIN) {
-        res.status(400).json({
-          status: "success",
-          data : {
-            data: newUser
-          }
-      })
-      return;
-    }
      try {
         if(req.body?.role === undefined || req.body?.role === enums.ROLE.PATIENT )
             await Patient.create(req.body)
@@ -147,6 +138,7 @@ exports.restrictTo = (...roles) => {
           new AppError('You do not have permission to perform this action', 403)
         );
       }
+  
       next();
     };
   };
@@ -159,7 +151,7 @@ exports.restrictTo = (...roles) => {
     }
     const user= await User.findOne({username}).select('+password')
 
-    if (!user || ! (await user.correctPassword(password, user.password))) {
+    if (!username || ! (await user.correctPassword(password, user.password))) {
        return next(new AppError("Invalid Credentials",401));
     }
     
