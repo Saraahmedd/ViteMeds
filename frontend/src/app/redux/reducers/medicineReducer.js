@@ -134,7 +134,6 @@ export const deleteMedicineReducer = (state = deleteMedicineInitialState, action
         case MEDICINE_DELETE_SUCCESS:
             return {
                 ...state,
-                medicine: action.payload,
                 loading: false,
                 error: null,
             };
