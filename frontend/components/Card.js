@@ -5,7 +5,7 @@ function Card ({ title, subtitle, text, image = "", buttonText = "", headerText 
     return (
         <>
             <div className={`card ${onClick ? 'hover-button' : ''}`} role={onClick ? "button" : ""}>
-                {image && <Image className="card-img-top" src={image} />}
+                {image}
                 {headerText && <div className="card-header">{headerText}</div>}
                 <div className="card-body">
                     {title && <h5 className="card-title">{title}</h5>}
