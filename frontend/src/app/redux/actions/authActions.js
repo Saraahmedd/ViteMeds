@@ -12,7 +12,6 @@ import baseURL from '../baseURL';
 
 export const login = (username, password) => async (dispatch) => {
   try {
-    console.log("hey")
     dispatch({
       type: USER_LOGIN_REQUEST,
     });
@@ -34,7 +33,7 @@ export const login = (username, password) => async (dispatch) => {
       payload: data.data,
     });
 
-    localStorage.setItem('userInfo', JSON.stringify(data)); 
+    localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
@@ -47,7 +46,6 @@ export const login = (username, password) => async (dispatch) => {
 
 export const registerAction = (reqBody) => async (dispatch) => {
   try {
-    console.log("Registering")
     dispatch({
       type: USER_REGISTER_REQUEST,
     });
@@ -57,7 +55,7 @@ export const registerAction = (reqBody) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
       withCredentials: true
-      
+
     };
     const { data } = await axios.post(
       `${baseURL}/api/v1/user/signup`,
@@ -70,9 +68,8 @@ export const registerAction = (reqBody) => async (dispatch) => {
       payload: data.data,
     });
 
-    localStorage.setItem('userInfo', JSON.stringify(data)); 
+    localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
-    console.log(error);
     dispatch({
       type: USER_REGISTER_FAIL,
       payload: error.response
