@@ -160,7 +160,7 @@ export const getMedicineById = (id) => async (dispatch) => {
 
 export const getMedicinesAction = (queryObj) => async (dispatch) => {
     try {
-
+       
         dispatch({
             type: MEDICINES_VIEW_REQUEST,
         });
@@ -174,10 +174,18 @@ export const getMedicinesAction = (queryObj) => async (dispatch) => {
 
         const queryStr = formulateQueryString(queryObj)
 
+        let url = ""
+
+        if( JSON.parse(localStorage.getItem('userInfo')).data.user.role !== "pharmacist")
+            url= `${baseURL}/api/v1/medicines/getmedicines?${queryStr}`;
+        else
+            url = `${baseURL}/api/v1/medicines/getmedicines/pharmacist?${queryStr}`
         const { data } = await axios.get(
-            `${baseURL}/api/v1/medicines/getmedicines?${queryStr}`,
+            url,
             config
         );
+
+        console.log("hey")
         dispatch({
             type: MEDICINES_VIEW_SUCCESS,
             payload: data.data,

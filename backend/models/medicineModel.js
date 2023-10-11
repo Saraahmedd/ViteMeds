@@ -8,8 +8,6 @@ const medicineSchema = new mongoose.Schema({
         required: true,
         unique: true,
         trim: true,
-        maxlength: [40, 'A medicine name must have less or equal then 40 characters'],
-        minlength: [10, 'A medicine name must have more or equal then 10 characters'],
     },
 
     description: {
@@ -28,10 +26,6 @@ const medicineSchema = new mongoose.Schema({
         type: Number,
         default: 0,
      },
-    expiryDate: {
-        type: Date,
-        required: [true, 'A medicine must have a expiry date'],
-    },
     medicinalUses: {
         type: [String],
         required: [true, 'A medicine must have a medicinal use'],
