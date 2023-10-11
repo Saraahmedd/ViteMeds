@@ -37,3 +37,35 @@ export const removeUser = (userID) => async (dispatch) => {
     });
   }
 };
+
+export const getAllUsers = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: USERS_GET_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true
+    };
+    const { data } = await axios.get(
+      `${baseURL}/api/v1/user`,
+      config
+    );
+
+    dispatch({
+      type: USERS_GET_SUCCESS,
+      payload: data.data,
+    });
+
+  } catch (error) {
+    dispatch({
+      type: USERS_GET_FAIL,
+      payload: error.response
+        ? error.response.data.message
+        : 'Error GETTINS users. Please try again.',
+    });
+  }
+};
