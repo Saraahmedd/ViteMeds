@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Button } from "../../../../components/Button";
 import Navbar from '../../../../components/Navbar';
 import Footer from '../../../../components/Footer';
+import { useDispatch } from 'react-redux';
 
 const SignUp = () => {
     const [formData, setFormData] = useState({

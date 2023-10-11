@@ -67,6 +67,8 @@ const Register = () => {
         }));
     };
 
+    const [action] = useState("Sign up");
+
     return (
         <>
             <Navbar />
