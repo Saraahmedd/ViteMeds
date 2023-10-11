@@ -33,10 +33,10 @@ function LoginForm() {
 
   return (
     <> 
-     <Navbar/>  
+    <Navbar/> 
     <div className="containerz">
       <div className="headerz">
-        <div className="textz">Login</div>
+        <div className="textz text-primary">Login</div>
         <div className="underlinez"></div>
       </div>
       <div className="inputsz">
@@ -60,7 +60,7 @@ function LoginForm() {
         </div>
       </div>
       <div className="forgot-passwordz">
-        Lost password?<span> Click Here!</span>
+        Lost password?<span className='text-primary'> Click Here!</span>
       </div>
       <div className="submit-containerz">
         <Button
@@ -69,7 +69,7 @@ function LoginForm() {
         ></Button>
       </div>
     </div>
-     <Footer/> 
+    <Footer/>
     </>
   );
 }

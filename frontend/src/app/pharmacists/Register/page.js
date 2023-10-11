@@ -63,9 +63,10 @@ const SignUp = () => {
         <>
              <Navbar /> 
             <div className="containerz">
-                <div className="headerz">
-                    <div className="textz">{action}</div>
+                <div className="headerz text-center">
+                    <div className="textz text-primary">{action}</div>
                     <div className="underlinez"></div>
+                    <div className="textsub text-muted"> Join us as a Pharmacist!</div>
                 </div>
                 <div className="inputsz">
                     <div className="inputz">
@@ -145,7 +146,7 @@ const SignUp = () => {
                     <div className="inputz">
                         <input
                             type="text"
-                            placeholder='Mobile Number'
+                            placeholder=' Mobile Number'
                             name="mobileNumber"
                             value={formData.mobileNumber}
                             onChange={handleInputChange}
@@ -155,7 +156,7 @@ const SignUp = () => {
                     <div className="inputz">
                         <input
                             type="text"
-                            placeholder='gender'
+                            placeholder=' Gender'
                             name="gender"
                             value={formData.gender}
                             onChange={handleInputChange}
@@ -165,7 +166,7 @@ const SignUp = () => {
                     <div className="inputz">
                         <input
                             type="text"
-                            placeholder='Speciality'
+                            placeholder=' Speciality'
                             name="speciality"
                             value={formData.speciality}
                             onChange={handleInputChange}
@@ -175,7 +176,7 @@ const SignUp = () => {
                     <div className="inputz">
                         <input
                             type="number"
-                            placeholder='Working Hours'
+                            placeholder=' Working Hours'
                             name="workingHours"
                             value={formData.workingHours}
                             onChange={handleInputChange}

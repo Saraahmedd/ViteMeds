@@ -19,21 +19,14 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="/#About" className="text-white text-decoration-none">
+                <a href="/#about" className="text-white text-decoration-none">
                 <div className="link-hover">
                     About Us
                 </div>
                 </a>
               </li>
               <li>
-                <a href="/services" className="text-white text-decoration-none">
-                <div className="link-hover">
-                    Services
-                </div>
-                </a>
-              </li>
-              <li>
-                <a href="/careers" className="text-white text-decoration-none">
+                <a href="/pharmacists/Register" className="text-white text-decoration-none">
                 <div className="link-hover">
                     Careers
                 </div>
@@ -52,8 +45,8 @@ const Footer = () => {
             <h3>Contact Info</h3>
             <hr />
             <p> <Image src='/phone.svg' height={20} width={20} /> (123) 456-7890</p>
-            <p> <Image src='/mail.svg' height={18} width={18} /> info@clinic.com</p>
-            <p> <Image src='/location.svg' height={22} width={22} /> Clinic Address</p>
+            <p> <Image src='/mail.svg' height={18} width={18} /> info@Pharmacy.com</p>
+            <p> <Image src='/location.svg' height={22} width={22} /> Pharmacy Address</p>
           </div>
           <div className="col-md-5">
             <h3>Newsletter</h3>
