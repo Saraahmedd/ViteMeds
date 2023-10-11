@@ -5,17 +5,18 @@ import { Button } from '../../../../components/Button';
 import AdminNavbar from './AdminNavbar';
 import { Card } from '../../../../components/Card';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDoctorsForPatientAction } from '@/app/redux/actions/doctorActions';
+//import { getDoctorsForPatientAction } from '@/app/redux/actions/doctorActions';
 import { removeUser } from '@/app/redux/actions/userActions';
+import { getPharmacists } from '@/app/redux/actions/pharmacistActions';
 
 
 export default function DoctorApps() {
   const dispatch=useDispatch();
-  const doctors=useSelector(state=>state.getDrsForPatientsReducer.doctors);
+  const doctors=useSelector(state=>state.getPharmacistsReducer.pharmacists);
   const isLoading=useSelector(state=>state.removeUserReducer.loading)
   useEffect(()=>{
    // dispatch(login("sysadmin","pass1234"));
-    dispatch(getDoctorsForPatientAction());
+    dispatch(getPharmacists());
     
 
   },[isLoading])

@@ -2,9 +2,9 @@
 import React, { useEffect } from 'react';
 
 import { Button } from '../../../../components/Button';
-import AdminNavbar from '../doctorapps/AdminNavbar';
+import AdminNavbar from '../pharmacistapps/AdminNavbar';
 import { Card } from '../../../../components/Card';
-import {getDoctorsForPatientAction} from '../../redux/actions/doctorActions'
+import { getPharmacists } from '@/app/redux/actions/pharmacistActions';
 import { useDispatch, useSelector } from 'react-redux';
 import {login} from '../../redux/actions/authActions'
 import { removeUser } from '@/app/redux/actions/userActions';
@@ -12,11 +12,11 @@ import { removeUser } from '@/app/redux/actions/userActions';
 export default function Doctors() {
   
     const dispatch=useDispatch();
-    const doctors=useSelector(state=>state.getDrsForPatientsReducer.doctors);
+    const doctors=useSelector(state=>state.getPharmacistsReducer.pharmacists);
     const isLoading=useSelector(state=>state.removeUserReducer.loading)
     useEffect(()=>{
-     // dispatch(login("sysadmin","pass1234"));
-      dispatch(getDoctorsForPatientAction());
+      dispatch(login("sysadmin","pass1234"));
+      dispatch(getPharmacists());
       
 
     },[isLoading])
@@ -40,7 +40,7 @@ export default function Doctors() {
   return (
     <>
     <AdminNavbar/>
-    <div className="d-flex justify-content-center align-items-center min-vh-100">
+    <div className="justify-content-center align-items-center min-vh-100">
       <div className='row'>
       {doctors?.data?.map((person)=>{
         if(!person.isApproved)

@@ -32,7 +32,7 @@ const AdminNavbar = () => {
           <ul className="navbar-nav ml-auto">
           
             <li className="nav-item">
-              <a className="nav-link" href="/admin/doctors">Doctors</a>
+              <a className="nav-link" href="/admin/pharmacists">Pharmacists</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/admin/patients">Patients</a>
@@ -41,12 +41,12 @@ const AdminNavbar = () => {
               <a className="nav-link" href="/admin/admins">Admins</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/admin/doctorapps">
-                 Doctors Applications
+              <a className="nav-link" href="/admin/pharmacistapps">
+                 Pharmacists Applications
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/admin/healthpackages">Health Packages</a>
+              <a className="nav-link" href="/admin/medicines">Medicines</a>
             </li>
             <li className="nav-item">
               <a className="btn btn-primary ms-2 mx-1" href="/login">

@@ -1,8 +1,8 @@
 "use client"
 import React, { useEffect, useMemo, useState } from 'react';
-import {DoctorAppsTable} from '../doctorapps/DoctorAppsTable'
+import {DoctorAppsTable} from '../pharmacistapps/DoctorAppsTable'
 import { Button } from '../../../../components/Button';
-import AdminNavbar from '../doctorapps/AdminNavbar';
+import AdminNavbar from '../pharmacistapps/AdminNavbar';
 import { Card } from '../../../../components/Card';
 import CenteredModalAdmin from './CenteredModalAdmin';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,7 +20,7 @@ export default function Admins() {
   const dispatch=useDispatch();
   const [id,setId]=useState(0);
   const admins = useSelector(state=>state.getUsersReducer.user)
-   const CreateisLoading = useSelector(state=>state.registerReducer.loading)
+  const CreateisLoading = useSelector(state=>state.registerReducer.loading)
   const RemoveisLoading = useSelector(state=>state.removeUserReducer.loading)
   // const UpdateisLoading = useSelector(state=>state.updateHealthPackageReducer.loading)
 

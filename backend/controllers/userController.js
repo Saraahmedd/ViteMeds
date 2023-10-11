@@ -1,6 +1,6 @@
 const userModel = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
-// const fact= = require('./handlerFactory');
+ const factory = require('./handlerFactory');
 const AppError = require('../utils/appError');
 const Patient = require('../models/patientModel');
 const Pharmacist = require("../models/pharmacistModel")
@@ -29,3 +29,6 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
         data: null
     });
 });
+
+
+exports.getAllUsers = factory.getAll(userModel)
