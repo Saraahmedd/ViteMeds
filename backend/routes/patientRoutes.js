@@ -10,4 +10,6 @@ router
     authController.restrictTo("administrator"),
     patientController.getpatient
   );
+
+  router.get('/',patientController.getAllPatients)
 module.exports = router;

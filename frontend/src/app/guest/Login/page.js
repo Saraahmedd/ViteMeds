@@ -6,8 +6,11 @@ import { useState } from 'react';
 import Navbar from '../../../../components/Navbar';
 import Footer from '../../../../components/Footer';
 import { Button } from "../../../../components/Button";
+import { login } from '@/app/redux/actions/authActions';
+import { useDispatch } from 'react-redux';
 
 function LoginForm() {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -24,6 +27,7 @@ function LoginForm() {
   const handleLogin = () => {
     // Gather data in the formData object and send it to the backend
     console.log('Form Data:', formData);
+    dispatch(login(formData.email, formData.password));
     // Add your code to send data to the backend here
   };
 
