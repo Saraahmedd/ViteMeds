@@ -8,12 +8,12 @@ const PolicyPage = () => {
       <Navbar />
       <div className="page-div container justify-content-center align-items-center m-5 mx-auto">
         <h1 className="text-primary text-center"><strong>Company Policy</strong></h1>
-        <h3 className='text-center'>XClinics Clinic</h3>
+        <h3 className='text-center'>XPharmacies Pharmacy</h3>
         <div className='d-flex justify-content-center align-items-center'><hr className='w-50'/></div>
         <div className="card bg-light rounded shadow p-5 m-5 border-0 align-self-center mx-auto">
         <h4 className='text-primary'>Data Collection</h4>
         <p>
-          At XClinics, we take your privacy seriously. We collect and store personal information
+          At XPharmacies, we take your privacy seriously. We collect and store personal information
           provided by users during the registration process, including but not limited to names, email
           addresses, date of birth, and contact information.
         </p>
@@ -37,7 +37,7 @@ const PolicyPage = () => {
 
         <h4 className='text-primary'>Third-Party Services</h4>
         <p>
-            XClinics may use third-party services for certain functions, such as payment processing
+            XPharmacies may use third-party services for certain functions, such as payment processing
           and analytics. These third parties may have their own privacy policies, and we encourage
           users to review them.
         </p>
@@ -58,7 +58,7 @@ const PolicyPage = () => {
 
         <h4 className='text-primary'>Changes to Policy</h4>
         <p>
-            XClinics reserves the right to update this policy at any time. Users will be notified of
+            XPharmacies reserves the right to update this policy at any time. Users will be notified of
           any significant changes.
         </p>
         <br />

@@ -15,7 +15,7 @@ const Navbar = () => {
         <div className="logo"></div>
         <h1>
         <a className="navbar-brand" href="/">
-        XClinics
+        XPharmacies
         </a>
         </h1>
           <button
@@ -41,10 +41,7 @@ const Navbar = () => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/services">Services</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/careers">Careers</a>
+              <a className="nav-link" href="/pharmacists/Register">Careers</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/policy">
@@ -52,12 +49,12 @@ const Navbar = () => {
               </a>
             </li>
             <li className="nav-item ">
-              <a className="btn btn-light text-primary ms-3 mx-1" href="/login">
+              <a className="btn btn-light text-primary ms-3 mx-1" href="/guest/Login">
                 Login
               </a>
             </li>
             <li className="nav-item rounded">
-              <a className="btn btn-primary text-light mx-1" href="/signup">
+              <a className="btn btn-primary text-light mx-1" href="/guest/Register">
                 Sign Up
               </a>
             </li>

@@ -3,8 +3,8 @@ import React from 'react';
 import "./Register.css";
 //import { Button } from './Register/Button.js';
 import { useState } from 'react';
-//import Navbar from '../../../../components/Navbar';
-//import Footer from '../../../../components/Footer';
+import Navbar from '../../../../components/Navbar';
+import Footer from '../../../../components/Footer';
 import { Button } from "../../../../components/Button";
 //import GenderDropdown from "../../../../components/DropDownmenu";
 //import "./DropDown.css";
@@ -45,11 +45,12 @@ const Register = () => {
 
     return (
         <>
-            {/* <Navbar /> */}
+            <Navbar />
             <div className="containerz">
-                <div className="headerz">
-                    <div className="textz">{action}</div>
+                <div className="headerz text-center">
+                    <div className="textz text-primary">{action}</div>
                     <div className="underlinez"></div>
+                    <div className="textsub text-muted"> Join us as a Patient!</div>
                 </div>
                 <div className="inputsz">
                     <div className="inputz">
@@ -109,7 +110,7 @@ const Register = () => {
                     ></Button>
                 </div>
             </div>
-            {/* <Footer /> */}
+            <Footer />
         </>
     );
 }
