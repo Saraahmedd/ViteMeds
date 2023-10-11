@@ -67,82 +67,17 @@ const Register = () => {
         }));
     };
 
-    const [action] = useState("Sign up");
-
     return (
         <>
             <Navbar />
-            <div className="containerz">
-                <div className="headerz text-center">
-                    <div className="textz text-primary">{action}</div>
-                    <div className="underlinez"></div>
-                    <div className="textsub text-muted"> Join us as a Patient!</div>
-                </div>
-                <div className="inputsz">
-                    <div className="inputz">
-                        <input
-                            type="text"
-                            placeholder=' Username'
-                            name="username"
-                            value={formData.username}
-                            onChange={handleInputChange}
-                        />
-                    </div>
-                    <div className="inputz">
-                        <input
-                            type="text"
-                            placeholder='Name'
-                            name="name"
-                            value={formData.name}
-                            onChange={handleInputChange}
-                        />
-                    </div>
-                    <div className="inputz">
-                        <input
-                            type="email"
-                            placeholder=' Email'
-                            name="email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                        />
-                    </div>
-                    <div className="inputz">
-                        <input
-                            type="password"
-                            placeholder=' Password'
-                            name="password"
-                            value={formData.password}
-                            onChange={handleInputChange}
-                        />
-                    </div>
-                    <div className="inputz">
-                        <input
-                            type="tel"
-                            placeholder=' Mobile Number'
-                            name="mobileNumber"
-                            value={formData.mobileNumber}
-                            onChange={handleInputChange}
-                        />
-                    </div>
-                    {/* <div>
-      <h1>Gender Selection</h1>
-      <GenderDropdown />
-    </div> */}
-                </div>
-       <div className="submit-containerz">
-                    <Button
-                        text="Sign Up"
-                        onClick={handleSignUp}
-                    ></Button>
-                </div>
-            </div>
             {!isLoading && !isAuthenticated &&
                 <>
                     <div className="containerz">
-                        <div className="headerz">
-                            <div className="textz">Sign Up</div>
-                            <div className="underlinez"></div>
-                        </div>
+                    <div className="headerz text-center">
+                        <div className="textz text-primary">Sign Up</div>
+                        <div className="underlinez"></div>
+                        <div className="textsub text-muted"> Join us as a Patient!</div>
+                    </div>
                         <div className="inputsz">
                             <div className="inputz">
                                 <input
@@ -190,14 +125,14 @@ const Register = () => {
                                 />
                             </div>
                             <div className='inputz'>
-                                <select name="gender" value={formData.gender} onChange={handleInputChange}>
+                                <select name="Gender" value={formData.gender} onChange={handleInputChange}>
                                     <option value="" selected disabled>Choose a gender...</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                 </select>
                             </div>
                             <div className="inputz">
-                                <p>Date of Birth</p>
+                                <p className='ms-2 text-center'> Date of Birth</p>
                                 <input
                                     type="date"
                                     name="dateOfBirth"
@@ -205,11 +140,12 @@ const Register = () => {
                                     onChange={handleInputChange}
                                 />
                             </div>
-                            <h4>Emergency Contact Details</h4>
+                            <hr />
+                            <h4 className='text-primary text-center'>Emergency Contact Details</h4>
                             <div className='inputz'>
                                 <input
                                     type="text"
-                                    placeholder='Emergency Contact Name'
+                                    placeholder=' Emergency Contact Name'
                                     name="eName"
                                     value={formData.eName}
                                     onChange={handleInputChange}
@@ -218,7 +154,7 @@ const Register = () => {
                             <div className='inputz'>
                                 <input
                                     type="tel"
-                                    placeholder='Emergency Contact Phone'
+                                    placeholder=' Emergency Contact Phone'
                                     name="eNumber"
                                     value={formData.eNumber}
                                     onChange={handleInputChange}
@@ -226,8 +162,8 @@ const Register = () => {
                             </div>
                             <div className='inputz'>
                                 <input
-                                    type="tel"
-                                    placeholder='Emergency Contact Phone'
+                                    type="text"
+                                    placeholder=' Relation to patient'
                                     name="erelationToPatient"
                                     value={formData.erelationToPatient}
                                     onChange={handleInputChange}
@@ -245,14 +181,12 @@ const Register = () => {
 
                 </>
             }
-
             {
                 isLoading &&
                 <>
                     <h1>Loading</h1>
                 </>
             }
-
             {
                 isAuthenticated &&
                 <>

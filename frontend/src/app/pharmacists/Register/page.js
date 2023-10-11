@@ -3,9 +3,10 @@ import React from 'react';
 import './Register.css';
 import { useState } from 'react';
 import { Button } from "../../../../components/Button";
-import Navbar from '../../../../components/Navbar';
-import Footer from '../../../../components/Footer';
+ import Navbar from '../../../../components/Navbar';
+ import Footer from '../../../../components/Footer';
 import { useDispatch } from 'react-redux';
+import { registerAction } from '@/app/redux/actions/authActions';
 
 const SignUp = () => {
     const [formData, setFormData] = useState({
@@ -60,7 +61,7 @@ const SignUp = () => {
 
     return (
         <>
-            <Navbar />
+             <Navbar /> 
             <div className="containerz">
                 <div className="headerz text-center">
                     <div className="textz text-primary">{action}</div>
@@ -145,7 +146,7 @@ const SignUp = () => {
                     <div className="inputz">
                         <input
                             type="text"
-                            placeholder='Mobile Number'
+                            placeholder=' Mobile Number'
                             name="mobileNumber"
                             value={formData.mobileNumber}
                             onChange={handleInputChange}
@@ -155,7 +156,7 @@ const SignUp = () => {
                     <div className="inputz">
                         <input
                             type="text"
-                            placeholder='gender'
+                            placeholder=' Gender'
                             name="gender"
                             value={formData.gender}
                             onChange={handleInputChange}
@@ -165,7 +166,7 @@ const SignUp = () => {
                     <div className="inputz">
                         <input
                             type="text"
-                            placeholder='Speciality'
+                            placeholder=' Speciality'
                             name="speciality"
                             value={formData.speciality}
                             onChange={handleInputChange}
@@ -175,7 +176,7 @@ const SignUp = () => {
                     <div className="inputz">
                         <input
                             type="number"
-                            placeholder='Working Hours'
+                            placeholder=' Working Hours'
                             name="workingHours"
                             value={formData.workingHours}
                             onChange={handleInputChange}
@@ -189,7 +190,7 @@ const SignUp = () => {
                     ></Button>
                 </div>
             </div>
-            <Footer />
+             <Footer /> 
         </>
     );
 }
