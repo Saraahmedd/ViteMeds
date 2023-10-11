@@ -3,8 +3,8 @@ import React from 'react';
 import "./Register.css";
 //import { Button } from './Register/Button.js';
 import { useState } from 'react';
-//import Navbar from '../../../../components/Navbar';
-//import Footer from '../../../../components/Footer';
+import Navbar from '../../../../components/Navbar';
+import Footer from '../../../../components/Footer';
 import { Button } from "../../../../components/Button";
 //import GenderDropdown from "../../../../components/DropDownmenu";
 //import "./DropDown.css";
@@ -45,7 +45,7 @@ const Register = () => {
 
     return (
         <>
-            {/* <Navbar /> */}
+             <Navbar /> 
             <div className="containerz">
                 <div className="headerz">
                     <div className="textz">{action}</div>
@@ -109,7 +109,7 @@ const Register = () => {
                     ></Button>
                 </div>
             </div>
-            {/* <Footer /> */}
+             <Footer /> 
         </>
     );
 }

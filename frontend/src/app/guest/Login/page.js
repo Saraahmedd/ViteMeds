@@ -3,8 +3,8 @@ import React from 'react';
 import "./Login.css";
 //import { Button } from './Register/Button.js';
 import { useState } from 'react';
-//import Navbar from '../../../../components/Navbar';
-//import Footer from '../../../../components/Footer';
+import Navbar from '../../../../components/Navbar';
+import Footer from '../../../../components/Footer';
 import { Button } from "../../../../components/Button";
 
 function LoginForm() {
@@ -29,7 +29,7 @@ function LoginForm() {
 
   return (
     <> 
-    {/* <Navbar/>  */}
+     <Navbar/>  
     <div className="containerz">
       <div className="headerz">
         <div className="textz">Login</div>
@@ -65,7 +65,7 @@ function LoginForm() {
         ></Button>
       </div>
     </div>
-    {/* <Footer/> */}
+     <Footer/> 
     </>
   );
 }
