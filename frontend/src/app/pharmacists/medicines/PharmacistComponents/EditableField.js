@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import {Button} from  '../../../../../components/Button';
+import { useDispatch } from 'react-redux';
+import { editMedicine } from '@/app/redux/actions/medicineActions';
 
-function EditableField({  value, onSave }) {
+function EditableField({  value, nameOfField ,id}) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedValue, setEditedValue] = useState(value);
+  const dispatch=useDispatch()
 
+  
   const handleSave = () => {
-    // onSave(editedValue);
+    dispatch(editMedicine(id, { [nameOfField]: editedValue }));
+
+
     setIsEditing(false);
   };
 
