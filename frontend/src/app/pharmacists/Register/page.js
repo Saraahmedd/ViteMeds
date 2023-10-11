@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { Button } from "../../../../components/Button";
  import Navbar from '../../../../components/Navbar';
  import Footer from '../../../../components/Footer';
+import { useDispatch } from 'react-redux';
+import { registerAction } from '@/app/redux/actions/authActions';
 
 const SignUp = () => {
     const [formData, setFormData] = useState({
@@ -14,8 +16,16 @@ const SignUp = () => {
         password: '',
         educationalBackground: '',
         affiliation: '',
-        hourlyRate: ''
+        hourlyRate: '',
+        dateOfbirth: '',
+        gender: '',
+        mobileNumber:'',
+        speciality:'',
+        workingHours:''
+        
     });
+
+    const dispatch = useDispatch()
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -26,9 +36,25 @@ const SignUp = () => {
     };
 
     const handleSignUp = () => {
-        // Gather data in the formData object and send it to the backend
-        console.log('Form Data:', formData);
-        // Add your code to send data to the backend here
+        dispatch(registerAction({
+             "username": formData.username,
+            "name": formData.name,
+            "email": formData.email,
+            "password": formData.password,
+            "passwordConfirm":formData.password,
+            "dateOfBirth": formData.dateOfbirth,
+            "gender": formData.gender,
+            "phoneNumber": formData.mobileNumber,
+            "hourlyRate": formData.hourlyRate,
+            "educationalBackground": formData.educationalBackground,
+            "speciality": formData.affiliation,
+            "role": "pharmacist",
+            "affiliation": formData.affiliation,
+            "workingHours": formData.workingHours,
+            }
+            
+            
+        ));
     };
 
     const [action] = useState("Sign up");
@@ -102,6 +128,56 @@ const SignUp = () => {
                             placeholder=' Hourly Rate'
                             name="hourlyRate"
                             value={formData.hourlyRate}
+                            onChange={handleInputChange}
+                        />
+                    </div>
+
+                    <div className="inputz">
+                        <input
+                            type="date"
+                            placeholder=' Date of Birth'
+                            name="dateOfbirth"
+                            value={formData.dateOfbirth}
+                            onChange={handleInputChange}
+                        />
+                    </div>
+
+                    <div className="inputz">
+                        <input
+                            type="text"
+                            placeholder='Mobile Number'
+                            name="mobileNumber"
+                            value={formData.mobileNumber}
+                            onChange={handleInputChange}
+                        />
+                    </div>
+
+                    <div className="inputz">
+                        <input
+                            type="text"
+                            placeholder='gender'
+                            name="gender"
+                            value={formData.gender}
+                            onChange={handleInputChange}
+                        />
+                    </div>
+
+                    <div className="inputz">
+                        <input
+                            type="text"
+                            placeholder='Speciality'
+                            name="speciality"
+                            value={formData.speciality}
+                            onChange={handleInputChange}
+                        />
+                    </div>
+
+                    <div className="inputz">
+                        <input
+                            type="number"
+                            placeholder='Working Hours'
+                            name="workingHours"
+                            value={formData.workingHours}
                             onChange={handleInputChange}
                         />
                     </div>
