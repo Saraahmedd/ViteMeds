@@ -5,7 +5,7 @@ const pharmacistSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.ObjectId,
         ref: 'User',
-        required: [true, 'Booking must belong to a User!']
+        required: [true, 'Pharmacist must belong to a User!']
     },
     name: {
         type: String,
@@ -49,6 +49,14 @@ const pharmacistSchema = new mongoose.Schema({
 
 
 });
+
+pharmacistSchema.pre(/^find/, function(next) {
+    this.populate({
+      path: 'user',
+    //   select: 'username email'  // Specify the fields you want to select from the referenced User model
+    });
+    next();
+  });
 
 const PharmacistModel = mongoose.model('Pharmacist', pharmacistSchema);
 

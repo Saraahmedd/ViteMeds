@@ -15,7 +15,7 @@ export default function Admins() {
   
 
     
-  const tableHeaders = ['Username','Password'];
+  const tableHeaders = ['Username'];
   const [modalShow,setModalShow]=useState(false);
   const dispatch=useDispatch();
   const [id,setId]=useState(0);
@@ -43,8 +43,7 @@ export default function Admins() {
        value.role==='administrator' ? {
         
         username: value.username, 
-        password: value.password,
-        button: generateButton(value._id)
+        // button: generateButton(value._id)
       
       }  : {
         

@@ -39,6 +39,28 @@ const medicineSchema = new mongoose.Schema({
 
 });
 
+medicineSchema.statics.getAllMedicinalUses = async function () {
+    try {
+        const medicines = await this.find();
+        const allMedicinalUsesSet = new Set();
+
+        // Extract and add unique medicinal uses to the set
+        medicines.forEach(medicine => {
+            medicine.medicinalUses.forEach(use => {
+                allMedicinalUsesSet.add(use);
+            });
+        });
+
+        // Convert the set back to an array
+        const allMedicinalUses = Array.from(allMedicinalUsesSet);
+
+        return allMedicinalUses;
+    } catch (error) {
+        throw new Error('Error fetching unique medicinal uses: ' + error.message);
+    }
+};
+
+
 const Medicine = mongoose.model('Medicine', medicineSchema);
 
 module.exports = Medicine;

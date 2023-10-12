@@ -39,22 +39,28 @@ export default function Patients() {
     <div className="justify-content-center align-items-center min-vh-100">
       <div className='row'>
       {patients?.data?.map((person)=>{
-        return <Card key={person.user} className="col-lg-4 offset-lg-1" title={person.name} subtitle="Doctor's Info"  text={
+        return <Card key={person.user} className="col-lg-4 offset-lg-1" title={person.name} subtitle="Patient's Info"  text={
           <div className="">
-          <h8 style={{ fontWeight: 'bold' }}> Username: </h8>{person.username}
+          <h8 style={{ fontWeight: 'bold' }}> Username: </h8>{person.user?.username}
           <br />
           <h8 style={{ fontWeight: 'bold' }}>email: </h8>{person.email}
           <br />
-          <h8 style={{ fontWeight: 'bold' }}>dob: </h8>{person.dob}
+          <h8 style={{ fontWeight: 'bold' }}>dob: </h8>{person.dateOfBirth}
+          <br />'
+          <h8 style={{ fontWeight: 'bold' }}>mobile number: </h8>{person.mobileNumber}
           <br />
-          <h8 style={{ fontWeight: 'bold' }}> affiliation: </h8>{person.affiliation}
+          <h8 style={{ fontWeight: 'bold' }}>gender: </h8>{person.gender}
           <br />
-          <h8 style={{ fontWeight: 'bold' }}>hourlyRate: </h8>{person.hourlyRate}
+          <h8 style={{ fontWeight: 'bold' }}>emergencyContact name: </h8>{person.emergencyContact.name}
           <br />
-          <h8 style={{ fontWeight: 'bold' }}>educationalBackground: </h8>{person.educationalBackground}
+          <h8 style={{ fontWeight: 'bold' }}>emergencyContact mobile number: </h8>{person.emergencyContact.mobileNumber}
+          <br />
+          <h8 style={{ fontWeight: 'bold' }}>emergencyContact relationToPatient: </h8>{person.emergencyContact.relationToPatient}
+          <br />
+          
           <br />
           </div>
-        } buttonText='Remove' onClickButton={()=>{onRemoveHandler(person.user)}}>
+        } buttonText='Remove' onClickButton={()=>{onRemoveHandler(person.user._id)}}>
        
         </Card>
        

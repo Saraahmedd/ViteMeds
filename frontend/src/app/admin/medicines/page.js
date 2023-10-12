@@ -21,6 +21,7 @@ function MedicineList() {
   const [name,setName] = useState({});
   const dispatch = useDispatch();
   const medicines = useSelector(state => state.getMedicinesReducer.medicines?.data)
+  const medUses = useSelector(state => state.getMedicinesReducer.medicines?.medUses)
 
   const handleCardClick = (medicine) => {
     setSelectedMedicine(medicine);
@@ -52,19 +53,20 @@ useEffect(()=> {
 
     return (
       <div>
+        <AdminNavbar />
        <div className="div d-flex">
         <div className="rows">
           <div className="row my-3">
           <div className="status-filter">
-          <span className="mr-2">Filter by medicinal use:</span>
-        <select onChange={handleMedicinalUseChange} className='col-lg-2 mx-lg-1' value={selectedMedicinalUse || ''}>
-          <option value="">All</option>
+          {/* <span className="mr-2">Filter by medicinal use:</span> */}
+        {/* <select onChange={handleMedicinalUseChange} className='col-lg-2 mx-lg-1' value={selectedMedicinalUse || ''}>
+          <option value="">All</option> */}
           {/* {allMedicinalUses.map((medicinalUse) => (
               <option key={medicinalUse} value={medicinalUse}>
                 {medicinalUse}
               </option>
             ))} */}
-        </select>
+        {/* </select> */}
       </div>
         </div>
       </div>
@@ -75,17 +77,23 @@ useEffect(()=> {
           placeholder="Search For Medicine"
           className="search-input"
         />
-        <Button text="Search"  className="search-button" onClick={() => console.log('Button clicked')} />
+        {/* <Button text="Search"  className="search-button" onClick={() => console.log('Button clicked')} /> */}
         </div>
 
         <div className="search-container">
-        <input
-          onChange={ (e)=> setMedUse( {"medicinalUses": {"in": e.target.value }} )}
-          type="text"
-          placeholder="Search For Med use"
-          className="search-input"
-        />
+          <select
+            onChange={(e) => setMedUse( e.target.value ===""?{}: {"medicinalUses": {"in": e.target.value}})}
+            className="search-input"
+          >
+            <option value="">Select Med Use</option>
+            {medUses?.map((medUse, index) => (
+              <option key={index} value={medUse}>
+                {medUse}
+              </option>
+            ))}
+          </select>
         </div>
+
         </div>
 
         
@@ -105,12 +113,12 @@ useEffect(()=> {
             key={medicine.id}
           
             title={medicine.name}
-            subtitle={`Price: ${medicine.price}`}
+            subtitle={`Price: ${medicine.price} - Description: ${medicine.description}`}
             onClickButton={() => handleCardClick(medicine)}
             buttonText={'Details'}
   
          
-            image={<img src={medicine.image}  alt="DoctorImage"  style={{ maxHeight: '150px' , maxWidth: '100px'}} />}
+            image={<img src={medicine.image}  alt="Image"  style={{ maxHeight: '150px' , maxWidth: '100px'}} />}
           />
          
          
@@ -129,7 +137,7 @@ useEffect(()=> {
         </div>
       }
       
-      image={<img src={selectedMedicine.image}  alt="DoctorImage"  style={{  float: 'right',  marginLeft: '10px',  maxHeight: '200px', maxWidth: '150px',}} />}
+      image={<img src={selectedMedicine.image}  alt="Image"  style={{  float: 'right',  marginLeft: '10px',  maxHeight: '200px', maxWidth: '150px',}} />}
     />
     )}
 

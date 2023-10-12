@@ -58,7 +58,7 @@ function AddModal(props) {
         <h3>Quantity</h3>
         <p>
           <input
-            type="integer"
+            type="number"
             placeholder="Quantity"
             className="search-input"
             value={reqbody.quantity}
@@ -88,7 +88,7 @@ function AddModal(props) {
         <h3>Price</h3>
         <p>
           <input
-            type="text"
+            type="number"
             placeholder="Price"
             className="search-input"
             value={reqbody.price}

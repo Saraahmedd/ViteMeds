@@ -45,6 +45,8 @@ router.route('/delete/:id')
   medicineController.deleteMedicine
   );
 
+  router.get('/medUses',medicineController.allMedicinalUses)
+
 router.get('/:id', medicineController.getMedicineById)
 
   module.exports = router;

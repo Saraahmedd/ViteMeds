@@ -41,8 +41,21 @@ const Register = () => {
     };
 
     const dispatch = useDispatch();
-    const isLoading = useSelector(state => state.registerReducer.loading);
+    const isLoading = useSelector(state => state.registerReducer.isLoading);
     const isAuthenticated = useSelector(state => state.registerReducer.isAuthenticated);
+    const error = useSelector(state => state.registerReducer.error);
+
+    // const {isAuthenticated, error,isLoading} = useSelector(state => state.registerReducer)
+
+    useEffect(()=> {
+        if(isAuthenticated === true){
+            window.history.pushState({},"", "/patients/medicines")
+            window.location.reload();
+        }
+        else if(error)
+          window.alert("error")
+    
+      },[isLoading,error,isAuthenticated])
 
     const handleSignUp = () => {
         // Gather data in the formData object and send it to the backend
@@ -65,6 +78,7 @@ const Register = () => {
                 relationToPatient: formData.erelationToPatient
             }
         }));
+        
     };
 
     return (
@@ -125,7 +139,7 @@ const Register = () => {
                                 />
                             </div>
                             <div className='inputz'>
-                                <select name="Gender" value={formData.gender} onChange={handleInputChange}>
+                                <select name="gender" value={formData.gender} onChange={handleInputChange}>
                                     <option value="" selected disabled>Choose a gender...</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>

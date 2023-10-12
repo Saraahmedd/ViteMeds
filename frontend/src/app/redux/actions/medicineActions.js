@@ -184,6 +184,9 @@ export const getMedicinesAction = (queryObj) => async (dispatch) => {
             url,
             config
         );
+        const {data: medUses} = await axios.get(`${baseURL}/api/v1/medicines/medUses`,config)
+        data.data.medUses = medUses;
+        console.log(medUses)
 
         console.log("hey")
         dispatch({

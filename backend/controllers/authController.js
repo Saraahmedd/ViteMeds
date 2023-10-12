@@ -154,6 +154,14 @@ exports.restrictTo = (...roles) => {
     if (!username || ! (await user.correctPassword(password, user.password))) {
        return next(new AppError("Invalid Credentials",401));
     }
+    if(user.role === 'doctor'){
+      const doc = await Doctor.findOne({user: user._id})
+      user.doctor = doc
+    }
+    else if(user.role=== 'patient'){
+      const pat = await Patient.findOne({user: user._id})
+      user.patient = pat;
+    }
     
     createSendToken(user, 200, req, res);
     }

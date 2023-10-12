@@ -47,11 +47,11 @@ export default function Doctors() {
         return
         return  <Card key={person.user} className="col-lg-4 offset-lg-1" title={person.name} subtitle="Doctor's Info"  text={
           <div className="">
-          <h8 style={{ fontWeight: 'bold' }}> Username: </h8>{person.username}
+          <h8 style={{ fontWeight: 'bold' }}> Username: </h8>{person.user?.username}
           <br />
           <h8 style={{ fontWeight: 'bold' }}>email: </h8>{person.email}
           <br />
-          <h8 style={{ fontWeight: 'bold' }}>dob: </h8>{person.dob}
+          <h8 style={{ fontWeight: 'bold' }}>dob: </h8>{person.dateOfBirth}
           <br />
           <h8 style={{ fontWeight: 'bold' }}> affiliation: </h8>{person.affiliation}
           <br />
@@ -60,7 +60,7 @@ export default function Doctors() {
           <h8 style={{ fontWeight: 'bold' }}>educationalBackground: </h8>{person.educationalBackground}
           <br />
           </div>
-        } buttonText='Remove' onClickButton={()=>{onRemoveHandler(person.user)}}>
+        } buttonText='Remove' onClickButton={()=>{onRemoveHandler(person.user._id)}}>
        
         </Card>
        

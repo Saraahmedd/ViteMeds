@@ -1,11 +1,11 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Register.css';
 import { useState } from 'react';
 import { Button } from "../../../../components/Button";
  import Navbar from '../../../../components/Navbar';
  import Footer from '../../../../components/Footer';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { registerAction } from '@/app/redux/actions/authActions';
 
 const SignUp = () => {
@@ -35,6 +35,18 @@ const SignUp = () => {
         });
     };
 
+    // const useEffect()
+    const {isAuthenticated, error,isLoading} = useSelector(state => state.registerReducer)
+
+    useEffect(()=> {
+        if(isAuthenticated === true){
+          window.alert("Successfully applied")
+        }
+        else if(error)
+          window.alert("error")
+    
+      },[isLoading,error,isAuthenticated])
+
     const handleSignUp = () => {
         dispatch(registerAction({
              "username": formData.username,
@@ -52,9 +64,12 @@ const SignUp = () => {
             "affiliation": formData.affiliation,
             "workingHours": formData.workingHours,
             }
+        
             
             
         ));
+        // window.alert("Application submitted")
+     
     };
 
     const [action] = useState("Sign up");
@@ -125,7 +140,7 @@ const SignUp = () => {
                     </div>
                     <div className="inputz">
                         <input
-                            type="text"
+                            type="number"
                             placeholder=' Hourly Rate'
                             name="hourlyRate"
                             value={formData.hourlyRate}
@@ -145,7 +160,7 @@ const SignUp = () => {
 
                     <div className="inputz">
                         <input
-                            type="text"
+                            type="number"
                             placeholder=' Mobile Number'
                             name="mobileNumber"
                             value={formData.mobileNumber}
@@ -153,15 +168,13 @@ const SignUp = () => {
                         />
                     </div>
 
-                    <div className="inputz">
-                        <input
-                            type="text"
-                            placeholder=' Gender'
-                            name="gender"
-                            value={formData.gender}
-                            onChange={handleInputChange}
-                        />
-                    </div>
+                    <div className='inputz'>
+                                <select name="gender" value={formData.gender} onChange={handleInputChange}>
+                                    <option value="" selected disabled>Choose a gender...</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
 
                     <div className="inputz">
                         <input

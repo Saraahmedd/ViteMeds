@@ -30,25 +30,19 @@ function MedicineList() {
 
     const dispatch = useDispatch();
     const medicines = useSelector(state => state.getMedicinesReducer.medicines?.data)
+    const medUses = useSelector(state => state.getMedicinesReducer.medicines?.medUses)
  useEffect(()=> {
   dispatch(login("amir","password123"))
       dispatch(getMedicinesAction( {...name, ...medUse}))
-    },[dispatch,name,medUse])
+
+    },[dispatch,name,medUse,modalAddShow,modalDescShow,selectedMedicine])
 
     const handleCardClick = (medicine) => {
       setSelectedMedicine(medicine);
       setModalDescShow(true);
     };
 
-    // const handleEdit = () => {
-    //   setModalEditShow(true);
-    //   setModalDescShow(false);
-    // };
 
-    // const handleSaveEdit = () => {
-    //   // Save edited data (implement this part later)
-    //   setEModalEditShow(false);
-    // };
    
       return (
         <div>
@@ -60,18 +54,22 @@ function MedicineList() {
             placeholder="Search For Medicine"
             className="search-input"
           />
-          <Button text="Search"  className="search-button" onClick={() => console.log('Button clicked')} />
+          {/* <Button text="Search"  className="search-button" onClick={() => console.log('Button clicked')} /> */}
           </div>
 
           <div className="search-container">
-          <input
-            onChange={ (e)=> setMedUse( {"medicinalUses": {"in": e.target.value }} )}
-            type="text"
-            placeholder="Search For Med use"
+          <select
+            onChange={(e) => setMedUse( e.target.value ===""?{}: {"medicinalUses": {"in": e.target.value}})}
             className="search-input"
-          />
-          {/* <Button text="Search"  className="search-button" onClick={() => console.log('Button clicked')} />*/}
-          </div> 
+          >
+            <option value="">Select Med Use</option>
+            {medUses?.map((medUse, index) => (
+              <option key={index} value={medUse}>
+                {medUse}
+              </option>
+            ))}
+          </select>
+        </div>
            
            <Button text="Add Product" className="add-button"   onClick={() => setModalAddShow(true)}/>
     
@@ -103,9 +101,9 @@ function MedicineList() {
              
     
             //   FOR PHARMACIST
-               text={`Quantity: ${medicine.quantity}`}
+               text={`Quantity: ${medicine.quantity} - sales: ${medicine.sales}`}
                //
-              image={<img src={medicine.image}  alt="DoctorImage"  style={{ maxHeight: '150px' , maxWidth: '100px'}} />}
+              image={<img src={medicine.image}  alt="Image"  style={{ maxHeight: '150px' , maxWidth: '100px'}} />}
             />
            
            
@@ -129,6 +127,7 @@ function MedicineList() {
               value={selectedMedicine.price}
               id={selectedMedicine._id}
               nameOfField={"price"}
+              hide={() => setModalDescShow(false)}
               onSave={(newValue) => handleSave(newValue, 'price')}
             />
           
@@ -140,6 +139,7 @@ function MedicineList() {
                id={selectedMedicine._id}
               value={selectedMedicine.quantity}
               nameOfField={"quantity"}
+              hide={() => setModalDescShow(false)}
               onSave={(newValue) => handleSave(newValue, 'quantity')}
             />
           
@@ -149,6 +149,7 @@ function MedicineList() {
             </div>
             <EditableField
              id={selectedMedicine._id}
+             hide={() => setModalDescShow(false)}
              nameOfField={"description"}
              
               value={selectedMedicine.description}
@@ -167,6 +168,7 @@ function MedicineList() {
             </div>
             <EditableField
               id={selectedMedicine._id}
+              hide={() => setModalDescShow(false)}
               value={selectedMedicine.medicinalUses.join(', ')}
               nameOfField={"medicinalUses"}
               onSave={(newValue) => handleSave(newValue.split(',').map(item => item.trim()), 'medicinalUses')}
@@ -179,6 +181,7 @@ function MedicineList() {
             <EditableField
              id={selectedMedicine._id}
              nameOfField={"medicineIngredients"}
+             hide={() => setModalDescShow(false)}
               
               value={selectedMedicine.medicineIngredients.join(', ')}
               onSave={(newValue) => handleSave(newValue.split(',').map(item => item.trim()), 'medicineIngredients')}
@@ -187,7 +190,7 @@ function MedicineList() {
           
           }
           
-          image={<img src={selectedMedicine.image}  alt="DoctorImage"  style={{  float: 'right',  marginLeft: '10px',  maxHeight: '200px', maxWidth: '150px',}} />}
+          image={<img src={selectedMedicine.image}  alt="Image"  style={{  float: 'right',  marginLeft: '10px',  maxHeight: '200px', maxWidth: '150px',}} />}
         />
 
         

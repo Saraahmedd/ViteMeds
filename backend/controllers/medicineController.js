@@ -13,7 +13,15 @@ exports.updateMedicine = catchAsync(async (req, res, next) => {
         excludedFields.forEach(field => delete req.body[field]);
         factory.updateOne(Medicine)(req, res, next);
     });
+// Assuming Medicine is your model
+exports.allMedicinalUses = catchAsync(async(req,res,next)=> {
 
+      const resp = await Medicine.getAllMedicinalUses();
+      res.status(200).json(resp)
+});
+
+
+// exports.getMedUses = () => await Medicine.getAllMedicinalUses();
 
 exports.createNewMedicine = factory.createOne(Medicine)
 exports.deleteMedicine = factory.deleteOne(Medicine);
