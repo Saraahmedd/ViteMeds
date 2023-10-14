@@ -45,13 +45,13 @@ export default function Patients() {
           <br />
           <h8 style={{ fontWeight: 'bold' }}>email: </h8>{person.email}
           <br />
-          <h8 style={{ fontWeight: 'bold' }}>dob: </h8>{person.dateOfBirth}
+          <h8 style={{ fontWeight: 'bold' }}>Date Of Birth: </h8>{person.dateOfBirth}
           <br />'
           <h8 style={{ fontWeight: 'bold' }}>mobile number: </h8>{person.mobileNumber}
           <br />
           <h8 style={{ fontWeight: 'bold' }}>gender: </h8>{person.gender}
           <br />
-          <h8 style={{ fontWeight: 'bold' }}>emergencyContact name: </h8>{person.emergencyContact.name}
+          <h8 style={{ fontWeight: 'bold' }}>emergencyContact name: </h8>{person.emergencyContact.fullName}
           <br />
           <h8 style={{ fontWeight: 'bold' }}>emergencyContact mobile number: </h8>{person.emergencyContact.mobileNumber}
           <br />

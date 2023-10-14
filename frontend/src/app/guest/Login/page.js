@@ -60,7 +60,7 @@ function LoginForm() {
         <div className="inputz">
           <input
             type="Email"
-            placeholder=' Email'
+            placeholder=' Username'
             name="email"
             value={formData.email}
             onChange={handleInputChange}
