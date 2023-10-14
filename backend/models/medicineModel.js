@@ -17,10 +17,22 @@ const medicineSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: [true, 'A medicine must have a price'],
-    },
+        validate: {
+          validator: function (value) {
+            return value >= 0;
+          },
+          message: 'Price cannot be negative',
+        },
+      },
     quantity: {
         type: Number,
         required: [true, 'A medicine must have a quantity'],
+        validate: {
+            validator: function (value) {
+              return value >= 0;
+            },
+            message: 'Quantity cannot be negative',
+          },
     },
     sales: {
         type: Number,
