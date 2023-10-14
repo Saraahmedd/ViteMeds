@@ -9,10 +9,11 @@ function AddModal(props) {
   const [reqbody, setReqbody] = useState({
     name: '',
     quantity: '',
-    medicinalUse: '',
+    medicinalUses: [],
     description: '',
     photo: null,
-    price: ""
+    price: "",
+    medicineIngredients: [],
   });
 
   const dispatch = useDispatch();
@@ -26,10 +27,24 @@ function AddModal(props) {
 
   const handleInputChange = (e, field) => {
     const value = e.target.value;
-    setReqbody((prevReqbody) => ({
-      ...prevReqbody,
-      [field]: value,
-    }));
+    if (field === 'medicinalUses') {
+      const medicinalUsesArray = value.split(',');
+      setReqbody((prevReqbody) => ({
+        ...prevReqbody,
+        [field]: medicinalUsesArray,
+      }));
+    } else if (field === 'medicineIngredients') {
+      const medicineIngredientsArray = value.split(',');
+      setReqbody((prevReqbody) => ({
+        ...prevReqbody,
+        [field]: medicineIngredientsArray,
+      }));
+    } else {
+      setReqbody((prevReqbody) => ({
+        ...prevReqbody,
+        [field]: value,
+      }));
+    }
   };
 
   const { onHide, onFileChange } = props;
@@ -71,8 +86,18 @@ function AddModal(props) {
             type="text"
             placeholder="Medicinal use"
             className="search-input"
-            value={reqbody.medicinalUse}
-            onChange={(e) => handleInputChange(e, 'medicinalUse')}
+            value={reqbody.medicinalUses}
+            onChange={(e) => handleInputChange(e, 'medicinalUses')}
+          />
+        </p>
+        <h3>Ingredients</h3>
+        <p>
+          <input
+            type="text"
+            placeholder="Description"
+            className="search-input"
+            value={reqbody.medicineIngredients}
+            onChange={(e) => handleInputChange(e, 'medicineIngredients')}
           />
         </p>
         <h3>Description</h3>
@@ -94,10 +119,6 @@ function AddModal(props) {
             value={reqbody.price}
             onChange={(e) => handleInputChange(e, 'price')}
           />
-        </p>
-        <h3>Upload Photo</h3>
-        <p>
-          <input type="file" onChange={handleFileChange} accept="image/*" />
         </p>
       </Modal.Body>
       <Modal.Footer>
