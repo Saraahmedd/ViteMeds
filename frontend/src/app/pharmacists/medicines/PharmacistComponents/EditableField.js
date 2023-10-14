@@ -27,27 +27,24 @@ function EditableField({  value, nameOfField ,id,hide}) {
             type="text"
             value={editedValue}
             onChange={(e) => setEditedValue(e.target.value)}
+            className='input-style border-primary rounded px-2'
           />
           <Button
   text="save and exit"
-  className="add-button btn-xs"
+  className="add-button btn-xs "
   onClick={handleSave}
   
-/>
-
-         
+/> 
         </div>
       ) : (
         <div>
           <span>{value}</span>
           <Button
   text="edit"
-  className="add-button btn-xs"
+  className="add-button btn-sm"
   onClick={() => setIsEditing(true)}
   
-/>
-
-          
+/>    
         </div>
       )}
     </div>

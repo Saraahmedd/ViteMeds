@@ -54,36 +54,23 @@ useEffect(()=> {
     return (
       <div>
         <AdminNavbar />
-       <div className="div d-flex">
-        <div className="rows">
-          <div className="row my-3">
-          <div className="status-filter">
-          {/* <span className="mr-2">Filter by medicinal use:</span> */}
-        {/* <select onChange={handleMedicinalUseChange} className='col-lg-2 mx-lg-1' value={selectedMedicinalUse || ''}>
-          <option value="">All</option> */}
-          {/* {allMedicinalUses.map((medicinalUse) => (
-              <option key={medicinalUse} value={medicinalUse}>
-                {medicinalUse}
-              </option>
-            ))} */}
-        {/* </select> */}
-      </div>
-        </div>
-      </div>
-      <div className="search-container">
+        <div className='m-5'>
+        <div className="m-3 ms-0">
+      <div className="row m-2 ms-0">
+      <div className="col-md-2  search-container">
         <input
           onChange={ (e)=> setName( {"name": {"regex": e.target.value }} )}
           type="text"
           placeholder="Search For Medicine"
-          className="search-input"
+          className="px-2 search-input input-style rounded border-primary"
         />
         {/* <Button text="Search"  className="search-button" onClick={() => console.log('Button clicked')} /> */}
         </div>
 
-        <div className="search-container">
+        <div className="col-md-2 search-container">
           <select
             onChange={(e) => setMedUse( e.target.value ===""?{}: {"medicinalUses": {"in": e.target.value}})}
-            className="search-input"
+            className="px-2 search-input input-style rounded border-primary"
           >
             <option value="">Select Med Use</option>
             {medUses?.map((medUse, index) => (
@@ -93,6 +80,7 @@ useEffect(()=> {
             ))}
           </select>
         </div>
+      </div>
 
         </div>
 
@@ -118,7 +106,7 @@ useEffect(()=> {
             buttonText={'Details'}
   
          
-            image={<img src={medicine.image}  alt="Image"  style={{ maxHeight: '150px' , maxWidth: '100px'}} />}
+            image={<img src={medicine.image? medicine.image : '/medication.svg'}  alt="Image"  style={{ maxHeight: '50px' , maxWidth: '50px'}} />}
           />
          
          
@@ -137,7 +125,7 @@ useEffect(()=> {
         </div>
       }
       
-      image={<img src={selectedMedicine.image}  alt="Image"  style={{  float: 'right',  marginLeft: '10px',  maxHeight: '200px', maxWidth: '150px',}} />}
+      image={<img src={selectedMedicine.image? selectedMedicine.image : '/medication.svg'}  alt="Image"  style={{  float: 'right',  marginLeft: '10px',  maxHeight: '200px', maxWidth: '150px',}} />}
     />
     )}
 
@@ -148,6 +136,8 @@ useEffect(()=> {
       </div>
       {/* <Footer/> */}
       </div>
+    </div>
+
     );
    
   }

@@ -14,12 +14,6 @@ import { getMedicinesAction } from '@/app/redux/actions/medicineActions';
 import { login } from '@/app/redux/actions/authActions';
 
 
-
-
-
-
-
-
 function MedicineList() {
     const [modalAddShow, setModalAddShow] = useState(false);
     const [modalDescShow, setModalDescShow] = useState(false);
@@ -45,24 +39,25 @@ function MedicineList() {
 
    
       return (
-        <div>
-          {/* <Navbar/> */}
-          <div className="search-container">
+        <div className='m-5'>
+        <h1 className="row text-primary text-center"><strong> XPharmacy Medicine</strong></h1>
+        <hr />
+        <div className="row div d-flex m-2 ms-0">
+        <div className="col-md-2 search-container">
           <input
             onChange={ (e)=> setName( {"name": {"regex": e.target.value }} )}
             type="text"
             placeholder="Search For Medicine"
-            className="search-input"
+            className="px-2 search-input input-style rounded border-primary"
           />
-          {/* <Button text="Search"  className="search-button" onClick={() => console.log('Button clicked')} /> */}
           </div>
 
-          <div className="search-container">
+          <div className="col-md-2 search-container">
           <select
             onChange={(e) => setMedUse( e.target.value ===""?{}: {"medicinalUses": {"in": e.target.value}})}
-            className="search-input"
+            className="px-2 search-input input-style rounded border-primary"
           >
-            <option value="">Select Med Use</option>
+            <option value="">All medicinal Uses</option>
             {medUses?.map((medUse, index) => (
               <option key={index} value={medUse}>
                 {medUse}
@@ -70,26 +65,21 @@ function MedicineList() {
             ))}
           </select>
         </div>
+        </div>
            
-           <Button text="Add Product" className="add-button"   onClick={() => setModalAddShow(true)}/>
+           <Button text="Add Product" className="add-button m-3 mb-4"   onClick={() => setModalAddShow(true)}/>
     
            <AddModal
             show={modalAddShow}
             onHide={() => setModalAddShow(false)} 
           />
-
-        
-       
-    
     
         <div className="container-fluid ">
            <div className="row">
     
            
            
-          {medicines?.map((medicine) => (
-            //  <div key={medicine.id} className="col-md-6 col-lg-4">
-           
+          {medicines?.map((medicine) => (           
             <Card
             className="col-lg-4"
               key={medicine.id}
@@ -99,11 +89,9 @@ function MedicineList() {
               onClickButton={() => handleCardClick(medicine)}
               buttonText={'Details'}
              
-    
-            //   FOR PHARMACIST
-               text={`Quantity: ${medicine.quantity} - sales: ${medicine.sales}`}
+                   text={`Quantity: ${medicine.quantity} - sales: ${medicine.sales}`}
                //
-              image={<img src={medicine.image}  alt="Image"  style={{ maxHeight: '150px' , maxWidth: '100px'}} />}
+              image={<img src={medicine.image? medicine.image : '/medication.svg'}  alt="Image"  style={{ maxHeight: '50px' , maxWidth: '50px'}} />}
             />
            
            
@@ -156,12 +144,6 @@ function MedicineList() {
               onSave={(newValue) => handleSave(newValue, 'description')}
             />
           
-          
-            
-          
-          
-           
-          
             <div className="info-container d-flex align-items">
               <h5>Medicinal Uses</h5>
              
@@ -180,7 +162,7 @@ function MedicineList() {
             </div>
             <EditableField
              id={selectedMedicine._id}
-             nameOfField={"medicineIngredients"}
+             nameOfField={"Medicine Ingredients"}
              hide={() => setModalDescShow(false)}
               
               value={selectedMedicine.medicineIngredients.join(', ')}
@@ -190,21 +172,13 @@ function MedicineList() {
           
           }
           
-          image={<img src={selectedMedicine.image}  alt="Image"  style={{  float: 'right',  marginLeft: '10px',  maxHeight: '200px', maxWidth: '150px',}} />}
+          image={<img src={selectedMedicine.image? selectedMedicine.image : '/medication.svg'}  alt="Image"  style={{  float: 'right',  marginLeft: '10px',  maxHeight: '200px', maxWidth: '150px',}} />}
         />
 
         
       )}
-      {/* <EditModal
-      show={modalEditShow}
-      onHide={() => setModalEditShow(false)}
-      selectedMedicine={selectedMedicine}
-      
-/> */}
-
         </div>
         </div>
-        {/* <Footer/> */}
         </div>
       );
      

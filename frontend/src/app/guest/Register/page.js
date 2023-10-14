@@ -2,7 +2,7 @@
 import React from 'react';
 import "./Register.css";
 //import { Button } from './Register/Button.js';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '../../../../components/Navbar';
 import Footer from '../../../../components/Footer';
 import { Button } from "../../../../components/Button";

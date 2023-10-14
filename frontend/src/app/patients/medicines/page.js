@@ -10,10 +10,6 @@ import { getMedicinesAction } from '@/app/redux/actions/medicineActions';
 import { login } from '@/app/redux/actions/authActions';
 
 
-
-
-
-
 function MedicineList() {
   const [selectedMedicinalUse, setSelectedMedicinalUse] = useState(null);
   const [modalDescShow, setModalDescShow] = useState(false);
@@ -35,51 +31,29 @@ function MedicineList() {
 
  
 useEffect(()=> {
-// dispatch(login("sysadmin","pass1234"))
     dispatch(getMedicinesAction( {...name, ...medUse}))
   },[dispatch,name,medUse])
-      
-      
-
-
-
-
-
   
       return (
-        <div>
-       <div className="div d-flex">
-        <div className="rows">
-          <div className="row my-3">
-          <div className="status-filter">
-          {/* <span className="mr-2">Filter by medicinal use:</span> */}
-        {/* <select onChange={handleMedicinalUseChange} className='col-lg-2 mx-lg-1' value={selectedMedicinalUse || ''}>
-          <option value="">All</option> */}
-          {/* {allMedicinalUses.map((medicinalUse) => (
-              <option key={medicinalUse} value={medicinalUse}>
-                {medicinalUse}
-              </option>
-            ))} */}
-        {/* </select> */}
-      </div>
-        </div>
-      </div>
-      <div className="search-container">
+      <div className='m-5'>
+        <h1 className="row text-primary text-center"><strong> XPharmacy Medicine</strong></h1>
+        <hr />
+       <div className="div d-flex m-2 ms-0">
+      <div className="search-container m-2">
         <input
           onChange={ (e)=> setName( {"name": {"regex": e.target.value }} )}
           type="text"
           placeholder="Search For Medicine"
-          className="search-input"
+          className="px-2 search-input input-style rounded border-primary"
         />
-        {/* <Button text="Search"  className="search-button" onClick={() => console.log('Button clicked')} /> */}
         </div>
 
-        <div className="search-container">
+        <div className="search-container m-2">
           <select
             onChange={(e) => setMedUse( e.target.value ===""?{}: {"medicinalUses": {"in": e.target.value}})}
-            className="search-input"
+            className="px-2 search-input input-style rounded border-primary"
           >
-            <option value="">Select Med Use</option>
+            <option value="">All medicinal Uses</option>
             {medUses?.map((medUse, index) => (
               <option key={index} value={medUse}>
                 {medUse}
@@ -87,35 +61,20 @@ useEffect(()=> {
             ))}
           </select>
         </div>
-
         </div>
-
-        
-        
-  
-  
+     
       <div className="container-fluid ">
          <div className="row">
-  
-         
-         
         {medicines?.map((medicine) => (
-         
-         
           <Card
           className="col-lg-4"
             key={medicine.id}
-          
             title={medicine.name}
             subtitle={`Price: ${medicine.price} - Description: ${medicine.description}`}
             onClickButton={() => handleCardClick(medicine)}
-            buttonText={'Details'}
-  
-         
-            image={<img src={medicine.image}  alt="Image"  style={{ maxHeight: '150px' , maxWidth: '100px'}} />}
+            buttonText={'Details'}        
+            image={<img src={medicine.image? medicine.image : '/medication.svg'}  alt="Image"  style={{ maxHeight: '50px' , maxWidth: '50px'}} />}
           />
-         
-         
         ))}
 
 {selectedMedicine && (
@@ -131,13 +90,9 @@ useEffect(()=> {
         </div>
       }
       
-      image={<img src={selectedMedicine.image}  alt="Image"  style={{  float: 'right',  marginLeft: '10px',  maxHeight: '200px', maxWidth: '150px',}} />}
+      image={<img src={selectedMedicine.image? selectedMedicine.image : '/medication.svg'}  alt="Image"  style={{  float: 'right',  marginLeft: '10px',  maxHeight: '200px', maxWidth: '150px',}} />}
     />
     )}
-
-
-
-        
       </div>
       </div>
       {/* <Footer/> */}

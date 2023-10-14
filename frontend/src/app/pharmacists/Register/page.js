@@ -59,7 +59,6 @@ const SignUp = () => {
             "phoneNumber": formData.mobileNumber,
             "hourlyRate": formData.hourlyRate,
             "educationalBackground": formData.educationalBackground,
-            "speciality": formData.affiliation,
             "role": "pharmacist",
             "affiliation": formData.affiliation,
             "workingHours": formData.workingHours,
@@ -176,15 +175,6 @@ const SignUp = () => {
                                 </select>
                             </div>
 
-                    <div className="inputz">
-                        <input
-                            type="text"
-                            placeholder=' Speciality'
-                            name="speciality"
-                            value={formData.speciality}
-                            onChange={handleInputChange}
-                        />
-                    </div>
 
                     <div className="inputz">
                         <input

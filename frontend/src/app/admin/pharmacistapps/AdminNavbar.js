@@ -42,7 +42,7 @@ const AdminNavbar = () => {
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/admin/pharmacistapps">
-                 Pharmacists Applications
+                 Applications
               </a>
             </li>
             <li className="nav-item">

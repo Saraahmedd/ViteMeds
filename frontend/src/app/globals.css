@@ -51,6 +51,11 @@
 .text-gray{
     color: gray;
 } 
+.input-style{
+  border: 1px solid;
+  height: 30px;
+  width: 170px;
+}
   
 /* -------------------------- Animation classes ----------------------------- */
 
