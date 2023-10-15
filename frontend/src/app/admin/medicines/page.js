@@ -55,6 +55,8 @@ useEffect(()=> {
       <div>
         <AdminNavbar />
         <div className='m-5'>
+        <h1 className="row text-primary text-center"><strong> XPharmacy Medicine</strong></h1>
+        <hr />
         <div className="m-3 ms-0">
       <div className="row m-2 ms-0">
       <div className="col-md-2  search-container">
