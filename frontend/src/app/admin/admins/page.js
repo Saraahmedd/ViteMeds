@@ -38,25 +38,30 @@ export default function Admins() {
   } 
    const adminlist = useMemo(() => {
     if (admins && admins.data) {
-      return admins.data.map((value) => (
-        
-       value.role==='administrator' ? {
-        
-        username: value.username, 
-        // button: generateButton(value._id)
-      
-      }  : {
-        
-        
-      
-      }));
+      const excludedAdminId =JSON.parse(localStorage.getItem('userInfo')).data.user._id ;
+  
+      return admins.data
+        .filter((value) => {
+          return value._id !== excludedAdminId;
+        })
+        .map((value) => {
+          if (value.role === 'administrator') {
+            return {
+              username: value.username,
+              // password: value.password,
+              // button: generateButton(value._id),
+            };
+          }
+          return null; 
+        })
+        .filter((value) => value !== null && typeof value !== 'undefined');
     }
     return [];
   }, [admins,modalShow,RemoveisLoading]);
   
   useEffect(()=>{
     
-    dispatch(login("sysadmin","pass1234"));
+    // dispatch(login("sysadmin","pass1234"));
     
     dispatch(getAllUsers());
     

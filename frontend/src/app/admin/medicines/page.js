@@ -106,7 +106,7 @@ useEffect(()=> {
             buttonText={'Details'}
   
          
-            image={<img src={medicine.image? medicine.image : '/medication.svg'}  alt="Image"  style={{ maxHeight: '50px' , maxWidth: '50px'}} />}
+            image={<img src={medicine.imageURL? medicine.imageURL : '/medication.svg'}  alt="Image"  style={{ maxHeight: '50px' , maxWidth: '50px'}} />}
           />
          
          
@@ -125,7 +125,7 @@ useEffect(()=> {
         </div>
       }
       
-      image={<img src={selectedMedicine.image? selectedMedicine.image : '/medication.svg'}  alt="Image"  style={{  float: 'right',  marginLeft: '10px',  maxHeight: '200px', maxWidth: '150px',}} />}
+      image={<img src={selectedMedicine.imageURL? selectedMedicine.imageURL : '/medication.svg'}  alt="Image"  style={{  float: 'right',  marginLeft: '10px',  maxHeight: '200px', maxWidth: '150px',}} />}
     />
     )}
 

@@ -3,18 +3,25 @@ import {Button} from  '../../../../../components/Button';
 import { useDispatch } from 'react-redux';
 import { editMedicine } from '@/app/redux/actions/medicineActions';
 
-function EditableField({  value, nameOfField ,id,hide}) {
+function EditableField({  value, nameOfField ,id,hide, edit}) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedValue, setEditedValue] = useState(value);
   const dispatch=useDispatch()
 
   
   const handleSave = () => {
-    dispatch(editMedicine(id, { [nameOfField]: editedValue }));
+    console.log(nameOfField)
+    let medicineIngredientsArray;
+    if(nameOfField === "medicineIngredients") {
+      medicineIngredientsArray = editedValue.split(',');
+    }
+    
+    dispatch(editMedicine(id, { [nameOfField]: medicineIngredientsArray ? medicineIngredientsArray:  editedValue }));
 
     
     setIsEditing(false);
     hide();
+
   };
 
 
@@ -36,15 +43,16 @@ function EditableField({  value, nameOfField ,id,hide}) {
   
 /> 
         </div>
-      ) : (
+      ) :  ( 
         <div>
           <span>{value}</span>
+          { edit === true &&
           <Button
   text="edit"
   className="add-button btn-sm"
-  onClick={() => setIsEditing(true)}
+  onClick={() => setIsEditing(true)} 
   
-/>    
+/>    }
         </div>
       )}
     </div>

@@ -25,11 +25,13 @@ function MedicineList() {
     const dispatch = useDispatch();
     const medicines = useSelector(state => state.getMedicinesReducer.medicines?.data)
     const medUses = useSelector(state => state.getMedicinesReducer.medicines?.medUses)
+    const {loading } = useSelector(state => state.addMedicineReducer)
+    const {loading: loading2 } = useSelector(state => state.editMedicineReducer)
  useEffect(()=> {
-  dispatch(login("amir","password123"))
+  // dispatch(login("amir","password123"))
       dispatch(getMedicinesAction( {...name, ...medUse}))
 
-    },[dispatch,name,medUse,modalAddShow,modalDescShow,selectedMedicine])
+    },[dispatch,name,medUse,modalAddShow,modalDescShow,selectedMedicine,loading, loading2])
 
     const handleCardClick = (medicine) => {
       setSelectedMedicine(medicine);
@@ -91,7 +93,8 @@ function MedicineList() {
              
                    text={`Quantity: ${medicine.quantity} - sales: ${medicine.sales}`}
                //
-              image={<img src={medicine.image? medicine.image : '/medication.svg'}  alt="Image"  style={{ maxHeight: '50px' , maxWidth: '50px'}} />}
+              image={<img src={medicine?.imageURL? medicine.imageURL : '/medication.svg'}  
+              alt="Image"  style={{ maxHeight: '50px' , maxWidth: '50px'}} />}
             />
            
            
@@ -116,6 +119,7 @@ function MedicineList() {
               id={selectedMedicine._id}
               nameOfField={"price"}
               hide={() => setModalDescShow(false)}
+              edit={true}
               onSave={(newValue) => handleSave(newValue, 'price')}
             />
           
@@ -128,6 +132,7 @@ function MedicineList() {
               value={selectedMedicine.quantity}
               nameOfField={"quantity"}
               hide={() => setModalDescShow(false)}
+              edit={true}
               onSave={(newValue) => handleSave(newValue, 'quantity')}
             />
           
@@ -139,6 +144,7 @@ function MedicineList() {
              id={selectedMedicine._id}
              hide={() => setModalDescShow(false)}
              nameOfField={"description"}
+             edit={false}
              
               value={selectedMedicine.description}
               onSave={(newValue) => handleSave(newValue, 'description')}
@@ -153,6 +159,7 @@ function MedicineList() {
               hide={() => setModalDescShow(false)}
               value={selectedMedicine.medicinalUses.join(', ')}
               nameOfField={"medicinalUses"}
+              edit={false}
               onSave={(newValue) => handleSave(newValue.split(',').map(item => item.trim()), 'medicinalUses')}
             />
           
@@ -162,8 +169,9 @@ function MedicineList() {
             </div>
             <EditableField
              id={selectedMedicine._id}
-             nameOfField={"Medicine Ingredients"}
+             nameOfField={"medicineIngredients"}
              hide={() => setModalDescShow(false)}
+             edit={true}
               
               value={selectedMedicine.medicineIngredients.join(', ')}
               onSave={(newValue) => handleSave(newValue.split(',').map(item => item.trim()), 'medicineIngredients')}
@@ -172,7 +180,7 @@ function MedicineList() {
           
           }
           
-          image={<img src={selectedMedicine.image? selectedMedicine.image : '/medication.svg'}  alt="Image"  style={{  float: 'right',  marginLeft: '10px',  maxHeight: '200px', maxWidth: '150px',}} />}
+          image={<img src={selectedMedicine?.imageURL? selectedMedicine.imageURL : '/medication.svg'}  alt="Image"  style={{  float: 'right',  marginLeft: '10px',  maxHeight: '200px', maxWidth: '150px',}} />}
         />
 
         

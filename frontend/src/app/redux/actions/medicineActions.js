@@ -74,6 +74,7 @@ export const editMedicine = (id, medicine) => async (dispatch) => {
             },
             withCredentials: true
         };
+        console.log(medicine)
         const { data } = await axios.patch(
             `${baseURL}/api/v1/medicines/update/${id}`,
             medicine,

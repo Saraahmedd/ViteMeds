@@ -73,7 +73,7 @@ useEffect(()=> {
             subtitle={`Price: ${medicine.price} - Description: ${medicine.description}`}
             onClickButton={() => handleCardClick(medicine)}
             buttonText={'Details'}        
-            image={<img src={medicine.image? medicine.image : '/medication.svg'}  alt="Image"  style={{ maxHeight: '50px' , maxWidth: '50px'}} />}
+            image={<img src={medicine.imageURL? medicine.imageURL : '/medication.svg'}  alt="Image"  style={{ maxHeight: '50px' , maxWidth: '50px'}} />}
           />
         ))}
 
@@ -89,8 +89,8 @@ useEffect(()=> {
           <p>Medicinal Uses: {selectedMedicine.medicinalUses.join(', ')}</p>
         </div>
       }
-      
-      image={<img src={selectedMedicine.image? selectedMedicine.image : '/medication.svg'}  alt="Image"  style={{  float: 'right',  marginLeft: '10px',  maxHeight: '200px', maxWidth: '150px',}} />}
+        
+      image={<img src={selectedMedicine?.imageURL? selectedMedicine.imageURL : '/medication.svg'}  alt="Image"  style={{  float: 'right',  marginLeft: '10px',  maxHeight: '200px', maxWidth: '150px',}} />}
     />
     )}
       </div>

@@ -9,7 +9,7 @@ exports.getAllMedicinesForPharmacist = factory.getAll(Medicine);
 exports.getMedicineById = factory.getOne(Medicine);
 
 exports.updateMedicine = catchAsync(async (req, res, next) => {
-        const excludedFields = ['name', 'description', 'medicinalUses', 'medicineIngredients'];
+        const excludedFields = ['name', 'description', 'medicinalUses'];
         excludedFields.forEach(field => delete req.body[field]);
         factory.updateOne(Medicine)(req, res, next);
     });

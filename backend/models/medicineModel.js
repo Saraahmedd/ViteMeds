@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 
 const medicineSchema = new mongoose.Schema({
-
-
     name: {
         type: String,
         required: true,
@@ -47,6 +45,9 @@ const medicineSchema = new mongoose.Schema({
     medicineIngredients: {
         type: [String],
         required: [true, 'A medicine must have medicinal ingredients'],
+    },
+    imageURL: {
+        type: String,
     }
 
 });
