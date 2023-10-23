@@ -38,13 +38,13 @@ const medicineSchema = new mongoose.Schema({
      },
     medicinalUses: {
         type: [String],
-        required: [true, 'A medicine must have a medicinal use'],
+        // required: [true, 'A medicine must have a medicinal use'],
 
     },
 
     medicineIngredients: {
         type: [String],
-        required: [true, 'A medicine must have medicinal ingredients'],
+        // required: [true, 'A medicine must have medicinal ingredients'],
     },
     imageURL: {
         type: String,

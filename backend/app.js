@@ -10,6 +10,8 @@ const cors = require('cors');
 const AppError = require('./utils/appError')
 const globalErrorHandler = require('./controllers/errorController');
 const dotenv = require('dotenv');
+const bodyParser = require('body-parser');
+const path = require('path');
 dotenv.config({ path: './config.env' });
 
 // Start express app
@@ -19,11 +21,15 @@ const userRouter = require('./routes/userRoutes.js');
 const patientRouter = require('./routes/patientRoutes.js');
 const pharmacistRouter = require('./routes/pharmacistRoutes.js');
 const medicineRouter = require('./routes/medicineRoutes.js');
+const orderRouter = require('./routes/orderRoutes.js');
+const orderController = require('./controllers/orderController');
 
 app.enable('trust proxy');
 
 
 // 1) GLOBAL MIDDLEWARES
+
+
 
 var corsOptions = {
   origin: ['http://localhost:3000'],
@@ -33,6 +39,8 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 // app.options('*', cors());
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 // Set secure HTTP headers
@@ -52,6 +60,12 @@ const limiter = rateLimit({
 if (process.env.NODE_ENV === 'production') {
   app.use('/api', limiter);
 }
+
+app.post(
+  '/webhook-checkout',
+  bodyParser.raw({ type: 'application/json' }),
+  orderController.webhookCheckout
+);
 
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));

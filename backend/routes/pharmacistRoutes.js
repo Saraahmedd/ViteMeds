@@ -14,4 +14,5 @@ router
   router.get("/",authController.protect,
   authController.restrictTo("administrator"),pharmacistController.getAllPharmacists)
 
+router.get("/docs/:id", pharmacistController.getPharmacistsDoc)
 module.exports = router;
