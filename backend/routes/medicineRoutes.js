@@ -30,12 +30,14 @@ router.route('/getmedicines/pharmacist')
 router.route('/new-medicine')
   .post(    
   authController.restrictTo('pharmacist'),
+  medicineController.upload.single('image'),
   medicineController.createNewMedicine
 );
 
 router.route('/update/:id')
   .patch(    
   authController.restrictTo('pharmacist'),
+  medicineController.upload.single('image'),
   medicineController.updateMedicine
 );
 

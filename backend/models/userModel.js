@@ -33,13 +33,46 @@ const userSchema = new mongoose.Schema({
         }
     },
     passwordChangedAt: Date,
-    passwordResetToken: String,
+    OTP: String,
     passwordResetExpires: Date,
+    wallet: {
+      type: Number,
+      default: 0
+    } ,
+
     active: {
       type: Boolean,
       default: true,
       select: false
     }
+    ,
+    deliveryAddress: [  {
+      id: {
+        type: Number,
+        unique: true,
+        required: true,
+      },
+      streetAddress: {
+          type: String,
+          required: true,
+      },
+      city: {
+          type: String,
+          required: true,
+      },
+      state: {
+          type: String,
+          required: true,
+      },
+      zipCode: {
+          type: String,
+          required: true,
+      },
+      country: {
+          type: String,
+          required: true,
+      }
+  }],
     
 });
 userSchema.pre('save', async function (next) {
@@ -57,12 +90,58 @@ userSchema.pre('save', function (next) {
     this.passwordChangedAt = Date.now() - 1000;
     next();
   });  
+
+  userSchema.pre('save', async function (next) {
+    if (!this.isNew) {
+        // Only generate and increment the 'id' if the parent entity is being created
+        return next();
+    }
+
+    const parentEntity = this;
+    
+    // Check if the 'deliveryAddress' array is empty
+    if (parentEntity.deliveryAddress.length === 0) {
+        return next();
+    }
+
+    let maxId = 0;
+
+    parentEntity.deliveryAddress.forEach((embeddedObject) => {
+        if (embeddedObject.id > maxId) {
+            maxId = embeddedObject.id;
+        }
+    });
+
+    const nextId = maxId + 1;
+
+    // Loop through each embedded object and update the 'id' field
+    parentEntity.deliveryAddress.forEach((embeddedObject) => {
+        embeddedObject.id = nextId;
+    });
+
+    next();
+});
+
   
 userSchema.methods.correctPassword = async function (
     candidatePassword,
     userPassword
   ) {
     return await bcrypt.compare(candidatePassword, userPassword);
+  };
+
+userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
+    if (this.passwordChangedAt) {
+      const changedTimestamp = parseInt(
+        this.passwordChangedAt.getTime() / 1000,
+        10
+      );
+  
+      return JWTTimestamp < changedTimestamp;
+    }
+  
+    // False means NOT changed
+    return false;
   };
   
 
