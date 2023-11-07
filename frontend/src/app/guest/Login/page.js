@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 
 //import { Button } from './Register/Button.js';
 import { useState } from "react";
+import { Card } from "../../../../components/Card";
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
 import { Button } from "../../../../components/Button";
