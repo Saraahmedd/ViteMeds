@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import { ReduxProvider } from "../redux/provider";
-import AdminNavbar from "../../../components/AdminNavbar";
+import PatientNavbar from "../../../components/PatientNavbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,7 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
       <div className={`global-text ${inter.className}`}>
-        <AdminNavbar />
+        <PatientNavbar />
         <div className="p-2 m-5">
         <ReduxProvider> {children} </ReduxProvider>
         </div>

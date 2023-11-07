@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useMemo, useState } from 'react';
-import {DoctorAppsTable} from '../pharmacistapps/DoctorAppsTable'
+import {DoctorAppsTable} from '../../../../components/DoctorAppsTable'
 import { Button } from '../../../../components/Button';
 import CenteredModalAdmin from './CenteredModalAdmin';
 import { useDispatch, useSelector } from 'react-redux';
@@ -64,7 +64,7 @@ export default function Admins() {
     <h3 className='my-1 mt-0 text-center text-title'>Admins</h3>
     <div className='underline-Bold mx-auto mb-5'></div>
     <div className=" justify-content-center align-items-center min-vh-100 container">
-      <Button text='Add Admin' variant='md' className="ms-auto " onClick={()=>{setModalShow(true)}}></Button>
+      <Button text='Add Admin' variant='md' className="ms-auto" onClick={()=>{setModalShow(true)}}></Button>
       <CenteredModalAdmin
         show={modalShow}
         onHide={() => setModalShow(false)} 

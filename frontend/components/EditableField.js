@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Button} from  '../../../../../components/Button';
+import {Button} from  './Button';
 import { useDispatch } from 'react-redux';
 import { editMedicine } from '@/app/redux/actions/medicineActions';
 

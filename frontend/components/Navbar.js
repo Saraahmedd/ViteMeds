@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,20 +16,17 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light w-100">
       <div className="container d-flex flex-row justify-content-between align-items-center w-100">
+            <Image src="/chevron.svg" width={20} height={20} className='mx-3 rotate-90 pt-2 pointer-cursor' onClick={goBack} ></Image>
         <div className="title col-md-6">
-        <Image src="/chevron.svg" width={20} height={20} className='mx-3 rotate-90 pt-2 pointer-cursor' onClick={goBack} ></Image>
-        <div className="logo"></div>
-        <h1>
-        <a className="navbar-brand" href="/">
-        XPharmacies
-        </a>
-        </h1>
+          <div className="logo"></div>
+          <h1>
+            <a className="navbar-brand" href="/">XPharmacies</a>
+          </h1>
           <button
             className="navbar-toggler"
             type="button"
-            onClick={toggleMenu}
-          >
-            <span className="navbar-toggler-icon"></span>
+            onClick={toggleMenu}>
+              <span className="navbar-toggler-icon"></span>
           </button>
         </div>
         <div

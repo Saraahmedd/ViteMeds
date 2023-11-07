@@ -3,16 +3,15 @@ import React, { useEffect } from 'react';
 import {useState} from 'react' ;
 import  {Card} from '../../../../components/Card'; 
 import {Button} from '../../../../components/Button'; 
-import  AddModal  from './PharmacistComponents/AddModal';
-import  EditableField  from './PharmacistComponents/EditableField';
+import  AddModal  from '../../../../components/AddModal';
+import  EditableField  from '../../../../components/EditableField';
+
 // import EditModal  from './MedicineModals/EditModal';
 
-import DescriptionModal  from './PharmacistComponents/DescriptionModal';
+import DescriptionModal  from '../../../../components/PharmacistMedicineModal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMedicinesAction } from '@/app/redux/actions/medicineActions';
-import { login } from '@/app/redux/actions/authActions';
-
 
 function MedicineList() {
     const [modalAddShow, setModalAddShow] = useState(false);

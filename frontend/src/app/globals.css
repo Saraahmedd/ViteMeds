@@ -64,6 +64,14 @@
   border-radius: 9px;
 }
 
+.pointer-cursor {
+  cursor: pointer;
+}
+
+.rotate-90 {
+  transform: rotate(90deg);
+}
+
 .text-title{
   font-weight: 700;
   font-size: 50px;
