@@ -24,6 +24,8 @@ export default function Patients() {
 
   return (
     <>
+    <h3 className='my-1 mt-0 text-center text-title'>Patients</h3>
+    <div className='underline-Bold mx-auto mb-5'></div>
     <div className="justify-content-center align-items-center min-vh-100">
       <div className='row'>
       {patients?.data?.map((person)=>{

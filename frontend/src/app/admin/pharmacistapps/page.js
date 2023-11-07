@@ -29,6 +29,8 @@ export default function DoctorApps() {
  
   return (
     <>
+    <h3 className='my-1 mt-0 text-center text-title'>Applications</h3>
+    <div className='underline-Bold mx-auto mb-5'></div>
     <div className="justify-content-center align-items-center min-vh-100">
       <div className='row'>
       {doctors?.data?.map((person)=>{

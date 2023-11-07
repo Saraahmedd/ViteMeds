@@ -3,24 +3,7 @@ import React, { useState } from 'react';
 function DoctorAppsTable(props) {
     const { headers, data, itemsPerPageOptions } = props;
 
-    // State for pagination
-    // const [currentPage, setCurrentPage] = useState(1);
-    // const [itemsPerPage, setItemsPerPage] = useState(itemsPerPageOptions[0]);
-
-    // Calculate the index of the first and last item to display based on pagination
-
     const currentItems = data;
-
-    // Change the current page
-    // const handlePageChange = (page) => {
-    //     setCurrentPage(page);
-    // };
-
-    // // Change the number of items per page
-    // const handleItemsPerPageChange = (e) => {
-    //     setItemsPerPage(parseInt(e.target.value, 10));
-    //     setCurrentPage(1); // Reset to the first page when changing items per page
-   // };
 
     return (
         <>
@@ -34,14 +17,11 @@ function DoctorAppsTable(props) {
                 </thead>
                 <tbody>
                     {currentItems.map((row, index) => (
-                        
                         <tr key={`tr${index}`}>
                             {Object.values(row).map((node, index2) => (
                                 <td key={`td${index}-${index2}`}>{node}</td>
                             ))}
                         </tr>
-
-                        
                     ))}
                 </tbody>
             </table>

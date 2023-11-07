@@ -18,7 +18,6 @@ export default function Admins() {
   const admins = useSelector(state=>state.getUsersReducer.user)
   const CreateisLoading = useSelector(state=>state.registerReducer.loading)
   const RemoveisLoading = useSelector(state=>state.removeUserReducer.loading)
-  // const UpdateisLoading = useSelector(state=>state.updateHealthPackageReducer.loading)
 
   const generateButton = (id) => {
     return (
@@ -44,8 +43,6 @@ export default function Admins() {
           if (value.role === 'administrator') {
             return {
               username: value.username,
-              // password: value.password,
-              // button: generateButton(value._id),
             };
           }
           return null; 
@@ -55,20 +52,19 @@ export default function Admins() {
     return [];
   }, [admins,modalShow,RemoveisLoading]);
   
+  
   useEffect(()=>{    
     dispatch(getAllUsers());
     }
   ,[dispatch,modalShow,CreateisLoading,RemoveisLoading])
  
 
-    
-    
-  
-
   return (
     <> 
+    <h3 className='my-1 mt-0 text-center text-title'>Admins</h3>
+    <div className='underline-Bold mx-auto mb-5'></div>
     <div className=" justify-content-center align-items-center min-vh-100 container">
-      <Button text='Add Admin' onClick={()=>{setModalShow(true)}}></Button>
+      <Button text='Add Admin' variant='md' className="ms-auto " onClick={()=>{setModalShow(true)}}></Button>
       <CenteredModalAdmin
         show={modalShow}
         onHide={() => setModalShow(false)} 

@@ -39,8 +39,8 @@ useEffect(()=> {
 
     return (
       <div>
-        <div className='m-5'>
-        <h1 className="row text-primary text-center"><strong> XPharmacy Medicine</strong></h1>
+        <h3 className='my-1 mt-0 text-center text-title'>Medicines</h3>
+        <div className='underline-Bold mx-auto mb-5'></div>
         <hr />
         <div className="m-3 ms-0">
       <div className="row m-2 ms-0">
@@ -69,11 +69,6 @@ useEffect(()=> {
       </div>
 
         </div>
-
-        
-        
-  
-  
       <div className="container-fluid ">
          <div className="row">
   
@@ -114,14 +109,9 @@ useEffect(()=> {
       image={<img src={selectedMedicine.imageURL? selectedMedicine.imageURL : '/medication.svg'}  alt="Image"  style={{  float: 'right',  marginLeft: '10px',  maxHeight: '200px', maxWidth: '150px',}} />}
     />
     )}
-
-
-
-        
       </div>
       </div>
       {/* <Footer/> */}
-      </div>
     </div>
 
     );
