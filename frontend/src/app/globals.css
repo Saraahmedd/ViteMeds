@@ -57,6 +57,22 @@
   width: 170px;
 }
 
+.text-bold {
+  font-weight: 700;
+}
+
+.item-center {
+  align-self: center;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+.item-center {
+  align-self: center;
+}
+
 .gradient-background {
   background: linear-gradient(
     to right,

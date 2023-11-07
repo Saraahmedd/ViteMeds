@@ -5,8 +5,8 @@ import { Button } from '../../../../components/Button';
 import { Card } from '../../../../components/Card';
 import { getPharmacists } from '@/app/redux/actions/pharmacistActions';
 import { useDispatch, useSelector } from 'react-redux';
-import {login} from '../../redux/actions/authActions'
 import { removeUser } from '@/app/redux/actions/userActions';
+import Image from 'next/image';
 
 export default function Doctors() {
   
@@ -33,6 +33,15 @@ export default function Doctors() {
       dispatch(removeUser(id))
 
     }
+
+    function formatDateToDDMMYYYY(isoDate) {
+      const date = new Date(isoDate);      
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-based, so add 1.
+      const year = date.getFullYear();
+      
+      return `${day}-${month}-${year}`;
+  }
     
 
   return (
@@ -44,24 +53,44 @@ export default function Doctors() {
       {doctors?.data?.map((person)=>{
         if(!person.isApproved)
         return
-        return  <Card key={person.user?._id} className="col-lg-4 offset-lg-1" title={person.name} subtitle="Pharmacist's Info"  text={
-          <div className="">
-          <h8 style={{ fontWeight: 'bold' }}> Username: </h8>{person.user?.username}
+        return  <div className="mx-auto col-md-6">
+              <Card key={person.user?._id} className="col-lg-8 mx-auto offset-lg-1 my-4 bg-light" title={<div className='text-capitalize ps-3'>{person.name}</div>} subtitle=""  text={
+          <div className="p-3">
+          <div className="row global-text">
+            <div>
+            <Image src='/mail-dark.svg' height={20} width={20} className="me-2"/> {person.email}
+            </div>
+          </div>
+          <div className="row my-2">
+          <div className='col-md-6'>
+            <Image src='/username.svg' height={20} width={20} className="me-2"/> {person.user?.username}
           <br />
-          <h8 style={{ fontWeight: 'bold' }}>email: </h8>{person.email}
+          </div>
+          <div className='col-md-6'>
+            <Image src='/birthday.svg' height={20} width={20} className="me-2"/>{formatDateToDDMMYYYY(person.dateOfBirth)}
           <br />
-          <h8 style={{ fontWeight: 'bold' }}>Date Of Birth: </h8>{person.dateOfBirth}
-          <br />
-          <h8 style={{ fontWeight: 'bold' }}> affiliation: </h8>{person.affiliation}
-          <br />
-          <h8 style={{ fontWeight: 'bold' }}>hourlyRate: </h8>{person.hourlyRate}
-          <br />
+          </div>
+          </div>
+          <div className="row global-text mb-1">
+          <div className="col-md-6">
+            <h8 style={{ fontWeight: 'bold' }}>Affiliation: </h8>{person.affiliation}
+            <br />
+          </div>
+          <div className="col-md-6">
+            <h8 style={{ fontWeight: 'bold' }}>Hourly Rate: </h8>{person.hourlyRate}
+            <br />
+          </div>
+          </div>
+          <div>
           <h8 style={{ fontWeight: 'bold' }}>educationalBackground: </h8>{person.educationalBackground}
           <br />
           </div>
-        } buttonText='Remove' onClickButton={()=>{onRemoveHandler(person.user._id)}}>
+          </div>
+        } buttonText='Remove' buttonClass={"col-md-12 m-3 ms-auto"} onClickButton={()=>{onRemoveHandler(person.user._id)}}>
        
         </Card>
+        </div>
+      
        
       })
        }
