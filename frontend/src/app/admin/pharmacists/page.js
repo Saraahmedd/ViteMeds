@@ -2,7 +2,6 @@
 import React, { useEffect } from 'react';
 
 import { Button } from '../../../../components/Button';
-import AdminNavbar from '../pharmacistapps/AdminNavbar';
 import { Card } from '../../../../components/Card';
 import { getPharmacists } from '@/app/redux/actions/pharmacistActions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -39,7 +38,6 @@ export default function Doctors() {
 
   return (
     <>
-    <AdminNavbar/>
     <div className="justify-content-center align-items-center min-vh-100">
       <div className='row'>
       {doctors?.data?.map((person)=>{

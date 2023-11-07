@@ -2,10 +2,8 @@
 import React, { useEffect } from 'react';
 import {useState} from 'react' ;
 import  {Card} from '../../../../components/Card'; 
-import {Button} from '../../../../components/Button'; 
 import  DescriptionModal  from './MedicineModals/DescriptionModal';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AdminNavbar from '../pharmacistapps/AdminNavbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMedicinesAction } from '@/app/redux/actions/medicineActions';
 
@@ -39,21 +37,8 @@ useEffect(()=> {
     dispatch(getMedicinesAction( {...name, ...medUse}))
   },[dispatch,name,medUse])
 
-
-  // const allMedicinalUses = Array.from(
-  //   new Set(medicines?.flatMap((medicine) => medicine.medicinalUses))
-  // );
-    
-    
-
-
-
-
-
-
     return (
       <div>
-        <AdminNavbar />
         <div className='m-5'>
         <h1 className="row text-primary text-center"><strong> XPharmacy Medicine</strong></h1>
         <hr />
@@ -66,7 +51,6 @@ useEffect(()=> {
           placeholder="Search For Medicine"
           className="px-2 search-input input-style rounded border-primary"
         />
-        {/* <Button text="Search"  className="search-button" onClick={() => console.log('Button clicked')} /> */}
         </div>
 
         <div className="col-md-2 search-container">

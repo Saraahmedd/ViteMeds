@@ -2,13 +2,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {DoctorAppsTable} from '../pharmacistapps/DoctorAppsTable'
 import { Button } from '../../../../components/Button';
-import AdminNavbar from '../pharmacistapps/AdminNavbar';
-import { Card } from '../../../../components/Card';
 import CenteredModalAdmin from './CenteredModalAdmin';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsers, removeUser } from '@/app/redux/actions/userActions';
-import { login } from '@/app/redux/actions/authActions';
-
 
 
 export default function Admins() {
@@ -59,15 +55,9 @@ export default function Admins() {
     return [];
   }, [admins,modalShow,RemoveisLoading]);
   
-  useEffect(()=>{
-    
-    // dispatch(login("sysadmin","pass1234"));
-    
+  useEffect(()=>{    
     dispatch(getAllUsers());
-    
     }
-  
-
   ,[dispatch,modalShow,CreateisLoading,RemoveisLoading])
  
 
@@ -76,10 +66,7 @@ export default function Admins() {
   
 
   return (
-    <>
-    <AdminNavbar/>
-    
-   
+    <> 
     <div className=" justify-content-center align-items-center min-vh-100 container">
       <Button text='Add Admin' onClick={()=>{setModalShow(true)}}></Button>
       <CenteredModalAdmin
@@ -87,11 +74,8 @@ export default function Admins() {
         onHide={() => setModalShow(false)} 
         //title={"Add A New Admin"}
         title={"Please Enter Username And Password"}
-
         />
       <DoctorAppsTable headers={tableHeaders} data={adminlist}></DoctorAppsTable>
-      
-    
     </div>
     </>
   );
