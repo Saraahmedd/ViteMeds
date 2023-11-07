@@ -40,7 +40,7 @@ function MedicineList() {
 
    
       return (
-        <div className='m-5'>
+        <div className=''>
         <h1 className="row text-primary text-center"><strong> XPharmacy Medicine</strong></h1>
         <hr />
         <div className="row div d-flex m-2 ms-0">
