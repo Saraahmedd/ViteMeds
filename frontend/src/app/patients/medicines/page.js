@@ -2,8 +2,7 @@
 import React, { useEffect } from 'react';
 import {useState} from 'react' ;
 import  {Card} from '../../../../components/Card'; 
-import {Button} from '../../../../components/Button'; 
-import  DescriptionModal  from './MedicineModals/DescriptionModal';
+import  DescriptionModal  from '../../../../components/MedicineDescriptionModal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMedicinesAction } from '@/app/redux/actions/medicineActions';
