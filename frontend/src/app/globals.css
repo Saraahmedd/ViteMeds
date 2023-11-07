@@ -57,6 +57,15 @@
   width: 170px;
 }
 
+.text-bold{
+  font-weight: 700;
+}
+
+.item-center{
+  align-self: center;
+  
+}
+
 .underline-Bold{
   width: 80px;
   height: 2px;
