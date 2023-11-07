@@ -4,7 +4,7 @@ const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 
 exports.getCart = catchAsync(async (req, res, next) => {
-    let cart = await Cart.findOne({ patient: req.params.patientId }).populate('items.medicine');
+    let cart = await Cart.findOne({ patient: req.user.id }).populate('items.medicine');
   
     if (!cart) {
       return next(new AppError('No cart found for this patient', 404));
@@ -29,10 +29,10 @@ exports.getCart = catchAsync(async (req, res, next) => {
 exports.addToCart = catchAsync(async (req, res, next) => {
     const { medicineId, quantity } = req.body;
     
-    let cart = await Cart.findOne({ patient: req.params.patientId });
+    let cart = await Cart.findOne({ patient: req.user.id });
   
     if (!cart) {
-      cart = await Cart.create({ patient: req.params.patientId, items: [] });
+      cart = await Cart.create({ patient: req.user.id , items: [] });
     }
   
     const medicine = await Medicine.findById(medicineId);
@@ -59,7 +59,7 @@ exports.addToCart = catchAsync(async (req, res, next) => {
 
   exports.updateCartItem = catchAsync(async (req, res, next) => {
     const { medicineId, quantity } = req.body;
-    const cart = await Cart.findOne({ patient: req.params.patientId });
+    const cart = await Cart.findOne({ patient: req.user.id });
   
     if (!cart) {
       return next(new AppError('No cart found for this patient', 404));
@@ -88,7 +88,7 @@ exports.addToCart = catchAsync(async (req, res, next) => {
 
   exports.removeCartItem = catchAsync(async (req, res, next) => {
     const { medicineId } = req.params;
-    const cart = await Cart.findOne({ patient: req.params.patientId });
+    const cart = await Cart.findOne({ patient: req.user.id  });
   
     if (!cart) {
       return next(new AppError('No cart found for this patient', 404));
