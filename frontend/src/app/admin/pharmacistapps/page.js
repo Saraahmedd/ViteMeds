@@ -1,11 +1,8 @@
 "use client"
 import React, { useEffect } from 'react';
-import { DoctorAppsTable } from './DoctorAppsTable';
 import { Button } from '../../../../components/Button';
-import AdminNavbar from './AdminNavbar';
 import { Card } from '../../../../components/Card';
 import { useDispatch, useSelector } from 'react-redux';
-//import { getDoctorsForPatientAction } from '@/app/redux/actions/doctorActions';
 import { removeUser } from '@/app/redux/actions/userActions';
 import { getPharmacists } from '@/app/redux/actions/pharmacistActions';
 
@@ -15,34 +12,25 @@ export default function DoctorApps() {
   const doctors=useSelector(state=>state.getPharmacistsReducer.pharmacists);
   const isLoading=useSelector(state=>state.removeUserReducer.loading)
   useEffect(()=>{
-   // dispatch(login("sysadmin","pass1234"));
     dispatch(getPharmacists());
     
 
   },[isLoading])
 
-  const button = <div style={{
-      fontSize: '1px', 
-    }}>
+  const button = <div style={{fontSize: '1px', }}>
   <Button text='Approve' variant='xs' ></Button>
-  <Button text='Reject' variant='xs'
-></Button>
+  <Button text='Reject' variant='xs'></Button>
   </div>
 
   const onRemoveHandler = (id)=>{
-    //console.log(id)
     dispatch(removeUser(id))
-
   }
     
  
-
-
-
-
   return (
     <>
-    <AdminNavbar/>
+    <h3 className='my-1 mt-0 text-center text-title'>Applications</h3>
+    <div className='underline-Bold mx-auto mb-5'></div>
     <div className="justify-content-center align-items-center min-vh-100">
       <div className='row'>
       {doctors?.data?.map((person)=>{

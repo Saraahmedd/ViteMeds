@@ -2,7 +2,6 @@
 import React, { useEffect } from 'react';
 
 import { Button } from '../../../../components/Button';
-import AdminNavbar from '../pharmacistapps/AdminNavbar';
 import { Card } from '../../../../components/Card';
 import { getPharmacists } from '@/app/redux/actions/pharmacistActions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -36,10 +35,10 @@ export default function Doctors() {
     }
     
 
-
   return (
     <>
-    <AdminNavbar/>
+    <h3 className='my-1 mt-0 text-center text-title'>Pharmacists</h3>
+    <div className='underline-Bold mx-auto mb-5'></div>
     <div className="justify-content-center align-items-center min-vh-100">
       <div className='row'>
       {doctors?.data?.map((person)=>{

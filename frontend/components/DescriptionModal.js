@@ -1,4 +1,4 @@
-import {Button} from  '../../../../../components/Button';
+import {Button} from  './Button';
 import {useState} from 'react' ;
 import Modal from 'react-bootstrap/Modal' ;
 

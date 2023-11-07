@@ -2,16 +2,10 @@
 import React, { useEffect } from 'react';
 import {useState} from 'react' ;
 import  {Card} from '../../../../components/Card'; 
-import {Button} from '../../../../components/Button'; 
-import  DescriptionModal  from './MedicineModals/DescriptionModal';
+import  DescriptionModal  from '../../../../components/MedicineDescriptionModal';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AdminNavbar from '../pharmacistapps/AdminNavbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMedicinesAction } from '@/app/redux/actions/medicineActions';
-
-
-
-
 
 
 function MedicineList() {
@@ -39,22 +33,11 @@ useEffect(()=> {
     dispatch(getMedicinesAction( {...name, ...medUse}))
   },[dispatch,name,medUse])
 
-
-  // const allMedicinalUses = Array.from(
-  //   new Set(medicines?.flatMap((medicine) => medicine.medicinalUses))
-  // );
-    
-    
-
-
-
-
-
-
     return (
       <div>
-        <AdminNavbar />
-        <div className='m-5'>
+        <h3 className='my-1 mt-0 text-center text-title'>Medicines</h3>
+        <div className='underline-Bold mx-auto mb-5'></div>
+        <hr />
         <div className="m-3 ms-0">
       <div className="row m-2 ms-0">
       <div className="col-md-2  search-container">
@@ -64,7 +47,6 @@ useEffect(()=> {
           placeholder="Search For Medicine"
           className="px-2 search-input input-style rounded border-primary"
         />
-        {/* <Button text="Search"  className="search-button" onClick={() => console.log('Button clicked')} /> */}
         </div>
 
         <div className="col-md-2 search-container">
@@ -83,11 +65,6 @@ useEffect(()=> {
       </div>
 
         </div>
-
-        
-        
-  
-  
       <div className="container-fluid ">
          <div className="row">
   
@@ -128,14 +105,9 @@ useEffect(()=> {
       image={<img src={selectedMedicine.imageURL? selectedMedicine.imageURL : '/medication.svg'}  alt="Image"  style={{  float: 'right',  marginLeft: '10px',  maxHeight: '200px', maxWidth: '150px',}} />}
     />
     )}
-
-
-
-        
       </div>
       </div>
       {/* <Footer/> */}
-      </div>
     </div>
 
     );

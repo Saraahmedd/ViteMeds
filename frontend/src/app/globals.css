@@ -56,6 +56,26 @@
   height: 30px;
   width: 170px;
 }
+
+.underline-Bold{
+  width: 80px;
+  height: 2px;
+  background: #140836;     
+  border-radius: 9px;
+}
+
+.pointer-cursor {
+  cursor: pointer;
+}
+
+.rotate-90 {
+  transform: rotate(90deg);
+}
+
+.text-title{
+  font-weight: 700;
+  font-size: 50px;
+}
   
 /* -------------------------- Animation classes ----------------------------- */
 
