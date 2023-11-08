@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { loginReducer, registerReducer } from './reducers/authReducer';
+import { loginReducer, registerReducer, logoutReducer,forgetPasswordReducer } from './reducers/authReducer';
 import { removeUserReducer,  getUsersReducer } from './reducers/userReducer';
 import { getPharmacistsReducer, getPharmacistReducer } from './reducers/pharmacistReducer';
 import { viewPatientsReducer, viewPatientReducer } from './reducers/patientReducer'
@@ -19,6 +19,8 @@ const store = configureStore({
     viewPatientsReducer,
     viewPatientReducer,
     getUsersReducer,
+    logoutReducer,
+    forgetPasswordReducer
 
   },
 });
