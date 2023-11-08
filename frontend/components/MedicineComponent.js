@@ -110,38 +110,91 @@ function MedicineComponent({ title }) {
             />
           ))}
 
-          {selectedMedicine && (
-            <DescriptionModal
-              show={modalDescShow}
-              onHide={() => setModalDescShow(false)}
-              subheader={selectedMedicine.name}
-              text={
-                <div>
-                  <p>Price: {selectedMedicine.price}</p>
-                  <p>Description: {selectedMedicine.description}</p>
-                  <p>
-                    Medicinal Uses: {selectedMedicine.medicinalUses.join(", ")}
-                  </p>
-                </div>
-              }
-              image={
-                <img
-                  src={
-                    selectedMedicine.imageURL
-                      ? selectedMedicine.imageURL
-                      : "/medication.svg"
-                  }
-                  alt="Image"
-                  style={{
-                    float: "right",
-                    marginLeft: "10px",
-                    maxHeight: "200px",
-                    maxWidth: "150px",
-                  }}
-                />
-              }
+{selectedMedicine && (
+        <DescriptionModal
+          show={modalDescShow}
+          onHide={() => setModalDescShow(false)}
+          // onEdit={handleEdit}
+          header={selectedMedicine.name}
+          subheader={""}
+          text={
+            <div>
+            <div className="info-container d-flex align-items">
+              <h5>Price</h5>
+            
+            </div>
+            <EditableField
+            
+              value={selectedMedicine.price}
+              id={selectedMedicine._id}
+              nameOfField={"price"}
+              hide={() => setModalDescShow(false)}
+              edit={true}
+              onSave={(newValue) => handleSave(newValue, 'price')}
             />
-          )}
+          
+            <div className="info-container d-flex align-items">
+              <h5>Quantity</h5>
+            
+            </div>
+            <EditableField
+               id={selectedMedicine._id}
+              value={selectedMedicine.quantity}
+              nameOfField={"quantity"}
+              hide={() => setModalDescShow(false)}
+              edit={true}
+              onSave={(newValue) => handleSave(newValue, 'quantity')}
+            />
+          
+            <div className="info-container d-flex align-items">
+              <h5>Description</h5>
+            
+            </div>
+            <EditableField
+             id={selectedMedicine._id}
+             hide={() => setModalDescShow(false)}
+             nameOfField={"description"}
+             edit={false}
+             
+              value={selectedMedicine.description}
+              onSave={(newValue) => handleSave(newValue, 'description')}
+            />
+          
+            <div className="info-container d-flex align-items">
+              <h5>Medicinal Uses</h5>
+             
+            </div>
+            <EditableField
+              id={selectedMedicine._id}
+              hide={() => setModalDescShow(false)}
+              value={selectedMedicine.medicinalUses.join(', ')}
+              nameOfField={"medicinalUses"}
+              edit={false}
+              onSave={(newValue) => handleSave(newValue.split(',').map(item => item.trim()), 'medicinalUses')}
+            />
+          
+            <div className="info-container d-flex align-items">
+              <h5>Medicine Ingredients</h5>
+             
+            </div>
+            <EditableField
+             id={selectedMedicine._id}
+             nameOfField={"medicineIngredients"}
+             hide={() => setModalDescShow(false)}
+             edit={true}
+              
+              value={selectedMedicine.medicineIngredients.join(', ')}
+              onSave={(newValue) => handleSave(newValue.split(',').map(item => item.trim()), 'medicineIngredients')}
+            />
+          </div>
+          
+          }
+          
+          image={<img src={selectedMedicine?.imageURL? selectedMedicine.imageURL : '/medication.svg'}  alt="Image"  style={{  float: 'right',  marginLeft: '10px',  maxHeight: '200px', maxWidth: '150px',}} />}
+        />
+
+        
+      )}
         </div>
       </div>
       {/* <Footer/> */}
