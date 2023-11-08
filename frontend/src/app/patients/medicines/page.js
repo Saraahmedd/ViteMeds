@@ -6,7 +6,7 @@ import { login } from "@/app/redux/actions/authActions";
 function MedicineList() {
   return (
     <div className="m-5">
-      <MedicineComponent title="XPharmacy Medicine" />
+      <MedicineComponent title="XPharmacy Medicine" role="patient" />
       {/* <Footer/> */}
     </div>
   );

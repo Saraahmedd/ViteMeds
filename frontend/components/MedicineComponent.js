@@ -12,7 +12,8 @@ import { getMedicinesAction } from "@/app/redux/actions/medicineActions";
 import { login } from "@/app/redux/actions/authActions";
 
 function MedicineComponent({ title, role }) {
-  let isPharmacist = true ? (role = "pharmacist") : false;
+  let isPharmacist;
+  role == "pharmacist" ? (isPharmacist = true) : false;
   const [modalAddShow, setModalAddShow] = useState(false);
   const [selectedMedicinalUse, setSelectedMedicinalUse] = useState(null);
   const [modalDescShow, setModalDescShow] = useState(false);
@@ -114,7 +115,7 @@ function MedicineComponent({ title, role }) {
                             : "/medication.svg"
                         }
                         alt="Image"
-                        style={{ maxHeight: "200px", maxWidth: "200px" }}
+                        style={{ maxHeight: "200px", maxWidth: "160px" }}
                       />
                     </div>
                     <div className="text-capitalize fw-bold  pt-4 text-center">
@@ -138,7 +139,7 @@ function MedicineComponent({ title, role }) {
               text={
                 <div>
                   <div className="info-container d-flex align-items">
-                    <h5>Price</h5>
+                    <h5>Price: {isPharmacist || selectedMedicine.price}</h5>
                   </div>
                   {isPharmacist && (
                     <EditableField
@@ -150,23 +151,28 @@ function MedicineComponent({ title, role }) {
                       onSave={(newValue) => handleSave(newValue, "price")}
                     />
                   )}
-
-                  <div className="info-container d-flex align-items">
-                    <h5>Quantity</h5>
-                  </div>
                   {isPharmacist && (
-                    <EditableField
-                      id={selectedMedicine._id}
-                      value={selectedMedicine.quantity}
-                      nameOfField={"quantity"}
-                      hide={() => setModalDescShow(false)}
-                      edit={true}
-                      onSave={(newValue) => handleSave(newValue, "quantity")}
-                    />
+                    <>
+                      <div className="info-container d-flex align-items">
+                        <h5>Quantity: </h5>
+                      </div>
+
+                      <EditableField
+                        id={selectedMedicine._id}
+                        value={selectedMedicine.quantity}
+                        nameOfField={"quantity"}
+                        hide={() => setModalDescShow(false)}
+                        edit={true}
+                        onSave={(newValue) => handleSave(newValue, "quantity")}
+                      />
+                    </>
                   )}
 
                   <div className="info-container d-flex align-items">
-                    <h5>Description</h5>
+                    <h5>
+                      Description:{" "}
+                      {isPharmacist || selectedMedicine.description}
+                    </h5>
                   </div>
                   {isPharmacist && (
                     <EditableField
@@ -180,7 +186,11 @@ function MedicineComponent({ title, role }) {
                   )}
 
                   <div className="info-container d-flex align-items">
-                    <h5>Medicinal Uses</h5>
+                    <h5>
+                      Medicinal Uses:{" "}
+                      {isPharmacist ||
+                        selectedMedicine.medicinalUses.join(", ")}
+                    </h5>
                   </div>
                   {isPharmacist && (
                     <EditableField
@@ -197,24 +207,26 @@ function MedicineComponent({ title, role }) {
                       }
                     />
                   )}
-
-                  <div className="info-container d-flex align-items">
-                    <h5>Medicine Ingredients</h5>
-                  </div>
                   {isPharmacist && (
-                    <EditableField
-                      id={selectedMedicine._id}
-                      nameOfField={"medicineIngredients"}
-                      hide={() => setModalDescShow(false)}
-                      edit={true}
-                      value={selectedMedicine.medicineIngredients.join(", ")}
-                      onSave={(newValue) =>
-                        handleSave(
-                          newValue.split(",").map((item) => item.trim()),
-                          "medicineIngredients"
-                        )
-                      }
-                    />
+                    <>
+                      <div className="info-container d-flex align-items">
+                        <h5>Medicine Ingredients: </h5>
+                      </div>
+
+                      <EditableField
+                        id={selectedMedicine._id}
+                        nameOfField={"medicineIngredients"}
+                        hide={() => setModalDescShow(false)}
+                        edit={true}
+                        value={selectedMedicine.medicineIngredients.join(", ")}
+                        onSave={(newValue) =>
+                          handleSave(
+                            newValue.split(",").map((item) => item.trim()),
+                            "medicineIngredients"
+                          )
+                        }
+                      />
+                    </>
                   )}
                 </div>
               }
