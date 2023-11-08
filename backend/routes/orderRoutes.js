@@ -6,3 +6,5 @@ const router = express.Router();
 router.route('/').post(authController.protect,orderController.createOrder);
 
 router.get('/checkout-session/:orderId',orderController.getCheckoutSession);
+
+router.route('/:id').patch(authController.protect,orderController.cancelOrder);

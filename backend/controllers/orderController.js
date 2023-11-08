@@ -92,3 +92,18 @@ exports.createOrder = catchAsync(async (req,res, next) => {
 
     //4. update sales and quantities of the medicine
 })
+
+exports.cancelOrder = catchAsync(async (req,res,next) => {
+    const order = await Order.findById(req.params.id);
+    if(!order) return next(new AppError("No order found with that ID", 404));
+
+    order.status = "Cancelled";
+    await order.save({validate: false});
+
+    res.status(200).json({
+        status: "success",
+        data: {
+            order
+        }
+    })
+})
