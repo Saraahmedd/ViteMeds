@@ -11,7 +11,8 @@ import AddModal from "./AddModal";
 import { getMedicinesAction } from "@/app/redux/actions/medicineActions";
 import { login } from "@/app/redux/actions/authActions";
 
-function MedicineComponent({ title }) {
+function MedicineComponent({ title, role }) {
+  let isPharmacist = true ? (role = "pharmacist") : false;
   const [modalAddShow, setModalAddShow] = useState(false);
   const [selectedMedicinalUse, setSelectedMedicinalUse] = useState(null);
   const [modalDescShow, setModalDescShow] = useState(false);
@@ -42,7 +43,9 @@ function MedicineComponent({ title }) {
   return (
     <div className="m-5">
       <h1 className="row text-primary text-center">
-        <strong>{title}</strong>
+        <strong>
+          {title} {role}
+        </strong>
       </h1>
       <hr />
       <div className="m-3 col-md-12 d-flex justify-content-center">
@@ -77,13 +80,17 @@ function MedicineComponent({ title }) {
           </select>
         </div>
       </div>
-      <Button
-        text="Add Product"
-        className="add-button m-3 mb-4"
-        onClick={() => setModalAddShow(true)}
-      />
+      {isPharmacist && (
+        <>
+          <Button
+            text="Add Product"
+            className="add-button m-3 mb-4"
+            onClick={() => setModalAddShow(true)}
+          />
 
-      <AddModal show={modalAddShow} onHide={() => setModalAddShow(false)} />
+          <AddModal show={modalAddShow} onHide={() => setModalAddShow(false)} />
+        </>
+      )}
       <div className="container-fluid ">
         <div className="row mx-4">
           {medicines?.map((medicine) => (
@@ -133,72 +140,82 @@ function MedicineComponent({ title }) {
                   <div className="info-container d-flex align-items">
                     <h5>Price</h5>
                   </div>
-                  <EditableField
-                    value={selectedMedicine.price}
-                    id={selectedMedicine._id}
-                    nameOfField={"price"}
-                    hide={() => setModalDescShow(false)}
-                    edit={true}
-                    onSave={(newValue) => handleSave(newValue, "price")}
-                  />
+                  {isPharmacist && (
+                    <EditableField
+                      value={selectedMedicine.price}
+                      id={selectedMedicine._id}
+                      nameOfField={"price"}
+                      hide={() => setModalDescShow(false)}
+                      edit={true}
+                      onSave={(newValue) => handleSave(newValue, "price")}
+                    />
+                  )}
 
                   <div className="info-container d-flex align-items">
                     <h5>Quantity</h5>
                   </div>
-                  <EditableField
-                    id={selectedMedicine._id}
-                    value={selectedMedicine.quantity}
-                    nameOfField={"quantity"}
-                    hide={() => setModalDescShow(false)}
-                    edit={true}
-                    onSave={(newValue) => handleSave(newValue, "quantity")}
-                  />
+                  {isPharmacist && (
+                    <EditableField
+                      id={selectedMedicine._id}
+                      value={selectedMedicine.quantity}
+                      nameOfField={"quantity"}
+                      hide={() => setModalDescShow(false)}
+                      edit={true}
+                      onSave={(newValue) => handleSave(newValue, "quantity")}
+                    />
+                  )}
 
                   <div className="info-container d-flex align-items">
                     <h5>Description</h5>
                   </div>
-                  <EditableField
-                    id={selectedMedicine._id}
-                    hide={() => setModalDescShow(false)}
-                    nameOfField={"description"}
-                    edit={false}
-                    value={selectedMedicine.description}
-                    onSave={(newValue) => handleSave(newValue, "description")}
-                  />
+                  {isPharmacist && (
+                    <EditableField
+                      id={selectedMedicine._id}
+                      hide={() => setModalDescShow(false)}
+                      nameOfField={"description"}
+                      edit={false}
+                      value={selectedMedicine.description}
+                      onSave={(newValue) => handleSave(newValue, "description")}
+                    />
+                  )}
 
                   <div className="info-container d-flex align-items">
                     <h5>Medicinal Uses</h5>
                   </div>
-                  <EditableField
-                    id={selectedMedicine._id}
-                    hide={() => setModalDescShow(false)}
-                    value={selectedMedicine.medicinalUses.join(", ")}
-                    nameOfField={"medicinalUses"}
-                    edit={false}
-                    onSave={(newValue) =>
-                      handleSave(
-                        newValue.split(",").map((item) => item.trim()),
-                        "medicinalUses"
-                      )
-                    }
-                  />
+                  {isPharmacist && (
+                    <EditableField
+                      id={selectedMedicine._id}
+                      hide={() => setModalDescShow(false)}
+                      value={selectedMedicine.medicinalUses.join(", ")}
+                      nameOfField={"medicinalUses"}
+                      edit={false}
+                      onSave={(newValue) =>
+                        handleSave(
+                          newValue.split(",").map((item) => item.trim()),
+                          "medicinalUses"
+                        )
+                      }
+                    />
+                  )}
 
                   <div className="info-container d-flex align-items">
                     <h5>Medicine Ingredients</h5>
                   </div>
-                  <EditableField
-                    id={selectedMedicine._id}
-                    nameOfField={"medicineIngredients"}
-                    hide={() => setModalDescShow(false)}
-                    edit={true}
-                    value={selectedMedicine.medicineIngredients.join(", ")}
-                    onSave={(newValue) =>
-                      handleSave(
-                        newValue.split(",").map((item) => item.trim()),
-                        "medicineIngredients"
-                      )
-                    }
-                  />
+                  {isPharmacist && (
+                    <EditableField
+                      id={selectedMedicine._id}
+                      nameOfField={"medicineIngredients"}
+                      hide={() => setModalDescShow(false)}
+                      edit={true}
+                      value={selectedMedicine.medicineIngredients.join(", ")}
+                      onSave={(newValue) =>
+                        handleSave(
+                          newValue.split(",").map((item) => item.trim()),
+                          "medicineIngredients"
+                        )
+                      }
+                    />
+                  )}
                 </div>
               }
               image={
