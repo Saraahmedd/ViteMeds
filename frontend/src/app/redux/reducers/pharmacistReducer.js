@@ -5,6 +5,9 @@ import {
     GET_PHARMACIST_REQUEST,
     GET_PHARMACIST_SUCCESS,
     GET_PHARMACIST_FAIL,
+    PHARMACIST_ACCEPTED_REQUEST,
+    PHARMACIST_ACCEPTED_SUCCESS,
+    PHARMACIST_ACCEPTED_FAIL
 } from '../constants/pharmacistConstants';
 
 const getPharmacistsInitialState = {
@@ -58,6 +61,32 @@ export const getPharmacistReducer = (state = getPharmacistInitialState, action) 
                 error: null,
             };
         case GET_PHARMACIST_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            };
+        default:
+            return state;
+    }
+};
+
+export const adminAcceptPharmacistReducer = (state = {}, action) => {
+    switch (action.type) {
+        case PHARMACIST_ACCEPTED_REQUEST:
+            return {
+                ...state,
+                loading: true,
+                error: null,
+            };
+        case PHARMACIST_ACCEPTED_SUCCESS:
+            return {
+                ...state,
+                pharmacist: action.payload,
+                loading: false,
+                error: null,
+            };
+        case PHARMACIST_ACCEPTED_FAIL:
             return {
                 ...state,
                 loading: false,

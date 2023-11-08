@@ -29,3 +29,21 @@ exports.getPharmacistsDoc = catchAsync(async(req,res,next)=> {
       archive.finalize();
     
 })
+//Rejecting is removing the user from the system
+exports.acceptPharmacist = catchAsync(async (req, res, next) => {
+
+  const pharmacist = await Pharmacist.findByIdAndUpdate(req.params.id, {isApproved:true}, {
+    new: true,
+    runValidators: true
+});
+
+  
+  res.status(200).json({
+    status: 'success',
+    data: {
+        data: pharmacist
+    }
+});
+
+  
+});
