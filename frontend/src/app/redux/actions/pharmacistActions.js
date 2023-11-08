@@ -7,7 +7,10 @@ import {
     GET_PHARMACISTS_FAIL,
     GET_PHARMACIST_REQUEST,
     GET_PHARMACIST_SUCCESS,
-    GET_PHARMACIST_FAIL
+    GET_PHARMACIST_FAIL,
+    PHARMACIST_ACCEPTED_REQUEST,
+    PHARMACIST_ACCEPTED_SUCCESS,
+    PHARMACIST_ACCEPTED_FAIL
 
 } from '../constants/pharmacistConstants';
 
@@ -71,3 +74,37 @@ export const getPharmacist = (id) => async (dispatch) => {
         });
     }
 }
+
+export const adminAcceptPharmacist = (pharmacistId) => async (dispatch) => {
+  
+    try {
+      dispatch({
+        type: PHARMACIST_ACCEPTED_REQUEST,
+      });
+  
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      };
+      let url ="";
+      
+      url=`${baseURL}/api/v1/pharmacist/acceptpharmacist?_id=${pharmacistId}`
+      
+      const { data } = await axios.patch(url, config);
+  
+      dispatch({
+        type: PHARMACIST_ACCEPTED_SUCCESS,
+        pharmacist: data.data
+      });
+    } catch (error) {
+     
+      dispatch({
+        type: PHARMACIST_ACCEPTED_FAIL,
+        payload: error.response
+          ? error.response.data.message
+          : 'Accepting pharmacist failed. Please try again.',
+      });
+    }
+  };

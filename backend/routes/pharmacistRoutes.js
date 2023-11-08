@@ -14,5 +14,7 @@ router
   router.get("/",authController.protect,
   authController.restrictTo("administrator"),pharmacistController.getAllPharmacists)
 
+router.route('/acceptpharmacist/:id').patch(authController.restrictTo(enums.ROLE.ADMIN),pharmacistController.acceptPharmacist);
+
 router.get("/docs/:id", pharmacistController.getPharmacistsDoc)
 module.exports = router;
