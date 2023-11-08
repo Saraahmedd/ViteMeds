@@ -4,6 +4,7 @@ import { removeUserReducer,  getUsersReducer } from './reducers/userReducer';
 import { getPharmacistsReducer, getPharmacistReducer } from './reducers/pharmacistReducer';
 import { viewPatientsReducer, viewPatientReducer } from './reducers/patientReducer'
 import { getMedicinesReducer, addMedicineReducer, editMedicineReducer, deleteMedicineReducer, getMedicineByIdReducer } from './reducers/medicineReducer';
+import {getCartReducer, addToCartReducer, deleteFromCartReducer, updateCartReducer} from './reducers/cartReducer'
 const store = configureStore({
   reducer: {
     loginReducer,
@@ -19,7 +20,10 @@ const store = configureStore({
     viewPatientsReducer,
     viewPatientReducer,
     getUsersReducer,
-
+    getCartReducer,
+    addToCartReducer,
+    deleteFromCartReducer,
+    updateCartReducer
   },
 });
 

@@ -101,9 +101,11 @@ exports.addToCart = catchAsync(async (req, res, next) => {
       await cart.save();
     }
   
-    res.status(204).json({
+    res.status(200).json({
       status: 'success',
-      data: null
+      data: {
+        cart
+      }
     });
   });  
 
