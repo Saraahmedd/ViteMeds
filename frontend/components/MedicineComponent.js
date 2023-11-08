@@ -73,6 +73,12 @@ function MedicineComponent({ title }) {
           </select>
         </div>
       </div>
+                       <Button text="Add Product" className="add-button m-3 mb-4"   onClick={() => setModalAddShow(true)}/>
+    
+           <AddModal
+            show={modalAddShow}
+            onHide={() => setModalAddShow(false)} 
+          />
       <div className="container-fluid ">
         <div className="row mx-4">
           {medicines?.map((medicine) => (
