@@ -7,7 +7,10 @@ import {
     GET_PHARMACIST_FAIL,
     PHARMACIST_ACCEPTED_REQUEST,
     PHARMACIST_ACCEPTED_SUCCESS,
-    PHARMACIST_ACCEPTED_FAIL
+    PHARMACIST_ACCEPTED_FAIL,
+    PHARMACIST_DOWNLOAD_DOCS_REQUEST,
+    PHARMACIST_DOWNLOAD_DOCS_SUCCESS,
+    PHARMACIST_DOWNLOAD_DOCS_FAIL
 } from '../constants/pharmacistConstants';
 
 const getPharmacistsInitialState = {
@@ -87,6 +90,32 @@ export const adminAcceptPharmacistReducer = (state = {}, action) => {
                 error: null,
             };
         case PHARMACIST_ACCEPTED_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            };
+        default:
+            return state;
+    }
+};
+
+export const downloadPharmacistDocsReducer = (state = {}, action) => {
+    switch (action.type) {
+        case PHARMACIST_DOWNLOAD_DOCS_REQUEST:
+            return {
+                ...state,
+                loading: true,
+                error: null,
+            };
+        case PHARMACIST_DOWNLOAD_DOCS_SUCCESS:
+            return {
+                ...state,
+                pharmacist: action.payload,
+                loading: false,
+                error: null,
+            };
+        case PHARMACIST_DOWNLOAD_DOCS_FAILL:
             return {
                 ...state,
                 loading: false,
