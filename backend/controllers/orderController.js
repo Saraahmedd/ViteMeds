@@ -91,4 +91,50 @@ exports.createOrder = catchAsync(async (req,res, next) => {
     await factory.createOne(Order)(req,res,next)
 
     //4. update sales and quantities of the medicine
-})
+});
+exports.getOrderDetails = catchAsync(async(req,res,next)=>{
+  try {
+    const orderId = req.query._id;
+    const order = await Order.findById(orderId);
+
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+
+    res.status(200).json({ order });
+  } catch (error) {
+    console.error('Error fetching order :', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+
+
+});
+exports.addAddressToOrder = async (req, res, next) => {
+  try {
+    const orderId = req.query._id; // Assuming you have orderId as a route parameter
+    const { streetAddress, city, state, zipCode, country } = req.body;
+    const order = await Order.findById(orderId);
+
+    // Add the provided delivery address to the order
+    if (order) {
+      order.deliveryAddress = {
+        streetAddress,
+        city,
+        state,
+        zipCode,
+        country,
+      };
+      await order.save();
+      res.status(200).json({ message: 'Delivery address added to the order successfully', order });
+    } else {
+      res.status(404).json({ message: 'Order not found' });
+    }
+  } catch (error) {
+    console.error('Error adding address to order:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+
+
+

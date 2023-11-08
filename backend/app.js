@@ -86,6 +86,7 @@ app.use('/api/v1/user', userRouter);
 app.use('/api/v1/patient', patientRouter);
 app.use('/api/v1/pharmacist', pharmacistRouter);
 app.use('/api/v1/medicines', medicineRouter);
+app.use('/api/v1/order',orderRouter);
 
 //404 Error , YOU MUST PUT YOUR ROUTERS ABOVE THAT COMMENT 
 app.all('*', (req, res, next) => {

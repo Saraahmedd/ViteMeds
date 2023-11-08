@@ -6,3 +6,6 @@ const router = express.Router();
 router.route('/').post(authController.protect,orderController.createOrder);
 
 router.get('/checkout-session/:orderId',orderController.getCheckoutSession);
+router.get('/viewOrderDetails',orderController.getOrderDetails);
+router.post('/addAddressToOrder', orderController.addAddressToOrder);
+module.exports = router;
