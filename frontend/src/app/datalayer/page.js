@@ -6,6 +6,13 @@ import { removeUser } from '../redux/actions/userActions';
 import { addMedicine, editMedicine, deleteMedicine, getMedicineById, getMedicinesAction } from '../redux/actions/medicineActions';
 import { viewPatients, viewPatient } from '../redux/actions/patientActions';
 import { getPharmacists, getPharmacist } from '../redux/actions/pharmacistActions'
+import { 
+  viewCart,
+  addToCart,
+  deleteFromCart,
+  updateCart,
+ } from '../redux/actions/cartActions'
+
 const Testing = () => {
   const dispatch = useDispatch();
 
@@ -18,11 +25,8 @@ const Testing = () => {
 
   useEffect(() => {
 
-    // dispatch(login({
-    //   email: "amir",
-    //   password: "password123"
-    // }))
-    // dispatch(login("sysAdmin", "pass1234"))
+  
+    // dispatch(login("tarekzeyad1", "Tarek1121"))
 
     //   name: {
     //     type: String,
@@ -89,8 +93,11 @@ const Testing = () => {
     // dispatch(viewPatient("60f6b0c6f4d7b5b8e0f5b7f6"))
     // dispatch(getMedicinesAction({}))
     // dispatch(getPharmacists())
-    dispatch(getPharmacist("60f6b0c6f4d7b5b8e0f5b7f6"))
-
+    // dispatch(getPharmacist("60f6b0c6f4d7b5b8e0f5b7f6"))
+    // dispatch(viewCart())
+    dispatch(addToCart("6520a19fa6b64c072c82a380", 1))
+    // dispatch(deleteFromCart("6520a19fa6b64c072c82a380"))
+    // dispatch(updateCart("6520a19fa6b64c072c82a380", 1))
 
   }
 
