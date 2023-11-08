@@ -137,9 +137,11 @@ function MedicineComponent({ title, role }) {
               header={selectedMedicine.name}
               subheader={""}
               text={
-                <div>
+                <div className="p-4">
                   <div className="info-container d-flex align-items">
-                    <h5>Price: {isPharmacist || selectedMedicine.price}</h5>
+                    <span className="">
+                      Price: {isPharmacist || selectedMedicine.price}
+                    </span>
                   </div>
                   {isPharmacist && (
                     <EditableField
@@ -154,7 +156,7 @@ function MedicineComponent({ title, role }) {
                   {isPharmacist && (
                     <>
                       <div className="info-container d-flex align-items">
-                        <h5>Quantity: </h5>
+                        <span className="">Quantity: </span>
                       </div>
 
                       <EditableField
@@ -169,10 +171,10 @@ function MedicineComponent({ title, role }) {
                   )}
 
                   <div className="info-container d-flex align-items">
-                    <h5>
+                    <span className="">
                       Description:{" "}
                       {isPharmacist || selectedMedicine.description}
-                    </h5>
+                    </span>
                   </div>
                   {isPharmacist && (
                     <EditableField
@@ -186,11 +188,11 @@ function MedicineComponent({ title, role }) {
                   )}
 
                   <div className="info-container d-flex align-items">
-                    <h5>
+                    <span className="">
                       Medicinal Uses:{" "}
                       {isPharmacist ||
                         selectedMedicine.medicinalUses.join(", ")}
-                    </h5>
+                    </span>
                   </div>
                   {isPharmacist && (
                     <EditableField
@@ -210,7 +212,7 @@ function MedicineComponent({ title, role }) {
                   {isPharmacist && (
                     <>
                       <div className="info-container d-flex align-items">
-                        <h5>Medicine Ingredients: </h5>
+                        <span className="">Medicine Ingredients: </span>
                       </div>
 
                       <EditableField
@@ -232,6 +234,7 @@ function MedicineComponent({ title, role }) {
               }
               image={
                 <img
+                  className="me-5"
                   src={
                     selectedMedicine?.imageURL
                       ? selectedMedicine.imageURL
@@ -240,7 +243,8 @@ function MedicineComponent({ title, role }) {
                   alt="Image"
                   style={{
                     float: "right",
-                    marginLeft: "10px",
+                    marginLeft: "0px",
+
                     maxHeight: "200px",
                     maxWidth: "150px",
                   }}
