@@ -14,7 +14,10 @@ import {
     FORGET_PASS_FAIL,
     RESET_PASS_REQUEST,
     RESET_PASS_SUCCESS,
-    RESET_PASS_FAIL
+    RESET_PASS_FAIL,
+    CHANGE_PASS_REQUEST,
+    CHANGE_PASS_SUCCESS,
+    CHANGE_PASS_FAIL
   } from '../constants/authConstants';
   
   const initialState = {
@@ -147,6 +150,32 @@ import {
           error: null,
         }};
       case RESET_PASS_FAIL:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+      default:
+        return state;
+    }
+  };
+
+  export const changePasswordReducer = (state = initialState, action) => {
+    switch (action.type) {
+      case CHANGE_PASS_REQUEST:
+        return {
+          ...state,
+          loading: true,
+          error: null,
+        };
+      case CHANGE_PASS_SUCCESS:{
+        return {
+          ...state,
+          isAuthenticated: false,
+          loading: false,
+          error: null,
+        }};
+      case CHANGE_PASS_FAIL:
         return {
           ...state,
           loading: false,

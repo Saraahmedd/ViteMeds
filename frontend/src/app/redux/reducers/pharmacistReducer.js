@@ -115,7 +115,7 @@ export const downloadPharmacistDocsReducer = (state = {}, action) => {
                 loading: false,
                 error: null,
             };
-        case PHARMACIST_DOWNLOAD_DOCS_FAILL:
+        case PHARMACIST_DOWNLOAD_DOCS_FAIL:
             return {
                 ...state,
                 loading: false,

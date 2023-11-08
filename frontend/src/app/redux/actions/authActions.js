@@ -14,7 +14,10 @@ import {
   FORGET_PASS_FAIL,
   RESET_PASS_REQUEST,
   RESET_PASS_SUCCESS,
-  RESET_PASS_FAIL
+  RESET_PASS_FAIL,
+  CHANGE_PASS_REQUEST,
+  CHANGE_PASS_SUCCESS,
+  CHANGE_PASS_FAIL
 } from '../constants/authConstants';
 import baseURL from '../baseURL';
 
@@ -152,6 +155,40 @@ export const forgetPasswordAction = (reqBody) => async (dispatch) => {
       payload: error.response
         ? error.response.data.message
         : 'Logout failed. Please try again.',
+    });
+  }
+};
+
+export const changePasswordAction = (reqBody) => async (dispatch) => {
+  try {
+    dispatch({
+      type: CHANGE_PASS_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true
+    };
+    const { data } = await axios.post(
+      `${baseURL}/api/v1/user/changePassword`,
+      reqBody,
+      config
+    );
+
+    dispatch({
+      type: CHANGE_PASS_SUCCESS,
+      payload: data.data,
+    });
+
+    localStorage.clear();
+  } catch (error) {
+    dispatch({
+      type: CHANGE_PASS_FAIL,
+      payload: error.response
+        ? error.response.data.message
+        : 'failed. Please try again.',
     });
   }
 };
