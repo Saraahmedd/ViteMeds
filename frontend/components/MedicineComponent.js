@@ -44,9 +44,7 @@ function MedicineComponent({ title, role }) {
   return (
     <div className="m-5">
       <h1 className="row text-primary text-center">
-        <strong>
-          {title} {role}
-        </strong>
+        <strong>{title}</strong>
       </h1>
       <hr />
       <div className="m-3 col-md-12 d-flex justify-content-center">
