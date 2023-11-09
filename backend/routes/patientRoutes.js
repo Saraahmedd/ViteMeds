@@ -11,5 +11,8 @@ router
     patientController.getpatient
   );
 
-  router.get('/',patientController.getAllPatients)
+  router.get('/',patientController.getAllPatients);
+
+  router.route('/addAddressToPatient/:_id').post(authController.protect,authController.restrictTo("patient") ,orderController.addAddressToPatient);
 module.exports = router;
+
