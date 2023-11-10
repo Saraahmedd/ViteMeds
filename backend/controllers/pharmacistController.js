@@ -1,4 +1,4 @@
-const Medicine = require("../models/medicineModel");
+//const Medicine = require("../models/medicineModel");
 const Pharmacist = require("../models/pharmacistModel");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
