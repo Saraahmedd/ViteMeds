@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const patientController = require("../controllers/patientController");
 const authController = require("../controllers/authController");
+// const orderController = require("../controllers/orderController");
 
 router
   .route("/:id")
@@ -13,6 +14,6 @@ router
 
   router.get('/',patientController.getAllPatients);
 
-  router.route('/addAddressToPatient/:_id').post(authController.protect,authController.restrictTo("patient") ,orderController.addAddressToPatient);
+  router.route('/addAddressToPatient').patch(authController.protect,authController.restrictTo("patient") ,patientController.addAddressToPatient);
 module.exports = router;
 

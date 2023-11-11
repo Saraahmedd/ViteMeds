@@ -8,30 +8,31 @@ const handlerfactory = require("./handlerFactory");
 exports.getpatient = handlerfactory.getOne(Patient);
 exports.getAllPatients = handlerfactory.getAll(Patient);
 
-exports.addAddressToPatient = async (req, res, next) => {
-    try {
-      const userId = req.params._id; // Assuming you have orderId as a route parameter
+exports.addAddressToPatient =catchAsync(async (req, res, next) => {
+      const userId = req.user._id // Assuming you have orderId as a route parameter
       const { streetAddress, city, state, zipCode, country } = req.body;
       const user = await User.findById(userId);
   
       // Add the provided delivery address to the order
       if (user) {
-        user.deliveryAddress = {
+        const newObject = {
           streetAddress,
           city,
           state,
           zipCode,
           country,
         };
-        await user.save();
+        
+        // Initialize existingArray if it's empty or undefined
+        user.deliveryAddress =user.deliveryAddress || [];
+        
+        // Append the new object to the existing array
+        user.deliveryAddress.push(newObject);
+        await user.save({ validateBeforeSave: false });
         res.status(200).json({ message: 'Delivery address added to the patient successfully', user });
       } else {
-        res.status(404).json({ message: 'user not found' });
-      }
-    } catch (error) {
-      console.error('Error adding address to patient:', error);
-      res.status(500).json({ message: 'Internal Server Error' });
+          return next(new AppError(404,"User not found"))
     }
-  };
+  });
   
 

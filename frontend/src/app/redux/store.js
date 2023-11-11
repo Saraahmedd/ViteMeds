@@ -6,7 +6,6 @@ import { viewPatientsReducer, viewPatientReducer } from './reducers/patientReduc
 import { getMedicinesReducer, addMedicineReducer, editMedicineReducer, deleteMedicineReducer, getMedicineByIdReducer } from './reducers/medicineReducer';
 import { viewOrderDetailsReducer } from './reducers/orderReducer';
 import { addAddressesReducer } from './reducers/patientReducer';
-=======
 import {getCartReducer, addToCartReducer, deleteFromCartReducer, updateCartReducer} from './reducers/cartReducer'
 const store = configureStore({
   reducer: {

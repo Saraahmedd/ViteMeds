@@ -102,7 +102,6 @@ exports.getOrderDetails = catchAsync(async(req,res,next)=>{
 
 
 
-})
 
 exports.cancelOrder = catchAsync(async (req,res,next) => {
     const order = await Order.findById(req.params.id);
