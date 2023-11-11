@@ -1,14 +1,27 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Table, Button, Modal, Form, Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { addAddressesAction } from '@/app/redux/actions/patientActions';
-import { PencilSquare, Key, Box, InfoCircle } from 'react-bootstrap-icons';
+import { addAddressesAction, viewMyDetails } from '@/app/redux/actions/patientActions';
 import ChangePassword from '../../../../components/ChangePassword';
 
 const PatientDashboard = () => {
   const [showModal, setShowModal] = useState(false);
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('userInfo')).data.user);
+  const [forceRerender, setForceRerender] = useState("a7a");
+  
+  const dispatch = useDispatch();
+  const patient = useSelector(state => state.viewMyDetailsReducer.patient?.patient.user);
+  const loading = useSelector(state => state.viewMyDetailsReducer.loading);
+ 
+  useEffect(() => {
+  dispatch(viewMyDetails());
+  }
+    ,[dispatch]
+  )
+ 
+  
+  const { success, error } = useSelector((state) => state.addAddressesReducer);
+
   const [newAddress, setNewAddress] = useState({
     streetAddress: '',
     city: '',
@@ -16,11 +29,11 @@ const PatientDashboard = () => {
     zipCode: '',
     country: '',
   });
-  const { success, error } = useSelector((state) => state.addAddressesReducer);
-  const dispatch = useDispatch();
 
   const handleShow = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
+
+ 
 
   const handleAddAddress = () => {
     dispatch(addAddressesAction(newAddress));
@@ -28,6 +41,8 @@ const PatientDashboard = () => {
   };
 
   return (
+<>
+    { patient ? (
     <div className="container mt-4">
       {success ? (
         <Alert variant="success">
@@ -41,16 +56,16 @@ const PatientDashboard = () => {
 
       <Card>
         <Card.Body>
-          <Card.Title>{user.username}'s Profile</Card.Title>
+          <Card.Title>{patient?.name}'s Profile {forceRerender}</Card.Title>
           <Table striped bordered hover responsive>
             <tbody>
               <tr>
-                <td>Role</td>
-                <td>{user.role}</td>
+                {/* <td>Role {patient.role}</td> */}
+                <td>{patient?.role}</td>
               </tr>
               <tr>
                 <td>Wallet</td>
-                <td>{user.wallet}</td>
+                <td>{patient?.wallet}</td>
               </tr>
               <tr>
                 <td colSpan="2">
@@ -66,7 +81,7 @@ const PatientDashboard = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {user.deliveryAddress?.map((address) => (
+                      {patient?.deliveryAddress?.map((address) => (
                         <tr key={address._id}>
                           <td>{address.streetAddress}</td>
                           <td>{address.city}</td>
@@ -145,7 +160,8 @@ const PatientDashboard = () => {
         </Modal.Footer>
       </Modal>
       <ChangePassword />
-    </div>
+    </div>) : (<></>)}
+    </>
   );
 };
 

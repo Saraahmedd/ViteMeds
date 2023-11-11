@@ -98,7 +98,6 @@ export const addAddressesAction = (address,id) => async (dispatch) => {
             address,
             config
         );
-        console.log(data)
 
         dispatch({
             type: ADD_ADDRESSES_SUCCESS,
@@ -134,6 +133,9 @@ export const viewMyDetails = () => async (dispatch) => {
             `${baseURL}/api/v1/patient/getMyDetails`,
             config
         );
+
+        
+        console.log(data.data.patient)
 
         dispatch({
             type: VIEW_MY_DETAILS_SUCCESS,

@@ -62,8 +62,16 @@ if (process.env.NODE_ENV === 'production') {
   app.use('/api', limiter);
 }
 
+app.use((req, res, next) => {
+  if (req.originalUrl === '/webhook') {
+    next(); // Do nothing with the body because I need it in a raw state.
+  } else {
+    express.json()(req, res, next);  // ONLY do express.json() if the received request is NOT a WebHook from Stripe.
+  }
+});
+
 app.post(
-  '/webhook-checkout',
+  '/webhook',
   bodyParser.raw({ type: 'application/json' }),
   orderController.webhookCheckout
 );

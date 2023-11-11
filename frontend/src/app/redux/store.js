@@ -8,7 +8,6 @@ import {getCartReducer, addToCartReducer, deleteFromCartReducer, updateCartReduc
 import { viewMyDetailsReducer } from './reducers/patientReducer';
 import { viewOrderDetailsReducer } from './reducers/orderReducer';
 import { addAddressesReducer } from './reducers/patientReducer';
-import {getCartReducer, addToCartReducer, deleteFromCartReducer, updateCartReducer} from './reducers/cartReducer'
 const store = configureStore({
   reducer: {
     loginReducer,

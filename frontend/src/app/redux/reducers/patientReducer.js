@@ -9,7 +9,8 @@ import {
     VIEW_MY_DETAILS_FAIL,
     ADD_ADDRESSES_FAIL,
     ADD_ADDRESSES_REQUEST,
-    ADD_ADDRESSES_SUCCESS
+    ADD_ADDRESSES_SUCCESS,
+    VIEW_MY_DETAILS_SUCCESS
 } from '../constants/patientConstants';
 
 const viewPatientsInitialState = {
@@ -104,7 +105,11 @@ export const addAddressesReducer = (state = {}, action) => {
     }
 }
 
-export const viewMyDetailsReducer = (state = viewPatientInitialState, action) => {
+export const viewMyDetailsReducer = (state =  {
+    loading: false,
+    error: null,
+    patient: null, // or any other initial value
+  }, action) => {
     switch (action.type) {
         case VIEW_MY_DETAILS_REQUEST:
             return {
@@ -112,7 +117,7 @@ export const viewMyDetailsReducer = (state = viewPatientInitialState, action) =>
                 loading: true,
                 error: null,
             };
-        case VIEW_PATIENTS_SUCCESS:
+        case VIEW_MY_DETAILS_SUCCESS:
             return {
                 ...state,
                 patient: action.payload,

@@ -64,6 +64,7 @@ export default function Cart() {
                     } EGP</h3>
                 </li>
             </ul>
+            <Button onClick={() => window.location.href ='/patients/checkout'}>Checkout</Button>
         </>
     )
 }

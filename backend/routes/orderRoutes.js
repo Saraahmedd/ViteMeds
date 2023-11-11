@@ -3,9 +3,12 @@ const authController = require('../controllers/authController');
 const orderController = require('../controllers/orderController');
 const router = express.Router();
 
-router.route('/').post(authController.protect,orderController.createOrder);
+// router.route('/').post(authController.protect,orderController.createOrder);
 
-router.get('/checkout-session/:orderId',orderController.getCheckoutSession);
+router.get('/checkout-session',authController.protect,orderController.getCheckoutSession);
+
+
+router.post('/',authController.protect,orderController.createOrder);
 
 router.get('/viewOrderDetails/:id',orderController.getOrderDetails);
 

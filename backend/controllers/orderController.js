@@ -3,34 +3,56 @@ const AppError = require('../utils/appError');
 const factory = require("./handlerFactory");
 const Order = require('../models/orderModel')
 const User = require('../models/userModel');
+const Cart = require('../models/cartModel')
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const getRawBody = require('raw-body')
 
 
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     // 1) Get the currently booked order
-    const order = await Order.findById(req.params.orderId).populate('medicines.medicine');
+    const user = req.user
+
+    const cart = await Cart.findOne( {patient: req.user._id}).populate('items.medicine')
+    .exec()
+    console.log(cart)
   
     // 2) Create checkout session
-    const lineItems = order.medicines.map((orderItem) => {
-      const medicine = orderItem.medicine;
+    const lineItems = cart.items.map((item) => {
+      console.log(item.medicine)
       return {
-        name: medicine.name,
-        description: medicine.description,
-        images: [medicine.imageURL],
-        amount: medicine.price * 100, 
-        currency: 'egp', 
-        quantity: orderItem.quantity,
+
+        price_data: {
+          currency: 'usd',
+          unit_amount: item.medicine.price * 100,
+          product_data: {
+            name: item.medicine.name,
+            description: item.medicine.description,
+            // images: ["http://localhost:8000/"+item.medicine.imageURL],
+          },
+        },
+      //   name: item.medicine.name,
+      //   description: item.medicine.description,
+      //   images: [item.medicine.imageURL],
+      //   amount: item.medicine.price * 100, 
+      //   currency: 'egp', 
+        quantity: item.quantity,
       };
     });
-  
+    console.log(lineItems)
+    console.log("hey?")
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      client_reference_id: req.params.orderId,
+      client_reference_id: user._id.toString(),
       line_items: lineItems,
-      success_url: `${req.protocol}://${req.get('host')}/my-orders?alert=booking`, // Adjust success and cancel URLs
-      cancel_url: `${req.protocol}://${req.get('host')}/my-orders?alert=cancel`, // Adjust success and cancel URLs
-      customer_email: req.user.username,
+      mode:'payment',
+      success_url: `http://localhost:3000/patients/medicines`, // Adjust success and cancel URLs
+      cancel_url: `http://localhost:3000/patients/profile`, // Adjust success and cancel URLs
+      // customer_email: "abdullahhatem87@yahoo.com",
+      metadata : {
+        deliveryAddress: req.query.deliveryAddress
+      }
     });
-  
+    // console.log("hey?")
     // 3) Create session as response
     res.status(200).json({
       status: 'success',
@@ -41,36 +63,50 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 
   
   const createOrderCheckout = async session => {
-    const orderId = session.client_reference_id;
-    const order = await Order.findById(orderId);
-    order.isPaid = true;
-    order.save({validate: false});
+    console.log(session)
+    const userId = session.client_reference_id;
+    const user = await User.findById(userId);
+    const cart = await Cart.findOne( {patient: userId})
+    
+    const deliveryAddress = user.deliveryAddress.id(session.metadata.deliveryAddress);
+    
+
+    const order = Order.create({
+      medicines: cart.items,
+      user: userId,
+      deliveryAddress: deliveryAddress || user.deliveryAddress[0],
+      paymentMethod: 'Stripe',
+      isPaid: true,
+      totalPrice: cart.totalPrice
+    })
+    await Cart.deleteOne({ _id: cart._id });
+    res.status(200).json({message: 'Order created successfully'});
   };
   
-  exports.webhookCheckout = (req, res, next) => {
+  exports.webhookCheckout = async(req, res, next) => {
+  
     const signature = req.headers['stripe-signature'];
   
     let event;
+    
     try {
       event = stripe.webhooks.constructEvent(
         req.body,
         signature,
         process.env.STRIPE_WEBHOOK_SECRET
       );
+      console.log("2")
     } catch (err) {
+      console.error(err);
       return res.status(400).send(`Webhook error: ${err.message}`);
     }
-  
+
     if (event.type === 'checkout.session.completed'){
+      console.log("here")
       createOrderCheckout(event.data.object);
+      console.log(event)
     
       res.status(200).json({ received: true });
-    }
-    else {
-        const orderId = session.client_reference_id;
-        const order = Order.findByIdAndDeleteId(orderId);
-        
-    res.status(400).json({ received: false });
     }
   };
 
@@ -83,12 +119,30 @@ exports.createOrder = catchAsync(async (req,res, next) => {
         else {
             user.wallet = user.wallet - req.body.totalPrice;
             req.body.isPaid = true;
-            return;
         }
-}
-    //2 If payment is COD, place order, DO nth
-    //3 If payment is Stripe, yeb2a alla allah
-    await factory.createOne(Order)(req,res,next)
+      }
+
+      // const {userId} = await Patient.findOne({user: user._id})
+      const cart = await Cart.findOne( {patient: user._id})
+      const deliveryAddress = user.deliveryAddress.id(req.body.deliveryAddress);
+      const order =await Order.create({
+        medicines: cart.items,
+        user: user._id,
+        deliveryAddress: deliveryAddress,
+        paymentMethod: req.body.paymentMethod,
+        isPaid: req.body.paymentMethod !== "COD",
+        totalPrice: cart.totalPrice
+      })
+
+      await Cart.deleteOne({ _id: cart._id });
+
+      res.status(200).json({
+        message: "success",
+        data :{
+          order
+        }
+      })
+      // await Cart.deleteOne( {patient: userId})
 
     //4. update sales and quantities of the medicine
 

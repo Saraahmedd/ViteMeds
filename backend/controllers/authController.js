@@ -237,8 +237,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   // 3) If so, update password
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
-  await user.save();
-  // User.findByIdAndUpdate will NOT work as intended!
+  await user.save({ validateBeforeSave: false });
 
   // 4) Log user in, send JWT
   createSendToken(user, 200, req, res);
