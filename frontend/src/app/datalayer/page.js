@@ -5,6 +5,8 @@ import { login, registerAction } from '../redux/actions/authActions';
 import { removeUser } from '../redux/actions/userActions';
 import { addMedicine, editMedicine, deleteMedicine, getMedicineById, getMedicinesAction } from '../redux/actions/medicineActions';
 import { viewPatients, viewPatient } from '../redux/actions/patientActions';
+import { getPharmacists, getPharmacist } from '../redux/actions/pharmacistActions';
+import { viewOrderDetails } from '../redux/actions/orderActions';// should be tested 
 import { getPharmacists, getPharmacist } from '../redux/actions/pharmacistActions'
 import { 
   viewCart,

@@ -91,7 +91,17 @@ exports.createOrder = catchAsync(async (req,res, next) => {
     await factory.createOne(Order)(req,res,next)
 
     //4. update sales and quantities of the medicine
-})
+
+});
+exports.getOrderDetails = catchAsync(async(req,res,next)=>{
+  await factory.getOne(Order)
+});
+
+
+
+
+
+
 
 exports.cancelOrder = catchAsync(async (req,res,next) => {
     const order = await Order.findById(req.params.id);
@@ -107,3 +117,4 @@ exports.cancelOrder = catchAsync(async (req,res,next) => {
         }
     })
 })
+

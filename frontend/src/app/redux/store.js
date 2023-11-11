@@ -1,11 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { loginReducer, registerReducer, logoutReducer,forgetPasswordReducer } from './reducers/authReducer';
+import { loginReducer, registerReducer, logoutReducer,forgetPasswordReducer,changePasswordReducer,resetPasswordReducer } from './reducers/authReducer';
 import { removeUserReducer,  getUsersReducer } from './reducers/userReducer';
 import { getPharmacistsReducer, getPharmacistReducer, adminAcceptPharmacistReducer} from './reducers/pharmacistReducer';
 import { viewPatientsReducer, viewPatientReducer } from './reducers/patientReducer'
 import { getMedicinesReducer, addMedicineReducer, editMedicineReducer, deleteMedicineReducer, getMedicineByIdReducer } from './reducers/medicineReducer';
 import {getCartReducer, addToCartReducer, deleteFromCartReducer, updateCartReducer} from './reducers/cartReducer';
 import { viewMyDetailsReducer } from './reducers/patientReducer';
+import { viewOrderDetailsReducer } from './reducers/orderReducer';
+import { addAddressesReducer } from './reducers/patientReducer';
+import {getCartReducer, addToCartReducer, deleteFromCartReducer, updateCartReducer} from './reducers/cartReducer'
 const store = configureStore({
   reducer: {
     loginReducer,
@@ -21,6 +24,8 @@ const store = configureStore({
     viewPatientsReducer,
     viewPatientReducer,
     getUsersReducer,
+    viewOrderDetailsReducer,
+    addAddressesReducer,
     logoutReducer,
     forgetPasswordReducer,
     getCartReducer,
@@ -28,7 +33,9 @@ const store = configureStore({
     deleteFromCartReducer,
     updateCartReducer,
     adminAcceptPharmacistReducer,
-    viewMyDetailsReducer
+    viewMyDetailsReducer,
+    changePasswordReducer,
+    resetPasswordReducer,
   },
 });
 

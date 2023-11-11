@@ -10,7 +10,10 @@ import {
     VIEW_PATIENT_FAIL,
     VIEW_MY_DETAILS_REQUEST,
     VIEW_MY_DETAILS_SUCCESS,
-    VIEW_MY_DETAILS_FAIL
+    VIEW_MY_DETAILS_FAIL,
+    ADD_ADDRESSES_FAIL,
+    ADD_ADDRESSES_REQUEST,
+    ADD_ADDRESSES_SUCCESS
 
 } from '../constants/patientConstants';
 
@@ -74,6 +77,43 @@ export const viewPatient = (id) => async (dispatch) => {
             payload: error.response
                 ? error.response.data.message
                 : 'View patient failed. Please try again.',
+        });
+    }
+};
+export const addAddressesAction = (address,id) => async (dispatch) => {
+    try {
+        dispatch({
+            type: ADD_ADDRESSES_REQUEST,
+        });
+        console.log(address)
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true
+        };
+        const { data } = await axios.post(
+            `${baseURL}/api/v1/orders/addAddressToOrder/${id}`,
+            address,
+            config
+        );
+        console.log(data)
+
+        dispatch({
+            type: ADD_ADDRESSES_SUCCESS,
+            payload: data.data,
+        });
+    }
+    catch (error) {
+        // print error message 
+        console.log(error)
+
+        dispatch({
+            type: ADD_ADDRESSES_FAIL,
+            payload: error.response
+                ? error.response.data.message
+                : 'Add addresses failed. Please try again.',
         });
     }
 }

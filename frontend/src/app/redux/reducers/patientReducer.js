@@ -7,6 +7,9 @@ import {
     VIEW_PATIENT_FAIL,
     VIEW_MY_DETAILS_REQUEST,
     VIEW_MY_DETAILS_FAIL,
+    ADD_ADDRESSES_FAIL,
+    ADD_ADDRESSES_REQUEST,
+    ADD_ADDRESSES_SUCCESS
 } from '../constants/patientConstants';
 
 const viewPatientsInitialState = {
@@ -63,6 +66,31 @@ export const viewPatientReducer = (state = viewPatientInitialState, action) => {
                 error: null,
             };
         case VIEW_PATIENT_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            };
+        default:
+            return state;
+    }
+}
+export const addAddressesReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ADD_ADDRESSES_REQUEST:
+            return {
+                ...state,
+                loading: true,
+                error: null,
+            };
+        case ADD_ADDRESSES_SUCCESS:
+            return {
+                ...state,
+                patients: action.payload,
+                loading: false,
+                error: null,
+            };
+        case ADD_ADDRESSES_FAIL:
             return {
                 ...state,
                 loading: false,

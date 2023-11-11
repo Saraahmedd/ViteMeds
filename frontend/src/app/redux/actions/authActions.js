@@ -64,7 +64,7 @@ export const registerAction = (reqBody) => async (dispatch) => {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
       },
       withCredentials: true
 
@@ -92,7 +92,7 @@ export const registerAction = (reqBody) => async (dispatch) => {
 };
 
 
-export const logout = () => async (dispatch) => {
+export const logoutAction = () => async (dispatch) => {
   try {
     dispatch({
       type: USER_LOGOUT_REQUEST,
@@ -105,7 +105,7 @@ export const logout = () => async (dispatch) => {
       withCredentials: true
     };
     const { data } = await axios.post(
-      `${baseURL}/api/v1/user/logout`,
+      `${baseURL}/api/v1/user/logout`,{},
       config
     );
 
@@ -171,7 +171,7 @@ export const changePasswordAction = (reqBody) => async (dispatch) => {
       },
       withCredentials: true
     };
-    const { data } = await axios.post(
+    const { data } = await axios.patch(
       `${baseURL}/api/v1/user/changePassword`,
       reqBody,
       config
@@ -193,6 +193,7 @@ export const changePasswordAction = (reqBody) => async (dispatch) => {
   }
 };
 
+
 export const resetPasswordAction = (reqBody) => async (dispatch) => {
   try {
     dispatch({
@@ -205,7 +206,7 @@ export const resetPasswordAction = (reqBody) => async (dispatch) => {
       },
       withCredentials: true
     };
-    const { data } = await axios.post(
+    const { data } = await axios.patch(
       `${baseURL}/api/v1/user/resetPassword`,
       reqBody,
       config

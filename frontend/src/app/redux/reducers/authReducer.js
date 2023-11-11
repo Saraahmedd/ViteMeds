@@ -107,13 +107,14 @@ import {
     }
   };
 
-  export const forgetPasswordReducer = (state = initialState, action) => {
+  export const forgetPasswordReducer = (state = {success: false}, action) => {
     switch (action.type) {
       case FORGET_PASS_REQUEST:
         return {
           ...state,
           loading: true,
           error: null,
+          success: false
         };
       case FORGET_PASS_SUCCESS:{
         return {
@@ -121,25 +122,28 @@ import {
           isAuthenticated: false,
           loading: false,
           error: null,
+          success: true
         }};
       case FORGET_PASS_FAIL:
         return {
           ...state,
           loading: false,
           error: action.payload,
+          success: false
         };
       default:
         return state;
     }
   };
 
-  export const resetPasswordReducer = (state = initialState, action) => {
+  export const resetPasswordReducer = (state = {}, action) => {
     switch (action.type) {
       case RESET_PASS_REQUEST:
         return {
           ...state,
           loading: true,
           error: null,
+          success: false
         };
       case RESET_PASS_SUCCESS:{
         return {
@@ -147,12 +151,14 @@ import {
           isAuthenticated: false,
           loading: false,
           error: null,
+          success: true,
         }};
       case RESET_PASS_FAIL:
         return {
           ...state,
           loading: false,
           error: action.payload,
+          success: false
         };
       default:
         return state;
@@ -166,6 +172,7 @@ import {
           ...state,
           loading: true,
           error: null,
+          success: false
         };
       case CHANGE_PASS_SUCCESS:{
         return {
@@ -173,11 +180,13 @@ import {
           isAuthenticated: false,
           loading: false,
           error: null,
+          success: true
         }};
       case CHANGE_PASS_FAIL:
         return {
           ...state,
           loading: false,
+          success: false,
           error: action.payload,
         };
       default:

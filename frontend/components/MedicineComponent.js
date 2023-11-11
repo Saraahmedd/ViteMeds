@@ -16,7 +16,7 @@ function MedicineComponent({ title, role }) {
   role == "pharmacist" ? (isPharmacist = true) : false;
   const [modalAddShow, setModalAddShow] = useState(false);
   const [selectedMedicinalUse, setSelectedMedicinalUse] = useState(null);
-  const [modalDescShow, setModalDescShow] = useState(false);
+  const [modalEditShow, setModalEditShow] = useState(false);
   const [selectedMedicine, setSelectedMedicine] = useState(null);
   const [name, setName] = useState({});
   const dispatch = useDispatch();
@@ -29,11 +29,9 @@ function MedicineComponent({ title, role }) {
 
   const handleCardClick = (medicine) => {
     setSelectedMedicine(medicine);
-    setModalDescShow(true);
+    setModalEditShow(true);
   };
-  const handleMedicinalUseChange = (event) => {
-    setSelectedMedicinalUse(event.target.value);
-  };
+
 
   const [medUse, setMedUse] = useState({});
 
@@ -87,7 +85,7 @@ function MedicineComponent({ title, role }) {
             onClick={() => setModalAddShow(true)}
           />
 
-          <AddModal show={modalAddShow} onHide={() => setModalAddShow(false)} />
+          <AddModal show={modalAddShow} onHide={() => setModalAddShow(false)} edit={false} />
         </>
       )}
       <div className="container-fluid ">
@@ -109,7 +107,7 @@ function MedicineComponent({ title, role }) {
                       <img
                         src={
                           medicine.imageURL
-                            ? medicine.imageURL
+                            ? "http://localhost:8000/"+ medicine.imageURL
                             : "/medication.svg"
                         }
                         alt="Image"
@@ -128,128 +126,9 @@ function MedicineComponent({ title, role }) {
           ))}
 
           {selectedMedicine && (
-            <DescriptionModal
-              show={modalDescShow}
-              onHide={() => setModalDescShow(false)}
-              // onEdit={handleEdit}
-              header={selectedMedicine.name}
-              subheader={""}
-              text={
-                <div className="p-4">
-                  <div className="info-container d-flex align-items">
-                    <span className="">
-                      Price: {isPharmacist || selectedMedicine.price}
-                    </span>
-                  </div>
-                  {isPharmacist && (
-                    <EditableField
-                      value={selectedMedicine.price}
-                      id={selectedMedicine._id}
-                      nameOfField={"price"}
-                      hide={() => setModalDescShow(false)}
-                      edit={true}
-                      onSave={(newValue) => handleSave(newValue, "price")}
-                    />
-                  )}
-                  {isPharmacist && (
-                    <>
-                      <div className="info-container d-flex align-items">
-                        <span className="">Quantity: </span>
-                      </div>
-
-                      <EditableField
-                        id={selectedMedicine._id}
-                        value={selectedMedicine.quantity}
-                        nameOfField={"quantity"}
-                        hide={() => setModalDescShow(false)}
-                        edit={true}
-                        onSave={(newValue) => handleSave(newValue, "quantity")}
-                      />
-                    </>
-                  )}
-
-                  <div className="info-container d-flex align-items">
-                    <span className="">
-                      Description:{" "}
-                      {isPharmacist || selectedMedicine.description}
-                    </span>
-                  </div>
-                  {isPharmacist && (
-                    <EditableField
-                      id={selectedMedicine._id}
-                      hide={() => setModalDescShow(false)}
-                      nameOfField={"description"}
-                      edit={false}
-                      value={selectedMedicine.description}
-                      onSave={(newValue) => handleSave(newValue, "description")}
-                    />
-                  )}
-
-                  <div className="info-container d-flex align-items">
-                    <span className="">
-                      Medicinal Uses:{" "}
-                      {isPharmacist ||
-                        selectedMedicine.medicinalUses.join(", ")}
-                    </span>
-                  </div>
-                  {isPharmacist && (
-                    <EditableField
-                      id={selectedMedicine._id}
-                      hide={() => setModalDescShow(false)}
-                      value={selectedMedicine.medicinalUses.join(", ")}
-                      nameOfField={"medicinalUses"}
-                      edit={false}
-                      onSave={(newValue) =>
-                        handleSave(
-                          newValue.split(",").map((item) => item.trim()),
-                          "medicinalUses"
-                        )
-                      }
-                    />
-                  )}
-                  {isPharmacist && (
-                    <>
-                      <div className="info-container d-flex align-items">
-                        <span className="">Medicine Ingredients: </span>
-                      </div>
-
-                      <EditableField
-                        id={selectedMedicine._id}
-                        nameOfField={"medicineIngredients"}
-                        hide={() => setModalDescShow(false)}
-                        edit={true}
-                        value={selectedMedicine.medicineIngredients.join(", ")}
-                        onSave={(newValue) =>
-                          handleSave(
-                            newValue.split(",").map((item) => item.trim()),
-                            "medicineIngredients"
-                          )
-                        }
-                      />
-                    </>
-                  )}
-                </div>
-              }
-              image={
-                <img
-                  className="me-5"
-                  src={
-                    selectedMedicine?.imageURL
-                      ? selectedMedicine.imageURL
-                      : "/medication.svg"
-                  }
-                  alt="Image"
-                  style={{
-                    float: "right",
-                    marginLeft: "0px",
-
-                    maxHeight: "200px",
-                    maxWidth: "150px",
-                  }}
-                />
-              }
-            />
-          )}
+             <AddModal show={modalEditShow} onHide={() => setModalEditShow(false)} edit={true} medicine={selectedMedicine} />
+          )
+          }
         </div>
       </div>
       {/* <Footer/> */}

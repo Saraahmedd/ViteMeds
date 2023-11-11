@@ -1,29 +1,42 @@
-import { addMedicine } from '@/app/redux/actions/medicineActions';
+import { addMedicine, editMedicine } from '@/app/redux/actions/medicineActions';
 import { Button } from './Button';
 import { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { useDispatch } from 'react-redux';
 
 function AddModal(props) {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [reqbody, setReqbody] = useState({
+  const [file,setFile] = useState({})
+ 
+  const { onHide, onFileChange, medicine, edit } = props;
+  console.log(medicine)
+  const [reqbody, setReqbody] = useState(edit === false && !medicine?{
     name: '',
     quantity: '',
     medicinalUses: [],
     description: '',
-    photo: null,
+    image: null,
     price: "",
     medicineIngredients: [],
-  });
+  }: 
+  {
+  name: medicine?.name,
+  quantity: medicine?.quantity,
+  medicinalUses: medicine?.medicinalUses,
+  description: medicine?.description,
+  price: medicine?.price,
+  medicineIngredients: medicine?.medicineIngredients,
+}
+  
+  );
+
+  const handleFileUpload = (e) => {
+    setFile(e.target.files[0]);
+  };
+ 
 
   const dispatch = useDispatch();
 
   // Handle file selection
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    setSelectedFile(file);
-    onFileChange(file); // Pass the selected file to the parent component
-  };
 
   const handleInputChange = (e, field) => {
     const value = e.target.value;
@@ -47,10 +60,21 @@ function AddModal(props) {
     }
   };
 
-  const { onHide, onFileChange } = props;
+  
 
   const handleAddMedicine = () => {
-    dispatch(addMedicine(reqbody));
+    const combinedFormData = new FormData();
+    for (const key in reqbody) {
+      if (reqbody.hasOwnProperty(key)) {
+        combinedFormData.append(key, reqbody[key]);
+      }
+     
+    }
+    combinedFormData.append('image', file);
+    if(edit)
+      dispatch(editMedicine(medicine?._id,combinedFormData))
+    else
+     dispatch(addMedicine(combinedFormData));
     onHide(); // Close the modal after dispatching the addMedicine action
   };
 
@@ -66,7 +90,7 @@ function AddModal(props) {
             type="text"
             placeholder="Medicine Name"
             className="search-input"
-            value={reqbody.name}
+            value={reqbody?.name}
             onChange={(e) => handleInputChange(e, 'name')}
           />
         </p>
@@ -76,7 +100,7 @@ function AddModal(props) {
             type="number"
             placeholder="Quantity"
             className="search-input"
-            value={reqbody.quantity}
+            value={reqbody?.quantity}
             onChange={(e) => handleInputChange(e, 'quantity')}
           />
         </p>
@@ -86,7 +110,7 @@ function AddModal(props) {
             type="text"
             placeholder="Medicinal use"
             className="search-input"
-            value={reqbody.medicinalUses}
+            value={reqbody?.medicinalUses}
             onChange={(e) => handleInputChange(e, 'medicinalUses')}
           />
         </p>
@@ -96,7 +120,7 @@ function AddModal(props) {
             type="text"
             placeholder="Description"
             className="search-input"
-            value={reqbody.medicineIngredients}
+            value={reqbody?.medicineIngredients}
             onChange={(e) => handleInputChange(e, 'medicineIngredients')}
           />
         </p>
@@ -106,7 +130,7 @@ function AddModal(props) {
             type="text"
             placeholder="Description"
             className="search-input"
-            value={reqbody.description}
+            value={reqbody?.description}
             onChange={(e) => handleInputChange(e, 'description')}
           />
         </p>
@@ -116,13 +140,25 @@ function AddModal(props) {
             type="number"
             placeholder="Price"
             className="search-input"
-            value={reqbody.price}
+            value={reqbody?.price}
             onChange={(e) => handleInputChange(e, 'price')}
           />
         </p>
+        <div className="row">
+                {/* Document 1 */}
+                <div className="col-md-4 mb-2">
+                  <label htmlFor="document1" className="d-flex align-items-center justify-content-between form-label">
+                    Image
+                    <span className="btn btn-outline-primary btn-sm">
+                      <i className="bi bi-cloud-upload"></i> Upload
+                      <input type="file" id="document1" className="d-none" onChange={(e) => handleFileUpload(e, 'image')} />
+                    </span>
+                  </label>
+                </div>
+          </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button text="Add" className="desc-button" onClick={handleAddMedicine} />
+        <Button text= {edit ? "edit" :"Add"} className="desc-button" onClick={handleAddMedicine} />
       </Modal.Footer>
     </Modal>
   );

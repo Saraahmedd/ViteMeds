@@ -31,7 +31,7 @@ export const addMedicine = (medicine) => async (dispatch) => {
 
         const config = {
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'multipart/form-data',
             },
             withCredentials: true
         };
@@ -67,7 +67,7 @@ export const editMedicine = (id, medicine) => async (dispatch) => {
 
         const config = {
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'multipart/form-data',
             },
             withCredentials: true
         };
