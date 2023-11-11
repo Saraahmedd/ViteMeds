@@ -23,7 +23,7 @@ const pharmacistSchema = new mongoose.Schema({
       },
 
     phoneNumber: {
-        type: Number,
+        type: String,
         required: [true, 'A pharmacist must have a phone number'],
     },
     role: {
