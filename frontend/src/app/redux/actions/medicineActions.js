@@ -20,8 +20,6 @@ import {
     MEDICINES_VIEW_SUCCESS,
     MEDICINES_VIEW_REQUEST,
     MEDICINES_VIEW_FAIL
-
-
 } from '../constants/medicineConstants';
 
 export const addMedicine = (medicine) => async (dispatch) => {
@@ -50,7 +48,6 @@ export const addMedicine = (medicine) => async (dispatch) => {
         });
     }
     catch (error) {
-        // print error message 
         console.log(error)
 
         dispatch({
@@ -74,7 +71,6 @@ export const editMedicine = (id, medicine) => async (dispatch) => {
             },
             withCredentials: true
         };
-        console.log(medicine)
         const { data } = await axios.patch(
             `${baseURL}/api/v1/medicines/update/${id}`,
             medicine,

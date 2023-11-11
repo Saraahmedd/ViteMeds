@@ -1,5 +1,5 @@
 import { addMedicine } from '@/app/redux/actions/medicineActions';
-import { Button } from '../../../../../components/Button';
+import { Button } from './Button';
 import { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { useDispatch } from 'react-redux';

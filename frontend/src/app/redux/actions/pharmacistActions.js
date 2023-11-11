@@ -7,7 +7,13 @@ import {
     GET_PHARMACISTS_FAIL,
     GET_PHARMACIST_REQUEST,
     GET_PHARMACIST_SUCCESS,
-    GET_PHARMACIST_FAIL
+    GET_PHARMACIST_FAIL,
+    PHARMACIST_ACCEPTED_REQUEST,
+    PHARMACIST_ACCEPTED_SUCCESS,
+    PHARMACIST_ACCEPTED_FAIL,
+    PHARMACIST_DOWNLOAD_DOCS_REQUEST,
+    PHARMACIST_DOWNLOAD_DOCS_SUCCESS,
+    PHARMACIST_DOWNLOAD_DOCS_FAIL
 
 } from '../constants/pharmacistConstants';
 
@@ -71,3 +77,81 @@ export const getPharmacist = (id) => async (dispatch) => {
         });
     }
 }
+
+export const adminAcceptPharmacist = (pharmacistId) => async (dispatch) => {
+  
+    try {
+      dispatch({
+        type: PHARMACIST_ACCEPTED_REQUEST,
+      });
+  
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      };
+      let url ="";
+      
+      url=`${baseURL}/api/v1/pharmacist/acceptpharmacist?_id=${pharmacistId}`
+      
+      const { data } = await axios.patch(url, config);
+  
+      dispatch({
+        type: PHARMACIST_ACCEPTED_SUCCESS,
+        pharmacist: data.data
+      });
+    } catch (error) {
+     
+      dispatch({
+        type: PHARMACIST_ACCEPTED_FAIL,
+        payload: error.response
+          ? error.response.data.message
+          : 'Accepting pharmacist failed. Please try again.',
+      });
+    }
+  };
+
+  export const downloadPharmacistDocs = (pharmacistId) => async (dispatch) => {
+    try {
+      dispatch({
+        type: PHARMACIST_DOWNLOAD_DOCS_REQUEST,
+      });
+  
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        responseType: 'stream',
+        withCredentials: true,
+      };
+  
+      const url = `${baseURL}/api/v1/pharmacist/docs/${pharmacistId}`;
+  
+      const response = await axios.get(url, config);
+  
+      const contentDisposition = response.headers['content-disposition'];
+      const fileName = contentDisposition
+        ? contentDisposition.replace(/attachment; filename=/, '')
+        : 'pharmacist_documents.zip';
+  
+      const blob = new Blob([response.data], { type: 'application/zip' });
+  
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = fileName;
+      link.click();
+  
+      dispatch({
+        type: PHARMACIST_DOWNLOAD_DOCS_SUCCESS,
+      });
+    } catch (error) {
+      dispatch({
+        type: PHARMACIST_DOWNLOAD_DOCS_FAIL,
+        payload: error.response
+          ? error.response.data.message
+          : 'Downloading pharmacist documents failed. Please try again.',
+      });
+    }
+  };
+  

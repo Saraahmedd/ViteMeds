@@ -1,121 +1,58 @@
 import {
-    GET_PHARMACISTS_REQUEST,
-    GET_PHARMACISTS_SUCCESS,
-    GET_PHARMACISTS_FAIL,
-    GET_PHARMACIST_REQUEST,
-    GET_PHARMACIST_SUCCESS,
-    GET_PHARMACIST_FAIL,
-    PHARMACIST_ACCEPTED_REQUEST,
-    PHARMACIST_ACCEPTED_SUCCESS,
-    PHARMACIST_ACCEPTED_FAIL,
-    PHARMACIST_DOWNLOAD_DOCS_REQUEST,
-    PHARMACIST_DOWNLOAD_DOCS_SUCCESS,
-    PHARMACIST_DOWNLOAD_DOCS_FAIL
-} from '../constants/pharmacistConstants';
+    VIEW_CART_REQUEST,
+    VIEW_CART_SUCCESS,
+    VIEW_CART_FAIL,
+    ADD_TO_CART_REQUEST,
+    ADD_TO_CART_SUCCESS,
+    ADD_TO_CART_FAIL,
+    DELETE_FROM_CART_REQUEST,
+    DELETE_FROM_CART_SUCCESS,
+    DELETE_FROM_CART_FAIL,
+    UPDATE_CART_REQUEST,
+    UPDATE_CART_SUCCESS,
+    UPDATE_CART_FAIL,
+} from '../constants/cartConstants';
 
-const getPharmacistsInitialState = {
-    pharmacists: [],
+const viewCartInitialState = {
+    cart: null,
     loading: false,
     error: null,
 };
-const getPharmacistInitialState = {
-    pharmacist: null,
+
+const addToCartInitialState = {
+    cart: null,
     loading: false,
     error: null,
 };
-export const getPharmacistsReducer = (state = getPharmacistsInitialState, action) => {
-    switch (action.type) {
-        case GET_PHARMACISTS_REQUEST:
-            return {
-                ...state,
-                loading: true,
-                error: null,
-            };
-        case GET_PHARMACISTS_SUCCESS:
-            return {
-                ...state,
-                pharmacists: action.payload,
-                loading: false,
-                error: null,
-            };
-        case GET_PHARMACISTS_FAIL:
-            return {
-                ...state,
-                loading: false,
-                error: action.payload,
-            };
-        default:
-            return state;
-    }
-};
-export const getPharmacistReducer = (state = getPharmacistInitialState, action) => {
-    switch (action.type) {
-        case GET_PHARMACIST_REQUEST:
-            return {
-                ...state,
-                loading: true,
-                error: null,
-            };
-        case GET_PHARMACIST_SUCCESS:
-            return {
-                ...state,
-                pharmacist: action.payload,
-                loading: false,
-                error: null,
-            };
-        case GET_PHARMACIST_FAIL:
-            return {
-                ...state,
-                loading: false,
-                error: action.payload,
-            };
-        default:
-            return state;
-    }
+
+const deleteFromCartInitialState = {
+    cart: null,
+    loading: false,
+    error: null,
 };
 
-export const adminAcceptPharmacistReducer = (state = {}, action) => {
-    switch (action.type) {
-        case PHARMACIST_ACCEPTED_REQUEST:
-            return {
-                ...state,
-                loading: true,
-                error: null,
-            };
-        case PHARMACIST_ACCEPTED_SUCCESS:
-            return {
-                ...state,
-                pharmacist: action.payload,
-                loading: false,
-                error: null,
-            };
-        case PHARMACIST_ACCEPTED_FAIL:
-            return {
-                ...state,
-                loading: false,
-                error: action.payload,
-            };
-        default:
-            return state;
-    }
+const updateCartInitialState = {
+    cart: null,
+    loading: false,
+    error: null,
 };
 
-export const downloadPharmacistDocsReducer = (state = {}, action) => {
+export const getCartReducer = (state = viewCartInitialState, action) => {
     switch (action.type) {
-        case PHARMACIST_DOWNLOAD_DOCS_REQUEST:
+        case VIEW_CART_REQUEST:
             return {
                 ...state,
                 loading: true,
                 error: null,
             };
-        case PHARMACIST_DOWNLOAD_DOCS_SUCCESS:
+        case VIEW_CART_SUCCESS:
             return {
                 ...state,
-                pharmacist: action.payload,
+                cart: action.payload,
                 loading: false,
                 error: null,
             };
-        case PHARMACIST_DOWNLOAD_DOCS_FAIL:
+        case VIEW_CART_FAIL:
             return {
                 ...state,
                 loading: false,
@@ -124,4 +61,82 @@ export const downloadPharmacistDocsReducer = (state = {}, action) => {
         default:
             return state;
     }
-};
+}
+
+export const addToCartReducer = (state = addToCartInitialState, action) => {
+    switch (action.type) {
+        case ADD_TO_CART_REQUEST:
+            return {
+                ...state,
+                loading: true,
+                error: null,
+            };
+        case ADD_TO_CART_SUCCESS:
+            return {
+                ...state,
+                cart: action.payload,
+                loading: false,
+                error: null,
+            };
+        case ADD_TO_CART_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            };
+        default:
+            return state;
+    }
+}
+
+export const deleteFromCartReducer = (state = deleteFromCartInitialState, action) => {
+    switch (action.type) {
+        case DELETE_FROM_CART_REQUEST:
+            return {
+                ...state,
+                loading: true,
+                error: null,
+            };
+        case DELETE_FROM_CART_SUCCESS:
+            return {
+                ...state,
+                cart: action.payload,
+                loading: false,
+                error: null,
+            };
+        case DELETE_FROM_CART_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            };
+        default:
+            return state;
+    }
+}
+
+export const updateCartReducer = (state = updateCartInitialState, action) => {
+    switch (action.type) {
+        case UPDATE_CART_REQUEST:
+            return {
+                ...state,
+                loading: true,
+                error: null,
+            };
+        case UPDATE_CART_SUCCESS:
+            return {
+                ...state,
+                cart: action.payload,
+                loading: false,
+                error: null,
+            };
+        case UPDATE_CART_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            };
+        default:
+            return state;
+    }
+}

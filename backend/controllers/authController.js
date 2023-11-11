@@ -199,7 +199,7 @@ exports.restrictTo = (...roles) => {
     }
     const user= await User.findOne({username}).select('+password')
 
-    if (!username || ! (await user.correctPassword(password, user.password))) {
+    if (!user || ! (await user.correctPassword(password, user.password))) {
        return next(new AppError("Invalid Credentials",401));
     }
     if(user.role === 'pharmacist'){

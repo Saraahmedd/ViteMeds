@@ -23,6 +23,7 @@ const pharmacistRouter = require('./routes/pharmacistRoutes.js');
 const medicineRouter = require('./routes/medicineRoutes.js');
 const orderRouter = require('./routes/orderRoutes.js');
 const orderController = require('./controllers/orderController');
+const cartrRouter = require('./routes/cartRoutes.js');
 
 app.enable('trust proxy');
 
@@ -87,6 +88,8 @@ app.use('/api/v1/patient', patientRouter);
 app.use('/api/v1/pharmacist', pharmacistRouter);
 app.use('/api/v1/medicines', medicineRouter);
 app.use('/api/v1/order',orderRouter);
+app.use('/api/v1/cart', cartrRouter);
+
 
 //404 Error , YOU MUST PUT YOUR ROUTERS ABOVE THAT COMMENT 
 app.all('*', (req, res, next) => {
