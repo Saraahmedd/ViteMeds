@@ -4,6 +4,9 @@ import { removeUserReducer,  getUsersReducer } from './reducers/userReducer';
 import { getPharmacistsReducer, getPharmacistReducer, adminAcceptPharmacistReducer} from './reducers/pharmacistReducer';
 import { viewPatientsReducer, viewPatientReducer } from './reducers/patientReducer'
 import { getMedicinesReducer, addMedicineReducer, editMedicineReducer, deleteMedicineReducer, getMedicineByIdReducer } from './reducers/medicineReducer';
+import { viewOrderDetailsReducer } from './reducers/orderReducer';
+import { addAddressesReducer } from './reducers/patientReducer';
+=======
 import {getCartReducer, addToCartReducer, deleteFromCartReducer, updateCartReducer} from './reducers/cartReducer'
 const store = configureStore({
   reducer: {
@@ -20,6 +23,8 @@ const store = configureStore({
     viewPatientsReducer,
     viewPatientReducer,
     getUsersReducer,
+    viewOrderDetailsReducer,
+    addAddressesReducer,
     logoutReducer,
     forgetPasswordReducer,
     getCartReducer,
