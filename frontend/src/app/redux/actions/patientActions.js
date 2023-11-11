@@ -90,8 +90,8 @@ export const addAddressesAction = (address,id) => async (dispatch) => {
             },
             withCredentials: true
         };
-        const { data } = await axios.post(
-            `${baseURL}/api/v1/orders/addAddressToOrder/${id}`,
+        const { data } = await axios.patch(
+            `${baseURL}/api/v1/patient/addAddressToPatient`,
             address,
             config
         );

@@ -80,6 +80,7 @@ export const addAddressesReducer = (state = {}, action) => {
                 ...state,
                 loading: true,
                 error: null,
+                success: false
             };
         case ADD_ADDRESSES_SUCCESS:
             return {
@@ -87,12 +88,14 @@ export const addAddressesReducer = (state = {}, action) => {
                 patients: action.payload,
                 loading: false,
                 error: null,
+                success: true
             };
         case ADD_ADDRESSES_FAIL:
             return {
                 ...state,
                 loading: false,
                 error: action.payload,
+                success: false
             };
         default:
             return state;
