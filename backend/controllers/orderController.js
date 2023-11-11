@@ -168,8 +168,9 @@ exports.cancelOrder = catchAsync(async (req,res,next) => {
     order.status = "Cancelled";
     await order.save({validate: false});
     const user = req.user;
-    user.wallet += order.totalPrice
-    user.save({validate: false})
+    if(order.isPaid)
+       user.wallet += order.totalPrice
+    user.save({validateBeforeSave: false})
 
     res.status(200).json({
         status: "success",

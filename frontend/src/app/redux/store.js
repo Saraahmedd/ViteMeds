@@ -6,7 +6,7 @@ import { viewPatientsReducer, viewPatientReducer } from './reducers/patientReduc
 import { getMedicinesReducer, addMedicineReducer, editMedicineReducer, deleteMedicineReducer, getMedicineByIdReducer } from './reducers/medicineReducer';
 import {getCartReducer, addToCartReducer, deleteFromCartReducer, updateCartReducer} from './reducers/cartReducer';
 import { viewMyDetailsReducer } from './reducers/patientReducer';
-import { viewOrderDetailsReducer } from './reducers/orderReducer';
+import { viewOrderDetailsReducer ,  viewOrderListReducer, cancelOrderReducer} from './reducers/orderReducer';
 import { addAddressesReducer } from './reducers/patientReducer';
 const store = configureStore({
   reducer: {
@@ -35,6 +35,9 @@ const store = configureStore({
     viewMyDetailsReducer,
     changePasswordReducer,
     resetPasswordReducer,
+    viewOrderDetailsReducer,
+    viewOrderListReducer,
+    cancelOrderReducer
   },
 });
 

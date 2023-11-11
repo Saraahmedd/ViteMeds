@@ -1,7 +1,7 @@
 import axios from 'axios';
 import baseURL from '../baseURL';
 
-import { ORDER_DETAILS_REQUEST,ORDER_DETAILS_FAIL,ORDER_DETAILS_SUCCESS, MAKE_ORDER_REQUEST, MAKE_ORDER_SUCCESS, MAKE_ORDER_FAILURE } from "../constants/orderConstants";
+import { ORDER_DETAILS_REQUEST,ORDER_DETAILS_FAIL,ORDER_DETAILS_SUCCESS, MAKE_ORDER_REQUEST, MAKE_ORDER_SUCCESS, MAKE_ORDER_FAILURE, ORDER_LIST_REQUEST, ORDER_LIST_SUCCESS, ORDER_LIST_FAIL, ORDER_CANCEL_REQUEST, ORDER_CANCEL_SUCCESS, ORDER_CANCEL_FAIL } from "../constants/orderConstants";
 
 export const viewOrderDetails = (id) => async (dispatch) => {
     try {
@@ -33,6 +33,71 @@ export const viewOrderDetails = (id) => async (dispatch) => {
                 : 'View order details failed. Please try again.',
         });
     }
+}
+
+export const viewOrderList = () => async (dispatch) => {
+  try {
+      dispatch({
+          type: ORDER_LIST_REQUEST,
+      });
+
+      const config = {
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          withCredentials: true
+      };
+      const { data } = await axios.get(
+          `${baseURL}/api/v1/order`,
+          config
+      );
+
+      dispatch({
+          type: ORDER_LIST_SUCCESS,
+          payload: data.data,
+      });
+  }
+  catch (error) {
+      dispatch({
+          type: ORDER_LIST_FAIL,
+          payload: error.response
+              ? error.response.data.message
+              : 'View order details failed. Please try again.',
+      });
+  }
+}
+
+export const cancelOrder = (id) => async (dispatch) => {
+  try {
+      dispatch({
+          type: ORDER_CANCEL_REQUEST,
+      });
+
+      const config = {
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          withCredentials: true
+      };
+      const { data } = await axios.patch(
+          `${baseURL}/api/v1/order/${id}`,
+          {},
+          config
+      );
+
+      dispatch({
+          type: ORDER_CANCEL_SUCCESS,
+          payload: data.data,
+      });
+  }
+  catch (error) {
+      dispatch({
+          type: ORDER_CANCEL_FAIL,
+          payload: error.response
+              ? error.response.data.message
+              : 'View order details failed. Please try again.',
+      });
+  }
 }
 
 export const makeOrderRequest = () => ({

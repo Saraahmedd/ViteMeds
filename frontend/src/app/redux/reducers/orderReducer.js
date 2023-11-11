@@ -4,7 +4,13 @@ import {
     ORDER_DETAILS_FAIL,
     MAKE_ORDER_REQUEST,
     MAKE_ORDER_SUCCESS,
-    MAKE_ORDER_FAILURE
+    MAKE_ORDER_FAILURE,
+    ORDER_LIST_FAIL,
+    ORDER_LIST_REQUEST,
+    ORDER_LIST_SUCCESS,
+    ORDER_CANCEL_REQUEST,
+    ORDER_CANCEL_SUCCESS,
+    ORDER_CANCEL_FAIL
 } from '../constants/orderConstants';
 
 export const viewOrderDetailsReducer = (state = {}, action) => {
@@ -31,6 +37,35 @@ export const viewOrderDetailsReducer = (state = {}, action) => {
         default:
             return state;
     }
+}
+
+export const viewOrderListReducer = (state = {}, action) => {
+  
+  switch (action.type) {
+   
+      case ORDER_LIST_REQUEST:
+          return {
+              ...state,
+              loading: true,
+              error: null,
+          };
+      case ORDER_LIST_SUCCESS:
+          return {
+            
+              ...state,
+              orders: action.payload.data,
+              loading: false,
+              error: null,
+          };
+      case ORDER_LIST_FAIL:
+          return {
+              ...state,
+              loading: false,
+              error: action.payload,
+          };
+      default:
+          return state;
+  }
 }
 
 // reducer.js
@@ -60,6 +95,30 @@ export const viewOrderDetailsReducer = (state = {}, action) => {
           ...state,
           loading: false,
           session: null,
+          error: action.payload
+        };
+      default:
+        return state;
+    }
+  };
+
+  export const cancelOrderReducer = (state = {}, action) => {
+    switch (action.type) {
+      case ORDER_CANCEL_REQUEST:
+        return {
+          ...state,
+          loading: true
+        };
+      case ORDER_CANCEL_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          error: null
+        };
+      case ORDER_CANCEL_FAIL:
+        return {
+          ...state,
+          loading: false,
           error: action.payload
         };
       default:
