@@ -13,3 +13,5 @@ router
 
   router.get('/',patientController.getAllPatients)
 module.exports = router;
+
+router.route("/getMyDetails").get( authController.protect,authController.restrictTo("patient"),patientController.getMyDetails);

@@ -7,7 +7,10 @@ import {
     VIEW_PATIENTS_FAIL,
     VIEW_PATIENT_REQUEST,
     VIEW_PATIENT_SUCCESS,
-    VIEW_PATIENT_FAIL
+    VIEW_PATIENT_FAIL,
+    VIEW_MY_DETAILS_REQUEST,
+    VIEW_MY_DETAILS_SUCCESS,
+    VIEW_MY_DETAILS_FAIL
 
 } from '../constants/patientConstants';
 
@@ -68,6 +71,38 @@ export const viewPatient = (id) => async (dispatch) => {
     catch (error) {
         dispatch({
             type: VIEW_PATIENT_FAIL,
+            payload: error.response
+                ? error.response.data.message
+                : 'View patient failed. Please try again.',
+        });
+    }
+}
+
+export const viewMyDetails = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: VIEW_MY_DETAILS_REQUEST,
+        });
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true
+        };
+        const { data } = await axios.get(
+            `${baseURL}/api/v1/patient/getMyDetails`,
+            config
+        );
+
+        dispatch({
+            type: VIEW_MY_DETAILS_SUCCESS,
+            payload: data.data,
+        });
+    }
+    catch (error) {
+        dispatch({
+            type: VIEW_MY_DETAILS_FAIL,
             payload: error.response
                 ? error.response.data.message
                 : 'View patient failed. Please try again.',
