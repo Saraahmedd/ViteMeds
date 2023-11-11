@@ -12,6 +12,8 @@ router.post('/',authController.protect,orderController.createOrder);
 
 router.get('/viewOrderDetails/:id',orderController.getOrderDetails);
 
+router.get('/',authController.protect,orderController.getMyOrders)
+
 router.route('/:id').patch(authController.protect,orderController.cancelOrder);
 
 module.exports = router;

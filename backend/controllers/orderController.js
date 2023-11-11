@@ -148,7 +148,11 @@ exports.createOrder = catchAsync(async (req,res, next) => {
 
 });
 exports.getOrderDetails = catchAsync(async(req,res,next)=>{
-  await factory.getOne(Order)
+    factory.getOne(Order)(req,res,next)
+});
+exports.getMyOrders = catchAsync(async(req,res,next)=>{
+  req.query.user = req.user._id
+  factory.getAll(Order)(req,res,next)
 });
 
 
@@ -163,6 +167,9 @@ exports.cancelOrder = catchAsync(async (req,res,next) => {
 
     order.status = "Cancelled";
     await order.save({validate: false});
+    const user = req.user;
+    user.wallet += order.totalPrice
+    user.save({validate: false})
 
     res.status(200).json({
         status: "success",
