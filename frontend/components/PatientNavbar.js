@@ -52,7 +52,7 @@ const PatientNavbar = () => {
 
 
             <li className="nav-item ms-2">
-              <a onClick={handleLogout} className="btn btn-primary" href="/guest/login">
+              <a onClick={handleLogout} className="btn btn-primary" href="/guest/Login">
                 Logout
               </a>
             </li>
