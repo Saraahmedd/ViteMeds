@@ -4,19 +4,20 @@ import { Button } from '../../../../components/Button';
 import { Card } from '../../../../components/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeUser } from '@/app/redux/actions/userActions';
-import { getPharmacists } from '@/app/redux/actions/pharmacistActions';
+import { getPharmacists,adminAcceptPharmacist } from '@/app/redux/actions/pharmacistActions';
 import Image from 'next/image';
 
 
 export default function DoctorApps() {
   const dispatch=useDispatch();
   const doctors=useSelector(state=>state.getPharmacistsReducer.pharmacists);
-  const isLoading=useSelector(state=>state.removeUserReducer.loading)
+  const isLoading=useSelector(state=>state.removeUserReducer.loading) 
+  const approvalisLoading = useSelector(state=>state.adminAcceptPharmacistReducer.loading) ;
   useEffect(()=>{
     dispatch(getPharmacists());
     
 
-  },[isLoading])
+  },[isLoading,approvalisLoading])
 
   const button = <div style={{fontSize: '1px', }}>
   <Button text='Approve' variant='xs' ></Button>
@@ -25,6 +26,9 @@ export default function DoctorApps() {
 
   const onRemoveHandler = (id)=>{
     dispatch(removeUser(id))
+  }
+  const onApproveHandler = (id)=>{
+    dispatch(adminAcceptPharmacist(id))
   }
     
   function formatDateToDDMMYYYY(isoDate) {
@@ -77,7 +81,10 @@ export default function DoctorApps() {
           <h8 style={{ fontWeight: 'bold' }}>educationalBackground: </h8>{person.educationalBackground}
           <br />
           </div>
+          <Button text='Approve' variant='xs' onClick={()=>{onApproveHandler(person._id)}}></Button>
+  <Button text='Reject' variant='xs' onClick={()=>{onRemoveHandler(person.user?._id)}}></Button>
         </Card>
+
         </div>
        
       })
