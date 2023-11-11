@@ -78,7 +78,7 @@ export const getPharmacist = (id) => async (dispatch) => {
     }
 }
 
-export const adminAcceptPharmacist = (pharmacistId) => async (dispatch) => {
+export const adminAcceptPharmacist = (pharmacistId,body) => async (dispatch) => {
   
     try {
       dispatch({
@@ -93,9 +93,9 @@ export const adminAcceptPharmacist = (pharmacistId) => async (dispatch) => {
       };
       let url ="";
       
-      url=`${baseURL}/api/v1/pharmacist/acceptpharmacist?_id=${pharmacistId}`
+      url=`${baseURL}/api/v1/pharmacist/acceptpharmacist/${pharmacistId}`
       
-      const { data } = await axios.patch(url, config);
+      const { data } = await axios.patch(url,body, config);
   
       dispatch({
         type: PHARMACIST_ACCEPTED_SUCCESS,
