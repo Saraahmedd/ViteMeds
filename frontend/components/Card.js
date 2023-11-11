@@ -1,10 +1,11 @@
+"use client"
 const { Button } = require("./Button");
 
 function Card ({ title, subtitle, text, className, image = "", buttonText = "", headerText = "", onClick, onClickButton, children, buttonClass= "" }) {
 
     return (
         <>
-            <div className={`card global-text shadow border-0 ${onClick ? 'hover-button' : ''} ${className}`} role={onClick ? "button" : ""}>
+            <div onClick={onClick} className={`card global-text shadow border-0 ${onClick ? 'hover-button' : ''} ${className}`} role={onClick ? "button" : ""}>
                 <div className="bg-primary px-2 rounded"></div>
                 {image}
                 {headerText && <div className="card-header">{headerText}</div>}

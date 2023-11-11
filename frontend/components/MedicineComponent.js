@@ -10,6 +10,7 @@ import { Button } from "./Button";
 import AddModal from "./AddModal";
 import { getMedicinesAction } from "@/app/redux/actions/medicineActions";
 import { login } from "@/app/redux/actions/authActions";
+import { addToCart, viewCart } from "@/app/redux/actions/cartActions";
 
 function MedicineComponent({ title, role }) {
   let isPharmacist;
@@ -20,6 +21,7 @@ function MedicineComponent({ title, role }) {
   const [selectedMedicine, setSelectedMedicine] = useState(null);
   const [name, setName] = useState({});
   const dispatch = useDispatch();
+
   const medicines = useSelector(
     (state) => state.getMedicinesReducer.medicines?.data
   );
@@ -27,10 +29,29 @@ function MedicineComponent({ title, role }) {
     (state) => state.getMedicinesReducer.medicines?.medUses
   );
 
+  const cart = useSelector(
+    (state) => state.getCartReducer.cart
+  );
+
   const handleCardClick = (medicine) => {
     setSelectedMedicine(medicine);
     setModalEditShow(true);
   };
+
+  function handleCartClick(e, medicine) {
+    e.stopPropagation();
+    dispatch(addToCart(medicine._id, 1));
+  }
+
+  function getMedicineText(medicine) {
+    const matchingCart = cart.cart.items.filter(i => i.medicine._id === medicine._id);
+    if(matchingCart.length > 0) {
+      const numInCart = matchingCart[0].quantity;
+      return `In Cart (${numInCart})`;
+    } else {
+      return "Add to Cart";
+    }
+  }
 
 
   const [medUse, setMedUse] = useState({});
@@ -38,6 +59,11 @@ function MedicineComponent({ title, role }) {
   useEffect(() => {
     dispatch(getMedicinesAction({ ...name, ...medUse }));
   }, [dispatch, name, medUse]);
+
+  useEffect(() => {
+    dispatch(viewCart());
+    console.log("cart changed");
+  }, [dispatch]);
 
   return (
     <div className="m-5">
@@ -92,7 +118,7 @@ function MedicineComponent({ title, role }) {
         <div className="row mx-4">
           {medicines?.map((medicine) => (
             <Card
-              key={medicine.id}
+              key={medicine._id}
               className="col-lg-2 offset-lg-1 my-3 bg-light mx-5 shadow"
               title={
                 <div className="text-capitalize p-3 text-center">
@@ -100,6 +126,7 @@ function MedicineComponent({ title, role }) {
                 </div>
               }
               subtitle={<></>}
+              onClick={() => handleCardClick(medicine)}
               text={
                 <div className="">
                   <div className="row global-text">
@@ -107,7 +134,7 @@ function MedicineComponent({ title, role }) {
                       <img
                         src={
                           medicine.imageURL
-                            ? "http://localhost:8000/"+ medicine.imageURL
+                            ? "http://localhost:8000/" + medicine.imageURL
                             : "/medication.svg"
                         }
                         alt="Image"
@@ -120,13 +147,13 @@ function MedicineComponent({ title, role }) {
                   </div>
                 </div>
               }
-              buttonText="Details"
-              onClickButton={() => handleCardClick(medicine)}
+              buttonText={cart ? getMedicineText(medicine) : "Add to Cart"}
+              onClickButton={(e) => handleCartClick(e, medicine)}
             />
           ))}
 
           {selectedMedicine && (
-             <AddModal show={modalEditShow} onHide={() => setModalEditShow(false)} edit={true} medicine={selectedMedicine} />
+            <AddModal show={modalEditShow} onHide={() => setModalEditShow(false)} edit={true} medicine={selectedMedicine} />
           )
           }
         </div>
