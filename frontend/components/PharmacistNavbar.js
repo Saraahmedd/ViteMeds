@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { useDispatch } from 'react-redux';
 
 const PharmacistNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,6 +12,11 @@ const PharmacistNavbar = () => {
 
   const goBack = () => {
     history.back()
+  }
+  const dispatch = useDispatch()
+
+  const handleLogout = ()=> {
+    dispatch(logoutAction())
   }
 
 
@@ -36,7 +42,7 @@ const PharmacistNavbar = () => {
         <div className={`col-sm-6 links&buttons collapse navbar-collapse ms-auto col-md-2 align-self-end ${isMenuOpen ? 'show' : ''}`}>
           <ul className="navbar-nav ms-auto">
             <li className="nav-item ms-auto">
-              <a className="btn btn-primary" href="/guest/Login">
+              <a onClick={handleLogout} className="btn btn-primary" href="/guest/Login">
                 Logout
               </a>
             </li>

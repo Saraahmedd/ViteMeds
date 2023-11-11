@@ -111,7 +111,7 @@ export const downloadPharmacistDocsReducer = (state = {}, action) => {
         case PHARMACIST_DOWNLOAD_DOCS_SUCCESS:
             return {
                 ...state,
-                pharmacist: action.payload,
+                // pharmacist: action.payload,
                 loading: false,
                 error: null,
             };

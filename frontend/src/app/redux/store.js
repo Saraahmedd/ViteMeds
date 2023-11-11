@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { loginReducer, registerReducer, logoutReducer,forgetPasswordReducer } from './reducers/authReducer';
+import { loginReducer, registerReducer, logoutReducer,forgetPasswordReducer,changePasswordReducer,resetPasswordReducer } from './reducers/authReducer';
 import { removeUserReducer,  getUsersReducer } from './reducers/userReducer';
 import { getPharmacistsReducer, getPharmacistReducer, adminAcceptPharmacistReducer} from './reducers/pharmacistReducer';
 import { viewPatientsReducer, viewPatientReducer } from './reducers/patientReducer'
@@ -26,7 +26,9 @@ const store = configureStore({
     addToCartReducer,
     deleteFromCartReducer,
     updateCartReducer,
-    adminAcceptPharmacistReducer
+    adminAcceptPharmacistReducer,
+    changePasswordReducer,
+    resetPasswordReducer,
   },
 });
 

@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { useDispatch } from 'react-redux';
 
 const AdminNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,6 +12,12 @@ const AdminNavbar = () => {
 
   const goBack = () => {
     history.back()
+  }
+
+  const dispatch = useDispatch()
+
+  const handleLogout = ()=> {
+    dispatch(logoutAction())
   }
 
 
@@ -37,7 +44,7 @@ const AdminNavbar = () => {
           className={`links&buttons collapse navbar-collapse col-md-6 align-self-end ms-auto ${isMenuOpen ? 'show' : ''}`}>
           <ul className="navbar-nav ms-auto">
             <li className="nav-item ms-auto">
-              <a className="btn btn-primary" href="/guest/Login">
+              <a onClick={handleLogout} className="btn btn-primary" href="/guest/login">
                 Logout
               </a>
             </li>
