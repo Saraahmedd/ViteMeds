@@ -61,7 +61,7 @@ const AdminNavbar = () => {
               <a className="nav-link" href="/admin/medicines">Medicines</a>
             </li>
             <li className="nav-item">
-              <a onClick={handleLogout} className="btn btn-primary ms-2 mx-1" href="/guest/login">
+              <a onClick={handleLogout} className="btn btn-primary ms-2 mx-1" href="/guest/Login">
                 Logout
               </a>
             </li>
