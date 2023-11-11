@@ -90,11 +90,11 @@ function LoginForm() {
                     onChange={handleInputChange}
                   />
                 </div>
-                <div className="col-md-2 d-flex align-items-center bg-white rounded">
+                <div className="col-md-2 d-flex align-items-center bg-light rounded">
                   <button
                     type="button"
                     onClick={togglePasswordVisibility}
-                    className="border-0 bg-white rounded"
+                    className="border-0 bg-light rounded"
                   >
                     <Image
                       src={showPassword ? "/hide.svg" : "/show.svg"}

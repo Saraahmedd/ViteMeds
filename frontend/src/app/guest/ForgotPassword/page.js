@@ -53,28 +53,26 @@ function ForgotPasswordForm() {
   return (
     <>
       <Navbar />
-      
       <div className="container">
-
-{
-  success2 ? (
-    <Alert variant="success">
-      <strong>Success!</strong> Please check your inbox.
-    </Alert>
-    ) : error2 ? (
-      <Alert variant="danger">
-        <strong>Error!</strong> {error}.
-      </Alert>
-    ) : success ? (
-      <Alert variant="success">
-        <strong>Success!</strong> Password Reset successfully.
-      </Alert>
-    ) : error ? (
-      <Alert variant="danger">
-        <strong>Error!</strong> {error2}.
-      </Alert>
-    ) : <></> // Add a default case or use 'null' if there's nothing to render
-  }
+      {
+        success2 ? (
+          <Alert variant="success" dismissible className="px-2">
+            <strong>Success! </strong> Please check your inbox.
+          </Alert>
+          ) : error2 ? (
+            <Alert variant="danger" dismissible className="px-2">
+              <strong>Error! </strong> {error}.
+            </Alert>
+          ) : success ? (
+            <Alert variant="success" dismissible className="px-2">
+              <strong>Success! </strong> Password Reset successfully.
+            </Alert>
+          ) : error ? (
+            <Alert variant="danger" dismissible className="px-2">
+              <strong>Error! </strong> {error2}.
+            </Alert>
+          ) : <></> // Add a default case or use 'null' if there's nothing to render
+        }
         <div className="row gradient-background m-5 rounded shadow mx-auto">
           <div className="col-md-4 mx-auto m-5 p-5">
             <h1 className="text-bold text-light rounded">XPharmacy</h1>
@@ -82,7 +80,7 @@ function ForgotPasswordForm() {
               Convenient pharmacy at your fingertips...
             </h2>
           </div>
-          <div className="col-md-5 bg-light mx-auto rounded shadow m-5">
+          <div className="col-md-5 bg-light mx-auto rounded shadow m-5 h-60 my-auto">
             <div className="text-center mt-5">
               <h1 className="text-primary fw-bold mb-2">Forgot Password</h1>
               <div className="underline-sm mx-auto"></div>
@@ -133,9 +131,8 @@ function ForgotPasswordForm() {
                     />
                   </div>
                   </>
-                
-              )}
-              <div className="text-center pb-3">
+                )}
+              <div className="text-center pb-3 mt-auto">
                 <Button text="Submit" onClick={handleForgotPassword} />
               </div>
             </div>

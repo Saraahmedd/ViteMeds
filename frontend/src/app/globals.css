@@ -15,7 +15,7 @@
   height: 200px;
   width: 150px;
   position: relative;
-  background-color: #3498db; /* Set your desired background color */
+  background-color: #0467a8; /* Set your desired background color */
   padding: 20px; /* Adjust padding as needed */
   color: #fff; /* Set text color */
   overflow: hidden; /* Hide the overflowing parts of the diamond */
@@ -80,7 +80,7 @@
     #007bff
   ); /* Replace #007bff with your Bootstrap primary color */
   width: 90%;
-  height: 450px; /* Set the height as needed */
+  height: 500px; /* Set the height as needed */
 }
 
 .underline-Bold {
