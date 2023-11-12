@@ -5,30 +5,36 @@ import Modal from 'react-bootstrap/Modal';
 import { useDispatch } from 'react-redux';
 
 function AddModal(props) {
+
   const [file,setFile] = useState({})
  
-  const { onHide, onFileChange, medicine, edit } = props;
-  console.log(medicine)
-  const [reqbody, setReqbody] = useState(edit === false && !medicine?{
-    name: '',
-    quantity: '',
-    medicinalUses: [],
-    description: '',
-    image: null,
-    price: "",
-    medicineIngredients: [],
-  }: 
-  {
-  name: medicine?.name,
-  quantity: medicine?.quantity,
-  medicinalUses: medicine?.medicinalUses,
-  description: medicine?.description,
-  price: medicine?.price,
-  medicineIngredients: medicine?.medicineIngredients,
-}
+const { onHide, onFileChange, medicine, edit,reqbody,setReqbody,show,show2} = props;
+  useEffect(() => {
+    if (show || show2) {
+      setReqbody(
+        edit === false && !medicine
+          ? {
+              name: '',
+              quantity: '',
+              medicinalUses: [],
+              description: '',
+              image: null,
+              price: '',
+              medicineIngredients: [],
+            }
+          : {
+              name: medicine?.name,
+              quantity: medicine?.quantity,
+              medicinalUses: medicine?.medicinalUses,
+              description: medicine?.description,
+              price: medicine?.price,
+              medicineIngredients: medicine?.medicineIngredients,
+            }
+      );
+    }
+  }, [show, show2, edit, medicine]);
   
-  );
-
+console.log(reqbody);
   const handleFileUpload = (e) => {
     setFile(e.target.files[0]);
   };
@@ -63,6 +69,7 @@ function AddModal(props) {
   
 
   const handleAddMedicine = () => {
+
     const combinedFormData = new FormData();
     for (const key in reqbody) {
       if (reqbody.hasOwnProperty(key)) {
@@ -75,15 +82,20 @@ function AddModal(props) {
       dispatch(editMedicine(medicine?._id,combinedFormData))
     else
      dispatch(addMedicine(combinedFormData));
-    onHide(); // Close the modal after dispatching the addMedicine action
+
+    setReqbody("")
+    onHide();
+     // Close the modal after dispatching the addMedicine action
   };
 
   return (
     <Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">Add Medicine</Modal.Title>
+        {!edit && <Modal.Title id="contained-modal-title-vcenter">Add Medicine</Modal.Title>}
+        {edit && <Modal.Title id="contained-modal-title-vcenter">Edit Medicine</Modal.Title>}
       </Modal.Header>
       <Modal.Body>
+        
         <h3>Name</h3>
         <p>
           <input
@@ -92,8 +104,10 @@ function AddModal(props) {
             className="search-input"
             value={reqbody?.name}
             onChange={(e) => handleInputChange(e, 'name')}
+            disabled={edit}
           />
         </p>
+      
         <h3>Quantity</h3>
         <p>
           <input
@@ -111,13 +125,16 @@ function AddModal(props) {
             placeholder="Medicinal use"
             className="search-input"
             value={reqbody?.medicinalUses}
-            onChange={(e) => handleInputChange(e, 'medicinalUses')}
+            onChange={(e) => handleInputChange(e, 'medicinalUses')
+          }
+          disabled={edit}
           />
         </p>
         <h3>Ingredients</h3>
         <p>
           <input
             type="text"
+          
             placeholder="Description"
             className="search-input"
             value={reqbody?.medicineIngredients}
@@ -128,6 +145,7 @@ function AddModal(props) {
         <p>
           <input
             type="text"
+            disabled={edit}
             placeholder="Description"
             className="search-input"
             value={reqbody?.description}
@@ -138,6 +156,7 @@ function AddModal(props) {
         <p>
           <input
             type="number"
+
             placeholder="Price"
             className="search-input"
             value={reqbody?.price}
@@ -158,7 +177,7 @@ function AddModal(props) {
           </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button text= {edit ? "edit" :"Add"} className="desc-button" onClick={handleAddMedicine} />
+        <Button text= {edit ? "Edit" :"Add"} className="desc-button" onClick={handleAddMedicine} />
       </Modal.Footer>
     </Modal>
   );

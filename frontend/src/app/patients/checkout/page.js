@@ -212,6 +212,9 @@ const Checkout = () => {
               paymentMethod : selectedPaymentMethod,
                 deliveryAddress: shippingInfo
              }))
+            
+             
+
         }}
         />
       )}

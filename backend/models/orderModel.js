@@ -66,7 +66,9 @@ const orderSchema = new mongoose.Schema({
 });
 
 orderSchema.post('save', async function (doc) {
-  if (this.isNew) { // Check if the order is newly created
+    
+  if (doc.status === 'Pending') { // Check if the order is newly created
+    
     for (const orderItem of doc.medicines) {
       const medicine = await Medicine.findById(orderItem.medicine);
 
@@ -76,6 +78,16 @@ orderSchema.post('save', async function (doc) {
         await medicine.save();
       }
     }
+  }else{
+    for (const orderItem of doc.medicines) {
+        const medicine = await Medicine.findById(orderItem.medicine);
+  
+        if (medicine) {
+          medicine.quantity += orderItem.quantity;
+          medicine.sales -= orderItem.quantity;
+          await medicine.save();
+        }
+      }
   }
 });
 

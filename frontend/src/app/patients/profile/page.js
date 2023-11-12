@@ -32,7 +32,7 @@ const PatientDashboard = () => {
   const patient = useSelector(state => state.viewMyDetailsReducer.patient?.patient);
   const loading = useSelector(state => state.cancelOrderReducer.loading);
   const orders = useSelector(state => state.viewOrderListReducer.orders)
-
+  const addAddressloading = useSelector(state => state.addAddressesReducer.loading);
   console.log(orders)
   // console.log()
  
@@ -41,7 +41,7 @@ const PatientDashboard = () => {
   dispatch(viewOrderList());
   
   }
-    ,[dispatch,loading]
+    ,[dispatch,loading,addAddressloading]
   )
  
   
@@ -62,7 +62,7 @@ const PatientDashboard = () => {
 
   const handleAddAddress = () => {
     dispatch(addAddressesAction(newAddress));
-    if (success) handleClose();
+     handleClose();
   };
 
   return (
