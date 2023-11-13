@@ -119,7 +119,7 @@ const isLoading = useSelector(
         <>
           <Button
             text="Add Product"
-            className="add-button m-3 mb-4"
+            className="add-button mx-5 mb-4 "
             onClick={() => setModalAddShow(true)}
           />
 
@@ -129,12 +129,12 @@ const isLoading = useSelector(
           />
         </>
       )}
-      <div className="container-fluid ">
-        <div className="row mx-4">
+      <div className="container mx-auto">
+        <div className="row mx-auto">
           {medicines?.map((medicine) => (
             <Card
               key={medicine._id}
-              className="col-lg-3 offset-lg-1 my-3 bg-light mx-5 shadow"
+              className="col-lg-3 offset-lg-1 my-3 bg-light mx-3 p-3 shadow"
               title={
                 <div className="text-capitalize p-3 text-center">
                   {medicine.name}
@@ -149,11 +149,7 @@ const isLoading = useSelector(
                   <div className="row global-text">
                     <div className="mx-auto">
                       <img
-                        src={
-                          medicine.imageURL
-                            ? "http://localhost:8000/" + medicine.imageURL
-                            : "/medication.svg"
-                        }
+                        src={medicine.imageURL? "http://localhost:8000/" + medicine.imageURL: "/medication.svg"}
                         alt="Image"
                         style={{ maxHeight: "200px", maxWidth: "160px" }}
                       />
