@@ -102,6 +102,9 @@ exports.signup = catchAsync(async (req, res, next) => {
         const currentUser = await User.findById(decoded.id);
         
         if(!currentUser || currentUser.role !==  enums.ROLE.ADMIN) return next(err)
+        var emailValidator = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if(!emailValidator.test(req.body.username)) return next(new AppError('For an administrator, the username must be an email address',400))
+
     } 
 
     const newUser = await User.create({
@@ -247,13 +250,17 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 exports.forgotPassword = catchAsync(async (req, res, next) => {
   // 1) Get user based on POSTed email
   let user;
-  let toBePassed =  await Patient.findOne({email: req.body.email})  || await Pharmacist.findOne({email: req.body.email}) 
+  let toBePassed =  await Patient.findOne({email: req.body.email})  || await Pharmacist.findOne({email: req.body.email});
  
-   user = await User.findOne({ _id: toBePassed.user });
+   user = await User.findOne({ _id: toBePassed?.user });
    
   
   if (!user) {
-    return next(new AppError('There is no user with email address.', 404));
+    user = await User.findOne({username: req.body.email});
+    toBePassed = {...user, email: req.body.email, name: req.body.name};
+    if(!user) {
+        return next(new AppError('There is no user with email address.', 404));
+    }
   }
 
   // 2) Generate the random reset token
@@ -290,9 +297,9 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   
   const user2 = await Patient.findOne({email: req.body.email})  || await Pharmacist.findOne({email: req.body.email}) 
   console.log(user2)
-  const user = await User.findOne({
+  let user = await User.findOne({
     OTP: req.body.OTP,
-    _id: user2.user,
+    _id: user2?.user,
     passwordResetExpires: { $gt: Date.now() }
   });
   console.log(req.body.OTP)
@@ -300,6 +307,8 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   // 2) If token has not expired, and there is user, set the new password
   if (!user) {
+    user = await User.findOne({username: req.body.email});
+    if(!user)
     return next(new AppError('Token is invalid or has expired', 400));
   }
   user.password = req.body.password;

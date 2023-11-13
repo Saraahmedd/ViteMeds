@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     required: true,
   },
+  // email : string,
   role: {
     type: String,
     enum: ["patient", "administrator", "pharmacist"],
