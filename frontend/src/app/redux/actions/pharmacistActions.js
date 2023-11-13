@@ -120,7 +120,8 @@ export const adminAcceptPharmacist = (pharmacistId,body) => async (dispatch) => 
   
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          
+          'Content-Type': 'application/zip',
         },
         responseType: 'stream',
         withCredentials: true,
@@ -130,13 +131,11 @@ export const adminAcceptPharmacist = (pharmacistId,body) => async (dispatch) => 
   
       const response = await axios.get(url, config);
   
-      const contentDisposition = response.headers['content-disposition'];
-      const fileName = contentDisposition
-        ? contentDisposition.replace(/attachment; filename=/, '')
-        : 'pharmacist_documents.zip';
+      const ContentDisposition = response.headers['content-disposition'];
+      const fileName = 'pharmacist_documents.zip';
   
-      const blob = new Blob([response.data], { type: 'application/zip' });
-  
+      const blob = new Blob ([response.data]);
+  console.log(blob)
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
       link.download = fileName;
