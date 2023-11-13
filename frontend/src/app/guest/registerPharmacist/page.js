@@ -53,29 +53,29 @@ const SignUp = () => {
 
   const handleSignUp = () => {
     const combinedFormData = new FormData();
-    combinedFormData.append('username', formData.username);
-    combinedFormData.append('name', formData.name);
-    combinedFormData.append('email', formData.email);
-    combinedFormData.append('password', formData.password);
-    combinedFormData.append('passwordConfirm', formData.password);
-    combinedFormData.append('dateOfBirth', formData.dateOfbirth);
-    combinedFormData.append('gender', formData.gender);
-    combinedFormData.append('phoneNumber', formData.phoneNumber);
-    combinedFormData.append('hourlyRate', formData.hourlyRate);
-    combinedFormData.append('educationalBackground', formData.educationalBackground);
-    combinedFormData.append('role', 'pharmacist');
-    combinedFormData.append('affiliation', formData.affiliation);
-    combinedFormData.append('workingHours', formData.workingHours);
-    combinedFormData.append('documents',files.document1);
-    combinedFormData.append('documents',files.document2);
-    combinedFormData.append('documents',files.document3);
-
-// Assuming files is an object where each property represents a file
-    
-    dispatch(
-      registerAction(combinedFormData)
-     
+    combinedFormData.append("username", formData.username);
+    combinedFormData.append("name", formData.name);
+    combinedFormData.append("email", formData.email);
+    combinedFormData.append("password", formData.password);
+    combinedFormData.append("passwordConfirm", formData.password);
+    combinedFormData.append("dateOfBirth", formData.dateOfbirth);
+    combinedFormData.append("gender", formData.gender);
+    combinedFormData.append("phoneNumber", formData.phoneNumber);
+    combinedFormData.append("hourlyRate", formData.hourlyRate);
+    combinedFormData.append(
+      "educationalBackground",
+      formData.educationalBackground
     );
+    combinedFormData.append("role", "pharmacist");
+    combinedFormData.append("affiliation", formData.affiliation);
+    combinedFormData.append("workingHours", formData.workingHours);
+    combinedFormData.append("documents", files.document1);
+    combinedFormData.append("documents", files.document2);
+    combinedFormData.append("documents", files.document3);
+
+    // Assuming files is an object where each property represents a file
+
+    dispatch(registerAction(combinedFormData));
     // window.alert("Application submitted")
   };
   const [showPassword, setShowPassword] = useState(false);
@@ -92,7 +92,7 @@ const SignUp = () => {
       ...prevFiles,
       [documentKey]: file,
     }));
-    console.log(files)
+    console.log(documentKey, files);
   };
 
   return (
@@ -343,44 +343,68 @@ const SignUp = () => {
                 </div>
 
                 <div className="mb-3">
-              <label className="text-semibold form-label">
-                Required Documents
-              </label>
-              <div className="row">
-                {/* Document 1 */}
-                <div className="col-md-4 mb-2">
-                  <label htmlFor="document1" className="d-flex align-items-center justify-content-between form-label">
-                    National ID
-                    <span className="btn btn-outline-primary btn-sm">
-                      <i className="bi bi-cloud-upload"></i> Upload
-                      <input type="file" id="document1" className="d-none" onChange={(e) => handleFileUpload(e, 'document1')} />
-                    </span>
+                  <label className="text-semibold form-label">
+                    Required Documents
                   </label>
-                </div>
+                  <div className="row">
+                    {/* Document 1 */}
+                    <div className="col-md-4 mb-2">
+                      <label
+                        htmlFor="document1"
+                        className="d-flex align-items-center justify-content-between form-label"
+                      >
+                        National ID
+                        <span className="btn btn-outline-primary btn-sm">
+                          <i className="bi bi-cloud-upload"></i> Upload
+                          <input
+                            type="file"
+                            id="document1"
+                            className="d-none"
+                            onChange={(e) => handleFileUpload(e, "document1")}
+                          />
+                        </span>
+                      </label>
+                    </div>
 
-                {/* Document 2 */}
-                <div className="col-md-4 mb-2">
-                  <label htmlFor="document2" className="d-flex align-items-center justify-content-between form-label">
-                    Pharmacacy Degree
-                    <span className="btn btn-outline-primary btn-sm">
-                      <i className="bi bi-cloud-upload"></i> Upload
-                      <input type="file" id="document2" className="d-none" onChange={(e) => handleFileUpload(e, 'document2')}/>
-                    </span>
-                  </label>
-                </div>
+                    {/* Document 2 */}
+                    <div className="col-md-4 mb-2">
+                      <label
+                        htmlFor="document2"
+                        className="d-flex align-items-center justify-content-between form-label"
+                      >
+                        Pharmacy Degree
+                        <span className="btn btn-outline-primary btn-sm">
+                          <i className="bi bi-cloud-upload"></i> Upload
+                          <input
+                            type="file"
+                            id="document2"
+                            className="d-none"
+                            onChange={(e) => handleFileUpload(e, "document2")}
+                          />
+                        </span>
+                      </label>
+                    </div>
 
-                {/* Document 3 */}
-                <div className="col-md-4 mb-2">
-                  <label htmlFor="document3" className="d-flex align-items-center justify-content-between form-label">
-                    Working Liscense
-                    <span className="btn btn-outline-primary btn-sm">
-                      <i className="bi bi-cloud-upload"></i> Upload
-                      <input type="file" id="document3" className="d-none" onChange={(e) => handleFileUpload(e, 'document3')} />
-                    </span>
-                  </label>
+                    {/* Document 3 */}
+                    <div className="col-md-4 mb-2">
+                      <label
+                        htmlFor="document3"
+                        className="d-flex align-items-center justify-content-between form-label"
+                      >
+                        Working Liscense
+                        <span className="btn btn-outline-primary btn-sm">
+                          <i className="bi bi-cloud-upload"></i> Upload
+                          <input
+                            type="file"
+                            id="document3"
+                            className="d-none"
+                            onChange={(e) => handleFileUpload(e, "document3")}
+                          />
+                        </span>
+                      </label>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
               </div>
             </div>
             <div className="text-center">
