@@ -105,7 +105,7 @@ function LoginForm() {
                   </button>
                 </div>
               </div>
-              <a href ="http://localhost:3000/guest/ForgotPassword">
+              <a href ="http://localhost:3000/guest/forgotPassword">
                 Forgot Password 
               </a>
               <div className="text-center pb-3">

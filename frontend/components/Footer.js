@@ -26,7 +26,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="/pharmacists/Register" className="text-white text-decoration-none">
+                <a href="/guest/registerPharmacist" className="text-white text-decoration-none">
                 <div className="link-hover">
                     Careers
                 </div>

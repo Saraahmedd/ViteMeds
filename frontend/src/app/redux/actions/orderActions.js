@@ -151,6 +151,7 @@ export const makeOrderRequest = () => ({
         config
       );
       dispatch(makeOrderSuccess(data.data))
+      window.location.href = '/patients/profile'
     }
 
     } catch (error) {

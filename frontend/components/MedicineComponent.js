@@ -11,17 +11,23 @@ import AddModal from "./AddModal";
 import { getMedicinesAction } from "@/app/redux/actions/medicineActions";
 import { login } from "@/app/redux/actions/authActions";
 import { addToCart, viewCart } from "@/app/redux/actions/cartActions";
+import { addToCartReducer } from "@/app/redux/reducers/cartReducer";
 
 function MedicineComponent({ title, role }) {
   let isPharmacist;
   role == "pharmacist" ? (isPharmacist = true) : false;
+  let isAdmin;
+  role == "admin" ? (isAdmin = true) : false;
   const [modalAddShow, setModalAddShow] = useState(false);
   const [selectedMedicinalUse, setSelectedMedicinalUse] = useState(null);
   const [modalEditShow, setModalEditShow] = useState(false);
   const [selectedMedicine, setSelectedMedicine] = useState(null);
   const [name, setName] = useState({});
+  const [reqbody, setReqbody] = useState("");
   const dispatch = useDispatch();
-
+const isLoading = useSelector(
+  (state) => state.addToCartReducer.loading
+);
   const medicines = useSelector(
     (state) => state.getMedicinesReducer.medicines?.data
   );
@@ -32,7 +38,13 @@ function MedicineComponent({ title, role }) {
   const cart = useSelector(
     (state) => state.getCartReducer.cart
   );
-
+ 
+  const addMedicineLoading = useSelector(
+    (state) => state.addMedicineReducer.loading
+  );
+  const editMedicineLoading = useSelector(
+    (state) => state.editMedicineReducer.loading
+  );
   const handleCardClick = (medicine) => {
     setSelectedMedicine(medicine);
     setModalEditShow(true);
@@ -58,12 +70,12 @@ function MedicineComponent({ title, role }) {
 
   useEffect(() => {
     dispatch(getMedicinesAction({ ...name, ...medUse }));
-  }, [dispatch, name, medUse]);
+  }, [dispatch, name, medUse,addMedicineLoading,editMedicineLoading]);
 
   useEffect(() => {
     dispatch(viewCart());
     console.log("cart changed");
-  }, [dispatch]);
+  }, [dispatch,isLoading]);
 
   return (
     <div className="m-5">
@@ -107,53 +119,68 @@ function MedicineComponent({ title, role }) {
         <>
           <Button
             text="Add Product"
-            className="add-button m-3 mb-4"
+            className="add-button mx-5 mb-4 "
             onClick={() => setModalAddShow(true)}
           />
 
-          <AddModal show={modalAddShow} onHide={() => setModalAddShow(false)} edit={false} />
+          <AddModal show2={modalEditShow} show={modalAddShow} onHide={() => {setModalAddShow(false);
+          setSelectedMedicine(null);
+          setReqbody("");}} edit={false} reqbody={reqbody} setReqbody={setReqbody}
+          />
         </>
       )}
-      <div className="container-fluid ">
-        <div className="row mx-4">
+      <div className="container mx-auto">
+        <div className="row mx-auto">
           {medicines?.map((medicine) => (
             <Card
               key={medicine._id}
-              className="col-lg-2 offset-lg-1 my-3 bg-light mx-5 shadow"
+              className="col-lg-3 offset-lg-1 my-3 bg-light mx-3 p-3 shadow"
               title={
                 <div className="text-capitalize p-3 text-center">
                   {medicine.name}
                 </div>
               }
               subtitle={<></>}
-              onClick={() => handleCardClick(medicine)}
+              onClick={() => {if(isPharmacist)
+                handleCardClick(medicine)
+              else false}}
               text={
                 <div className="">
                   <div className="row global-text">
                     <div className="mx-auto">
                       <img
-                        src={
-                          medicine.imageURL
-                            ? "http://localhost:8000/" + medicine.imageURL
-                            : "/medication.svg"
-                        }
+                        src={medicine.imageURL? "http://localhost:8000/" + medicine.imageURL: "/medication.svg"}
                         alt="Image"
                         style={{ maxHeight: "200px", maxWidth: "160px" }}
                       />
                     </div>
-                    <div className="text-capitalize fw-bold  pt-4 text-center">
+                    <div className="text-capitalize fw-bold  pt-3 text-center">
                       Price: {medicine.price}
                     </div>
+                    <div className="text-capitalize fw-bold  pt-3 text-center">
+                      Description: {medicine.description}
+                    </div>
+                    {isPharmacist && <div className="text-capitalize fw-bold  pt-3 text-center">
+                      Quantity: {medicine.quantity}
+                    </div>}
+                    {isPharmacist && <div className="text-capitalize fw-bold  pt-3 text-center">
+                      Sales: {medicine.sales}
+                    </div>}
                   </div>
+                  <hr />
                 </div>
               }
-              buttonText={cart ? getMedicineText(medicine) : "Add to Cart"}
-              onClickButton={(e) => handleCartClick(e, medicine)}
+              buttonText={isAdmin ? false :isPharmacist ? "Edit" : cart ? getMedicineText(medicine) : "Add to Cart"}
+              onClickButton={(e) => { if(!isPharmacist && !isAdmin) handleCartClick(e, medicine)
+              else if(isPharmacist) handleCardClick(medicine)}}  buttonClass="col-md-12 mx-auto row"
             />
           ))}
 
           {selectedMedicine && (
-            <AddModal show={modalEditShow} onHide={() => setModalEditShow(false)} edit={true} medicine={selectedMedicine} />
+            <AddModal show={modalEditShow} show2={modalAddShow} onHide={() => {setModalEditShow(false);
+              setReqbody("");
+            setSelectedMedicine(null);
+          }} edit={true} medicine={selectedMedicine} reqbody={reqbody} setReqbody={setReqbody}/>
           )
           }
         </div>

@@ -44,7 +44,7 @@ const Navbar = () => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/pharmacists/Register">Careers</a>
+              <a className="nav-link" href="/guest/registerPharmacist">Careers</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/policy">
@@ -52,12 +52,12 @@ const Navbar = () => {
               </a>
             </li>
             <li className="nav-item ">
-              <a className="btn btn-light text-primary ms-3 mx-1" href="/guest/Login">
+              <a className="btn btn-light text-primary ms-3 mx-1" href="/guest/login">
                 Login
               </a>
             </li>
             <li className="nav-item rounded">
-              <a className="btn btn-primary text-light mx-1" href="/guest/Register">
+              <a className="btn btn-primary text-light mx-1" href="/guest/register">
                 Sign Up
               </a>
             </li>

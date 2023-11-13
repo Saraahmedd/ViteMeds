@@ -28,7 +28,7 @@ const PatientNavbar = () => {
         <div className="title col-md-6">
           <div className="logo"></div>
           <h1>
-            <a className="navbar-brand" href="/patient/medicines">
+            <a className="navbar-brand" href="/patients/medicines">
               Home
             </a>
           </h1>
@@ -43,8 +43,13 @@ const PatientNavbar = () => {
         <div
           className={`links&buttons collapse navbar-collapse col-md-6 align-self-end ms-auto ${isMenuOpen ? 'show' : ''}`}>
           <ul className="navbar-nav ms-auto">
+          <li className="nav-item ms-2">
+              <a className="btn btn-primary" href="/patients/profile">
+                Profile
+              </a>
+            </li>
 
-            <li className="nav-item ms-auto">
+            <li className="nav-item ms-2">
               <a className="btn btn-primary" href="/patients/medicines/cart">
                 My Cart
               </a>
@@ -52,7 +57,7 @@ const PatientNavbar = () => {
 
 
             <li className="nav-item ms-2">
-              <a onClick={handleLogout} className="btn btn-primary" href="/guest/Login">
+              <a onClick={handleLogout} className="btn btn-primary" href="/guest/login">
                 Logout
               </a>
             </li>

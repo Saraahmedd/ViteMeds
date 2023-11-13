@@ -65,7 +65,7 @@ exports.getOne = (Model, popOptions) =>
         });
     });
 
-exports.getAll = (Model, excludedFields = '') =>
+exports.getAll = (Model, excludedFields = '',popOptions='') =>
   catchAsync(async (req, res, next) => {
     let filter = {};
     // if (req.params.tourId) filter = { tour: req.params.tourId };
@@ -77,7 +77,7 @@ exports.getAll = (Model, excludedFields = '') =>
       .paginate();
     
     // Apply field exclusion using .select()
-    features.query = features.query.select(`${excludedFields}`);
+    features.query = features.query.select(`${excludedFields}`).populate(popOptions);
 
     const doc = await features.query;
 
