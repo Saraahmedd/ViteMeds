@@ -123,7 +123,7 @@ export const adminAcceptPharmacist = (pharmacistId,body) => async (dispatch) => 
           
           'Content-Type': 'application/zip',
         },
-        responseType: 'stream',
+        responseType: 'blob',
         withCredentials: true,
       };
   
