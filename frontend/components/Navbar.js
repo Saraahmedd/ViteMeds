@@ -44,7 +44,7 @@ const Navbar = () => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/pharmacists/Register">Careers</a>
+              <a className="nav-link" href="/guest/registerPharmacist">Careers</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/policy">
