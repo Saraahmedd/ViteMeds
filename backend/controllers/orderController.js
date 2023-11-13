@@ -5,7 +5,6 @@ const Order = require('../models/orderModel')
 const User = require('../models/userModel');
 const Cart = require('../models/cartModel')
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const getRawBody = require('raw-body')
 
 
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
