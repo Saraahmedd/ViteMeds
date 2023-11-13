@@ -134,7 +134,7 @@ const isLoading = useSelector(
           {medicines?.map((medicine) => (
             <Card
               key={medicine._id}
-              className="col-lg-2 offset-lg-1 my-3 bg-light mx-5 shadow"
+              className="col-lg-3 offset-lg-1 my-3 bg-light mx-5 shadow"
               title={
                 <div className="text-capitalize p-3 text-center">
                   {medicine.name}
@@ -171,15 +171,12 @@ const isLoading = useSelector(
                       Sales: {medicine.sales}
                     </div>}
                   </div>
+                  <hr />
                 </div>
               }
               buttonText={isAdmin ? false :isPharmacist ? "Edit" : cart ? getMedicineText(medicine) : "Add to Cart"}
-              onClickButton={(e) => { if(!isPharmacist && !isAdmin)
-                handleCartClick(e, medicine)
-              else if(isPharmacist)
-              handleCardClick(medicine)
-            }
-              }
+              onClickButton={(e) => { if(!isPharmacist && !isAdmin) handleCartClick(e, medicine)
+              else if(isPharmacist) handleCardClick(medicine)}}  buttonClass="col-md-12 mx-auto row"
             />
           ))}
 
