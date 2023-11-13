@@ -4,7 +4,7 @@ import { Button } from '../../../../components/Button';
 import { Card } from '../../../../components/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeUser } from '@/app/redux/actions/userActions';
-import { getPharmacists,adminAcceptPharmacist } from '@/app/redux/actions/pharmacistActions';
+import { getPharmacists,adminAcceptPharmacist, downloadPharmacistDocs } from '@/app/redux/actions/pharmacistActions';
 import Image from 'next/image';
 
 
@@ -30,7 +30,9 @@ export default function DoctorApps() {
   const onApproveHandler = (id)=>{
     dispatch(adminAcceptPharmacist(id))
   }
-    
+    const onViewFiles = (pharmId)=>{
+dispatch(downloadPharmacistDocs(pharmId))
+    }
   function formatDateToDDMMYYYY(isoDate) {
     const date = new Date(isoDate);      
     const day = date.getDate().toString().padStart(2, '0');
@@ -54,6 +56,7 @@ export default function DoctorApps() {
        {/* {button} */}
        <div className="p-3">
        <div className="row global-text">
+       <Button text='View Files' variant='xs' onClick={()=>{onViewFiles(person._id)}}></Button>
             <div>
             <Image src='/mail-dark.svg' height={20} width={20} className="me-2"/> {person.email}
             </div>
@@ -82,7 +85,7 @@ export default function DoctorApps() {
           <br />
           </div>
           <Button text='Approve' variant='xs' onClick={()=>{onApproveHandler(person._id)}}></Button>
-  <Button text='Reject' variant='xs' onClick={()=>{onRemoveHandler(person.user?._id)}}></Button>
+          <Button text='Reject' variant='xs' onClick={()=>{onRemoveHandler(person.user?._id)}}></Button>
         </Card>
 
         </div>

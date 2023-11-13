@@ -19,9 +19,10 @@ exports.getPharmacistsDoc = catchAsync(async(req,res,next)=> {
         zlib: { level: 9 }, 
       });
 
+      res.setHeader('Content-Type', 'application/zip');
       res.attachment('pharmacist_documents.zip');
       archive.pipe(res);
-
+      //console.log(res.headers);
       pharmacist.documents.forEach((document) => {
         archive.file(document, { name: path.basename(document) });
       });
