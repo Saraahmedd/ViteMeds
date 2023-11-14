@@ -52,12 +52,12 @@ const Navbar = () => {
               </a>
             </li>
             <li className="nav-item ">
-              <a className="btn btn-light text-primary ms-3 mx-1" href="/guest/login">
+              <a className="btn btn-light text-primary ms-3 mx-1" href="/guest/Login">
                 Login
               </a>
             </li>
             <li className="nav-item rounded">
-              <a className="btn btn-primary text-light mx-1" href="/guest/register">
+              <a className="btn btn-primary text-light mx-1" href="/guest/Register">
                 Sign Up
               </a>
             </li>
