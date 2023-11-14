@@ -1,15 +1,13 @@
 "use client"
 import React, { useEffect } from 'react';
-
 import { Card } from '../../../../components/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { viewPatients } from '@/app/redux/actions/patientActions';
 import { removeUser } from '@/app/redux/actions/userActions';
 // import { Button } from '../../../../components/Button';
-import Button from 'react-bootstrap';
 // import Table from '../../../../components/Table';
-import { Table } from 'react-bootstrap';
-import Image from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
+import {Image} from 'react-bootstrap';
 
 
 
@@ -26,34 +24,29 @@ export default function Patients() {
   },[dispatch,isLoading])
 
   const onRemoveHandler = (id)=>{
+    console.log(id)
     dispatch(removeUser(id))
   }
 
   const generateButton = (id) => {
     return (
-      <div style={{ fontSize: '1px' }}>
         <Button variant='xs' className="btn btn-light rounded-circle" onClick={()=>onRemoveHandler(id)}>
           <Image src='/delete.svg' height={20} width={20} className="rounded-circle"/>
         </Button>
-      </div>
     );
   };
 
-  console.log(patients)
-
   let tabledata = patients?.data?.map(item => {
-    const { emergencyContact ,_id ,user ,...rest } = item;
+    const { emergencyContact ,user ,...rest } = item;
     rest.dateOfBirth = formatDateToDDMMYYYY(rest.dateOfBirth)
-    rest.username = item.user.username
-    rest.emergencyContactName = item.emergencyContact.fullName
-    rest.emergencyContactNumber = item.emergencyContact.mobileNumber
-    rest.emergencyContactRelation = item.emergencyContact.relationToPatient
-    rest.button = generateButton(user?._id)
+    rest.username = item?.user.username
+    rest.emergencyContactName = emergencyContact.fullName
+    rest.emergencyContactNumber = emergencyContact.mobileNumber
+    rest.emergencyContactRelation = emergencyContact.relationToPatient
+    rest.button = generateButton(user._id)
     return rest;
   })
 
-  console.log(tabledata)
-  console.log(tableHeaders)
 
   function formatDateToDDMMYYYY(isoDate) {
     const date = new Date(isoDate);
@@ -71,31 +64,7 @@ export default function Patients() {
     <div className='underline-Bold mx-auto mb-5'></div>
     <div className="justify-content-center align-items-center min-vh-100">
       <div className='row mx-auto'>
-      {/* {patients?.data?.map((person)=>{
-        return <Card key={person.user?._id} className="col-md-4 offset-md-1 m-5" title={person.name} subtitle="Patient's Info"  text={
-          <div className="">
-          <h8 style={{ fontWeight: 'bold' }}> Username: </h8>{person.user?.username}
-          <br />
-          <h8 style={{ fontWeight: 'bold' }}>email: </h8>{person.email}
-          <br />
-          <h8 style={{ fontWeight: 'bold' }}>Birth Date: </h8>{person.dateOfBirth}
-          <br />
-          <h8 style={{ fontWeight: 'bold' }}>Mobile number: </h8>{person.mobileNumber}
-          <br />
-          <h8 style={{ fontWeight: 'bold' }}>Gender: </h8>{person.gender}
-          <br />
-          <h8 style={{ fontWeight: 'bold' }}>Emergency Contact: </h8>{person.emergencyContact.fullName}
-          <br />
-          <h8 style={{ fontWeight: 'bold' }}>Emergency Number: </h8>{person.emergencyContact.mobileNumber}
-          <br />
-          <h8 style={{ fontWeight: 'bold' }}>Emergency Contact Relation: </h8>{person.emergencyContact.relationToPatient}
-          <br />
-          
-          <br />
-          </div>
-        } buttonText='Remove' onClickButton={()=>{onRemoveHandler(person.user._id)}}>
-        </Card>})} */}
-        <Table striped bordered hover>
+        <Table striped bordered hover className='table table-striped table-bordered table-hover m-3' >
             <thead>
               <tr>
                 {tableHeaders.map((header, index) => (
@@ -115,12 +84,11 @@ export default function Patients() {
                     <td>{rowData.emergencyContactName}</td>
                     <td>{rowData.emergencyContactNumber}</td>
                     <td>{rowData.emergencyContactRelation}</td>
-                    {/* <td>{rowData.button}</td> */}
+                    <td>{rowData.button}</td>
                 </tr>
               ))}
             </tbody>
           </Table>
-          {/* <Table headers={tableHeaders} data={tabledata} className="" /> */}
        </div>
     </div>
     </>
