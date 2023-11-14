@@ -84,8 +84,10 @@ dispatch(downloadPharmacistDocs(pharmId))
           <h8 style={{ fontWeight: 'bold' }}>educationalBackground: </h8>{person.educationalBackground}
           <br />
           </div>
-          <Button text='Approve' variant='xs' onClick={()=>{onApproveHandler(person._id)}}></Button>
-          <Button text='Reject' variant='xs' onClick={()=>{onRemoveHandler(person.user?._id)}}></Button>
+          <div className="row">
+            <Button color='dark' text='Reject' variant='xs' onClick={()=>{onRemoveHandler(person.user?._id)}} className='col-md-4 mx-auto'></Button>
+            <Button color='primary' text='Approve' variant='xs' onClick={()=>{onApproveHandler(person._id)}} className='col-md-4 mx-auto'></Button>
+          </div>
         </Card>
 
         </div>
