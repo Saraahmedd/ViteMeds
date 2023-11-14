@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
+import { logoutAction } from '@/app/redux/actions/authActions';
 
 const PatientNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
