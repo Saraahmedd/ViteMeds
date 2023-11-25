@@ -41,10 +41,26 @@ exports.addToCart = catchAsync(async (req, res, next) => {
     }
   
     const itemIndex = cart.items.findIndex(item => item.medicine.equals(medicineId));
+    let resp;
     if (itemIndex > -1) {
       cart.items[itemIndex].quantity += quantity;
     } else {
-      cart.items.push({ medicine: medicineId, quantity });
+      if(medicine.prescription) {
+        const config = {
+          headers: {
+              'Content-Type': 'application/json',
+          },
+      };
+         resp = await axios.post("http://localhost:8000/api/v1/prescriptions/check",{email: req.body.email },config)
+        
+      }
+      if(resp.statusCode === 200) {
+          cart.items.push({ medicine: medicineId, quantity });
+      }
+      else {
+        return next(new AppError('Action not allowed', 400));
+      }
+
     }
   
     await cart.save();

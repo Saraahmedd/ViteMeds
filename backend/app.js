@@ -106,4 +106,36 @@ app.all('*', (req, res, next) => {
 
 app.use(globalErrorHandler);
 
+//Scheduler for salaries
+
+const schedule = require('node-schedule');
+const User = require('./models/userModel.js')
+const Pharmacist = require('./models/pharmacistModel.js')
+
+// Define a function to update wallet with salary
+const updateWalletWithSalary = async () => {
+  try {
+      const users = await User.find();
+      for (const user of users) {
+        if(user.role === "pharmacist")
+        {
+          const p = await Pharmacist.findOne({user: user._id})
+          user.wallet += p.salary ? p.salary: 2000;
+          await user.save({validateBeforeSave: false});
+        }
+      }
+  } catch (error) {
+      console.error('Error updating wallets:', error);
+  }
+};
+
+updateWalletWithSalary()
+// Abdullah: This is a CRON expression to execute every first day of the month
+const job = schedule.scheduleJob('0 0 1 * *', updateWalletWithSalary);
+
+// You can handle errors or log success messages in the job callback
+job.on('run', () => {
+  console.log('Job ran successfully!');
+});
+
 module.exports = app;

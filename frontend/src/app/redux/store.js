@@ -8,6 +8,9 @@ import {getCartReducer, addToCartReducer, deleteFromCartReducer, updateCartReduc
 import { viewMyDetailsReducer } from './reducers/patientReducer';
 import { viewOrderDetailsReducer ,  viewOrderListReducer, cancelOrderReducer} from './reducers/orderReducer';
 import { addAddressesReducer } from './reducers/patientReducer';
+import {
+  getNotificationsReducer,updateNotificationReducer
+}from './reducers/notificationReducer'
 const store = configureStore({
   reducer: {
     loginReducer,
@@ -38,7 +41,9 @@ const store = configureStore({
     viewOrderDetailsReducer,
     viewOrderListReducer,
     cancelOrderReducer,
-    downloadPharmacistDocsReducer
+    downloadPharmacistDocsReducer,
+    getNotificationsReducer,
+    updateNotificationReducer
   },
 });
 
