@@ -1,5 +1,6 @@
 const Notification = require('../models/notifiicationModel');
 const handlerfactory = require("./handlerFactory");
+const catchAsync = require("../utils/catchAsync");
 
 exports.updateNotification = handlerfactory.updateOne(Notification)
 

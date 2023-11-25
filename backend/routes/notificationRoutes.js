@@ -5,3 +5,5 @@ const router = express.Router();
 
 router.patch('/:id', notificationController.updateNotification);
 router.get('/', notificationController.getNotifications);
+
+module.exports = router;
