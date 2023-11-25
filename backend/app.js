@@ -15,7 +15,18 @@ const path = require('path');
 dotenv.config({ path: './config.env' });
 
 // Start express app
+
 const app = express();
+const port = process.env.PORT || 3000;
+const server = app.listen(port, () => {
+    console.log(`Running on port ${port}`);
+});
+const socketIO = require('socket.io');
+const { initSocket } = require('./utils/socket');
+const io = socketIO(server);
+initSocket(io);
+
+
 const adminRouter = require('./routes/adminRoutes.js');
 const userRouter = require('./routes/userRoutes.js');
 const patientRouter = require('./routes/patientRoutes.js');
@@ -25,11 +36,19 @@ const orderRouter = require('./routes/orderRoutes.js');
 const orderController = require('./controllers/orderController');
 const cartrRouter = require('./routes/cartRoutes.js');
 const notificationRouter = require('./routes/notificationRoutes.js')
+const chatRoutes = require('./routes/chatRoutes');
+
 
 app.enable('trust proxy');
 
+const { getIO } = require('./utils/socket');
+
+// ... (other imports)
+
+
 
 // 1) GLOBAL MIDDLEWARES
+
 
 
 
@@ -39,6 +58,8 @@ var corsOptions = {
   optionsSuccessStatus: 200 
 }
 app.use(cors(corsOptions));
+
+// app.use(cors())
 
 // app.options('*', cors());
 
@@ -99,6 +120,7 @@ app.use('/api/v1/medicines', medicineRouter);
 app.use('/api/v1/order',orderRouter);
 app.use('/api/v1/cart', cartrRouter);
 app.use('/api/v1/notifications', notificationRouter);
+app.use('/api/v1/chat', chatRoutes);
 
 
 //404 Error , YOU MUST PUT YOUR ROUTERS ABOVE THAT COMMENT 
@@ -131,6 +153,8 @@ const updateWalletWithSalary = async () => {
   }
 };
 
+
+
 updateWalletWithSalary()
 // Abdullah: This is a CRON expression to execute every first day of the month
 const job = schedule.scheduleJob('0 0 1 * *', updateWalletWithSalary);
@@ -139,5 +163,25 @@ const job = schedule.scheduleJob('0 0 1 * *', updateWalletWithSalary);
 job.on('run', () => {
   console.log('Job ran successfully!');
 });
+
+
+
+
+
+process.on('unhandledRejection', err => {//handle unhandled errors like mongoDB authentication/promise erros etc..
+    console.log(err.name, err.message, err.stack);
+    console.log('Shutting down')
+    server.close(() => {
+        process.exit(1);
+    })
+});
+
+process.on('uncaughtException', err => {
+    console.log(err.name, err.message, err.stack);
+    console.log('Shutting down')
+    server.close(() => { 
+        process.exit(1);
+    })
+})
 
 module.exports = app;
