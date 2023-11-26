@@ -6,8 +6,10 @@ import { removeUser } from '../redux/actions/userActions';
 import { addMedicine, editMedicine, deleteMedicine, getMedicineById, getMedicinesAction } from '../redux/actions/medicineActions';
 import { viewPatients, viewPatient } from '../redux/actions/patientActions';
 import { getPharmacists, getPharmacist } from '../redux/actions/pharmacistActions';
-import { viewOrderDetails } from '../redux/actions/orderActions';// should be tested 
-import { getPharmacists, getPharmacist } from '../redux/actions/pharmacistActions'
+import { getFilteredOrders, viewOrderDetails } from '../redux/actions/orderActions';// should be tested 
+import { getMedicineAlternativeAction } from '../redux/actions/medicineActions';
+import { archiveMedicine } from '../redux/actions/medicineActions';
+import { getTotalSalesForMonth } from '../redux/actions/orderActions';
 import { 
   viewCart,
   addToCart,
@@ -18,9 +20,9 @@ import {
 const Testing = () => {
   const dispatch = useDispatch();
 
-  // const selector = useSelector(state => state.authReducer)
-  // const selector = useSelector(state => state.patientReducer)
-  const selector = useSelector(state => state.pharmacistReducer)
+   //const selector = useSelector(state => state.authReducer)
+  //const selector = useSelector(state => state.patientReducer)
+  //const selector = useSelector(state => state.pharmacistReducer)
   // const selector = useSelector(state => state.medicineReducer)
 
 
@@ -28,7 +30,7 @@ const Testing = () => {
   useEffect(() => {
 
   
-    // dispatch(login("tarekzeyad1", "Tarek1121"))
+    //dispatch(login("pharmacist2002", "Pharmacist2002"));
 
     //   name: {
     //     type: String,
@@ -89,7 +91,7 @@ const Testing = () => {
     //   "price": 100,
     // }))
     // dispatch(deleteMedicine("60f6b0c6f4d7b5b8e0f5b7f6"))
-    // dispatch(getMedicineById("60f6b0c6f4d7b5b8e0f5b7f6"))
+   // dispatch(getMedicineById("654ed163a814c42174d421aa"))
     // dispatch(getMedicinesAction({}))
     // dispatch(viewPatients())
     // dispatch(viewPatient("60f6b0c6f4d7b5b8e0f5b7f6"))
@@ -97,7 +99,15 @@ const Testing = () => {
     // dispatch(getPharmacists())
     // dispatch(getPharmacist("60f6b0c6f4d7b5b8e0f5b7f6"))
     // dispatch(viewCart())
-    dispatch(addToCart("6520a19fa6b64c072c82a380", 1))
+    //dispatch(getMedicineAlternativeAction("65626a3fe0c4e9589cba795c"));
+   // dispatch(archiveMedicine("65626d652cab777418812fee", "archived"));
+    //const targetMonth = 11;
+    //dispatch(getTotalSalesForMonth(targetMonth));
+    //console.log("hello");
+    //const targetMedicineId ="";
+    //const year=2023;
+    //dispatch(getFilteredOrders(targetMedicineId,year,targetMonth));
+    //dispatch(addToCart("6520a19fa6b64c072c82a380", 1))
     // dispatch(deleteFromCart("6520a19fa6b64c072c82a380"))
     // dispatch(updateCart("6520a19fa6b64c072c82a380", 1))
 

@@ -16,6 +16,18 @@ router.get('/',authController.protect,orderController.getMyOrders)
 
 router.route('/:id').patch(authController.protect,orderController.cancelOrder);
 
+router.route('/total-sales_month/:month').get(
+    //authController.restrictTo('pharmacist'),//add for administartor too
+    orderController.getTotalSalesForMonth
+)
+router.get('/allOrders',orderController.getAllOrders);
+router.get('/orderCount',orderController.getTotalOrderCount);
+router.get('/total-sales',orderController.getTotalSales);
+router.get('/profit',orderController.getOrderProfit);
+router.get('/profitPerMonth/:month',orderController.getOrderProfitForMonth);
+router.get('/expenses',orderController.getOrderExpenses);
+router.get('expensesPerMonth/:month',orderController.getOrderExpensesForMonth);
+router.get('/filtered-orders/:medicineId?/:year?/:month?/:day?/:time?', orderController.getFilteredOrders);
 module.exports = router;
 
 
