@@ -52,7 +52,7 @@ const Navbar = () => {
               </a>
             </li>
             <li className="nav-item ">
-              <a className="btn btn-light text-primary ms-3 mx-1" href="/guest/Login">
+              <a className="btn btn-light text-primary ms-3 mx-1" href="/guest/login">
                 Login
               </a>
             </li>
