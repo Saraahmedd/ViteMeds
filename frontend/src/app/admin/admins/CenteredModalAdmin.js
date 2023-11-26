@@ -21,7 +21,7 @@ function CenteredModalAdmin(props) {
     if (field === 'password') {
       setShowPassword(!showPassword);
     }
-    if (field === 'confirmpassword') {
+    if (field === 'confirmPassword') {
       setShowConfirmPassword(!showConfirmPassword);
     }
   };
