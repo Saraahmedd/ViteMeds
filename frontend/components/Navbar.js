@@ -57,7 +57,7 @@ const Navbar = () => {
               </a>
             </li>
             <li className="nav-item rounded">
-              <a className="btn btn-primary text-light mx-1" href="/guest/Register">
+              <a className="btn btn-primary text-light mx-1" href="/guest/register">
                 Sign Up
               </a>
             </li>
