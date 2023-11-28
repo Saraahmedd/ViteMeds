@@ -1,7 +1,23 @@
 import axios from 'axios';
 import baseURL from '../baseURL';
 
-import { ORDER_DETAILS_REQUEST,ORDER_DETAILS_FAIL,ORDER_DETAILS_SUCCESS, MAKE_ORDER_REQUEST, MAKE_ORDER_SUCCESS, MAKE_ORDER_FAILURE, ORDER_LIST_REQUEST, ORDER_LIST_SUCCESS, ORDER_LIST_FAIL, ORDER_CANCEL_REQUEST, ORDER_CANCEL_SUCCESS, ORDER_CANCEL_FAIL } from "../constants/orderConstants";
+import { ORDER_DETAILS_REQUEST,ORDER_DETAILS_FAIL,ORDER_DETAILS_SUCCESS, MAKE_ORDER_REQUEST, MAKE_ORDER_SUCCESS, MAKE_ORDER_FAILURE, ORDER_LIST_REQUEST, ORDER_LIST_SUCCESS, ORDER_LIST_FAIL, ORDER_CANCEL_REQUEST, ORDER_CANCEL_SUCCESS, ORDER_CANCEL_FAIL,
+  TOTAL_SALES_MONTH_REQUEST,
+  TOTAL_SALES_MONTH_SUCCESS,
+  TOTAL_SALES_MONTH_FAIL,
+  GET_ALL_ORDERS_REQUEST,
+  GET_ALL_ORDERS_SUCCESS,
+  GET_ALL_ORDERS_FAIL,
+  GET_TOTAL_ORDER_COUNT_REQUEST,
+  GET_TOTAL_ORDER_COUNT_SUCCESS,
+  GET_TOTAL_ORDER_COUNT_FAIL,
+  GET_TOTAL_SALES_REQUEST,
+  GET_TOTAL_SALES_SUCCESS,
+  GET_TOTAL_SALES_FAIL,
+  FILTERED_ORDERS_REQUEST,
+  FILTERED_ORDERS_SUCCESS,
+  FILTERED_ORDERS_FAIL,
+ } from "../constants/orderConstants";
 
 export const viewOrderDetails = (id) => async (dispatch) => {
     try {
@@ -164,3 +180,171 @@ export const makeOrderRequest = () => ({
       // showAlert('error', error);
     }
   };
+  export const getTotalSalesForMonth = (month) => async (dispatch) => {
+    try {
+      dispatch({
+        type: TOTAL_SALES_MONTH_REQUEST,
+      });
+  
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      };
+  
+      const { data } = await axios.get(
+        `${baseURL}/api/v1/order/total-sales_month/${month}`,
+        config
+      );
+  
+      dispatch({
+        type: TOTAL_SALES_MONTH_SUCCESS,
+        payload: data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: TOTAL_SALES_MONTH_FAIL,
+        payload: error.response
+          ? error.response.data.message
+          : 'Get total sales for month failed. Please try again.',
+      });
+    }
+  };
+  
+  // Action creators for getting all orders
+  export const getAllOrders = () => async (dispatch) => {
+    try {
+      dispatch({
+        type: GET_ALL_ORDERS_REQUEST,
+      });
+  
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      };
+  
+      const { data } = await axios.get(`${baseURL}/api/v1/order/allOrders`, config);
+  
+      dispatch({
+        type: GET_ALL_ORDERS_SUCCESS,
+        payload: data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_ALL_ORDERS_FAIL,
+        payload: error.response
+          ? error.response.data.message
+          : 'Get all orders failed. Please try again.',
+      });
+    }
+  };
+  export const getTotalOrderCount = () => async (dispatch) => {
+    try {
+      dispatch({
+        type: GET_TOTAL_ORDER_COUNT_REQUEST,
+      });
+  
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      };
+  
+      const { data } = await axios.get(`${baseURL}/api/v1/order/orderCount`, config);
+  
+      dispatch({
+        type: GET_TOTAL_ORDER_COUNT_SUCCESS,
+        payload: data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_TOTAL_ORDER_COUNT_FAIL,
+        payload: error.response
+          ? error.response.data.message
+          : 'Get total order count failed. Please try again.',
+      });
+    }
+  };
+  
+  // Action creators for getting total sales
+  export const getTotalSales = () => async (dispatch) => {
+    try {
+      dispatch({
+        type: GET_TOTAL_SALES_REQUEST,
+      });
+  
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      };
+  
+      const { data } = await axios.get(`${baseURL}/api/v1/order/total-sales`, config);
+  
+      dispatch({
+        type: GET_TOTAL_SALES_SUCCESS,
+        payload: data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_TOTAL_SALES_FAIL,
+        payload: error.response
+          ? error.response.data.message
+          : 'Get total sales failed. Please try again.',
+      });
+    }
+  };
+  
+  export const getFilteredOrders = (medicineId, year, month, day, time) => async (dispatch) => {
+    try {
+      dispatch({
+        type: FILTERED_ORDERS_REQUEST,
+      });
+  
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      };
+  
+      let url = `${baseURL}/api/v1/order/filtered-orders`;
+  
+      const queryParams = [];
+  
+      if (medicineId) { 
+        url += `/`+`${medicineId}`;
+      }
+  
+      if (year || month || day || time) {
+        if (year) queryParams.push(`year=${year}`);
+        if (month) queryParams.push(`month=${month}`);
+        if (day) queryParams.push(`day=${day}`);
+        if (time) queryParams.push(`time=${time}`);
+      }
+  
+      if (queryParams.length > 0) {
+        url += `?${queryParams.join('&')}`;
+
+      }
+  
+      const { data } = await axios.get(url, config);
+      dispatch({
+        type: FILTERED_ORDERS_SUCCESS,
+        payload: data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: FILTERED_ORDERS_FAIL,
+        payload: error.response
+          ? error.response.data.message
+          : 'Get filtered orders failed. Please try again.',
+      });
+    }
+  };
+  

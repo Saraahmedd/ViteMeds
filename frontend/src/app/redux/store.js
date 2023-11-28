@@ -8,9 +8,14 @@ import {getCartReducer, addToCartReducer, deleteFromCartReducer, updateCartReduc
 import { viewMyDetailsReducer } from './reducers/patientReducer';
 import { viewOrderDetailsReducer ,  viewOrderListReducer, cancelOrderReducer} from './reducers/orderReducer';
 import { addAddressesReducer } from './reducers/patientReducer';
+import { getMedicineAlternativeReducer } from './reducers/medicineReducer';
+import { archiveMedicineReducer } from './reducers/medicineReducer';
+import { getTotalSalesPerMonthReducer } from './reducers/orderReducer';
+import { getFilteredOrdersReducer } from './reducers/orderReducer';
 import {
   getNotificationsReducer,updateNotificationReducer
 }from './reducers/notificationReducer'
+
 const store = configureStore({
   reducer: {
     loginReducer,
@@ -42,6 +47,10 @@ const store = configureStore({
     viewOrderListReducer,
     cancelOrderReducer,
     downloadPharmacistDocsReducer,
+    getMedicineAlternativeReducer,
+    archiveMedicineReducer, 
+    getFilteredOrdersReducer,
+    getTotalSalesPerMonthReducer,
     getNotificationsReducer,
     updateNotificationReducer
   },

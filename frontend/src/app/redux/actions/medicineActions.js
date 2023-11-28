@@ -19,7 +19,13 @@ import {
     MEDICINE_GET_BY_ID_FAIL,
     MEDICINES_VIEW_SUCCESS,
     MEDICINES_VIEW_REQUEST,
-    MEDICINES_VIEW_FAIL
+    MEDICINES_VIEW_FAIL,
+    MEDICINE_ALTERNATIVE_SUCCESS,
+    MEDICINE_ALTERNATIVE_FAIL,
+    MEDICINE_ALTERNATIVE_REQUEST,
+    MEDICINE_ARCHIVE_FAIL,
+    MEDICINE_ARCHIVE_REQUEST,
+    MEDICINE_ARCHIVE_SUCCESS
 } from '../constants/medicineConstants';
 
 export const addMedicine = (medicine) => async (dispatch) => {
@@ -200,3 +206,72 @@ export const getMedicinesAction = (queryObj) => async (dispatch) => {
         });
     }
 };
+
+export const getMedicineAlternativeAction = (id) => async (dispatch) =>{
+    try {
+        dispatch({
+            type: MEDICINE_ALTERNATIVE_REQUEST,
+        });
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            withCredentials: true
+        };
+        const { data } = await axios.get(
+            `${baseURL}/api/v1/medicines/alternative/${id}`,
+            config
+        );
+        dispatch({
+            type: MEDICINE_ALTERNATIVE_SUCCESS,
+            payload: data.data,
+        });
+    }
+    catch (error) {
+        dispatch({
+            type: MEDICINE_ALTERNATIVE_FAIL,
+            payload: error.response
+                ? error.response.data.message
+                : 'Get medicine alternative failed. Please try again.',
+        });
+    }
+}
+
+export const archiveMedicine = (id, status) => async (dispatch) => {
+    try {
+      dispatch({
+        type: MEDICINE_ARCHIVE_REQUEST,
+      });
+  
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      };
+  
+      const body = { status };
+      const { data } = await axios.patch(
+        `${baseURL}/api/v1/medicines/archive/${id}`,
+        body,
+        config,
+      );
+  
+      console.log(data);
+  
+      dispatch({
+        type: MEDICINE_ARCHIVE_SUCCESS,
+        payload: data.data,
+      });
+      dispatch(getMedicinesAction({}));
+    } catch (error) {
+      dispatch({
+        type: MEDICINE_ARCHIVE_FAIL,
+        payload: error.response
+          ? error.response.data.message
+          : 'Archive medicine failed. Please try again.',
+      });
+    }
+  };
+  

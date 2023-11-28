@@ -46,9 +46,23 @@ const medicineSchema = new mongoose.Schema({
         type: [String],
         // required: [true, 'A medicine must have medicinal ingredients'],
     },
+
+    mainActiveIngredients:{
+       type:[String],
+    },
+
     imageURL: {
         type: String,
     },
+<<<<<<< HEAD
+
+    status:{
+        type: String,
+        enum:['archived','unarchived'],
+        default:'unarchived',
+        required:true,
+
+=======
     mainActiveIngredients: [String],
     status:{
         type: String,
@@ -59,6 +73,7 @@ const medicineSchema = new mongoose.Schema({
     prescription: {
         type: Boolean,
         default: false,
+>>>>>>> main
     }
 
 });

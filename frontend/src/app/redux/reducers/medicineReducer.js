@@ -14,11 +14,23 @@ import {
     MEDICINE_GET_BY_ID_SUCCESS,
     MEDICINES_VIEW_FAIL,
     MEDICINES_VIEW_REQUEST,
-    MEDICINES_VIEW_SUCCESS
+    MEDICINES_VIEW_SUCCESS,
+    MEDICINE_ALTERNATIVE_FAIL,
+    MEDICINE_ALTERNATIVE_REQUEST,
+    MEDICINE_ALTERNATIVE_SUCCESS,
+    MEDICINE_ARCHIVE_FAIL,
+    MEDICINE_ARCHIVE_REQUEST,
+    MEDICINE_ARCHIVE_SUCCESS
 
 } from '../constants/medicineConstants';
 const getMedicinesInitialState = {
     medicines: [],
+    loading: false,
+    error: null,
+};
+
+const archiveMedicineInitialState = {
+    medicine: null,
     loading: false,
     error: null,
 };
@@ -174,3 +186,56 @@ export const getMedicineByIdReducer = (state = getMedicineByIdInitialState, acti
     }
 
 }
+export const getMedicineAlternativeReducer = (state = getMedicineByIdInitialState, action) => {
+    switch (action.type) {
+        case MEDICINE_ALTERNATIVE_REQUEST:
+            return {
+                ...state,
+                loading: true,
+                error: null,
+            };
+        case MEDICINE_ALTERNATIVE_SUCCESS:
+            return {
+                ...state,
+                medicine: action.payload,
+                loading: false,
+                error: null,
+            };
+        case MEDICINE_ALTERNATIVE_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            };
+        default:
+            return state;
+    }
+
+}
+  
+  export const archiveMedicineReducer = (state = archiveMedicineInitialState, action) => {
+    switch (action.type) {
+      case MEDICINE_ARCHIVE_REQUEST:
+        return {
+          ...state,
+          loading: true,
+          error: null,
+        };
+      case MEDICINE_ARCHIVE_SUCCESS:
+        return {
+          ...state,
+          medicine: action.payload,
+          loading: false,
+          error: null,
+        };
+      case MEDICINE_ARCHIVE_FAIL:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+      default:
+        return state;
+    }
+  };
+  

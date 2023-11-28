@@ -26,6 +26,11 @@ router.route('/getmedicines/pharmacist')
     medicineController.getAllMedicinesForUserAndAdmin
   );
 
+  router.route('/getarchivedmedicines/pharmacist')
+  .get(
+    authController.restrictTo('pharmacist'),
+    medicineController.getAllArchivedMedicinesForPharmacist
+  );
 
 router.route('/new-medicine')
   .post(    
@@ -50,5 +55,16 @@ router.route('/delete/:id')
   router.get('/medUses',medicineController.allMedicinalUses)
 
 router.get('/:id', medicineController.getMedicineById)
+
+router.route('/archive/:id')
+  .patch(
+    authController.restrictTo('pharmacist'),
+    medicineController.archiveMedicine
+  );
+
+  router.route('/alternative/:id').get(
+    authController.restrictTo('patient'),
+    medicineController.viewAlternative
+    );
 
   module.exports = router;
