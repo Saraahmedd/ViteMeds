@@ -46,7 +46,11 @@ const pharmacistSchema = new mongoose.Schema({
         type: Number,
         required: [true, 'A pharmacist must have a working hours'],
     },
-    documents: [String]
+    documents: [String],
+    salary: {
+        type: Number,
+        default: 2000
+    }
 
 
 });

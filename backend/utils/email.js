@@ -54,7 +54,12 @@ module.exports = class Email {
   }
 
   async sendWelcome() {
+    
     await this.send('welcome', 'Welcome to elha2ny!');
+  }
+  async sendMedOutfStock(medicine) {
+    this.medicine = medicine;
+    await this.send('medicineOutOfStock', 'Medicine out of stock alert!');
   }
 
   async sendPasswordReset() {

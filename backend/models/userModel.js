@@ -21,6 +21,13 @@ const userSchema = new mongoose.Schema({
     required: [true, "Please provide a password"],
     minlength: 8,
     select: false,
+    validate: {
+      validator: function (value) {
+        // Check for at least one letter, one number, and one capital letter
+        return /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[A-Z])/.test(value);
+      },
+      message: 'Password must contain at least one letter, one number, and one capital letter',
+    },
   },
   passwordConfirm: {
     type: String,

@@ -6,6 +6,8 @@ import { Modal } from "react-bootstrap";
 import ChangePassword from "./ChangePassword";
 import { Button } from "./Button";
 
+import { logoutAction } from '@/app/redux/actions/authActions';
+
 const PharmacistNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -22,7 +24,6 @@ const PharmacistNavbar = () => {
   const handleLogout = () => {
     dispatch(logoutAction());
   };
-
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light w-100">
       <div className="container d-flex flex-row justify-content-between w-100">

@@ -12,6 +12,10 @@ import { getMedicineAlternativeReducer } from './reducers/medicineReducer';
 import { archiveMedicineReducer } from './reducers/medicineReducer';
 import { getTotalSalesPerMonthReducer } from './reducers/orderReducer';
 import { getFilteredOrdersReducer } from './reducers/orderReducer';
+import {
+  getNotificationsReducer,updateNotificationReducer
+}from './reducers/notificationReducer'
+
 const store = configureStore({
   reducer: {
     loginReducer,
@@ -46,7 +50,9 @@ const store = configureStore({
     getMedicineAlternativeReducer,
     archiveMedicineReducer, 
     getFilteredOrdersReducer,
-    getTotalSalesPerMonthReducer
+    getTotalSalesPerMonthReducer,
+    getNotificationsReducer,
+    updateNotificationReducer
   },
 });
 

@@ -61,6 +61,10 @@
   font-weight: 700;
 }
 
+.text-semibold{
+  font-weight: 600;
+}
+
 .item-center {
   align-self: center;
 }

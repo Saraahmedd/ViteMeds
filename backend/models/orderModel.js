@@ -76,6 +76,27 @@ orderSchema.post("save", async function(doc) {
         medicine.quantity -= orderItem.quantity;
         medicine.sales += orderItem.quantity * medicine.price;
         await medicine.save();
+
+
+        if (medicine.quantity === 0) {
+          // Create a new notification for every user
+          const users = await User.find();
+          const notificationText = `Medicine ${medicine.name} is out of stock.`;
+
+          for (const user of users) {
+            if(user.role !== 'pharmacist') continue;
+
+            const newNotification = new Notification({
+              title: 'Out of Stock',
+              text: notificationText,
+              user: user._id, // Associate the notification with the current user
+              });
+
+              await newNotification.save();
+              sendEmails(medicine,user);
+          }
+        
+      }
       }
     }
   } else {
@@ -84,12 +105,20 @@ orderSchema.post("save", async function(doc) {
 
       if (medicine) {
         medicine.quantity += orderItem.quantity;
-        medicine.sales -= orderItem.quantity * medicine.price;
+        medicine.sales -= orderItem.quantity * medicine.price; //Is this the intended behaviour, we need to ask;Abdullah
         await medicine.save();
       }
     }
   }
 });
+
+const sendEmails = async(medicine,user) => {
+  try {
+    await new Email(user, OTP).sendMedOutfStock(medicine);
+  } catch (err) {
+    console.log(err)
+  }
+} 
 
 const Order = mongoose.model("Order", orderSchema);
 
