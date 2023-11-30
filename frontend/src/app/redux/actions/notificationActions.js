@@ -1,6 +1,6 @@
 // notificationActions.js
 
-import * as types from './notificationActionTypes';
+import * as types from '../constants/notificationConstants';
 import axios from 'axios';
 
 export const updateNotification = (id, isRead) => async (dispatch) => {

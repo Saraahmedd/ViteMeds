@@ -1,6 +1,6 @@
 // notificationReducers.js
 
-import * as types from './notificationActionTypes';
+import * as types from '../constants/notificationConstants';
 
 const updateNotificationInitialState = {
     loading: false,
@@ -33,7 +33,7 @@ export const updateNotificationReducer = (state = updateNotificationInitialState
     }
 };
 
-export const getNotificationsReducer = (state = getNotificationsInitialState, action) => {
+export const getNotificationsReducer = (state = {}, action) => {
     switch (action.type) {
         case types.GET_NOTIFICATIONS_REQUEST:
             return {
