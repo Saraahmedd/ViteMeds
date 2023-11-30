@@ -54,15 +54,6 @@ const medicineSchema = new mongoose.Schema({
     imageURL: {
         type: String,
     },
-<<<<<<< HEAD
-
-    status:{
-        type: String,
-        enum:['archived','unarchived'],
-        default:'unarchived',
-        required:true,
-
-=======
     mainActiveIngredients: [String],
     status:{
         type: String,
@@ -73,7 +64,6 @@ const medicineSchema = new mongoose.Schema({
     prescription: {
         type: Boolean,
         default: false,
->>>>>>> main
     }
 
 });
