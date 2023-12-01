@@ -33,12 +33,12 @@ const PatientDashboard = () => {
 
   const dispatch = useDispatch();
   const patient = useSelector(
-    (state) => state.viewMyDetailsReducer.patient?.patient
+    (state) => state.viewMyDetailsReducer.patient?.patient,
   );
   const loading = useSelector((state) => state.cancelOrderReducer.loading);
   const orders = useSelector((state) => state.viewOrderListReducer.orders);
   const addAddressloading = useSelector(
-    (state) => state.addAddressesReducer.loading
+    (state) => state.addAddressesReducer.loading,
   );
   console.log(orders);
   // console.log()

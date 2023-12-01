@@ -219,7 +219,7 @@ const Checkout = () => {
     console.log("cart changed");
   }, [dispatch]);
   const patient = useSelector(
-    (state) => state.viewMyDetailsReducer.patient?.patient.user
+    (state) => state.viewMyDetailsReducer.patient?.patient.user,
   );
   useEffect(() => {
     dispatch(viewMyDetails());
@@ -271,7 +271,7 @@ const Checkout = () => {
               makeOrder({
                 paymentMethod: selectedPaymentMethod,
                 deliveryAddress: shippingInfo,
-              })
+              }),
             );
           }}
         />

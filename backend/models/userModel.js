@@ -26,7 +26,8 @@ const userSchema = new mongoose.Schema({
         // Check for at least one letter, one number, and one capital letter
         return /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[A-Z])/.test(value);
       },
-      message: 'Password must contain at least one letter, one number, and one capital letter',
+      message:
+        "Password must contain at least one letter, one number, and one capital letter",
     },
   },
   passwordConfirm: {
@@ -34,7 +35,7 @@ const userSchema = new mongoose.Schema({
     required: [true, "Please confirm your password"],
     validate: {
       // This only works on CREATE and SAVE!!!
-      validator: function(el) {
+      validator: function (el) {
         return el === this.password;
       },
       message: "Passwords are not the same!",
@@ -82,7 +83,7 @@ const userSchema = new mongoose.Schema({
     },
   ],
 });
-userSchema.pre("save", async function(next) {
+userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 
   this.password = await bcrypt.hash(this.password, 12);
@@ -91,25 +92,25 @@ userSchema.pre("save", async function(next) {
   next();
 });
 
-userSchema.pre("save", function(next) {
+userSchema.pre("save", function (next) {
   if (!this.isModified("password") || this.isNew) return next();
 
   this.passwordChangedAt = Date.now() - 1000;
   next();
 });
 
-userSchema.methods.correctPassword = async function(
+userSchema.methods.correctPassword = async function (
   candidatePassword,
-  userPassword
+  userPassword,
 ) {
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
-userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
+userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   if (this.passwordChangedAt) {
     const changedTimestamp = parseInt(
       this.passwordChangedAt.getTime() / 1000,
-      10
+      10,
     );
 
     return JWTTimestamp < changedTimestamp;

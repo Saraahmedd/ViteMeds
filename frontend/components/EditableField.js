@@ -20,7 +20,7 @@ function EditableField({ value, nameOfField, id, hide, edit }) {
         [nameOfField]: medicineIngredientsArray
           ? medicineIngredientsArray
           : editedValue,
-      })
+      }),
     );
 
     setIsEditing(false);

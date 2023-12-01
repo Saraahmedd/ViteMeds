@@ -6,23 +6,20 @@ exports.initSocket = (socketIO) => {
 
   console.log("Socket initialized");
 
-  io.on('connection', (socket) => {
-    console.log('A user connected');
+  io.on("connection", (socket) => {
+    console.log("A user connected");
 
     // Additional socket event handling can be added here
 
-    socket.on('disconnect', () => {
-      console.log('User disconnected');
+    socket.on("disconnect", () => {
+      console.log("User disconnected");
     });
-   
   });
 };
 
-
-
 exports.getIO = () => {
   if (!io) {
-    throw new Error('Socket.io not initialized');
+    throw new Error("Socket.io not initialized");
   }
   return io;
 };

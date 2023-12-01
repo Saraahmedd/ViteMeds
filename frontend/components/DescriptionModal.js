@@ -1,10 +1,9 @@
-import {Button} from  './Button';
-import {useState} from 'react' ;
-import Modal from 'react-bootstrap/Modal' ;
+import { Button } from "./Button";
+import { useState } from "react";
+import Modal from "react-bootstrap/Modal";
 
 function DescriptionModal(props) {
-
-  const {subheader, text , image ,  onHide} = props
+  const { subheader, text, image, onHide } = props;
 
   return (
     <Modal
@@ -15,20 +14,17 @@ function DescriptionModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-        Medicine description
+          Medicine description
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      {image}
+        {image}
         <h4>{subheader}</h4>
-       
-        <p>
-        {text}
-        </p>
+
+        <p>{text}</p>
       </Modal.Body>
       <Modal.Footer>
-      
-        <Button text="Close" className="desc-button"   onClick={onHide}/>
+        <Button text="Close" className="desc-button" onClick={onHide} />
       </Modal.Footer>
     </Modal>
   );

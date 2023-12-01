@@ -38,8 +38,8 @@ function LoginForm() {
         role === "administrator"
           ? "/admin"
           : role === "patient"
-          ? "/patients/medicines"
-          : "/pharmacists/medicines";
+            ? "/patients/medicines"
+            : "/pharmacists/medicines";
       window.history.pushState({}, url, url);
       window.location.reload();
     }
@@ -105,8 +105,8 @@ function LoginForm() {
                   </button>
                 </div>
               </div>
-              <a href ="http://localhost:3000/guest/forgotPassword">
-                Forgot Password 
+              <a href="http://localhost:3000/guest/forgotPassword">
+                Forgot Password
               </a>
               <div className="text-center pb-3">
                 <Button text="Login" onClick={handleLogin} />

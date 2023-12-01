@@ -51,7 +51,7 @@ const Register = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.registerReducer.isLoading);
   const isAuthenticated = useSelector(
-    (state) => state.registerReducer.isAuthenticated
+    (state) => state.registerReducer.isAuthenticated,
   );
   const error = useSelector((state) => state.registerReducer.error);
 
@@ -85,7 +85,7 @@ const Register = () => {
           mobileNumber: formData.eNumber,
           relationToPatient: formData.erelationToPatient,
         },
-      })
+      }),
     );
   };
 

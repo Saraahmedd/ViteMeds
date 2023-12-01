@@ -1,12 +1,11 @@
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 const factory = require("./handlerFactory");
-const Order = require('../models/orderModel')
-const User = require('../models/userModel');
-const Cart = require('../models/cartModel')
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const mongoose = require('mongoose');
-
+const Order = require("../models/orderModel");
+const User = require("../models/userModel");
+const Cart = require("../models/cartModel");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const mongoose = require("mongoose");
 
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   // 1) Get the currently booked order
@@ -67,7 +66,7 @@ const createOrderCheckout = async (session) => {
   const cart = await Cart.findOne({ patient: userId });
 
   const deliveryAddress = user.deliveryAddress.id(
-    session.metadata.deliveryAddress
+    session.metadata.deliveryAddress,
   );
 
   const order = Order.create({
@@ -91,7 +90,7 @@ exports.webhookCheckout = async (req, res, next) => {
     event = stripe.webhooks.constructEvent(
       req.body,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET
+      process.env.STRIPE_WEBHOOK_SECRET,
     );
     console.log("2");
   } catch (err) {
@@ -154,7 +153,7 @@ exports.getOrderDetails = catchAsync(async (req, res, next) => {
 });
 exports.getMyOrders = catchAsync(async (req, res, next) => {
   req.query.user = req.user._id;
-  factory.getAll(Order,undefined,'medicines.medicine')(req, res, next);
+  factory.getAll(Order, undefined, "medicines.medicine")(req, res, next);
 });
 
 exports.cancelOrder = catchAsync(async (req, res, next) => {
@@ -180,8 +179,8 @@ exports.getTotalSalesForMonth = catchAsync(async (req, res, next) => {
 
   const currentYear = new Date().getFullYear();
 
-  const startDate = new Date(currentYear, month - 1, 1); 
-  const endDate = new Date(currentYear, month, 0, 23, 59, 59); 
+  const startDate = new Date(currentYear, month - 1, 1);
+  const endDate = new Date(currentYear, month, 0, 23, 59, 59);
 
   const salesData = await Order.find({
     //isPaid: true,
@@ -197,7 +196,7 @@ exports.getTotalSalesForMonth = catchAsync(async (req, res, next) => {
   }, 0);
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     data: {
       salesData,
       totalSales,
@@ -205,8 +204,7 @@ exports.getTotalSalesForMonth = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getTotalSales = catchAsync(async (req, res, next) => { 
-
+exports.getTotalSales = catchAsync(async (req, res, next) => {
   const salesData = await Order.find({
     //isPaid: true,
     //status: { $ne: 'cancelled' },
@@ -217,7 +215,7 @@ exports.getTotalSales = catchAsync(async (req, res, next) => {
   }, 0);
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     data: {
       salesData,
       totalSales,
@@ -230,12 +228,12 @@ exports.getOrderProfitForMonth = catchAsync(async (req, res, next) => {
 
   const currentYear = new Date().getFullYear();
 
-  const startDate = new Date(currentYear, month - 1, 1); 
-  const endDate = new Date(currentYear, month, 0, 23, 59, 59); 
+  const startDate = new Date(currentYear, month - 1, 1);
+  const endDate = new Date(currentYear, month, 0, 23, 59, 59);
 
   const salesData = await Order.find({
     isPaid: true,
-    status: { $ne: 'Cancelled' },
+    status: { $ne: "Cancelled" },
     createdAt: {
       $gte: startDate,
       $lte: endDate,
@@ -247,7 +245,7 @@ exports.getOrderProfitForMonth = catchAsync(async (req, res, next) => {
   }, 0);
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     data: {
       salesData,
       totalSales,
@@ -255,12 +253,10 @@ exports.getOrderProfitForMonth = catchAsync(async (req, res, next) => {
   });
 });
 
-
 exports.getOrderProfit = catchAsync(async (req, res, next) => {
-
   const salesData = await Order.find({
     isPaid: true,
-    status: { $ne: 'Cancelled' },
+    status: { $ne: "Cancelled" },
   });
 
   const totalSales = salesData.reduce((sum, order) => {
@@ -268,7 +264,7 @@ exports.getOrderProfit = catchAsync(async (req, res, next) => {
   }, 0);
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     data: {
       salesData,
       totalSales,
@@ -281,12 +277,12 @@ exports.getOrderExpensesForMonth = catchAsync(async (req, res, next) => {
 
   const currentYear = new Date().getFullYear();
 
-  const startDate = new Date(currentYear, month - 1, 1); 
-  const endDate = new Date(currentYear, month, 0, 23, 59, 59); 
+  const startDate = new Date(currentYear, month - 1, 1);
+  const endDate = new Date(currentYear, month, 0, 23, 59, 59);
 
   const salesData = await Order.find({
     isPaid: true,
-    status: 'Cancelled',
+    status: "Cancelled",
     createdAt: {
       $gte: startDate,
       $lte: endDate,
@@ -298,7 +294,7 @@ exports.getOrderExpensesForMonth = catchAsync(async (req, res, next) => {
   }, 0);
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     data: {
       salesData,
       totalSales,
@@ -307,10 +303,9 @@ exports.getOrderExpensesForMonth = catchAsync(async (req, res, next) => {
 });
 
 exports.getOrderExpenses = catchAsync(async (req, res, next) => {
-
   const salesData = await Order.find({
     isPaid: true,
-    status: 'Cancelled',
+    status: "Cancelled",
   });
 
   const totalSales = salesData.reduce((sum, order) => {
@@ -318,7 +313,7 @@ exports.getOrderExpenses = catchAsync(async (req, res, next) => {
   }, 0);
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     data: {
       salesData,
       totalSales,
@@ -327,14 +322,13 @@ exports.getOrderExpenses = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllOrders = catchAsync(async (req, res, next) => {
-
   const orders = await factory.getAll(Order)(req, res, next);
 
   const totalSales = orders.reduce((sum, order) => sum + order.totalPrice, 0);
   const count = orders.length;
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     data: {
       orders,
       totalSales,
@@ -347,12 +341,11 @@ exports.getTotalOrderCount = catchAsync(async (req, res, next) => {
   const totalCount = await Order.countDocuments();
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     data: {
       totalCount,
     },
   });
-
 });
 
 exports.getFilteredOrders = catchAsync(async (req, res, next) => {
@@ -361,7 +354,10 @@ exports.getFilteredOrders = catchAsync(async (req, res, next) => {
   let filter = {};
 
   if (year) {
-    filter.createdAt = { $gte: new Date(year, 0, 1), $lt: new Date(Number(year) + 1, 0, 1) };
+    filter.createdAt = {
+      $gte: new Date(year, 0, 1),
+      $lt: new Date(Number(year) + 1, 0, 1),
+    };
   }
 
   if (month) {
@@ -377,12 +373,19 @@ exports.getFilteredOrders = catchAsync(async (req, res, next) => {
   }
 
   if (time) {
-    const exactDate = new Date(year, month - 1, day, new Date(time).getHours(), 0, 0);
+    const exactDate = new Date(
+      year,
+      month - 1,
+      day,
+      new Date(time).getHours(),
+      0,
+      0,
+    );
     filter.createdAt = exactDate;
   }
 
   if (medicineId) {
-    filter['medicines.medicine'] = mongoose.Types.ObjectId(medicineId);
+    filter["medicines.medicine"] = mongoose.Types.ObjectId(medicineId);
   }
 
   const orders = await Order.find(filter);
@@ -392,7 +395,7 @@ exports.getFilteredOrders = catchAsync(async (req, res, next) => {
   }, 0);
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     data: {
       orders,
       count: orders.length,
@@ -400,6 +403,3 @@ exports.getFilteredOrders = catchAsync(async (req, res, next) => {
     },
   });
 });
-
-
-

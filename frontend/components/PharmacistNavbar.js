@@ -6,7 +6,7 @@ import { Modal } from "react-bootstrap";
 import ChangePassword from "./ChangePassword";
 import { Button } from "./Button";
 
-import { logoutAction } from '@/app/redux/actions/authActions';
+import { logoutAction } from "@/app/redux/actions/authActions";
 
 const PharmacistNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

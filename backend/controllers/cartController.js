@@ -5,7 +5,7 @@ const AppError = require("../utils/appError");
 
 exports.getCart = catchAsync(async (req, res, next) => {
   let cart = await Cart.findOne({ patient: req.user.id }).populate(
-    "items.medicine"
+    "items.medicine",
   );
 
   if (!cart) {
@@ -17,7 +17,7 @@ exports.getCart = catchAsync(async (req, res, next) => {
     cart.items.map(async (item) => {
       const medicine = await Medicine.findById(item.medicine._id);
       item.currentPrice = medicine.price;
-    })
+    }),
   );
 
   res.status(200).json({
@@ -43,7 +43,7 @@ exports.addToCart = catchAsync(async (req, res, next) => {
   }
 
   const itemIndex = cart.items.findIndex((item) =>
-    item.medicine.equals(medicineId)
+    item.medicine.equals(medicineId),
   );
   let resp;
 
@@ -58,7 +58,7 @@ exports.addToCart = catchAsync(async (req, res, next) => {
     resp = await axios.post(
       "http://localhost:8000/api/v1/prescriptions/check",
       { email: req.body.email },
-      config
+      config,
     );
     if (resp?.statusCode === 200) {
       cart.items.push({ medicine: medicineId, quantity });
@@ -88,11 +88,11 @@ exports.updateCartItem = catchAsync(async (req, res, next) => {
   }
 
   const itemIndex = cart.items.findIndex((item) =>
-    item.medicine.equals(medicineId)
+    item.medicine.equals(medicineId),
   );
   if (itemIndex === -1) {
     return next(
-      new AppError("No medicine found with that ID in the cart", 404)
+      new AppError("No medicine found with that ID in the cart", 404),
     );
   }
 
@@ -121,7 +121,7 @@ exports.removeCartItem = catchAsync(async (req, res, next) => {
   }
 
   const itemIndex = cart.items.findIndex((item) =>
-    item.medicine.equals(medicineId)
+    item.medicine.equals(medicineId),
   );
 
   if (itemIndex !== -1) {

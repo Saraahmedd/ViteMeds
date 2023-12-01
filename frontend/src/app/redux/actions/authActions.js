@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
@@ -17,10 +17,9 @@ import {
   RESET_PASS_FAIL,
   CHANGE_PASS_REQUEST,
   CHANGE_PASS_SUCCESS,
-  CHANGE_PASS_FAIL
-} from '../constants/authConstants';
-import baseURL from '../baseURL';
-
+  CHANGE_PASS_FAIL,
+} from "../constants/authConstants";
+import baseURL from "../baseURL";
 
 export const login = (username, password) => async (dispatch) => {
   try {
@@ -30,14 +29,14 @@ export const login = (username, password) => async (dispatch) => {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      withCredentials: true
+      withCredentials: true,
     };
     const { data } = await axios.post(
       `${baseURL}/api/v1/user/login`,
       { username, password },
-      config
+      config,
     );
 
     dispatch({
@@ -45,13 +44,13 @@ export const login = (username, password) => async (dispatch) => {
       payload: data.data,
     });
 
-    localStorage.setItem('userInfo', JSON.stringify(data));
+    localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
       payload: error.response
         ? error.response.data.message
-        : 'Login failed. Please try again.',
+        : "Login failed. Please try again.",
     });
   }
 };
@@ -64,15 +63,14 @@ export const registerAction = (reqBody) => async (dispatch) => {
 
     const config = {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
       },
-      withCredentials: true
-
+      withCredentials: true,
     };
     const { data } = await axios.post(
       `${baseURL}/api/v1/user/signup`,
       reqBody,
-      config
+      config,
     );
 
     dispatch({
@@ -80,17 +78,16 @@ export const registerAction = (reqBody) => async (dispatch) => {
       payload: data.data,
     });
 
-    localStorage.setItem('userInfo', JSON.stringify(data));
+    localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
       payload: error.response
         ? error.response.data.message
-        : 'Signup failed, Please try again.',
+        : "Signup failed, Please try again.",
     });
   }
 };
-
 
 export const logoutAction = () => async (dispatch) => {
   try {
@@ -100,13 +97,14 @@ export const logoutAction = () => async (dispatch) => {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      withCredentials: true
+      withCredentials: true,
     };
     const { data } = await axios.post(
-      `${baseURL}/api/v1/user/logout`,{},
-      config
+      `${baseURL}/api/v1/user/logout`,
+      {},
+      config,
     );
 
     dispatch({
@@ -120,7 +118,7 @@ export const logoutAction = () => async (dispatch) => {
       type: USER_LOGOUT_FAIL,
       payload: error.response
         ? error.response.data.message
-        : 'Logout failed. Please try again.',
+        : "Logout failed. Please try again.",
     });
   }
 };
@@ -133,14 +131,14 @@ export const forgetPasswordAction = (reqBody) => async (dispatch) => {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      withCredentials: true
+      withCredentials: true,
     };
     const { data } = await axios.post(
       `${baseURL}/api/v1/user/forgotPassword`,
       reqBody,
-      config
+      config,
     );
 
     dispatch({
@@ -154,7 +152,7 @@ export const forgetPasswordAction = (reqBody) => async (dispatch) => {
       type: FORGET_PASS_FAIL,
       payload: error.response
         ? error.response.data.message
-        : 'Logout failed. Please try again.',
+        : "Logout failed. Please try again.",
     });
   }
 };
@@ -167,14 +165,14 @@ export const changePasswordAction = (reqBody) => async (dispatch) => {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      withCredentials: true
+      withCredentials: true,
     };
     const { data } = await axios.patch(
       `${baseURL}/api/v1/user/changePassword`,
       reqBody,
-      config
+      config,
     );
 
     dispatch({
@@ -188,11 +186,10 @@ export const changePasswordAction = (reqBody) => async (dispatch) => {
       type: CHANGE_PASS_FAIL,
       payload: error.response
         ? error.response.data.message
-        : 'failed. Please try again.',
+        : "failed. Please try again.",
     });
   }
 };
-
 
 export const resetPasswordAction = (reqBody) => async (dispatch) => {
   try {
@@ -202,14 +199,14 @@ export const resetPasswordAction = (reqBody) => async (dispatch) => {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      withCredentials: true
+      withCredentials: true,
     };
     const { data } = await axios.patch(
       `${baseURL}/api/v1/user/resetPassword`,
       reqBody,
-      config
+      config,
     );
 
     dispatch({
@@ -223,7 +220,7 @@ export const resetPasswordAction = (reqBody) => async (dispatch) => {
       type: RESET_PASS_FAIL,
       payload: error.response
         ? error.response.data.message
-        : 'Logout failed. Please try again.',
+        : "Logout failed. Please try again.",
     });
   }
 };

@@ -65,7 +65,7 @@ const orderSchema = new mongoose.Schema({
   },
 });
 
-orderSchema.post("save", async function(doc) {
+orderSchema.post("save", async function (doc) {
   if (doc.status === "Pending") {
     // Check if the order is newly created
 
@@ -77,26 +77,24 @@ orderSchema.post("save", async function(doc) {
         medicine.sales += orderItem.quantity * medicine.price;
         await medicine.save();
 
-
         if (medicine.quantity === 0) {
           // Create a new notification for every user
           const users = await User.find();
           const notificationText = `Medicine ${medicine.name} is out of stock.`;
 
           for (const user of users) {
-            if(user.role !== 'pharmacist') continue;
+            if (user.role !== "pharmacist") continue;
 
             const newNotification = new Notification({
-              title: 'Out of Stock',
+              title: "Out of Stock",
               text: notificationText,
               user: user._id, // Associate the notification with the current user
-              });
+            });
 
-              await newNotification.save();
-              sendEmails(medicine,user);
+            await newNotification.save();
+            sendEmails(medicine, user);
           }
-        
-      }
+        }
       }
     }
   } else {
@@ -112,13 +110,13 @@ orderSchema.post("save", async function(doc) {
   }
 });
 
-const sendEmails = async(medicine,user) => {
+const sendEmails = async (medicine, user) => {
   try {
     await new Email(user, OTP).sendMedOutfStock(medicine);
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
-} 
+};
 
 const Order = mongoose.model("Order", orderSchema);
 

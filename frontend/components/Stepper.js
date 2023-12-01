@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 const Stepper = ({ currentStep, totalSteps, onPrev, onNext }) => {
   const circles = Array.from({ length: totalSteps }, (_, index) => index + 1);
@@ -9,7 +9,6 @@ const Stepper = ({ currentStep, totalSteps, onPrev, onNext }) => {
     onPrev: PropTypes.func.isRequired,
     onNext: PropTypes.func.isRequired,
   };
- 
 
   const stepperStyles = `
     * {
@@ -104,29 +103,41 @@ const Stepper = ({ currentStep, totalSteps, onPrev, onNext }) => {
   `;
 
   return (
-    <div style={{ width: '900px', margin: 'auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(600px, 1fr))', gap: '20px' }}>
+    <div
+      style={{
+        width: "900px",
+        margin: "auto",
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fill, minmax(600px, 1fr))",
+        gap: "20px",
+      }}
+    >
       <style>{stepperStyles}</style>
       <div className="container">
         <div className="steps">
           {circles.map((step) => (
-            <div key={step} className={`circle ${step <= currentStep ? 'active' : ''}`}>
+            <div
+              key={step}
+              className={`circle ${step <= currentStep ? "active" : ""}`}
+            >
               {step}
             </div>
           ))}
           <div className="progress-bar">
-            <div className="indicator" style={{ width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%` }} />
+            <div
+              className="indicator"
+              style={{
+                width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%`,
+              }}
+            />
           </div>
         </div>
-        <div className="buttons">
-         
-        </div>
+        <div className="buttons"></div>
       </div>
     </div>
   );
 };
 
 module.exports = {
-    Stepper
-}
-
-
+  Stepper,
+};

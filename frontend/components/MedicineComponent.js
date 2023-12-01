@@ -25,25 +25,21 @@ function MedicineComponent({ title, role }) {
   const [name, setName] = useState({});
   const [reqbody, setReqbody] = useState("");
   const dispatch = useDispatch();
-const isLoading = useSelector(
-  (state) => state.addToCartReducer.loading
-);
+  const isLoading = useSelector((state) => state.addToCartReducer.loading);
   const medicines = useSelector(
-    (state) => state.getMedicinesReducer.medicines?.data
+    (state) => state.getMedicinesReducer.medicines?.data,
   );
   const medUses = useSelector(
-    (state) => state.getMedicinesReducer.medicines?.medUses
+    (state) => state.getMedicinesReducer.medicines?.medUses,
   );
 
-  const cart = useSelector(
-    (state) => state.getCartReducer.cart
-  );
- 
+  const cart = useSelector((state) => state.getCartReducer.cart);
+
   const addMedicineLoading = useSelector(
-    (state) => state.addMedicineReducer.loading
+    (state) => state.addMedicineReducer.loading,
   );
   const editMedicineLoading = useSelector(
-    (state) => state.editMedicineReducer.loading
+    (state) => state.editMedicineReducer.loading,
   );
   const handleCardClick = (medicine) => {
     setSelectedMedicine(medicine);
@@ -56,8 +52,10 @@ const isLoading = useSelector(
   }
 
   function getMedicineText(medicine) {
-    const matchingCart = cart.cart.items.filter(i => i.medicine._id === medicine._id);
-    if(matchingCart.length > 0) {
+    const matchingCart = cart.cart.items.filter(
+      (i) => i.medicine._id === medicine._id,
+    );
+    if (matchingCart.length > 0) {
       const numInCart = matchingCart[0].quantity;
       return `In Cart (${numInCart})`;
     } else {
@@ -65,17 +63,16 @@ const isLoading = useSelector(
     }
   }
 
-
   const [medUse, setMedUse] = useState({});
 
   useEffect(() => {
     dispatch(getMedicinesAction({ ...name, ...medUse }));
-  }, [dispatch, name, medUse,addMedicineLoading,editMedicineLoading]);
+  }, [dispatch, name, medUse, addMedicineLoading, editMedicineLoading]);
 
   useEffect(() => {
     dispatch(viewCart());
     console.log("cart changed");
-  }, [dispatch,isLoading]);
+  }, [dispatch, isLoading]);
 
   return (
     <div className="m-5">
@@ -101,7 +98,7 @@ const isLoading = useSelector(
               setMedUse(
                 e.target.value === ""
                   ? {}
-                  : { medicinalUses: { in: e.target.value } }
+                  : { medicinalUses: { in: e.target.value } },
               )
             }
             className="rounded form-control "
@@ -123,9 +120,17 @@ const isLoading = useSelector(
             onClick={() => setModalAddShow(true)}
           />
 
-          <AddModal show2={modalEditShow} show={modalAddShow} onHide={() => {setModalAddShow(false);
-          setSelectedMedicine(null);
-          setReqbody("");}} edit={false} reqbody={reqbody} setReqbody={setReqbody}
+          <AddModal
+            show2={modalEditShow}
+            show={modalAddShow}
+            onHide={() => {
+              setModalAddShow(false);
+              setSelectedMedicine(null);
+              setReqbody("");
+            }}
+            edit={false}
+            reqbody={reqbody}
+            setReqbody={setReqbody}
           />
         </>
       )}
@@ -141,15 +146,20 @@ const isLoading = useSelector(
                 </div>
               }
               subtitle={<></>}
-              onClick={() => {if(isPharmacist)
-                handleCardClick(medicine)
-              else false}}
+              onClick={() => {
+                if (isPharmacist) handleCardClick(medicine);
+                else false;
+              }}
               text={
                 <div className="">
                   <div className="row global-text">
                     <div className="mx-auto">
                       <img
-                        src={medicine.imageURL? "http://localhost:8000/" + medicine.imageURL: "/medication.svg"}
+                        src={
+                          medicine.imageURL
+                            ? "http://localhost:8000/" + medicine.imageURL
+                            : "/medication.svg"
+                        }
                         alt="Image"
                         style={{ maxHeight: "200px", maxWidth: "160px" }}
                       />
@@ -160,29 +170,52 @@ const isLoading = useSelector(
                     <div className="text-capitalize fw-bold  pt-3 text-center">
                       Description: {medicine.description}
                     </div>
-                    {isPharmacist && <div className="text-capitalize fw-bold  pt-3 text-center">
-                      Quantity: {medicine.quantity}
-                    </div>}
-                    {isPharmacist && <div className="text-capitalize fw-bold  pt-3 text-center">
-                      Sales: {medicine.sales}
-                    </div>}
+                    {isPharmacist && (
+                      <div className="text-capitalize fw-bold  pt-3 text-center">
+                        Quantity: {medicine.quantity}
+                      </div>
+                    )}
+                    {isPharmacist && (
+                      <div className="text-capitalize fw-bold  pt-3 text-center">
+                        Sales: {medicine.sales}
+                      </div>
+                    )}
                   </div>
                   <hr />
                 </div>
               }
-              buttonText={isAdmin ? false :isPharmacist ? "Edit" : cart ? getMedicineText(medicine) : "Add to Cart"}
-              onClickButton={(e) => { if(!isPharmacist && !isAdmin) handleCartClick(e, medicine)
-              else if(isPharmacist) handleCardClick(medicine)}}  buttonClass="col-md-12 mx-auto row"
+              buttonText={
+                isAdmin
+                  ? false
+                  : isPharmacist
+                    ? "Edit"
+                    : cart
+                      ? getMedicineText(medicine)
+                      : "Add to Cart"
+              }
+              onClickButton={(e) => {
+                if (!isPharmacist && !isAdmin) handleCartClick(e, medicine);
+                else if (isPharmacist) handleCardClick(medicine);
+              }}
+              buttonClass="col-md-12 mx-auto row"
             />
           ))}
 
           {selectedMedicine && (
-            <AddModal show={modalEditShow} show2={modalAddShow} onHide={() => {setModalEditShow(false);
-              setReqbody("");
-            setSelectedMedicine(null);
-          }} edit={true} medicine={selectedMedicine} reqbody={reqbody} setReqbody={setReqbody}/>
-          )
-          }
+            <AddModal
+              show={modalEditShow}
+              show2={modalAddShow}
+              onHide={() => {
+                setModalEditShow(false);
+                setReqbody("");
+                setSelectedMedicine(null);
+              }}
+              edit={true}
+              medicine={selectedMedicine}
+              reqbody={reqbody}
+              setReqbody={setReqbody}
+            />
+          )}
         </div>
       </div>
       {/* <Footer/> */}

@@ -9,7 +9,7 @@ function ChangePassword() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const { success, error } = useSelector(
-    (state) => state.changePasswordReducer
+    (state) => state.changePasswordReducer,
   );
 
   const handlePasswordChange = () => {
@@ -18,7 +18,7 @@ function ChangePassword() {
         passwordCurrent: oldPassword,
         password: newPassword,
         passwordConfirm: confirmPassword,
-      })
+      }),
     );
   };
   const [showError, setShowError] = useState(false);
