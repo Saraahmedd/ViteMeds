@@ -45,7 +45,7 @@ const SignUp = () => {
 
   // const useEffect()
   const { isAuthenticated, error, isLoading } = useSelector(
-    (state) => state.registerReducer,
+    (state) => state.registerReducer
   );
 
   useEffect(() => {
@@ -69,7 +69,7 @@ const SignUp = () => {
     combinedFormData.append("hourlyRate", formData.hourlyRate);
     combinedFormData.append(
       "educationalBackground",
-      formData.educationalBackground,
+      formData.educationalBackground
     );
     combinedFormData.append("role", "pharmacist");
     combinedFormData.append("affiliation", formData.affiliation);
@@ -330,6 +330,7 @@ const SignUp = () => {
                           name="hourlyRate"
                           value={formData.hourlyRate}
                           onChange={handleInputChange}
+                          inputMode="numeric"
                         />
                       </div>
                       <div className="col-md-6 mb-1">
@@ -346,6 +347,7 @@ const SignUp = () => {
                           name="workingHours"
                           value={formData.workingHours}
                           onChange={handleInputChange}
+                          inputMode="numeric"
                         />
                       </div>
                     </div>
