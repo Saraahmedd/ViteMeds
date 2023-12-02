@@ -6,7 +6,27 @@ const handleCastErrorDB = (err) => {
 };
 
 const handleDuplicateFieldsDB = (err) => {
-  const value = err.errmsg.match(/(["'])(\\?.)*?\1/)[0];
+  console.log(err);
+  // const value = err.message.match(/(["'])(\\?.)*?\1/)[0];
+
+  let value = null;
+
+  if (err && err.message) {
+    const match = err.message.match(/(["'])(\\?.)*?\1/);
+    value = match ? match[0] : null;
+  }
+
+  try {
+    if (err && err.message) {
+      const match = err.message.match(/(["'])(\\?.)*?\1/);
+      value = match ? match[0] : null;
+    } else {
+      throw new Error("err.message is undefined or null");
+    }
+  } catch (error) {
+    // Handle the case where there is no match or an error occurred
+    console.error("Error extracting value:", error);
+  }
 
   const message = `Duplicate field value: ${value}. Please use another value!`;
   return new AppError(message, 400);
