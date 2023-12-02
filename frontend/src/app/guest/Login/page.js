@@ -5,8 +5,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Card } from "../../../../components/Card";
 import Navbar from "../../../../components/Navbar";
-import Footer from "../../../../components/Footer";
-import { Button } from "../../../../components/Button";
+import { Alert, Button, Row } from "react-bootstrap";
 import { login } from "@/app/redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
@@ -19,7 +18,9 @@ function LoginForm() {
   });
   const [showPassword, setShowPassword] = useState(false);
 
-  const { isAuthenticated, error } = useSelector((state) => state.loginReducer);
+  const { isAuthenticated, error, loading } = useSelector(
+    (state) => state.loginReducer
+  );
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,31 +32,52 @@ function LoginForm() {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+  let url = "";
   useEffect(() => {
     if (isAuthenticated) {
       const role = JSON.parse(localStorage.getItem("userInfo")).data.user.role;
-      const url =
+      url =
         role === "administrator"
           ? "/admin"
           : role === "patient"
-            ? "/patients/medicines"
-            : "/pharmacists/medicines";
-      window.history.pushState({}, url, url);
-      window.location.reload();
+          ? "/patients/medicines"
+          : "/pharmacists/medicines";
+      setTimeout(() => {
+        window.history.pushState({}, "", url);
+        window.location.reload();
+      }, 5000);
     }
-    if (error) window.alert("error");
   }, [dispatch, isAuthenticated, error]);
 
   const handleLogin = () => {
-    // Gather data in the formData object and send it to the backend
-    console.log("Form Data:", formData);
     dispatch(login(formData.email, formData.password));
   };
 
   return (
     <>
       <Navbar />
-      <div className="container ">
+      <br />
+
+      <div className="container" style={{ width: "80%", textAlign: "center" }}>
+        {isAuthenticated && (
+          <>
+            <Alert
+              style={{ marginLeft: "65px", width: "90%", textAlign: "center" }}
+              variant="success"
+            >
+              Registration Successful, Redirecting ...
+            </Alert>
+          </>
+        )}
+
+        {error && (
+          <Alert
+            style={{ marginLeft: "65px", width: "90%", textAlign: "center" }}
+            variant="danger"
+          >
+            {error}
+          </Alert>
+        )}
         <div className="row gradient-background m-5 rounded shadow mx-auto">
           <div className="col-md-4 mx-auto m-5 p-5">
             <h1 className=" text-bold text-light rounded">XPharmacy</h1>
@@ -73,10 +95,11 @@ function LoginForm() {
                 <input
                   type="email"
                   className="form-control py-3"
-                  placeholder="Email"
+                  placeholder="username"
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
+                  required
                 />
               </div>
               <div className="mb-3 row">
@@ -88,6 +111,7 @@ function LoginForm() {
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
+                    required
                   />
                 </div>
                 <div className="col-md-2 d-flex align-items-center bg-light rounded">
@@ -105,17 +129,27 @@ function LoginForm() {
                   </button>
                 </div>
               </div>
-              <a href="http://localhost:3000/guest/forgotPassword">
-                Forgot Password
-              </a>
-              <div className="text-center pb-3">
-                <Button text="Login" onClick={handleLogin} />
+              <a href="/guest/forgotPassword">Forgot Password</a>
+              <div className="text-center py-4 pb-3">
+                {loading ? (
+                  <Button variant="primary" disabled>
+                    <span
+                      className="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    Loading...
+                  </Button>
+                ) : (
+                  <Button type="submit" variant="primary" onClick={handleLogin}>
+                    Login
+                  </Button>
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

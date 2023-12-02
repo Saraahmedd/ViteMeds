@@ -36,7 +36,7 @@ export const login = (username, password) => async (dispatch) => {
     const { data } = await axios.post(
       `${baseURL}/api/v1/user/login`,
       { username, password },
-      config,
+      config
     );
 
     dispatch({
@@ -46,6 +46,7 @@ export const login = (username, password) => async (dispatch) => {
 
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
+    console.log("broooooooo");
     dispatch({
       type: USER_LOGIN_FAIL,
       payload: error.response
@@ -70,7 +71,7 @@ export const registerAction = (reqBody) => async (dispatch) => {
     const { data } = await axios.post(
       `${baseURL}/api/v1/user/signup`,
       reqBody,
-      config,
+      config
     );
 
     dispatch({
@@ -104,7 +105,7 @@ export const logoutAction = () => async (dispatch) => {
     const { data } = await axios.post(
       `${baseURL}/api/v1/user/logout`,
       {},
-      config,
+      config
     );
 
     dispatch({
@@ -138,7 +139,7 @@ export const forgetPasswordAction = (reqBody) => async (dispatch) => {
     const { data } = await axios.post(
       `${baseURL}/api/v1/user/forgotPassword`,
       reqBody,
-      config,
+      config
     );
 
     dispatch({
@@ -172,7 +173,7 @@ export const changePasswordAction = (reqBody) => async (dispatch) => {
     const { data } = await axios.patch(
       `${baseURL}/api/v1/user/changePassword`,
       reqBody,
-      config,
+      config
     );
 
     dispatch({
@@ -206,7 +207,7 @@ export const resetPasswordAction = (reqBody) => async (dispatch) => {
     const { data } = await axios.patch(
       `${baseURL}/api/v1/user/resetPassword`,
       reqBody,
-      config,
+      config
     );
 
     dispatch({

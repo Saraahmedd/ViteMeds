@@ -1,6 +1,7 @@
 import "./globals.css";
 import "../../node_modules/bootstrap/dist/css/bootstrap.css";
 import { ReduxProvider } from "./redux/provider";
+import Footer from "../../components/Footer";
 
 export const metadata = {
   title: "Create Next App",
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
       <body>
         <ReduxProvider> {children} </ReduxProvider>
       </body>
+      <Footer />
     </html>
   );
 }
