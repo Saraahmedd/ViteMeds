@@ -9,10 +9,10 @@ const crypto = require("crypto");
 const multer = require("multer");
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
+  destination: function(req, file, cb) {
     cb(null, "uploads/");
   },
-  filename: function (req, file, cb) {
+  filename: function(req, file, cb) {
     if (!req.locals) {
       req.locals = {};
     }
@@ -69,7 +69,7 @@ const createSendToken = (user, statusCode, req, res) => {
 
   res.cookie("jwt", token, {
     Expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
     ),
     httpOnly: true,
     secure: req.secure || req.headers["x-forwarded-proto"] === "https",
@@ -100,7 +100,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     token = req.cookies?.jwt;
     const err = new AppError(
       "You are not authorized to create an admin account",
-      401,
+      401
     );
 
     if (!token) return next(err);
@@ -109,14 +109,13 @@ exports.signup = catchAsync(async (req, res, next) => {
     const currentUser = await User.findById(decoded.id);
 
     if (!currentUser || currentUser.role !== enums.ROLE.ADMIN) return next(err);
-    var emailValidator =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    var emailValidator = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (!emailValidator.test(req.body.username))
       return next(
         new AppError(
           "For an administrator, the username must be an email address",
-          400,
-        ),
+          400
+        )
       );
   }
 
@@ -164,7 +163,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   if (!token) {
     return next(
-      new AppError("You are not logged in! Please log in to get access.", 401),
+      new AppError("You are not logged in! Please log in to get access.", 401)
     );
   }
 
@@ -177,8 +176,8 @@ exports.protect = catchAsync(async (req, res, next) => {
     return next(
       new AppError(
         "The user belonging to this token does no longer exist.",
-        401,
-      ),
+        401
+      )
     );
   }
 
@@ -199,7 +198,7 @@ exports.restrictTo = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
       return next(
-        new AppError("You do not have permission to perform this action", 403),
+        new AppError("You do not have permission to perform this action", 403)
       );
     }
 
@@ -220,10 +219,10 @@ exports.login = catchAsync(async (req, res, next) => {
   }
   if (user.role === "pharmacist") {
     const doc = await Pharmacist.findOne({ user: user._id });
-    user.doctor = doc;
+    user.data = doc;
   } else if (user.role === "patient") {
     const pat = await Patient.findOne({ user: user._id });
-    user.patient = pat;
+    user.data = pat;
   }
 
   createSendToken(user, 200, req, res);
@@ -295,7 +294,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
     return next(
       new AppError("There was an error sending the email. Try again later!"),
-      500,
+      500
     );
   }
 });
