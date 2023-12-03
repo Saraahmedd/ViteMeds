@@ -159,6 +159,7 @@ export const resetPasswordReducer = (state = {}, action) => {
       };
     }
     case RESET_PASS_FAIL:
+      console.log(action.payload);
       return {
         ...state,
         loading: false,

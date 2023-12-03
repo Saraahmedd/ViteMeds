@@ -18,6 +18,7 @@ const ShippingInformation = ({ onPrev, onNext, patient }) => {
 
   return (
     <div>
+      <Sidebar />
       <h2>Shipping Information</h2>
       <form
         style={{
@@ -219,7 +220,7 @@ const Checkout = () => {
     console.log("cart changed");
   }, [dispatch]);
   const patient = useSelector(
-    (state) => state.viewMyDetailsReducer.patient?.patient.user,
+    (state) => state.viewMyDetailsReducer.patient?.patient.user
   );
   useEffect(() => {
     dispatch(viewMyDetails());
@@ -271,7 +272,7 @@ const Checkout = () => {
               makeOrder({
                 paymentMethod: selectedPaymentMethod,
                 deliveryAddress: shippingInfo,
-              }),
+              })
             );
           }}
         />
