@@ -2,48 +2,60 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Card } from "./Card";
-import DescriptionModal from "./MedicineDescriptionModal";
+import DescriptionModal from "./DescriptionModal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useDispatch, useSelector } from "react-redux";
-import EditableField from "./EditableField";
 import { Button } from "./Button";
 import AddModal from "./AddModal";
 import { getMedicinesAction } from "@/app/redux/actions/medicineActions";
-import { login } from "@/app/redux/actions/authActions";
-import { addToCart, viewCart } from "@/app/redux/actions/cartActions";
-import { addToCartReducer } from "@/app/redux/reducers/cartReducer";
-
+import {
+  addToCart,
+  deleteFromCart,
+  viewCart,
+} from "@/app/redux/actions/cartActions";
+import { FaTimes } from "react-icons/fa";
+import { Spinner } from "react-bootstrap";
 function MedicineComponent({ title, role }) {
   let isPharmacist;
   role == "pharmacist" ? (isPharmacist = true) : false;
   let isAdmin;
   role == "admin" ? (isAdmin = true) : false;
   const [modalAddShow, setModalAddShow] = useState(false);
-  const [selectedMedicinalUse, setSelectedMedicinalUse] = useState(null);
   const [modalEditShow, setModalEditShow] = useState(false);
   const [selectedMedicine, setSelectedMedicine] = useState(null);
+  const [modalDescrShow, setModalDescrShow] = useState(false);
   const [name, setName] = useState({});
   const [reqbody, setReqbody] = useState("");
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.addToCartReducer.loading);
+  const loadingDeletion = useSelector(
+    (state) => state.deleteFromCartReducer.loading
+  );
   const medicines = useSelector(
-    (state) => state.getMedicinesReducer.medicines?.data,
+    (state) => state.getMedicinesReducer.medicines?.data
+  );
+  const medicinesLoading = useSelector(
+    (state) => state.getMedicinesReducer.loading
   );
   const medUses = useSelector(
-    (state) => state.getMedicinesReducer.medicines?.medUses,
+    (state) => state.getMedicinesReducer.medicines?.medUses
   );
 
   const cart = useSelector((state) => state.getCartReducer.cart);
 
   const addMedicineLoading = useSelector(
-    (state) => state.addMedicineReducer.loading,
+    (state) => state.addMedicineReducer.loading
   );
   const editMedicineLoading = useSelector(
-    (state) => state.editMedicineReducer.loading,
+    (state) => state.editMedicineReducer.loading
   );
   const handleCardClick = (medicine) => {
     setSelectedMedicine(medicine);
     setModalEditShow(true);
+  };
+  const handleCardClickPatient = (medicine) => {
+    setSelectedMedicine(medicine);
+    setModalDescrShow(true);
   };
 
   function handleCartClick(e, medicine) {
@@ -53,7 +65,7 @@ function MedicineComponent({ title, role }) {
 
   function getMedicineText(medicine) {
     const matchingCart = cart.cart.items.filter(
-      (i) => i.medicine._id === medicine._id,
+      (i) => i.medicine._id === medicine._id
     );
     if (matchingCart.length > 0) {
       const numInCart = matchingCart[0].quantity;
@@ -67,15 +79,23 @@ function MedicineComponent({ title, role }) {
 
   useEffect(() => {
     dispatch(getMedicinesAction({ ...name, ...medUse }));
-  }, [dispatch, name, medUse, addMedicineLoading, editMedicineLoading]);
+  }, [
+    dispatch,
+    name,
+    loadingDeletion,
+    medUse,
+    addMedicineLoading,
+    editMedicineLoading,
+    isLoading,
+  ]);
 
   useEffect(() => {
     dispatch(viewCart());
     console.log("cart changed");
-  }, [dispatch, isLoading]);
+  }, [dispatch, isLoading, loadingDeletion]);
 
   return (
-    <div className="m-5">
+    <div className="container text-center justify-content-center">
       <h1 className="row text-primary text-center">
         <strong>{title}</strong>
       </h1>
@@ -92,26 +112,44 @@ function MedicineComponent({ title, role }) {
             />
           </div>
         </div>
-        <div className="">
-          <select
-            onChange={(e) =>
-              setMedUse(
-                e.target.value === ""
-                  ? {}
-                  : { medicinalUses: { in: e.target.value } },
-              )
-            }
-            className="rounded form-control "
-          >
-            <option value="">Select Med Use</option>
-            {medUses?.map((medUse, index) => (
-              <option key={index} value={medUse}>
-                {medUse}
-              </option>
-            ))}
-          </select>
+        <div className="position-relative">
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <select
+              onChange={(e) =>
+                setMedUse(
+                  e.target.value === ""
+                    ? {}
+                    : { medicinalUses: { in: e.target.value } }
+                )
+              }
+              className="rounded form-control"
+            >
+              <option value="">Select Med Use</option>
+              {medUses?.map((medUse, index) => (
+                <option key={index} value={medUse}>
+                  {medUse}
+                </option>
+              ))}
+            </select>
+            {Object.keys(medUse).length !== 0 && (
+              <button
+                onClick={() => setMedUse({})}
+                className="close-button"
+                aria-label="Clear Filter"
+                style={{
+                  marginLeft: "1px",
+                  backgroundColor: "transparent",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                <FaTimes />
+              </button>
+            )}
+          </div>
         </div>
       </div>
+      {medicinesLoading && <Spinner />}
       {isPharmacist && (
         <>
           <Button
@@ -134,12 +172,12 @@ function MedicineComponent({ title, role }) {
           />
         </>
       )}
-      <div className="container mx-auto">
-        <div className="row mx-auto">
+      <div className="container m-auto text-center">
+        <div className="row m-auto text-center my-5 py-5">
           {medicines?.map((medicine) => (
             <Card
               key={medicine._id}
-              className="col-lg-3 offset-lg-1 my-3 bg-light mx-3 p-3 shadow"
+              className="col-3 m-auto"
               title={
                 <div className="text-capitalize p-3 text-center">
                   {medicine.name}
@@ -148,20 +186,20 @@ function MedicineComponent({ title, role }) {
               subtitle={<></>}
               onClick={() => {
                 if (isPharmacist) handleCardClick(medicine);
-                else false;
+                else handleCardClickPatient(medicine);
               }}
               text={
                 <div className="">
                   <div className="row global-text">
-                    <div className="mx-auto">
+                    <div className="mx-auto text-center">
                       <img
                         src={
                           medicine.imageURL
-                            ? "http://localhost:8000/" + medicine.imageURL
+                            ? "http://localhost:8080/" + medicine.imageURL
                             : "/medication.svg"
                         }
                         alt="Image"
-                        style={{ maxHeight: "200px", maxWidth: "160px" }}
+                        style={{ maxHeight: "120px", maxWidth: "200px" }}
                       />
                     </div>
                     <div className="text-capitalize fw-bold  pt-3 text-center">
@@ -188,11 +226,21 @@ function MedicineComponent({ title, role }) {
                 isAdmin
                   ? false
                   : isPharmacist
-                    ? "Edit"
-                    : cart
-                      ? getMedicineText(medicine)
-                      : "Add to Cart"
+                  ? "Edit"
+                  : cart
+                  ? getMedicineText(medicine)
+                  : "Add to Cart"
               }
+              buttonText2={
+                !isPharmacist &&
+                !isAdmin &&
+                cart &&
+                getMedicineText(medicine).startsWith("In") &&
+                "Remove 1 item from Cart"
+              }
+              onClickButton2={(e) => {
+                dispatch(deleteFromCart(medicine._id));
+              }}
               onClickButton={(e) => {
                 if (!isPharmacist && !isAdmin) handleCartClick(e, medicine);
                 else if (isPharmacist) handleCardClick(medicine);
@@ -202,19 +250,26 @@ function MedicineComponent({ title, role }) {
           ))}
 
           {selectedMedicine && (
-            <AddModal
-              show={modalEditShow}
-              show2={modalAddShow}
-              onHide={() => {
-                setModalEditShow(false);
-                setReqbody("");
-                setSelectedMedicine(null);
-              }}
-              edit={true}
-              medicine={selectedMedicine}
-              reqbody={reqbody}
-              setReqbody={setReqbody}
-            />
+            <>
+              <AddModal
+                show={modalEditShow}
+                show2={modalAddShow}
+                onHide={() => {
+                  setModalEditShow(false);
+                  setReqbody("");
+                  setSelectedMedicine(null);
+                }}
+                edit={true}
+                medicine={selectedMedicine}
+                reqbody={reqbody}
+                setReqbody={setReqbody}
+              />
+              <DescriptionModal
+                medicine={selectedMedicine}
+                show={modalDescrShow}
+                onHide={() => setModalDescrShow(false)}
+              />
+            </>
           )}
         </div>
       </div>
