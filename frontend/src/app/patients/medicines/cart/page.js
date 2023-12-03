@@ -66,7 +66,7 @@ export default function Cart() {
             );
           })}
         <li className="list-group-item text-end">
-          <h3>Total: {cart && cart.cart.totalPrice} EGP</h3>
+          <h3>Total: {cart && cart.cart.totalPrice} $</h3>
         </li>
       </ul>
       {cart && (
