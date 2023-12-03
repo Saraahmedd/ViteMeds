@@ -1,0 +1,14 @@
+.root-layout {
+  display: flex;
+  height: 100vh; /* Set the height of the root layout to the full viewport height */
+}
+
+.main-content {
+  display: flex;
+  flex: 1; /* Allow the main content to take up the remaining space */
+}
+
+.content-wrapper {
+  flex: 1; /* Allow the content wrapper to take up the remaining space */
+  padding: 20px; /* Add padding or adjust as needed */
+}

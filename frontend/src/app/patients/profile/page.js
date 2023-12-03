@@ -8,6 +8,7 @@ import {
 } from "@/app/redux/actions/patientActions";
 import ChangePassword from "../../../../components/ChangePassword";
 import { cancelOrder, viewOrderList } from "@/app/redux/actions/orderActions";
+import Sidebar from "../../../../components/PatientSidebar";
 
 const PatientDashboard = () => {
   const [showModal, setShowModal] = useState(false);
@@ -33,12 +34,12 @@ const PatientDashboard = () => {
 
   const dispatch = useDispatch();
   const patient = useSelector(
-    (state) => state.viewMyDetailsReducer.patient?.patient,
+    (state) => state.viewMyDetailsReducer.patient?.patient
   );
   const loading = useSelector((state) => state.cancelOrderReducer.loading);
   const orders = useSelector((state) => state.viewOrderListReducer.orders);
   const addAddressloading = useSelector(
-    (state) => state.addAddressesReducer.loading,
+    (state) => state.addAddressesReducer.loading
   );
   console.log(orders);
   // console.log()
@@ -68,6 +69,7 @@ const PatientDashboard = () => {
 
   return (
     <>
+      <Sidebar />
       {patient ? (
         <div className="container mt-4">
           {success ? (

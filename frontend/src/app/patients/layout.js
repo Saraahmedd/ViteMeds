@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
 import { ReduxProvider } from "../redux/provider";
 import PatientNavbar from "../../../components/PatientNavbar";
+import Sidebar from "../../../components/PatientSidebar";
+import "./patient.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,9 +15,8 @@ export default function RootLayout({ children }) {
   return (
     <div className={`global-text ${inter.className}`}>
       <PatientNavbar />
-      <div className="p-2 m-5">
-        <ReduxProvider> {children} </ReduxProvider>
-      </div>
+
+      <ReduxProvider> {children} </ReduxProvider>
     </div>
   );
 }

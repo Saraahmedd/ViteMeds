@@ -7,6 +7,7 @@ import {
 import { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import Sidebar from "../../../../../components/PatientSidebar";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export default function Cart() {
   const addToCartSel = useSelector((state) => state.addToCartReducer.cart);
 
   const deleteFromCartSel = useSelector(
-    (state) => state.deleteFromCartReducer.cart,
+    (state) => state.deleteFromCartReducer.cart
   );
 
   useEffect(() => {
@@ -39,6 +40,7 @@ export default function Cart() {
 
   return (
     <>
+      <Sidebar />
       <ul className="list-group">
         {cart &&
           cart.cart.items.map((item, index) => {

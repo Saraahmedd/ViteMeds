@@ -65,7 +65,7 @@ function LoginForm() {
               style={{ marginLeft: "65px", width: "90%", textAlign: "center" }}
               variant="success"
             >
-              Registration Successful, Redirecting ...
+              Login Successful, Redirecting ...
             </Alert>
           </>
         )}
