@@ -156,7 +156,7 @@ const PatientDashboard = () => {
 
           <Card>
             <Card.Body>
-              <Card.Title>My Orders </Card.Title>
+              <Card.Title style={{color:"#000080"}}>My Orders </Card.Title>
               <Table striped bordered hover responsive>
                 <tbody>
                   <tr>
