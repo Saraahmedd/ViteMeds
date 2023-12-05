@@ -12,3 +12,207 @@
   flex: 1; /* Allow the content wrapper to take up the remaining space */
   padding: 20px; /* Add padding or adjust as needed */
 }
+
+/* Add this to your CSS file or style component */
+
+.chat-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #3498db;
+  color: #fff;
+  border-radius: 50%;
+  padding: 13px;
+  margin-bottom: 60px;
+  cursor: pointer;
+}
+
+.chat-icon:hover {
+  background-color: #2980b9;
+}
+
+/* Optional: Style the tooltip */
+.react-tooltip {
+  font-size: 14px;
+  background-color: #3498db;
+}
+
+.bottom-modal-body {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  transform: translate3d(
+    0,
+    0,
+    0
+  ); /* Ensure smooth transition on some devices */
+}
+
+/* Add this to your CSS file or style component */
+
+.chat-panel {
+  position: fixed;
+  bottom: -400px;
+  right: 20px;
+  width: 300px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: bottom 0.3s ease-in-out;
+}
+
+.chat-panel.open {
+  bottom: 20px;
+}
+
+.chat-header {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-button {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.chat-title {
+  font-size: 16px;
+}
+
+.chat-body {
+  padding: 20px;
+}
+
+/* Style your chat messages and input area as needed */
+/* Add this to your CSS file or style component */
+
+.chat-panel {
+  position: fixed;
+  bottom: -400px;
+  right: 20px;
+  width: 320px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: bottom 0.3s ease-in-out;
+}
+
+.chat-panel.open {
+  bottom: 20px;
+}
+
+.chat-header {
+  background-color: #3498db;
+  color: #fff;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.close-button {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.chat-title {
+  font-size: 18px;
+}
+
+.chat-body {
+  padding: 20px;
+}
+
+input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.send-button {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  margin-top: 8px;
+  /* padding: 10px; */
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 18px;
+  align-self: flex-end;
+}
+
+.send-button:hover {
+  background-color: #2980b9;
+}
+
+/* Add this to your CSS file or style component */
+
+/* ... (Previous styles) */
+
+.chat-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-area {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.message {
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.user {
+  background-color: #3498db;
+  color: #fff;
+  align-self: flex-start;
+}
+
+.agent {
+  background-color: #eaeaea;
+  color: #333;
+  align-self: flex-end;
+}
+
+/* ... (Remaining styles) */
+
+.message-area {
+  flex-grow: 1;
+  max-height: 300px; /* Set your desired fixed height */
+  overflow-y: auto;
+  margin-bottom: 10px;
+
+  /* Customizing the scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: #3498db #f0f0f0; /* Track and handle colors */
+}
+
+.message-area::-webkit-scrollbar {
+  width: 8px; /* Set the width of the scrollbar */
+}
+
+.message-area::-webkit-scrollbar-thumb {
+  background-color: #3498db; /* Color of the scrollbar handle */
+  border-radius: 4px; /* Rounded corners of the scrollbar handle */
+}
+
+.message-area::-webkit-scrollbar-track {
+  background-color: #f0f0f0; /* Color of the scrollbar track */
+}

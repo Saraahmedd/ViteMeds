@@ -7,11 +7,6 @@ socket.on("connect", () => {
   //Handle security issues: Abdullah
 });
 
-// socket.on('message', (data) => {
-//   console.log('Received message:', data);
-//   // Perform any testing actions when a message is received
-// });
-
 socket.on("newMessage", (data) => {
   console.log("Received new message:", data);
 });

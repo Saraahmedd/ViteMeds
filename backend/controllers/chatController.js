@@ -1,14 +1,15 @@
 const Message = require("../models/messageModel");
 
 exports.sendMessage = async (req, res) => {
-  const { sender, receiver, content } = req.body;
+  const { content, sender } = req.body;
 
   try {
-    const newMessage = new Message({ sender, receiver, content });
+    const newMessage = new Message({ content, sender });
+    req.io.emit("newMessage", newMessage);
+
     await newMessage.save();
 
     // Emit the new message through sockets
-    req.io.emit("newMessage", newMessage);
 
     res.status(201).json({ message: "Message sent successfully" });
   } catch (error) {

@@ -23,7 +23,12 @@ const server = app.listen(port, () => {
 });
 const socketIO = require("socket.io");
 const { initSocket } = require("./utils/socket");
-const io = socketIO(server);
+const io = socketIO(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  },
+});
 initSocket(io);
 
 const adminRouter = require("./routes/adminRoutes.js");
@@ -38,8 +43,6 @@ const notificationRouter = require("./routes/notificationRoutes.js");
 const chatRoutes = require("./routes/chatRoutes");
 
 app.enable("trust proxy");
-
-const { getIO } = require("./utils/socket");
 
 // ... (other imports)
 
@@ -87,7 +90,7 @@ app.use((req, res, next) => {
 app.post(
   "/webhook",
   bodyParser.raw({ type: "application/json" }),
-  orderController.webhookCheckout,
+  orderController.webhookCheckout
 );
 
 // Body parser, reading data from body into req.body

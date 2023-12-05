@@ -14,6 +14,7 @@ import { viewCart } from "@/app/redux/actions/cartActions";
 
 // Step 2: Shipping Information
 const ShippingInformation = ({ onPrev, onNext, patient }) => {
+  
   //add validation that all fields are filled
 
   return (

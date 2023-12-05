@@ -8,6 +8,9 @@ exports.initSocket = (socketIO) => {
 
   io.on("connection", (socket) => {
     console.log("A user connected");
+    const patientId = socket.handshake.query.patientId;
+
+    socket.join(`/patient/${patientId}`);
 
     // Additional socket event handling can be added here
 

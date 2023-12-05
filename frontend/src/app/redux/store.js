@@ -47,6 +47,8 @@ import {
   updateNotificationReducer,
 } from "./reducers/notificationReducer";
 
+import { socketReducer } from "./reducers/socketReducer";
+
 const store = configureStore({
   reducer: {
     loginReducer,
@@ -84,6 +86,7 @@ const store = configureStore({
     getTotalSalesPerMonthReducer,
     getNotificationsReducer,
     updateNotificationReducer,
+    socketReducer,
   },
 });
 
