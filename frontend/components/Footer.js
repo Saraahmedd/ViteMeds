@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer className="bg-primary text-white pt-4 pb-1">
+    <footer className="bg-secondary text-white pt-4 pb-1">
       <div className="container">
         <div className="row">
           <div className="col-md-2">

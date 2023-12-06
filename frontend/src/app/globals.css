@@ -21,7 +21,7 @@
   overflow: hidden; /* Hide the overflowing parts of the diamond */
 }
 body {
-  min-height: 80vh;
+  min-height: 100vh;
 }
 .z-index-0 {
   z-index: 0;

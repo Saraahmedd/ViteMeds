@@ -25,6 +25,9 @@ export const initSocket = () => {
   return (dispatch) => {
     dispatch(connectSocket());
 
+    socketService.init(
+      JSON.parse(localStorage.getItem("userInfo")).data.user._id
+    );
     socketService.on("newMessage", (message) => {
       dispatch(receiveMessage(message));
     });

@@ -43,7 +43,7 @@ export const viewCart = () => async (dispatch) => {
   }
 };
 
-export const addToCart = (medicineId, quantity) => async (dispatch) => {
+export const addToCart = (medicineId, quantity, isSet) => async (dispatch) => {
   try {
     dispatch({
       type: ADD_TO_CART_REQUEST,
@@ -55,11 +55,10 @@ export const addToCart = (medicineId, quantity) => async (dispatch) => {
       },
       withCredentials: true,
     };
-    const { data } = await axios.post(
-      `${baseURL}/api/v1/cart`,
-      { medicineId, quantity },
-      config,
-    );
+    const body = isSet
+      ? { medicineId, setQuantity: quantity }
+      : { medicineId, quantity };
+    const { data } = await axios.post(`${baseURL}/api/v1/cart`, body, config);
 
     console.log(data.data);
     dispatch({
@@ -90,7 +89,7 @@ export const deleteFromCart = (id) => async (dispatch) => {
     };
     const { data } = await axios.delete(
       `${baseURL}/api/v1/cart/items/${id}`,
-      config,
+      config
     );
 
     console.log(data.data);
@@ -123,7 +122,7 @@ export const updateCart = (medicineId, quantity) => async (dispatch) => {
     const { data } = await axios.patch(
       `${baseURL}/api/v1/cart/items`,
       { medicineId, quantity },
-      config,
+      config
     );
     console.log(data.data);
 

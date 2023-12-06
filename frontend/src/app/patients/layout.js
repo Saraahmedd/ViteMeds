@@ -25,9 +25,8 @@ export default function RootLayout({ children }) {
 
   const handleChatIconClick = () => {
     setShowChatPanel(true);
-    if (!connected) {
-      dispatch(initSocket());
-    }
+
+    dispatch(initSocket());
   };
 
   const handleCloseChatPanel = () => {

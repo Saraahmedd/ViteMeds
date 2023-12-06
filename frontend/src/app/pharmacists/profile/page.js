@@ -81,8 +81,8 @@ const PharmacistDashboard = () => {
 
   return (
     <>
-     <Sidebar />
-     <style>
+     {/* <Sidebar /> */}
+     {/* <style>
         {`
           body {
             margin: 0;
@@ -90,7 +90,7 @@ const PharmacistDashboard = () => {
             background: linear-gradient(to right, #778899 50%, white 50%);
           }
           `}
-          </style>
+          </style> */}
      
       {loadingPage ? (
         <Spinner />

@@ -91,10 +91,11 @@ export const addToCartReducer = (state = addToCartInitialState, action) => {
 
 export const deleteFromCartReducer = (
   state = deleteFromCartInitialState,
-  action,
+  action
 ) => {
   switch (action.type) {
     case DELETE_FROM_CART_REQUEST:
+      console.log("reqqqqqqqqqqq");
       return {
         ...state,
         loading: true,
