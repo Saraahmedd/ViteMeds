@@ -9,10 +9,8 @@ const Spinner = ({}) => {
       width="120"
       ariaLabel="dna-loading"
       wrapperStyle={{
-        margin: "auto",
-        position: "absolute",
-        bottom: "55vh",
-        left: "100vh",
+        textAlign: "center",
+        width: "100%",
       }}
       wrapperClass="dna-wrapper primary"
     />

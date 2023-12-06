@@ -4,7 +4,10 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer className="bg-secondary text-white pt-4 pb-1">
+    <div
+      suppressHydrationWarning={true}
+      className="bg-primary text-white pt-4 pb-1"
+    >
       <div className="container">
         <div className="row">
           <div className="col-md-2">
@@ -83,7 +86,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
+    </div>
   );
 };
 

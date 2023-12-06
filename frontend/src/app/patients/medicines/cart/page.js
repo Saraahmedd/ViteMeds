@@ -34,6 +34,7 @@ export default function Cart() {
   const deleteFromCartSel = useSelector(
     (state) => state.deleteFromCartReducer.cart
   );
+
   const loading = useSelector((state) => state.deleteFromCartReducer.loading);
 
   useEffect(() => {

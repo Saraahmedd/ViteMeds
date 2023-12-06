@@ -34,7 +34,10 @@ export default function RootLayout({ children }) {
   };
 
   return (
-    <div className={`global-text ${inter.className}`}>
+    <div
+      suppressHydrationWarning={true}
+      className={`global-text ${inter.className}`}
+    >
       <PatientNavbar />
 
       <ReduxProvider> {children} </ReduxProvider>

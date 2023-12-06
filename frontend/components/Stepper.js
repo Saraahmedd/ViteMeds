@@ -18,11 +18,11 @@ const Stepper = ({ currentStep, totalSteps, onPrev, onNext }) => {
       font-family: "Poppins", sans-serif;
     }
 
-    .container {
+    .container2 {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 40px;
+    
       max-width: 400px;
       width: 100%;
     }
@@ -113,7 +113,17 @@ const Stepper = ({ currentStep, totalSteps, onPrev, onNext }) => {
       }}
     >
       <style>{stepperStyles}</style>
-      <div className="container">
+      <div
+        className="container"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          maxWidth: "400px",
+          width: "100%",
+          padding: "20px",
+        }}
+      >
         <div className="steps">
           {circles.map((step) => (
             <div

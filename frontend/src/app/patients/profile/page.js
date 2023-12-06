@@ -199,7 +199,7 @@ const PatientDashboard = () => {
           <Nav
             variant="tabs"
             defaultActiveKey="/patients/profile"
-            style={{ marginLeft: "350px" }}
+            // style={{ marginLeft: "350px" }}
           >
             <Nav.Item>
               <Nav.Link href="/patients/profile">Profile</Nav.Link>
@@ -211,7 +211,7 @@ const PatientDashboard = () => {
           <Card
             style={{
               background: "linear-gradient(to right, #b0c4de 25%, white 65%)",
-              marginLeft: "350px",
+              // marginLeft: "350px",
               marginBottom: "5px",
             }}
           >

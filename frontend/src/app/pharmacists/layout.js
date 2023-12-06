@@ -30,9 +30,9 @@ export default function RootLayout({ children }) {
   return (
     <div className={`global-text ${inter.className}`}>
       <PharmacistNavbar />
-      <div className="p-2 m-5">
-        <ReduxProvider> {children} </ReduxProvider>
-      </div>
+
+      <ReduxProvider> {children} </ReduxProvider>
+
       <div
         className="chat-icon"
         onClick={handleChatIconClick}
