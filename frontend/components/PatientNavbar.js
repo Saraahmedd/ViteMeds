@@ -5,13 +5,15 @@ import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { FiUser, FiShoppingCart, FiLogOut, FiUnlock } from "react-icons/fi";
 import { logoutAction } from "@/app/redux/actions/authActions";
-import { NavDropdown } from "react-bootstrap";
+import { Modal, NavDropdown } from "react-bootstrap";
+import ChangePassword from "./ChangePassword";
 // ... (import statements remain the same)
 
 // PatientNavbar component
 const PatientNavbar = () => {
   // State for managing the dropdown visibility
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   // Redux dispatch
   const dispatch = useDispatch();
@@ -43,6 +45,19 @@ const PatientNavbar = () => {
   return (
     <nav className="navbar navbar-light bg-light">
       <div className="container d-flex justify-content-between align-items-center">
+        <Modal
+          show={showModal}
+          size="md"
+          onHide={() => setShowModal(false)}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          className="rounded"
+        >
+          <Modal.Header closeButton className="bg-primary"></Modal.Header>
+          <Modal.Body>
+            <ChangePassword />
+          </Modal.Body>
+        </Modal>
         {/* Back button */}
         <Image
           src="https://via.placeholder.com/50"
@@ -72,7 +87,14 @@ const PatientNavbar = () => {
               {/* //TODO: Handle on click for logout to call the action + change
               //password to open the modal */}
               <NavDropdown.Item href="/guest/login">Logout</NavDropdown.Item>
-              <NavDropdown.Item href="#">Change Password</NavDropdown.Item>
+              <NavDropdown.Item
+                href="#"
+                onClick={(e) => {
+                  setShowModal(!showModal);
+                }}
+              >
+                Change Password
+              </NavDropdown.Item>
             </NavDropdown>
           </div>
 

@@ -1,95 +1,109 @@
+// Import necessary libraries and components
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
-import { Modal } from "react-bootstrap";
-import ChangePassword from "./ChangePassword";
-import { Button } from "./Button";
-
+import { FiUser, FiShoppingCart, FiLogOut, FiUnlock } from "react-icons/fi";
 import { logoutAction } from "@/app/redux/actions/authActions";
+import { Modal, NavDropdown } from "react-bootstrap";
+import ChangePassword from "./ChangePassword";
+// ... (import statements remain the same)
 
-const PharmacistNavbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+// PatientNavbar component
+const PatientNavbar = () => {
+  // State for managing the dropdown visibility
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  const goBack = () => {
-    history.back();
-  };
+  // Redux dispatch
   const dispatch = useDispatch();
 
+  // Function to handle logout
   const handleLogout = () => {
     dispatch(logoutAction());
+    handleCloseDropdown();
   };
+
+  // Function to handle change password (you can replace this with your actual logic)
+  const handleChangePassword = () => {
+    // Implement your logic for changing the password
+    console.log("Changing password");
+    handleCloseDropdown();
+  };
+
+  // Function to toggle the dropdown visibility
+  const handleToggleDropdown = () => {
+    console.log("Toggling dropdown visibility");
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  // Close dropdown when clicking outside
+  const handleCloseDropdown = () => {
+    setIsDropdownOpen(false);
+  };
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light w-100">
-      <div className="container d-flex flex-row justify-content-between w-100">
-        <Modal
-          show={showModal}
-          size="md"
-          onHide={() => setShowModal(false)}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          className="rounded"
-        >
-          <Modal.Header closeButton className="bg-primary"></Modal.Header>
-          <Modal.Body>
-            <ChangePassword />
-          </Modal.Body>
-        </Modal>
+    <nav className="navbar navbar-light bg-light">
+      <Modal
+        show={showModal}
+        size="md"
+        onHide={() => setShowModal(false)}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        className="rounded"
+      >
+        <Modal.Header closeButton className="bg-primary"></Modal.Header>
+        <Modal.Body>
+          <ChangePassword />
+        </Modal.Body>
+      </Modal>
+      <div className="container d-flex justify-content-between align-items-center">
+        {/* Back button */}
         <Image
-          src="/chevron.svg"
-          width={20}
-          height={20}
-          className="mx-3 rotate-90 pt-2 pointer-cursor"
-          onClick={goBack}
-        ></Image>
-        <div className="title col-md-6 col-sm-6">
-          <div className="logo"></div>
-          <h1>
-            <a className="navbar-brand" href="/pharmacists/medicines">
-              Home
-            </a>
-          </h1>
-          <button className="navbar-toggler" type="button" onClick={toggleMenu}>
-            <span className="navbar-toggler-icon"></span>
-          </button>
-        </div>
-        <div
-          className={`col-sm-6 links&buttons collapse navbar-collapse ms-auto col-md-2 align-self-end ${
-            isMenuOpen ? "show" : ""
-          }`}
-        >
-          <ul className="navbar-nav ms-auto">
-            <li>
-              <Button
-                className="col-md-8 mx-auto mt-3"
-                variant="md"
+          src="https://via.placeholder.com/50"
+          alt="Logo"
+          width={50}
+          height={50}
+        />
+
+        {/* Dummy Logo */}
+
+        {/* Icons and Dropdown */}
+        <div className="d-flex align-items-center position-relative">
+          {/* User Icon with dropdown toggle */}
+          <div
+            className="mx-2 pointer-cursor position-relative"
+            onClick={handleToggleDropdown}
+            onBlur={handleCloseDropdown}
+            tabIndex={0}
+          >
+            {/* Dropdown Content */}
+
+            <NavDropdown
+              title={<FiUser size={24} color="#007bff" />}
+              id="basic-nav-dropdown"
+              alignRight
+            >
+              {/* //TODO: Handle on click for logout to call the action + change
+              //password to open the modal */}
+              <NavDropdown.Item href="/guest/login">Logout</NavDropdown.Item>
+              <NavDropdown.Item
+                href="#"
                 onClick={(e) => {
                   setShowModal(!showModal);
                 }}
-                text={"Change Password"}
               >
-                {" "}
-              </Button>
-            </li>
-            <li className="nav-item ms-auto">
-              <a
-                onClick={handleLogout}
-                className="btn btn-primary"
-                href="/guest/Login"
-              >
-                Logout
-              </a>
-            </li>
-          </ul>
+                Change Password
+              </NavDropdown.Item>
+            </NavDropdown>
+          </div>
+
+          {/* Shopping Cart Icon */}
         </div>
       </div>
     </nav>
   );
 };
 
-export default PharmacistNavbar;
+// Export the PatientNavbar component
+export default PatientNavbar;
