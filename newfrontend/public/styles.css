@@ -1,0 +1,5 @@
+.word-animation {
+    background: -webkit-linear-gradient(#2E1760, #5e08c4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;  
+}
