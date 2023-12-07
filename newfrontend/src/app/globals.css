@@ -15,6 +15,7 @@
 
 * {
   font-family: 'GeneralSans', 'Times New Roman';
+  overflow-x: hidden;
 }
 
 
@@ -27,7 +28,7 @@
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.5s ease;
+  transition: all 0.5s ease;
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
