@@ -1,7 +1,11 @@
+import PricingCard from "@/components/HealthPackagesCard";
+import MyComponent from "@/components/PersonCard";
+
 export default function Dashboard() {
-    return (
-        <>
-            <h1>Hello</h1>
-        </>
-    );
+  return (
+    <>
+      <MyComponent />
+      <PricingCard />
+    </>
+  );
 }
