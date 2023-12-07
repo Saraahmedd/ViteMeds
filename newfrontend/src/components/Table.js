@@ -22,11 +22,11 @@ const colors = {
 const TableComponent = ({ columns, fields, rows, badgeColumns, buttons }) => {
   return (
     <Card>
-      <Flex justifyContent="start" className="space-x-2">
+      {/* <Flex justifyContent="start" className="space-x-2">
         <Title>Purchases</Title>
         <Badge color="gray">{rows.length}</Badge>
       </Flex>
-      <Text className="mt-2">Overview of this month's purchases</Text>
+      <Text className="mt-2">Overview of this month's purchases</Text> */}
       <Table className="mt-6">
         <TableHead>
           <TableRow>
