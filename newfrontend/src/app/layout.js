@@ -7,6 +7,8 @@ export const metadata = {
   description: "Login to Seaats",
 };
 
+import { ReduxProvider } from "./redux/provider";
+
 const myFont = localFont({
   src: [
     {
@@ -35,7 +37,9 @@ const myFont = localFont({
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="min-h-screen">
-      <body className={myFont.className + " min-h-screen"}>{children}</body>
+      <body className={myFont.className + " min-h-screen"}>
+        <ReduxProvider>{children} </ReduxProvider>
+      </body>
     </html>
   );
 }
