@@ -2,8 +2,8 @@ import React from "react";
 
 const MyComponent = () => {
   return (
-    <div className="m-10 max-w-sm">
-      <div className="rounded-lg border bg-white px-4 pt-8 pb-10 shadow-lg">
+    <div className="m-10  max-w-sm">
+      <div className="rounded-lg border  px-4 pt-8 pb-10 shadow-lg">
         <div className="relative mx-auto w-36 rounded-full">
           <span className="absolute right-0 m-3 h-3 w-3 rounded-full bg-green-500 ring-2 ring-green-300 ring-offset-2"></span>
           <img
@@ -22,7 +22,7 @@ const MyComponent = () => {
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto,
           placeat!
         </p>
-        <ul className="mt-3 divide-y rounded bg-gray-100 py-2 px-3 text-gray-600 shadow-sm hover:text-gray-700 hover:shadow">
+        <ul className="mt-3 divide-y rounded bg-gray-800 py-2 px-3 text-gray-600 shadow-sm hover:text-gray-700 hover:shadow">
           <li className="flex items-center py-3 text-sm">
             <span>Status</span>
             <span className="ml-auto">

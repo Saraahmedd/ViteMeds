@@ -1,8 +1,12 @@
+"use client";
 import PricingCard from "@/components/HealthPackagesCard";
 import MyComponent from "@/components/PersonCard";
 
 import { ProductCard } from "@/components/ProductCard";
+import ChangePasswordModal from "@/components/ChangePassword";
 import { Card, Grid } from "@tremor/react";
+import MembersTable from "@/components/Table";
+import ProfileCard from "@/components/ProfileCard";
 
 export default function Dashboard() {
   return (
@@ -14,9 +18,14 @@ export default function Dashboard() {
           ))}
         </Grid>
         <MyComponent />
+
         <PricingCard />
+        <ChangePasswordModal />
       </Card>
+
+      <MembersTable />
       <ProductCard />
+      <ProfileCard />
     </>
   );
 }
