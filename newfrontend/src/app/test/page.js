@@ -2,6 +2,7 @@
 
 import PersonalCard from "@/components/PersonCard";
 import { ProductCard } from "@/components/ProductCard";
+import TableComponent from "@/components/Table";
 import MembersTable from "@/components/Table";
 import { Card, Grid } from "@tremor/react";
 
@@ -26,25 +27,44 @@ const buttons = {
 };
 
 export default function Dashboard() {
+  const columns = [
+    "Transaction ID",
+    "User",
+    "Item",
+    "Status",
+    "Amount",
+    "Link",
+  ];
+  const fields = ["transactionID", "user", "item", "status", "amount", "link"];
+  const badgeColumns = ["status"];
+  const buttons = [
+    { size: "xs", variant: "secondary", color: "gray", label: "See details" },
+  ];
+  const transactions = [
+    {
+      transactionID: "#123456",
+      user: "Lena Mayer",
+      item: "Under Armour Shorts",
+      status: "Ready for dispatch",
+      amount: "$ 49.90",
+      link: "#",
+    },
+    {
+      transactionID: "#999999",
+      user: "John Doe",
+      item: "Test Item",
+      status: "Cancelled",
+      amount: "$ 99.99",
+      link: "#",
+    },
+  ];
   return (
-    <PersonalCard
-      imageUrl="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
-      name="Michael Simbal"
-      title="Marketing Exec. at Denva Corp"
-      description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto, placeat!"
-      data={data}
-      displayColumns={["Status", "Joined On"]}
-      actualColumns={["status", "joinedOn"]}
+    <TableComponent
+      columns={columns}
+      fields={fields}
+      rows={transactions}
+      badgeColumns={badgeColumns}
       buttons={buttons}
-      worker={true}
-      fields={["email", "birthdate", "username", "speciality", "affiliation"]}
-      displayNames={[
-        "Email",
-        "Birth Date",
-        "Username",
-        "Speciality",
-        "Affiliation",
-      ]}
     />
   );
 }

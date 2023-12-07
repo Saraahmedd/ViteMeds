@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 export default async function DashboardLayout({ children }) {
   return (
     <>
-      <Sidebar />
+      <Sidebar role={"patient"} />
       <div className="p-[32px] sm:ml-64 min-h-screen flex flex-col">
         {children}
         <Footer />

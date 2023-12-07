@@ -166,7 +166,7 @@ const PersonalCard = ({
             alt=""
           />
         </div>
-        <h1 className="my-1 text-center text-xl font-bold leading-8 text-gray-900">
+        <h1 className="my-1 text-center text-xl font-bold leading-8 text-gray-400">
           {name}
         </h1>
         {data.affiliation && (
