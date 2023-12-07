@@ -5,6 +5,8 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
     "./node_modules/@tremor/**/*.{js,ts,jsx,tsx}",
   ],
+  // darkMode: "class",
+
   theme: {
     transparent: "transparent",
     current: "currentColor",
@@ -16,7 +18,7 @@ module.exports = {
             faint: "#eff6ff", // blue-50
             muted: "#bfdbfe", // blue-200
             subtle: "#60a5fa", // blue-400
-            DEFAULT: "#2E1760", // blue-500
+            DEFAULT: "#3b82f6", // blue-500
             emphasis: "#1d4ed8", // blue-700
             inverted: "#ffffff", // white
           },
@@ -40,7 +42,6 @@ module.exports = {
             inverted: "#ffffff", // white
           },
         },
-        // dark mode
         "dark-tremor": {
           brand: {
             faint: "#0B1229", // custom
@@ -57,14 +58,14 @@ module.exports = {
             emphasis: "#d1d5db", // gray-300
           },
           border: {
-            DEFAULT: "#1f2937", // gray-800
+            DEFAULT: "#374151", // gray-700
           },
           ring: {
             DEFAULT: "#1f2937", // gray-800
           },
           content: {
             subtle: "#4b5563", // gray-600
-            DEFAULT: "#6b7280", // gray-600
+            DEFAULT: "#6b7280", // gray-500
             emphasis: "#e5e7eb", // gray-200
             strong: "#f9fafb", // gray-50
             inverted: "#000000", // black
