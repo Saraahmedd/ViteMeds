@@ -19,14 +19,21 @@ const colors = {
   Shipped: "emerald",
 };
 
-const TableComponent = ({ columns, fields, rows, badgeColumns, buttons }) => {
+const TableComponent = ({
+  columns,
+  fields,
+  rows,
+  badgeColumns,
+  buttons,
+  title,
+}) => {
   return (
     <Card>
-      {/* <Flex justifyContent="start" className="space-x-2">
-        <Title>Purchases</Title>
+      <Flex justifyContent="start" className="space-x-2">
+        <Title>{title}</Title>
         <Badge color="gray">{rows.length}</Badge>
       </Flex>
-      <Text className="mt-2">Overview of this month's purchases</Text> */}
+      {/* <Text className="mt-2">Overview of this month's purchases</Text> */}
       <Table className="mt-6">
         <TableHead>
           <TableRow>
