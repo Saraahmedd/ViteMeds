@@ -2,18 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'GeneralSans';
+  src: url('/fonts/GeneralSans-Variable.woff2') format('woff2'),
+    url('/fonts/GeneralSans-Variable.woff') format('woff'),
+    url('/fonts/GeneralSans-Variable.ttf') format('truetype');
+  font-weight: 200 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+
+* {
+  font-family: 'GeneralSans', 'Times New Roman';
+}
+
+
 :root {
   --foreground-rgb: 231, 227, 252, 0.87;
   --background-start-rgb: 23, 34, 48;
   --background-end-rgb: 20, 30, 43;
 }
 
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
 body {
   color: rgba(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
+  background: linear-gradient(to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+.bgColor {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.colorColor {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.cartbtn {
+  transition: background-color 0.5s ease;
 }
