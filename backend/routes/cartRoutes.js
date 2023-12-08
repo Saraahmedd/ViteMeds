@@ -3,28 +3,16 @@ const router = express.Router({ mergeParams: true });
 const cartController = require("../controllers/cartController");
 const authController = require("../controllers/authController");
 
-router.get(
-  "/",
-  authController.protect,
-  cartController.getCart
-);
+router.get("/", authController.protect, cartController.getCart);
 
-router.post(
-  "/",
-  authController.protect,
-  cartController.addToCart
-);
+router.post("/", authController.protect, cartController.addToCart);
 
-router.patch(
-  "/items",
-  authController.protect,
-  cartController.updateCartItem
-);
-  
+router.patch("/items", authController.protect, cartController.updateCartItem);
+
 router.delete(
   "/items/:medicineId",
   authController.protect,
-  cartController.removeCartItem
+  cartController.removeCartItem,
 );
 
 module.exports = router;

@@ -5,36 +5,47 @@ This guide will provide an overview of the file structure and configuration vari
 ## File Structure
 
 ### Scripts
+
 - Contains any custom scripts like seeding db scripts with dummy data.
 
 ### Uploads
+
 - Directory for file uploads or related functionality (e.g uploading photos).
 
 ### Constants
+
 - Holds enums, and other constants used throughout the application.
 
 ### Routes
+
 - Defines API endpoints and their corresponding controllers (aka handlers).
 
 ### Models
+
 - Contains Mongoose models (aka tables) representing our application's data structure.
 
 ### Controllers
+
 - Houses the logic for handling various API endpoints (this will be called in the routes dir see the link?).
 
 ### Email
+
 - Stores templates for email notifications.
 
 ### config.env
+
 - Configuration file for environment variables.
 
 ### Server.js
+
 - Entry point of the application, where the server is started.
 
 ### App.js
+
 - Main application file, setting up middleware and connecting routes.
 
 ### Utils
+
 - Utility functions and classes for the application.
   - **AppError.js**: Custom error class, use its constuctor whenever there is an error you figured out, for example passwords do not match.
   - **CatchAsync.js**: Wrapper function to handle async functions and errors.
@@ -65,12 +76,15 @@ Make sure to configure the following environment variables in your `config.env` 
 ## Usage Guidelines
 
 - **Use `catchAsync` for Error Handling**: Wrap all asynchronous handlers in controllers using the `catchAsync` utility.
- ### It takes an arrow ASYNC function as  parameter and catches any unexpected errors in that function. Also you can return errors safely inside that function, they will be caught. I suggest however to use 
- ### next(new AppError(name,code)) when returning a new AppError, this will let the errorController middleware to handle the response for you. This way we won't have repeated try catch blocks
+
+### It takes an arrow ASYNC function as parameter and catches any unexpected errors in that function. Also you can return errors safely inside that function, they will be caught. I suggest however to use
+
+### next(new AppError(name,code)) when returning a new AppError, this will let the errorController middleware to handle the response for you. This way we won't have repeated try catch blocks
 
 - **Error Handling**: When encountering errors, use `next(new AppError(message, statusCode))` to pass the error to the error handler. The error controller will handle these errors automatically. Be mindful of potential future specific error handling needs, such as JWT errors. We will need to handle them in errorController in the future.
 
 ################################ handlerFactory.js
+
 ## CRUD Operations with Handler Factory
 
 The `handlerFactory` provides pre-built controller functions for common CRUD operations, simplifying the process of creating, reading, updating, and deleting records.
@@ -80,8 +94,8 @@ The `handlerFactory` provides pre-built controller functions for common CRUD ope
 To create a new example, use the `createExample` function from the `handlerFactory`. This function allows you to handle `POST` requests for creating new records in the database.
 
 ```javascript
-const Example = require('../models/exampleModel');
-const factory = require('./handlerFactory');
+const Example = require("../models/exampleModel");
+const factory = require("./handlerFactory");
 
 exports.createExample = factory.createOne(Example);
 ```
@@ -91,8 +105,8 @@ exports.createExample = factory.createOne(Example);
 Retrieve all examples from the database using the `getAllExamples` function from the `handlerFactory`. This function supports basic filtering, sorting, pagination, and field limiting.
 
 ```javascript
-const Example = require('../models/exampleModel');
-const factory = require('./handlerFactory');
+const Example = require("../models/exampleModel");
+const factory = require("./handlerFactory");
 
 exports.getAllExamples = factory.getAll(Example);
 ```
@@ -102,8 +116,8 @@ exports.getAllExamples = factory.getAll(Example);
 Retrieve a single example based on the provided ID using the `getExample` function from the `handlerFactory`.
 
 ```javascript
-const Example = require('../models/exampleModel');
-const factory = require('./handlerFactory');
+const Example = require("../models/exampleModel");
+const factory = require("./handlerFactory");
 
 exports.getExample = factory.getOne(Example);
 ```
@@ -113,8 +127,8 @@ exports.getExample = factory.getOne(Example);
 Update an example based on the provided ID with the data from the `req.body` using the `updateExample` function from the `handlerFactory`.
 
 ```javascript
-const Example = require('../models/exampleModel');
-const factory = require('./handlerFactory');
+const Example = require("../models/exampleModel");
+const factory = require("./handlerFactory");
 
 exports.updateExample = factory.updateOne(Example);
 ```
@@ -124,8 +138,8 @@ exports.updateExample = factory.updateOne(Example);
 Delete an example based on the provided ID using the `deleteExample` function from the `handlerFactory`.
 
 ```javascript
-const Example = require('../models/exampleModel');
-const factory = require('./handlerFactory');
+const Example = require("../models/exampleModel");
+const factory = require("./handlerFactory");
 
 exports.deleteExample = factory.deleteOne(Example);
 ```
@@ -142,7 +156,6 @@ exports.deleteExample = factory.deleteOne(Example);
 
 By following these guidelines and understanding the provided `handlerFactory`, you can efficiently handle basic CRUD operations in our project. Always exercise caution and tailor the functions based on the specific needs of your application. Happy coding!
 
-
 Certainly! Here's a README file that explains how to use the `APIFeatures` class and how to structure your API request URLs according to the regular expressions used in the provided methods.
 
 ---
@@ -155,90 +168,90 @@ The `APIFeatures` class is a utility for building query pipelines to handle API 
 
 1. **Import the `APIFeatures` class:**
 
-    Import the `APIFeatures` class into your file where you intend to use it.
+   Import the `APIFeatures` class into your file where you intend to use it.
 
-    ```javascript
-    const APIFeatures = require('./path/to/APIFeatures');
-    ```
+   ```javascript
+   const APIFeatures = require("./path/to/APIFeatures");
+   ```
 
 2. **Instantiate the `APIFeatures` class:**
 
-    Create a new instance of the `APIFeatures` class, passing the base query object and the request query string as parameters.
+   Create a new instance of the `APIFeatures` class, passing the base query object and the request query string as parameters.
 
-    ```javascript
-    const features = new APIFeatures(Model.find(filter), req.query);
-    ```
+   ```javascript
+   const features = new APIFeatures(Model.find(filter), req.query);
+   ```
 
 3. **Filtering:**
 
-    Use the `filter` method to filter the query based on the request query parameters.
+   Use the `filter` method to filter the query based on the request query parameters.
 
-    - Filtering uses comparison operators: `$eq`, `$gt`, `$gte`, `$lt`, `$lte`.
+   - Filtering uses comparison operators: `$eq`, `$gt`, `$gte`, `$lt`, `$lte`.
 
-    **URL Example:**
-    
-    ```
-    /api/endpoint?price[gte]=1000&rating[gte]=4
-    ```
+   **URL Example:**
+
+   ```
+   /api/endpoint?price[gte]=1000&rating[gte]=4
+   ```
 
 4. **Sorting:**
 
-    Utilize the `sort` method to sort the query results based on the specified sorting parameters.
+   Utilize the `sort` method to sort the query results based on the specified sorting parameters.
 
-    - Multiple sorting parameters can be comma-separated.
+   - Multiple sorting parameters can be comma-separated.
 
-    **URL Example:**
+   **URL Example:**
 
-    ```
-    /api/endpoint?sort=price,-rating
-    ```
+   ```
+   /api/endpoint?sort=price,-rating
+   ```
 
 5. **Limiting Fields:**
 
-    Apply the `limitFields` method to select specific fields from the query result based on the request.
+   Apply the `limitFields` method to select specific fields from the query result based on the request.
 
-    - Specify fields to include or exclude using the `fields` parameter.
+   - Specify fields to include or exclude using the `fields` parameter.
 
-    **URL Example:**
+   **URL Example:**
 
-    ```
-    /api/endpoint?fields=name,price
-    ```
+   ```
+   /api/endpoint?fields=name,price
+   ```
 
 6. **Pagination:**
 
-    Use the `paginate` method to handle pagination, specifying the page number and the limit of results per page.
+   Use the `paginate` method to handle pagination, specifying the page number and the limit of results per page.
 
-    - Defaults to page 1 and limit 100 if not specified.
+   - Defaults to page 1 and limit 100 if not specified.
 
-    **URL Example:**
+   **URL Example:**
 
-    ```
-    /api/endpoint?page=2&limit=10
-    ```
+   ```
+   /api/endpoint?page=2&limit=10
+   ```
 
 7. **Execute the Query:**
 
-    After chaining the desired methods, access the modified query using `features.query`.
+   After chaining the desired methods, access the modified query using `features.query`.
 
-    ```javascript
-    const doc = await features.query;
-    ```
+   ```javascript
+   const doc = await features.query;
+   ```
 
 8. **Complete Example:**
 
-    ```javascript
-    let filter = {};
-    if (req.params.tourId) filter = { tour: req.params.tourId };
+   ```javascript
+   let filter = {};
+   if (req.params.tourId) filter = { tour: req.params.tourId };
 
-    const features = new APIFeatures(Model.find(filter), req.query)
-        .filter()
-        .sort()
-        .limitFields()
-        .paginate();
+   const features = new APIFeatures(Model.find(filter), req.query)
+     .filter()
+     .sort()
+     .limitFields()
+     .paginate();
 
-    const doc = await features.query;
-    ```
+   const doc = await features.query;
+   ```
 
 ---
 

@@ -1,6 +1,6 @@
-const nodemailer = require('nodemailer');
-const pug = require('pug');
-const htmlToText = require('html-to-text');
+const nodemailer = require("nodemailer");
+const pug = require("pug");
+const htmlToText = require("html-to-text");
 
 module.exports = class Email {
   constructor(user, OTP) {
@@ -10,14 +10,14 @@ module.exports = class Email {
   }
 
   newTransport() {
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === "production") {
       // Sendgrid
       return nodemailer.createTransport({
-        service: 'SendGrid',
+        service: "SendGrid",
         auth: {
           user: process.env.SENDGRID_USERNAME,
-          pass: process.env.SENDGRID_PASSWORD
-        }
+          pass: process.env.SENDGRID_PASSWORD,
+        },
       });
     }
 
@@ -26,8 +26,8 @@ module.exports = class Email {
       port: process.env.EMAIL_PORT,
       auth: {
         user: process.env.EMAIL_USERNAME,
-        pass: process.env.EMAIL_PASSWORD
-      }
+        pass: process.env.EMAIL_PASSWORD,
+      },
     });
   }
 
@@ -35,9 +35,9 @@ module.exports = class Email {
   async send(template, subject) {
     // 1) Render HTML based on a pug template
     const html = pug.renderFile(`${__dirname}/../email/${template}.pug`, {
-      firstName: this.firstName,
+      // firstName: this.firstName,
       OTP: this.OTP,
-      subject
+      subject,
     });
 
     // 2) Define email options
@@ -46,7 +46,7 @@ module.exports = class Email {
       to: this.to,
       subject,
       html,
-      text: htmlToText.fromString(html)
+      text: htmlToText.fromString(html),
     };
 
     // 3) Create a transport and send email
@@ -54,13 +54,17 @@ module.exports = class Email {
   }
 
   async sendWelcome() {
-    await this.send('welcome', 'Welcome to elha2ny!');
+    await this.send("welcome", "Welcome to elha2ny!");
+  }
+  async sendMedOutfStock(medicine) {
+    this.medicine = medicine;
+    await this.send("medicineOutOfStock", "Medicine out of stock alert!");
   }
 
   async sendPasswordReset() {
     await this.send(
-      'passwordReset',
-      'Your password reset token (valid for only 10 minutes)'
+      "passwordReset",
+      "Your password reset token (valid for only 10 minutes)",
     );
   }
 };

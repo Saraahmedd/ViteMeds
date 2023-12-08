@@ -59,7 +59,26 @@ function Profile() {
 
         <div className="flex flex-wrap gap-x-4 gap-y-8">
           <div className="prof h-96 w-3/5 rounded-xl p-10"></div>
-          <div className="prof h-96 w-[35rem] rounded-xl p-10"></div>
+          <div className="prof h-96 w-[35rem] rounded-xl p-10">
+          <input
+                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                  type="password"
+                  placeholder="Old Password"
+                />
+                <input
+                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                  type="password"
+                  placeholder="New Password"
+                />
+                <input
+                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                  type="password"
+                  placeholder="Confirm Password"
+                />
+                <button className="mt-5 tracking-wide font-semibold bg-purple-600 text-gray-100 w-full py-4 rounded-lg hover:bg-purple-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                  <span className="ml-3">Submit</span>
+                </button>
+          </div>
           <TableComponent
             columns={columns}
             fields={fields}
