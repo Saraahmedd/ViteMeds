@@ -7,9 +7,9 @@ export default async function DashboardLayout({ children }) {
   return (
     <>
       <Sidebar role={"patient"} />
-      <div className="p-[32px] sm:ml-64 flex flex-col">
+      <div className="p-[32px] grow flex-1 sm:ml-64 flex flex-col">
         {children}
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </>
   );

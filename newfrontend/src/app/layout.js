@@ -40,7 +40,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className="dark">
       <body className={myFont.className + " min-h-screen flex flex-col "}>
         <ReduxProvider>{children} </ReduxProvider>
-        <div className="flex-1 grow"></div>
+        {/* <div className="flex-1 grow"></div> */}
         <Footer />
       </body>
     </html>
