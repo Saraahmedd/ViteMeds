@@ -71,7 +71,11 @@ const TableComponent = ({
                 <TableCell>
                   {buttons.map((button, buttonIndex) => (
                     <Button
-                      onClick={(e) => button.function(item._id)}
+                      onClick={
+                        button.label !== "Documents"
+                          ? (e) => button.function(item._id)
+                          : (e) => button.function(item.pharmacistID)
+                      }
                       key={buttonIndex}
                       {...button}
                     >

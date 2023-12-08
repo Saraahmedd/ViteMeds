@@ -25,13 +25,14 @@ const getPharmacistInitialState = {
 };
 export const getPharmacistsReducer = (
   state = getPharmacistsInitialState,
-  action,
+  action
 ) => {
   switch (action.type) {
     case GET_PHARMACISTS_REQUEST:
       return {
         ...state,
         loading: true,
+        success: false,
         error: null,
       };
     case GET_PHARMACISTS_SUCCESS:
@@ -39,12 +40,14 @@ export const getPharmacistsReducer = (
         ...state,
         pharmacists: action.payload,
         loading: false,
+        success: true,
         error: null,
       };
     case GET_PHARMACISTS_FAIL:
       return {
         ...state,
         loading: false,
+        success: false,
         error: action.payload,
       };
     default:
@@ -53,7 +56,7 @@ export const getPharmacistsReducer = (
 };
 export const getPharmacistReducer = (
   state = getPharmacistInitialState,
-  action,
+  action
 ) => {
   switch (action.type) {
     case GET_PHARMACIST_REQUEST:
@@ -86,6 +89,7 @@ export const adminAcceptPharmacistReducer = (state = {}, action) => {
       return {
         ...state,
         loading: true,
+        success: false,
         error: null,
       };
     case PHARMACIST_ACCEPTED_SUCCESS:
@@ -93,12 +97,14 @@ export const adminAcceptPharmacistReducer = (state = {}, action) => {
         ...state,
         pharmacist: action.payload,
         loading: false,
+        success: true,
         error: null,
       };
     case PHARMACIST_ACCEPTED_FAIL:
       return {
         ...state,
         loading: false,
+        success: false,
         error: action.payload,
       };
     default:
