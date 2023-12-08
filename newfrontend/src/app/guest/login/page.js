@@ -7,7 +7,7 @@ import { login } from "@/app/redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import {useRouter} from "next/router";
 import { redirect } from "next/navigation";
-import { TextInput } from "@tremor/react";
+import { Button, TextInput } from "@tremor/react";
 import { BottomCallout } from "@/components/BottomCallout";
 const Login = () => {
 
@@ -84,18 +84,12 @@ const Login = () => {
                   required
                   error={loginError}
                 />
-                {loginLoading ? (
-                  <button className="mt-5 tracking-wide font-semibold bg-purple-600 text-gray-100 w-full py-4 rounded-lg hover:bg-purple-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
-                >
-                  <span
-                      className="spinner-border spinner-border-sm"
-                      role="status"
-                      aria-hidden="true"
-                    ></span>Logging In...
-                </button>) : (<button className="mt-5 tracking-wide font-semibold bg-purple-600 text-gray-100 w-full py-4 rounded-lg hover:bg-purple-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
-                onClick={handleLogin}>
-                  <span className="ml-3">Log In</span>
-                </button>) }
+               <Button className="mt-5 tracking-wide font-semibold bg-purple-600 text-gray-100 w-full py-4 rounded-lg hover:bg-purple-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+                onClick={handleLogin}
+                loading = {loginLoading}
+                color={"purple"}>
+                <span className="ml-3">Log In</span>
+                </Button>
                 
                 {/* Forgot Password Link */}
                 <div className="mt-2 text-sm text-gray-500 text-center">
@@ -109,9 +103,10 @@ const Login = () => {
           </div>
           
           {/* Sign Up Button */}
-          <button className="mt-4 tracking-wide font-semibold bg-purple-600 text-gray-100 w-full py-4 rounded-lg hover:bg-purple-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+          <Button className="mt-4 tracking-wide font-semibold bg-purple-600 text-gray-100 w-full py-4 rounded-lg hover:bg-purple-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+          color={"purple"}>
             <span className="ml-3">Sign Up</span>
-          </button>
+          </Button>
               </div>
             </div>
           </div>
