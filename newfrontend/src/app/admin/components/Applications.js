@@ -6,6 +6,7 @@ import TableComponent from "@/components/Table";
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { formatDateToDDMMYYYY } from "../../redux/validators";
+import { DatePicker, DateRangePicker } from "@tremor/react";
 
 //OPTIONAL
 // const buttons = {
@@ -88,6 +89,7 @@ const Application = () => {
               columns={["Username", "Name", "Email"]}
               fields={["username", "name", "email"]}
               freeze={freeze}
+              filters={<DateRangePicker className="z-10" />}
               buttons={[
                 {
                   size: "xs",

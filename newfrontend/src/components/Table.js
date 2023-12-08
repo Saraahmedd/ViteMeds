@@ -40,6 +40,7 @@ const TableComponent = ({
         <Badge>{rows?.length}</Badge>
       </Flex>
       {/* <Text className="mt-2">Overview of this month's purchases</Text> */}
+
       <Table className="mt-6">
         <TableHead>
           <TableRow>
