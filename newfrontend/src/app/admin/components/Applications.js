@@ -9,16 +9,6 @@ import { formatDateToDDMMYYYY } from "../../redux/validators";
 import { DatePicker, DateRangePicker } from "@tremor/react";
 
 //OPTIONAL
-// const buttons = {
-//   right: {
-//     label: "Reject",
-//     onClick: () => console.log("Purple button clicked"),
-//   },
-//   left: {
-//     label: "Accept",
-//     onClick: () => console.log("Transparent button clicked"),
-//   },
-// };
 
 const Application = () => {
   const dispatch = useDispatch();
@@ -35,7 +25,7 @@ const Application = () => {
   useEffect(() => {
     // dispatch(login("sysadmin","pass1234"));
     dispatch(getPharmacists());
-  }, [dispatch, removeLoading]);
+  }, [dispatch, removeLoading, approvalLoading]);
 
   const [freeze, setFreeze] = useState(false);
 
@@ -48,7 +38,40 @@ const Application = () => {
     }
     setFreeze(true);
   };
+  const { loading: approvalLoading, success: approvalSuccess } = useSelector(
+    (state) => state.adminAcceptPharmacistReducer
+  );
 
+  const buttons = {
+    right: {
+      label: "Reject",
+      size: "xs",
+      variant: "secondary",
+      color: "rose",
+      className: "mx-2",
+      icon: () => (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-4 h-4"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+          />
+        </svg>
+      ),
+      onClick: (id) => dispatch(removeUser(id)),
+    },
+    left: {
+      label: "Accept",
+      onClick: (id) => dispatch(adminAcceptPharmacist(id)),
+    },
+  };
   const pharmacistList = useMemo(() => {
     return pharmacists.data
       ?.map(({ _id, user, dateOfBirth, ...rest }) => ({
@@ -94,30 +117,6 @@ const Application = () => {
                 {
                   size: "xs",
                   variant: "secondary",
-                  color: "rose",
-                  label: "Delete",
-                  className: "mx-2",
-                  icon: () => (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-4 h-4"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                      />
-                    </svg>
-                  ),
-                  function: (id) => dispatch(removeUser(id)),
-                },
-                {
-                  size: "xs",
-                  variant: "secondary",
                   label: "Select",
                   className: "mx-2",
                   icon: () => (
@@ -140,7 +139,7 @@ const Application = () => {
                 },
               ]}
               badgeColumns={[]}
-              title={"Manage the Approved Pharmacists"}
+              title={"Manage the Pending Pharmacists Applications"}
             />
           </div>
 
@@ -153,7 +152,7 @@ const Application = () => {
               data={selected}
               displayColumns={["Status", "Joined On"]}
               actualColumns={["status", "joinedOn"]}
-              // buttons={buttons}
+              buttons={buttons}
               worker={true}
               fields={[
                 "email",
