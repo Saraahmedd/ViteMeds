@@ -49,11 +49,10 @@ const Footer = () => {
               Pharmacy
             </a>
             . All Rights Reserved.
-          
-        </div>
+          </span>
         </div>
       </footer>
-    
+    </div>
   );
 };
 
