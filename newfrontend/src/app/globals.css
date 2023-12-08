@@ -45,6 +45,18 @@ body {
       transparent,
       rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: white;
+}
+
+::-ms-reveal {
+  filter: invert(100%);
+}
+
+
+.cardBgColor {
+  background-color: rgb(31,41,55) !important
+}
 
 .bgColor {
   background-color: rgba(255, 255, 255, 0.95);

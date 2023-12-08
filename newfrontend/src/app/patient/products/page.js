@@ -3,7 +3,7 @@
 import { ProductCard } from "@/components/ProductCard";
 import { Card, Grid } from "@tremor/react";
 
-export default function Dashboard() {
+export default function Products() {
     return (
         <>
             <Card className="grow flex-1">

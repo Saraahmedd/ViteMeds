@@ -46,6 +46,9 @@ import {
   getNotificationsReducer,
   updateNotificationReducer,
 } from "./reducers/notificationReducer";
+import {
+  getTotalSalesReducer
+} from "./reducers/orderReducer";
 
 import { socketReducer } from "./reducers/socketReducer";
 
@@ -87,6 +90,7 @@ const store = configureStore({
     getNotificationsReducer,
     updateNotificationReducer,
     socketReducer,
+    getTotalSalesReducer,
   },
 });
 

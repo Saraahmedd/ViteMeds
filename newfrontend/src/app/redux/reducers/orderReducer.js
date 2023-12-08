@@ -286,7 +286,7 @@ export const getTotalSalesReducer = (state = {}, action) => {
     case GET_TOTAL_SALES_SUCCESS:
       return {
         ...state,
-        totalSales: action.payload.data, // Adjust based on your API response structure
+        totalSales: action.payload, // Adjust based on your API response structure
         loading: false,
         error: null,
       };
