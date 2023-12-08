@@ -48,8 +48,8 @@ const Footer = () => {
             <a href="https://flowbite.com/" className="hover:underline">
               Pharmacy
             </a>
-            . All Rights Reserved.
           </span>
+          . All Rights Reserved.
         </div>
       </footer>
     </div>

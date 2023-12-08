@@ -2,36 +2,73 @@
 import React from "react";
 import TableComponent from "@/components/Table";
 import ProfilePicture from "@/components/ProfilePicture";
-import MinifiedUserCard from "@/components/MinifiedUserCard";
+import Image from "next/image";
+import { useState } from "react";
+import { useEffect } from "react";
+import {
+  addAddressesAction,
+  viewMyDetails,
+} from "@/app/redux/actions/patientActions";
+import { cancelOrder, viewOrderList } from "@/app/redux/actions/orderActions";
+import { useDispatch, useSelector } from "react-redux";
+import { BottomCallout } from "@/components/BottomCallout";
+import { Button } from "@tremor/react";
+
 
 // EXAMPLE USAGE
 
-const columns = ["Transaction ID", "User", "Item", "Status", "Amount", "Link"];
-const fields = ["transactionID", "user", "item", "status", "amount", "link"];
+const columns = ["Order ID", "Status", "Payment Method", "Total Price", "Created At", "Is Paid"];
+const fields = ["_id", "status", "paymentMethod", "totalPrice", "createdAt", "isPaid"];
 const badgeColumns = ["status"];
 const buttons = [
   { size: "xs", variant: "secondary", color: "gray", label: "See details" },
 ];
-const transactions = [
-  {
-    transactionID: "#123456",
-    user: "Lena Mayer",
-    item: "Under Armour Shorts",
-    status: "Ready for dispatch",
-    amount: "$ 49.90",
-    link: "#",
-  },
-  {
-    transactionID: "#999999",
-    user: "John Doe",
-    item: "Test Item",
-    status: "Shipped",
-    amount: "$ 99.99",
-    link: "#",
-  },
-];
 
+const columns2 = ["Street", "City", "State", "Zip Code", "Country"];
+const fields2= ["streetAddress", "city", "state", "zipCode", "country"];
 function Profile() {
+
+  const formatDate = (dateString) => {
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    };
+
+    const formattedDate = new Date(dateString).toLocaleDateString(
+      "en-US",
+      options
+    );
+
+    return formattedDate;
+  };
+  
+  const dispatch = useDispatch();
+  
+  const patient = useSelector(
+    (state) => state.viewMyDetailsReducer.patient?.patient
+  );
+  
+  const orders = useSelector(
+    (state) => state.viewOrderListReducer.orders
+  );
+
+  const [selectedTab, setSelectedTab] = useState("Orders");
+  const handleTabClick = (tab) => {
+    setSelectedTab(tab);
+  };
+
+  useEffect(() => {
+    dispatch(viewMyDetails());
+    dispatch(viewOrderList());
+  }, [dispatch]);
+  
+
+
   return (
     <div className="h-full overflow-hidden pl-10">
       <main
@@ -48,44 +85,135 @@ function Profile() {
           <div>
             <br />
             <h1 className="text-2xl font-black text-white-800">
-              Welcome Back Yassin!
+              Welcome Back {patient?.name}!
             </h1>
-            <p className="mb-6 text-white-600">
-              Here's an overview of your monthly transactions.
-            </p>
           </div>
         </div>
         <br />
 
         <div className="flex flex-wrap gap-x-4 gap-y-8">
-          <div className="prof h-96 w-3/5 rounded-xl p-10"></div>
-          <div className="prof h-96 w-[35rem] rounded-xl p-10">
-          <input
-                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                  type="password"
-                  placeholder="Old Password"
-                />
-                <input
-                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                  type="password"
-                  placeholder="New Password"
-                />
-                <input
-                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                  type="password"
-                  placeholder="Confirm Password"
-                />
-                <button className="mt-5 tracking-wide font-semibold bg-purple-600 text-gray-100 w-full py-4 rounded-lg hover:bg-purple-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
-                  <span className="ml-3">Submit</span>
-                </button>
+          <div className="flex prof h-96 w-3/5 rounded-xl p-10">
+            <div>
+                <div className="flex mt-[2rem]">
+                <Image src="/user.svg" height={25} width={25}></Image> <p className="ml-3 text-lg">{patient?.name}</p>
+                </div>
+                <div className="flex mt-5">
+                <Image src="/email.svg" height={25} width={25}></Image> <p className="ml-3 text-lg">{patient?.email}</p>
+                </div>
+                <div className="flex mt-5">
+                  <Image src="/birthday.svg" height={25} width={25}></Image> <p className="ml-3 text-lg">{patient?.dateOfBirth}</p>
+                </div>
+                <div className="flex mt-5">
+                <Image src="/mobile.svg" height={25} width={25}></Image> <p className="ml-3 text-lg">{patient?.mobileNumber}</p>
+                </div>
+                <div className="flex mt-5">
+                <Image src="/wallet.svg" height={25} width={25}></Image> <p className="ml-3 text-lg">{patient?.user.wallet}</p>
+                </div>
+              </div>
+            <div>
+            <div className="ml-[8rem] inline-block h-[270px] min-h-[1em] mt-5 w-0.5 self-stretch bg-purple-100 opacity-100 dark:opacity-50"></div>
+            </div>
+
+            <div>
+            <h1 className="ml-[5.5rem] mt-[3rem] text-2xl text-white-200">Emergency Contact</h1>
+            <div className="flex mt-[3rem] ml-[7.5rem]">
+            <Image src="/user.svg" height={25} width={25}></Image> <p className="ml-3 text-lg">{patient?.emergencyContact.fullName}</p>
+            </div>
+            <div className="flex mt-5 ml-[7.5rem]">
+            <Image src="/mobile.svg" height={25} width={25}></Image> <p className="ml-3 text-lg">{patient?.emergencyContact.mobileNumber}</p>
+            </div>
+            </div>
+            
           </div>
+          <div className="prof h-96 w-[35rem] rounded-xl p-10">
+            <h1 className="text-center text-2xl text-white-200">Change Password</h1>
+            <input
+              className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 mt-5"
+              type="password"
+              placeholder="Old Password"
+            />
+            <input
+              className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 mt-5"
+              type="password"
+              placeholder="New Password"
+            />
+            <input
+              className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 mt-5"
+              type="password"
+              placeholder="Confirm Password"
+            />
+            <button className="mt-4 ml-[7rem] tracking-wide font-semibold bg-purple-600 text-gray-100 w-1/2 py-4 rounded-lg hover:bg-purple-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+              <span className="ml-3">Submit</span>
+            </button>
+          </div>
+          <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
+        <li className="me-2">
+          <a
+            href="#"
+            onClick={() => handleTabClick("Orders")}
+            className={`inline-block p-4 ${
+              selectedTab === "Orders"
+                ? "text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
+                : "rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+            }`}
+          >
+            Orders
+          </a>
+        </li>
+        <li className="me-2">
+          <a
+            href="#"
+            onClick={() => handleTabClick("Addresses")}
+            className={`inline-block p-4 ${
+              selectedTab === "Addresses"
+                ? "text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
+                : "rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+            }`}
+          >
+            Addresses
+          </a>
+        </li>
+      </ul>
+      {selectedTab == "Orders" && orders ? (
+           <TableComponent
+           title="My Orders"
+           columns={columns}
+           fields={fields}
+           rows={orders?.map((order) => ({
+             _id: order._id,
+             status: order.status,
+             paymentMethod: order.paymentMethod,
+             totalPrice: order.totalPrice,
+             createdAt: formatDate(order.createdAt),
+             isPaid: order.isPaid ? "Paid" : "Not Paid",
+           }))}
+           badgeColumns={badgeColumns}
+           buttons={buttons}
+         /> ) : (
+          null
+         )
+      }
+      
+      {selectedTab === "Addresses" && patient ? (
           <TableComponent
-            columns={columns}
-            fields={fields}
-            rows={transactions}
+            title="My Addresses"
+            columns={columns2}
+            fields={fields2}
+            rows={patient?.user.deliveryAddress
+              .map((address) => ({
+                streetAddress: address.streetAddress,
+                city: address.city,
+                state:address.state,
+                zipCode: address.zipCode,
+                country :  address.country,
+                
+             }))}
             badgeColumns={badgeColumns}
-            buttons={buttons}
           />
+        ) : (
+          null
+        )}
+         
         </div>
       </main>
     </div>
