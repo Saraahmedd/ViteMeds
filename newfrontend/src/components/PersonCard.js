@@ -1,5 +1,6 @@
 import React from "react";
 import {} from "@heroicons/react/outline";
+import { Button } from "@tremor/react";
 
 const PersonalCard = ({
   imageUrl,
@@ -208,18 +209,20 @@ const PersonalCard = ({
         </div>
         {buttons && (
           <div className="flex justify-between mt-3">
-            <button
+            <Button
               className="border border-purple-500 text-purple-500 px-4 py-2 rounded"
               onClick={buttons.right.onClick}
+              {...buttons.right}
             >
               {buttons.right.label}
-            </button>
-            <button
+            </Button>
+            <Button
               className="bg-purple-500 text-white px-4 py-2 rounded"
               onClick={buttons.left.onClick}
+              {...buttons.left}
             >
               {buttons.left.label}
-            </button>
+            </Button>
           </div>
         )}
       </div>
