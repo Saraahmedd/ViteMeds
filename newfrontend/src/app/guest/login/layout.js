@@ -8,7 +8,7 @@ export default async function DashboardLayout({ children }) {
       <Header />
       <div>
         {children}
-        <Footer />
+        
       </div>
     </>
   );

@@ -19,14 +19,28 @@ const colors = {
   Shipped: "emerald",
 };
 
-const TableComponent = ({ columns, fields, rows, badgeColumns, buttons }) => {
+const TableComponent = ({
+  columns,
+  fields,
+  rows,
+  badgeColumns,
+  buttons,
+  title,
+  setSelected,
+  freeze,
+}) => {
+  console.log(rows);
   return (
-    <Card>
+    <Card
+    // style={{ borderColor: "rgb(147 51 234 / var(--tw-border-opacity))" }}
+    // className="border"
+    >
       <Flex justifyContent="start" className="space-x-2">
-        <Title>Purchases</Title>
-        <Badge color="gray">{rows.length}</Badge>
+        <Title>{title}</Title>
+        <Badge>{rows?.length}</Badge>
       </Flex>
-      <Text className="mt-2">Overview of this month's purchases</Text>
+      {/* <Text className="mt-2">Overview of this month's purchases</Text> */}
+
       <Table className="mt-6">
         <TableHead>
           <TableRow>
@@ -36,8 +50,12 @@ const TableComponent = ({ columns, fields, rows, badgeColumns, buttons }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((item, rowIndex) => (
-            <TableRow key={rowIndex}>
+          {rows?.map((item, rowIndex) => (
+            <TableRow
+              style={{ cursor: "pointer" }}
+              onMouseOver={() => !freeze && setSelected && setSelected(item)}
+              key={rowIndex}
+            >
               {fields.map((field, fieldIndex) => (
                 <TableCell key={fieldIndex}>
                   {badgeColumns.includes(fields[fieldIndex]) ? (
@@ -52,7 +70,11 @@ const TableComponent = ({ columns, fields, rows, badgeColumns, buttons }) => {
               {buttons && (
                 <TableCell>
                   {buttons.map((button, buttonIndex) => (
-                    <Button key={buttonIndex} {...button}>
+                    <Button
+                      onClick={(e) => button.function(item._id)}
+                      key={buttonIndex}
+                      {...button}
+                    >
                       {button.label}
                     </Button>
                   ))}

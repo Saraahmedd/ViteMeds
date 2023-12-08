@@ -1,75 +1,90 @@
-"use client"
-const { Card } = require("@tremor/react")
+"use client";
+const { Card } = require("@tremor/react");
 const { default: Image } = require("next/image");
 const { useState } = require("react");
-const { ErrorMsg } = require("./Error");
+const { ErrorMsg } = require("./BottomCallout");
 
 function CartProductCard({ id, name, image, price, initialQuantity }) {
+  const [quantity, setQuantity] = useState(initialQuantity);
 
+  return (
+    <div>
+      <Card
+        className={`lg:h-[12rem]`}
+        style={{
+          backgroundColor: "rgb(31,41,55)",
+          overflow: "hidden",
+        }}
+      >
+        <div className="flex flex-col lg:flex-row lg:h-[9rem] my-auto items-center">
+          <Card className="w-full h-[8rem] lg:w-[10rem] lg:h-[8rem] items-center justify-center">
+            <div
+              style={{
+                backgroundImage: `url(${image})`,
+                backgroundSize: "contain",
+                backgroundPosition: "50%",
+                backgroundRepeat: "no-repeat",
+                height: "100%",
+                width: "100%",
+              }}
+            ></div>
+          </Card>
+          <div className="mt-2 lg:my-0 lg:mx-5 w-full lg:w-auto">
+            <p className="font-bold colorColor text-xl">{name}</p>
+            <p className="font-bold colorColor text-lg">{price} EGP</p>
+          </div>
 
+          <div className="flex-1 grow" />
 
-    const [quantity, setQuantity] = useState(initialQuantity);
-
-
-    return (
-        <div>
-            <Card
-                className={`lg:h-[12rem]`}
-                style={{
-                    backgroundColor: 'rgb(31,41,55)',
-                    overflow: 'hidden'
-                }}
+          <div className="flex flex-row items-center self-end lg:self-center">
+            <div
+              role="button"
+              onClick={() => setQuantity((q) => (q - 1 > 0 ? q - 1 : 1))}
+              className="flex items-center justify-center text-2xl rounded-md border h-10 w-10 mx-3 hover:bg-white hover:text-black"
             >
-                <div
-                    className="flex flex-col lg:flex-row lg:h-[9rem] my-auto items-center"
-                >
-                    <Card
-                        className="w-full h-[8rem] lg:w-[10rem] lg:h-[8rem] items-center justify-center"
-                    >
-                        <div
-                            style={{
-                                backgroundImage: `url(${image})`,
-                                backgroundSize: 'contain',
-                                backgroundPosition: '50%',
-                                backgroundRepeat: 'no-repeat',
-                                height: '100%',
-                                width: '100%',
-                            }}
-                        >
-                        </div>
-                    </Card>
-                    <div className="mt-2 lg:my-0 lg:mx-5 w-full lg:w-auto">
-                        <p className="font-bold colorColor text-xl">{name}</p>
-                        <p className="font-bold colorColor text-lg">{price} EGP</p>
-                    </div>
+              -
+            </div>
 
-                    <div className="flex-1 grow" />
+            <span className="font-bold">{quantity}</span>
 
-                    <div className="flex flex-row items-center self-end lg:self-center">
-                        <div role="button" onClick={() => setQuantity(q => q - 1 > 0 ? q - 1 : 1)} className="flex items-center justify-center text-2xl rounded-md border h-10 w-10 mx-3 hover:bg-white hover:text-black">
-                            -
-                        </div>
+            <div
+              onClick={() => setQuantity((q) => q + 1)}
+              role="button"
+              className="flex items-center justify-center text-2xl rounded-md border h-10 w-10 mx-3 hover:bg-white hover:text-black"
+            >
+              +
+            </div>
+          </div>
 
-                        <span className="font-bold">{quantity}</span>
+          <div className="lg:mx-6 my-2 lg:my-0 self-end lg:self-center text-end">
+            <p className="text-xs text-gray-200 my-1 lg:my-0">
+              {quantity} x {price} EGP
+            </p>
+            <span className="font-bold text-xl my-1 lg:my-0">
+              {quantity * price} EGP
+            </span>
+          </div>
 
-                        <div onClick={() => setQuantity(q => q + 1)} role="button" className="flex items-center justify-center text-2xl rounded-md border h-10 w-10 mx-3 hover:bg-white hover:text-black">
-                            +
-                        </div>
-                    </div>
-
-                    <div className="lg:mx-6 my-2 lg:my-0 self-end lg:self-center text-end">
-                        <p className="text-xs text-gray-200 my-1 lg:my-0">{quantity} x {price} EGP</p>
-                        <span className="font-bold text-xl my-1 lg:my-0">{quantity * price} EGP</span>
-                    </div>
-
-                    <div className="lg:mx-2 my-2 lg:my-0 self-end lg:self-center" role="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 hover:text-red-500">
-                            <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clipRule="evenodd" />
-                        </svg>
-                    </div>
-                </div>
-            </Card>
-            {/* <div className="flex flex-row mt-3">
+          <div
+            className="lg:mx-2 my-2 lg:my-0 self-end lg:self-center"
+            role="button"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="w-5 h-5 hover:text-red-500"
+            >
+              <path
+                fillRule="evenodd"
+                d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </div>
+        </div>
+      </Card>
+      {/* <div className="flex flex-row mt-3">
                 <div className="grow flex-1" />
                 <div className="bgColor w-7 h-7 text-center flex items-center justify-center rounded-[0.875rem] mx-1">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#D21312" className="w-[0.95rem] h-[0.95rem]">
@@ -106,10 +121,10 @@ function CartProductCard({ id, name, image, price, initialQuantity }) {
                 </svg>
                 <span className="ml-2 colorColor text-md font-bold">{price} EGP</span>
             </div> */}
-        </div>
-    )
+    </div>
+  );
 }
 
 module.exports = {
-    CartProductCard
-}
+  CartProductCard,
+};
