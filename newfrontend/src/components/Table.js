@@ -26,14 +26,21 @@ const TableComponent = ({
   badgeColumns,
   buttons,
   title,
+  setSelected,
+  freeze,
 }) => {
+  console.log(rows);
   return (
-    <Card>
+    <Card
+    // style={{ borderColor: "rgb(147 51 234 / var(--tw-border-opacity))" }}
+    // className="border"
+    >
       <Flex justifyContent="start" className="space-x-2">
         <Title>{title}</Title>
-        <Badge>{rows.length}</Badge>
+        <Badge>{rows?.length}</Badge>
       </Flex>
       {/* <Text className="mt-2">Overview of this month's purchases</Text> */}
+
       <Table className="mt-6">
         <TableHead>
           <TableRow>
@@ -43,8 +50,12 @@ const TableComponent = ({
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((item, rowIndex) => (
-            <TableRow key={rowIndex}>
+          {rows?.map((item, rowIndex) => (
+            <TableRow
+              style={{ cursor: "pointer" }}
+              onMouseOver={() => !freeze && setSelected && setSelected(item)}
+              key={rowIndex}
+            >
               {fields.map((field, fieldIndex) => (
                 <TableCell key={fieldIndex}>
                   {badgeColumns.includes(fields[fieldIndex]) ? (

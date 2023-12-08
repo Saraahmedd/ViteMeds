@@ -45,7 +45,7 @@ const PersonalCard = ({
             />
           </svg>
         );
-      case "birthdate":
+      case "dateOfBirth":
         return (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -150,6 +150,23 @@ const PersonalCard = ({
             />
           </svg>
         );
+      case "hourlyRate":
+        return (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        );
       default:
         return null;
     }
@@ -157,7 +174,7 @@ const PersonalCard = ({
 
   return (
     <div style={{ width: "120%" }} className="m-10  max-w-md">
-      <div className="rounded-lg border px-4 pt-8 pb-10 shadow-lg">
+      <div className="rounded-lg border border-gray-800 px-4 pt-8 pb-10 shadow-lg">
         <div className="relative mx-auto w-28 rounded-full">
           <span className="absolute right-0 m-3 h-3 w-3 rounded-full bg-green-500 ring-2 ring-green-300 ring-offset-2"></span>
           <img
@@ -169,13 +186,13 @@ const PersonalCard = ({
         <h1 className="my-1 text-center text-xl font-bold leading-8 text-gray-400">
           {name}
         </h1>
-        {data.affiliation && (
+        {data?.affiliation && (
           <h3 className="font-lg text-semibold text-center leading-6 text-gray-600">
-            {`Pharmacist at ${data.affiliation}`}
+            {`Pharmacist at ${data?.affiliation}`}
           </h3>
         )}
         <p className="text-center text-sm leading-6 text-gray-500 hover:text-gray-600">
-          {data.educationalBackground}
+          {data?.educationalBackground}
         </p>
         <div className="mt-3 flex flex-wrap justify-between md:space-x-1.2">
           {fields.map((field, index) => (
@@ -184,8 +201,8 @@ const PersonalCard = ({
               className="flex items-center py-3 text-sm w-full md:w-1/2"
             >
               <span>{renderIcon(field)}</span>
-              <span className="ml-1 mr-1">{displayNames[index]}: </span>
-              <span className="mr-auto">{data[field]}</span>
+              <span className="ml-1 mr-1">{data && displayNames[index]}: </span>
+              <span className="mr-auto">{data && data[field]}</span>
             </div>
           ))}
         </div>
