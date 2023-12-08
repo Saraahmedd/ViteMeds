@@ -66,7 +66,7 @@ const createOrderCheckout = async (session) => {
   const cart = await Cart.findOne({ patient: userId });
 
   const deliveryAddress = user.deliveryAddress.id(
-    session.metadata.deliveryAddress,
+    session.metadata.deliveryAddress
   );
 
   const order = Order.create({
@@ -90,7 +90,7 @@ exports.webhookCheckout = async (req, res, next) => {
     event = stripe.webhooks.constructEvent(
       req.body,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET,
+      process.env.STRIPE_WEBHOOK_SECRET
     );
     console.log("2");
   } catch (err) {
@@ -208,7 +208,9 @@ exports.getTotalSales = catchAsync(async (req, res, next) => {
   const salesData = await Order.find({
     //isPaid: true,
     //status: { $ne: 'cancelled' },
-  });
+  })
+    .populate("medicines.medicine")
+    .exec();
 
   const totalSales = salesData.reduce((sum, order) => {
     return sum + order.totalPrice;
@@ -379,7 +381,7 @@ exports.getFilteredOrders = catchAsync(async (req, res, next) => {
       day,
       new Date(time).getHours(),
       0,
-      0,
+      0
     );
     filter.createdAt = exactDate;
   }
