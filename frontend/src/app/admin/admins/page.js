@@ -14,7 +14,7 @@ export default function Admins() {
   const admins = useSelector((state) => state.getUsersReducer.user);
   const CreateisLoading = useSelector((state) => state.registerReducer.loading);
   const RemoveisLoading = useSelector(
-    (state) => state.removeUserReducer.loading,
+    (state) => state.removeUserReducer.loading
   );
 
   const generateButton = (id) => {
@@ -64,7 +64,7 @@ export default function Admins() {
     <>
       <h3 className="my-1 mt-0 text-center text-title">Admins</h3>
       <div className="underline-Bold mx-auto mb-5"></div>
-      <div className=" justify-content-center align-items-center min-vh-100 container">
+      <div className=" justify-content-center align-items-center container">
         <Button
           text="Add Admin"
           variant="md"

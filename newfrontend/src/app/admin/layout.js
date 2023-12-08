@@ -7,10 +7,7 @@ export default async function DashboardLayout({ children }) {
   return (
     <>
       <Sidebar role={"admin"} />
-      <div className="p-[32px] sm:ml-64 min-h-screen flex flex-col">
-        {children}
-        <Footer />
-      </div>
+      <div className="p-[32px] sm:ml-64  flex flex-col">{children}</div>
     </>
   );
 }

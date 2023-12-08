@@ -22,7 +22,7 @@ import {
   validateEmail,
   validatePassword,
   validatePhoneNumber,
-} from "../validators";
+} from "../../../../../newfrontend/src/app/redux/validators";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({

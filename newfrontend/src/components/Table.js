@@ -31,7 +31,7 @@ const TableComponent = ({
     <Card>
       <Flex justifyContent="start" className="space-x-2">
         <Title>{title}</Title>
-        <Badge color="gray">{rows.length}</Badge>
+        <Badge>{rows.length}</Badge>
       </Flex>
       {/* <Text className="mt-2">Overview of this month's purchases</Text> */}
       <Table className="mt-6">
@@ -59,7 +59,11 @@ const TableComponent = ({
               {buttons && (
                 <TableCell>
                   {buttons.map((button, buttonIndex) => (
-                    <Button key={buttonIndex} {...button}>
+                    <Button
+                      onClick={(e) => button.function(item._id)}
+                      key={buttonIndex}
+                      {...button}
+                    >
                       {button.label}
                     </Button>
                   ))}

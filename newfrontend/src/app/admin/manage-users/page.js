@@ -71,6 +71,8 @@ const Page = () => {
           </a>
         </li>
       </ul>
+
+      <br />
       {renderComponent()}
     </>
   );

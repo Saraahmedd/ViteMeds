@@ -14,6 +14,7 @@ export const removeUserReducer = (state = {}, action) => {
         ...state,
         loading: true,
         error: null,
+        success: false,
       };
     case USER_REMOVE_SUCCESS: {
       console.log("success");
@@ -22,6 +23,7 @@ export const removeUserReducer = (state = {}, action) => {
         user: action.payload,
         loading: false,
         error: null,
+        success: true,
       };
     }
     case USER_REMOVE_FAIL:
@@ -29,6 +31,7 @@ export const removeUserReducer = (state = {}, action) => {
         ...state,
         loading: false,
         error: action.payload,
+        success: false,
       };
     default:
       return state;

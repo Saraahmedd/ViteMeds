@@ -21,7 +21,7 @@ import {
   validateEmail,
   validatePassword,
   validatePhoneNumber,
-} from "../validators";
+} from "../../../../../newfrontend/src/app/redux/validators";
 
 const Register = () => {
   const [formData, setFormData] = useState({
