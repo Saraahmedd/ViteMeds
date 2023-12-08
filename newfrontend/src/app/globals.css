@@ -49,6 +49,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: white;
 }
 
+::-ms-reveal {
+  filter: invert(100%);
+}
+
+
 .cardBgColor {
   background-color: rgb(31,41,55) !important
 }
