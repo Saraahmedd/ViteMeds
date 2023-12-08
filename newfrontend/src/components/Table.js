@@ -23,7 +23,7 @@ const TableComponent = ({ columns, fields, rows, badgeColumns, buttons }) => {
   return (
     <Card>
       <Flex justifyContent="start" className="space-x-2">
-        <Title>Purchases</Title>
+        <Title>Orders</Title>
         <Badge color="gray">{rows.length}</Badge>
       </Flex>
       <Text className="mt-2">Overview of this month's purchases</Text>
