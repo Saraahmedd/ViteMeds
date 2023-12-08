@@ -12,7 +12,7 @@ import {
 import { cancelOrder, viewOrderList } from "@/app/redux/actions/orderActions";
 import { useDispatch, useSelector } from "react-redux";
 import { BottomCallout } from "@/components/BottomCallout";
-import { Button } from "@tremor/react";
+import ChangePassword from "@/components/ChangePassword";
 
 
 // EXAMPLE USAGE
@@ -23,6 +23,8 @@ const badgeColumns = ["status"];
 const buttons = [
   { size: "xs", variant: "secondary", color: "gray", label: "See details" },
 ];
+
+
 
 const columns2 = ["Street", "City", "State", "Zip Code", "Country"];
 const fields2= ["streetAddress", "city", "state", "zipCode", "country"];
@@ -56,6 +58,7 @@ function Profile() {
   const orders = useSelector(
     (state) => state.viewOrderListReducer.orders
   );
+
 
   const [selectedTab, setSelectedTab] = useState("Orders");
   const handleTabClick = (tab) => {
@@ -125,26 +128,8 @@ function Profile() {
             </div>
             
           </div>
-          <div className="prof h-96 w-[35rem] rounded-xl p-10">
-            <h1 className="text-center text-2xl text-white-200">Change Password</h1>
-            <input
-              className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 mt-5"
-              type="password"
-              placeholder="Old Password"
-            />
-            <input
-              className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 mt-5"
-              type="password"
-              placeholder="New Password"
-            />
-            <input
-              className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 mt-5"
-              type="password"
-              placeholder="Confirm Password"
-            />
-            <button className="mt-4 ml-[7rem] tracking-wide font-semibold bg-purple-600 text-gray-100 w-1/2 py-4 rounded-lg hover:bg-purple-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
-              <span className="ml-3">Submit</span>
-            </button>
+          <div>
+          <ChangePassword></ChangePassword>
           </div>
           <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
         <li className="me-2">
