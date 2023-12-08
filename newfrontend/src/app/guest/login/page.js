@@ -7,16 +7,23 @@ import { login } from "@/app/redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import {useRouter} from "next/router";
 import { redirect } from "next/navigation";
+import { TextInput } from "@tremor/react";
+import { BottomCallout } from "@/components/BottomCallout";
 const Login = () => {
+
+  const {
+    isAuthenticated,
+    loading: loginLoading,
+    success: loginSuccess,
+    error: loginError,
+  } = useSelector((state) => state.loginReducer);
+  const [visibleFeedback, setVisibleFeedback] = useState(false);
 // const Router = useRouter()
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-  const { isAuthenticated, error, loading } = useSelector(
-    (state) => state.loginReducer
-  );
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -41,7 +48,7 @@ const Login = () => {
         window.location.reload()
       }, 1000);
     }
-  }, [dispatch, isAuthenticated, error]);
+  }, [dispatch,  loginError,isAuthenticated]);
 
   const handleLogin = () => {
     dispatch(login(formData.username, formData.password));
@@ -55,17 +62,19 @@ const Login = () => {
             <div className="w-full flex-1 mt-8">
               <div className="mx-auto max-w-xs">
                 {/* Log In Form */}
-                <input
-                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-lg focus:outline-none focus:border-gray-400"
+                <TextInput
+                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-lg focus:outline-none focus:border-gray-400 mt-5"
                   type="username"
                   placeholder="Username"
                   name="username"
                   value={formData.username}
                   onChange={handleInputChange}
                   required
+                  error={loginError}
+                  
 
                 />
-                <input
+                <TextInput
                   className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-lg focus:outline-none focus:border-gray-400 mt-5"
                   type="password"
                   placeholder="Password"
@@ -73,12 +82,20 @@ const Login = () => {
                   value={formData.password}
                   onChange={handleInputChange}
                   required
-
+                  error={loginError}
                 />
-                <button className="mt-5 tracking-wide font-semibold bg-purple-600 text-gray-100 w-full py-4 rounded-lg hover:bg-purple-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+                {loginLoading ? (
+                  <button className="mt-5 tracking-wide font-semibold bg-purple-600 text-gray-100 w-full py-4 rounded-lg hover:bg-purple-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+                >
+                  <span
+                      className="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>Loading...
+                </button>) : (<button className="mt-5 tracking-wide font-semibold bg-purple-600 text-gray-100 w-full py-4 rounded-lg hover:bg-purple-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                 onClick={handleLogin}>
                   <span className="ml-3">Log In</span>
-                </button>
+                </button>) }
                 
                 {/* Forgot Password Link */}
                 <div className="mt-2 text-sm text-gray-500 text-center">
@@ -105,6 +122,15 @@ const Login = () => {
         {/* GIF to the Right */}
        
         <Lottie animationData={pharmacyanimation} className='w-[550px] h-[550px]' loop={true} />
+
+        {loginError && (
+        <BottomCallout
+          message="Invalid Username or Password"
+          variant="error"
+          visible={true}
+          setVisible={setVisibleFeedback}
+        />
+      )}
         
       </div>
     </div>
