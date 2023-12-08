@@ -52,7 +52,7 @@ const TableComponent = ({
           {rows?.map((item, rowIndex) => (
             <TableRow
               style={{ cursor: "pointer" }}
-              onMouseOver={() => !freeze && setSelected(item)}
+              onMouseOver={() => !freeze && setSelected && setSelected(item)}
               key={rowIndex}
             >
               {fields.map((field, fieldIndex) => (

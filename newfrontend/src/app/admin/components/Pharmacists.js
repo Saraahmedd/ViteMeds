@@ -49,11 +49,13 @@ const Pharmacists = () => {
   };
 
   const pharmacistList = useMemo(() => {
-    return pharmacists.data?.map(({ _id, user, dateOfBirth, ...rest }) => ({
-      ...rest,
-      ...user,
-      dateOfBirth: formatDateToDDMMYYYY(dateOfBirth),
-    }));
+    return pharmacists.data
+      ?.map(({ _id, user, dateOfBirth, ...rest }) => ({
+        ...rest,
+        ...user,
+        dateOfBirth: formatDateToDDMMYYYY(dateOfBirth),
+      }))
+      .filter((value) => value.isApproved);
   }, [removeError, pharmacists]);
 
   return (
