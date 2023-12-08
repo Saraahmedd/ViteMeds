@@ -91,7 +91,7 @@ const Login = () => {
                       className="spinner-border spinner-border-sm"
                       role="status"
                       aria-hidden="true"
-                    ></span>Loading...
+                    ></span>Logging In...
                 </button>) : (<button className="mt-5 tracking-wide font-semibold bg-purple-600 text-gray-100 w-full py-4 rounded-lg hover:bg-purple-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                 onClick={handleLogin}>
                   <span className="ml-3">Log In</span>
