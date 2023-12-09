@@ -175,7 +175,7 @@ export const makeOrder = (body) => async (dispatch) => {
         config,
       );
       dispatch(makeOrderSuccess(data.data));
-      window.location.href = "/patients/profile";
+      window.location.href = "/patient/profile";
     }
   } catch (error) {
     console.log(error);

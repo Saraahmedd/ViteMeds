@@ -45,7 +45,7 @@ function CartProductCard({
           </Card>
           <div className="mt-2 lg:my-0 lg:mx-5 w-full lg:w-auto">
             <p className="font-bold colorColor text-xl">{name}</p>
-            <p className="font-bold colorColor text-lg">{price} EGP</p>
+            <p className="font-bold colorColor text-lg">{price} USD</p>
           </div>
 
           <div className="flex-1 grow" />
@@ -80,10 +80,10 @@ function CartProductCard({
 
           <div className="lg:mx-6 my-2 lg:my-0 self-end lg:self-center text-end">
             <p className="text-xs text-gray-200 my-1 lg:my-0">
-              {quantity} x {price} EGP
+              {quantity} x {price} USD
             </p>
             <span className="font-bold text-xl my-1 lg:my-0">
-              {quantity * price} EGP
+              {quantity * price} USD
             </span>
           </div>
 
@@ -142,7 +142,7 @@ function CartProductCard({
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff" className="h-4 w-4">
                     <path fillRule="evenodd" d="M5.25 2.25a3 3 0 00-3 3v4.318a3 3 0 00.879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 005.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 00-2.122-.879H5.25zM6.375 7.5a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25z" clipRule="evenodd" />
                 </svg>
-                <span className="ml-2 colorColor text-md font-bold">{price} EGP</span>
+                <span className="ml-2 colorColor text-md font-bold">{price} USD</span>
             </div> */}
     </div>
   );
