@@ -55,6 +55,7 @@ const getMedicineByIdInitialState = {
 };
 
 export const getMedicinesReducer = (state = {}, action) => {
+  console.log(action.payload);
   switch (action.type) {
     case MEDICINES_VIEW_REQUEST:
       return {

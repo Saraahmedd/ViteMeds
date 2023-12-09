@@ -338,7 +338,7 @@ export const getFilteredOrdersReducer = (state = {}, action) => {
     case FILTERED_ORDERS_SUCCESS:
       return {
         ...state,
-        filteredOrders: action.payload.data, // Adjust based on your API response structure
+        filteredOrders: action.payload, // Adjust based on your API response structure
         loading: false,
         error: null,
       };

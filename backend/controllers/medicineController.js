@@ -10,9 +10,8 @@ exports.getAllMedicinesForUserAndAdmin = factory.getAll(
   "",
   { status: "unarchived" },
 );
-exports.getAllMedicinesForPharmacist = factory.getAll(Medicine, "", "", {
-  status: "unarchived",
-});
+
+exports.getAllMedicinesForPharmacist = factory.getAll(Medicine);
 exports.getAllArchivedMedicinesForPharmacist = factory.getAll(
   Medicine,
   "",

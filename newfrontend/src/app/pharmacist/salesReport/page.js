@@ -1,16 +1,20 @@
 "use client";
 import React from "react";
 import TableComponent from "@/components/Table";
+import PersonalCard from "@/components/PersonCard";
 import ProfilePicture from "@/components/ProfilePicture";
 import Image from "next/image";
 import { useState } from "react";
 import { useEffect } from "react";
-import { getTotalSales } from "@/app/redux/actions/orderActions";
+import {Select} from "react-select"
+import { getTotalSales,getFilteredOrders } from "@/app/redux/actions/orderActions";
+
 import { useDispatch, useSelector } from "react-redux";
 import { BottomCallout } from "@/components/BottomCallout";
-import { Button } from "@tremor/react";
+import { Button , Card } from "@tremor/react";
 import { Modal } from "@tremor/react";
 import {viewOrderDetails} from "@/app/redux/actions/orderActions";
+import {getMedicinesAction} from "@/app/redux/actions/medicineActions";
 
 // EXAMPLE USAGE
 
@@ -40,24 +44,31 @@ function SalesReport() {
       };
   
   const dispatch = useDispatch();
-  
-  const  Sales  = useSelector((state) => state.getTotalSalesReducer?.totalSales);
-  const orders = Sales?.salesData;
+  const medicines = useSelector(
+    (state) => state.getMedicinesReducer.medicines?.data
+  );
+  const options = medicines
+  ? medicines.map((medicine) => ({
+      value: medicine.name,
+      label: medicine.name,
+    }))
+  : [];
+console.log(options);
+  const  Sales  = useSelector((state) => state.getFilteredOrdersReducer?.filteredOrders);
+  const orders = Sales?.orders;
   const totalsales = Sales?.totalSales;
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [showOrderDetailsModal, setShowOrderDetailsModal] = useState(false);
-
   const handleViewDetails = (orderId) => {
-     useEffect(() => {
-
-        if (orderId) {
-          dispatch(fetchOrderDetails(orderId));
-        }
-      }, [dispatch, orderId]);
-      
-    const order = useSelector((state) => state.viewOrderDetailsReducer(orderId));
+    const order = orders.find((order) => order._id === orderId);
+    console.log(order);
+    console.log(orderId);
     setSelectedOrder(order);
     setShowOrderDetailsModal(true);
+    
+  };
+  const selectedOption = () => {
+    
   };
 
   const handleCloseOrderDetailsModal = () => {
@@ -67,34 +78,22 @@ function SalesReport() {
 
 
   useEffect(() => {
-    dispatch(getTotalSales());
+    dispatch(getFilteredOrders());
+    dispatch(getMedicinesAction({}));
+    console.log(medicines);
   }, [dispatch]);
   
 console.log(orders);
 console.log(selectedOrder);
+console.log(medicines);
+
   return (
-    <div className="h-full overflow-hidden pl-10">
-      <div className="flex flex-wrap gap-x-4 gap-y-8">
-
-        {/* First row with three columns containing images */}
-        <div className="flex flex-wrap gap-x-4 mb-8" >
-          <div className="w-1/3">
-            {/* Image 1 */}
-            <Image src="/image1.png" width={600} height={400} style={{ backgroundColor: "transparent", marginBottom: '10px' }} />
-          </div>
-          <div className="w-1/3">
-            {/* Image 2 */}
-            <Image src="/image2.png" width={600} height={600} style={{ backgroundColor: "transparent", marginBottom: '10px' }} />
-          </div>
-        </div>
-
-        {/* Second row with the table and filters */}
-        <div className="w-full overflow-auto scrollbar-transparent">
-          {/* Table */}
+  <div>
+    <div className="flex overflow-hidden gap-x-4 gap-y-8">
+    <div className="prof h-400 overflow-hidden w-4/6 rounded-xl p-10">
           {orders? (
-            <div className="max-h-[500px]">
             <TableComponent
-              title="Total Sales"
+              title="Sales Report"
               columns={columns}
               fields={fields}
               rows={orders?.map((order) => ({
@@ -112,56 +111,67 @@ console.log(selectedOrder);
                 variant: "secondary",
                 color: "purple",
                 label: "See details",
-                onClick: (id) => handleViewDetails(id)
+                function: (id) => handleViewDetails(id)
                 }
                 ]}
             />
-            </div>
           ) : (
             null
           )}
         </div>
-    {/* Order Details Modal */}
-    {selectedOrder && (
-          <div className="modal">
-            <div className="modal-header">
-              <h2>Order Details</h2>
-              <button onClick={handleCloseOrderDetailsModal}>Close</button>
-            </div>
-            <div className="modal-body">
-              {/* Display order details here */}
-              <p><strong>Status:</strong> {selectedOrder.status}</p>
-              <p><strong>Payment Method:</strong> {selectedOrder.paymentMethod}</p>
-              <p><strong>Total Price:</strong> {selectedOrder.totalPrice}</p>
-              <p><strong>Created At:</strong> {formatDate(selectedOrder.createdAt)}</p>
+        <div className="prof h-400 overflow-hidden w-2/6 rounded-xl p-10">
+        <Card>
+  <h1 style={{ textAlign: "center", fontSize: "2rem", marginBottom: "16px", fontWeight: "bold" }}>
+    Order Details
+  </h1>
+  <hr style={{ borderTop: "2px solid #333", marginBottom: "16px" }} />
+  {selectedOrder && (
+    <>
+      <p style={{ fontSize: "1.2rem", marginBottom: "5px" }}>
+        <strong>Status:</strong> {selectedOrder.status}
+      </p>
+      <p style={{ fontSize: "1.2rem", marginBottom: "5px" }}>
+        <strong>Payment Method:</strong> {selectedOrder.paymentMethod}
+      </p>
+      <p style={{ fontSize: "1.2rem", marginBottom: "5px" }}>
+        <strong>Total Price:</strong> {selectedOrder.totalPrice}$
+      </p>
+      <p style={{ fontSize: "1.2rem", marginBottom: "5px" }}>
+        <strong>Created At:</strong> {formatDate(selectedOrder.createdAt)}
+      </p>
+      {/* Add more details as needed */}
+      <p style={{ fontSize: "1.2rem", marginBottom: "5px" }}>
+        <strong>Delivery Address:</strong>{' '}
+        {selectedOrder.deliveryAddress.country},{' '}
+        {selectedOrder.deliveryAddress.state},{' '}
+        {selectedOrder.deliveryAddress.city},{' '}
+        {selectedOrder.deliveryAddress.streetAddress},{' '}
+        {selectedOrder.deliveryAddress.zipCode}
+      </p>
 
-              {/* Add more details as needed */}
-              <p><strong>Delivery Address:</strong></p>
-              <p>{selectedOrder.deliveryAddress.country}, {selectedOrder.deliveryAddress.state}, {selectedOrder.deliveryAddress.city}, {selectedOrder.deliveryAddress.streetAddress}, {selectedOrder.deliveryAddress.zipCode}</p>
-
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th style={{ color: 'steelblue' }}>Medicine</th>
-                    <th style={{ color: 'steelblue' }}>Quantity</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {selectedOrder.medicines.map((item) => (
-                    <tr key={item._id}>
-                      <td>{item.medicine.name}</td>
-                      <td>{item.quantity}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+      {/* Medicines */}
+      <div style={{ fontSize: "1.2rem", marginBottom: "5px"}}>
+        <strong style={{fontSize: "1.5rem", marginBottom: "5px", color:"purple"}}>Medicines:</strong>
+        {selectedOrder.medicines.map((item) => {
+            console.log(item)
+        
+          return (<div key={item._id}>
+            <p style={{ marginBottom: "5px" }}>
+              <strong style={{marginRight:"3px"}}>Name:</strong> {item.medicine?.name}
+              <strong style={{marginRight:"10px", marginLeft:"30px"}}>Quantity:</strong> {item.quantity}
+            </p>
           </div>
-        )}
-
-
+          )
+})}
       </div>
-  </div>
+    </>
+  )}
+</Card>
+
+
+          </div>
+      </div>
+      </div>
   );
 }
 
