@@ -211,6 +211,7 @@ exports.getTotalSales = catchAsync(async (req, res, next) => {
   })
     .populate("medicines.medicine")
     .exec();
+  console.log(salesData);
 
   const totalSales = salesData.reduce((sum, order) => {
     return sum + order.totalPrice;
