@@ -55,7 +55,7 @@ const getMedicineByIdInitialState = {
 };
 
 export const getMedicinesReducer = (state = {}, action) => {
-  console.log(action.payload);
+  // console.log(action.payload);
   switch (action.type) {
     case MEDICINES_VIEW_REQUEST:
       return {
@@ -110,7 +110,7 @@ export const addMedicineReducer = (state = addMedicineInitialState, action) => {
 
 export const editMedicineReducer = (
   state = editMedicineInitialState,
-  action,
+  action
 ) => {
   switch (action.type) {
     case MEDICINE_EDIT_REQUEST:
@@ -139,7 +139,7 @@ export const editMedicineReducer = (
 
 export const deleteMedicineReducer = (
   state = deleteMedicineInitialState,
-  action,
+  action
 ) => {
   switch (action.type) {
     case MEDICINE_DELETE_REQUEST:
@@ -167,7 +167,7 @@ export const deleteMedicineReducer = (
 
 export const getMedicineByIdReducer = (
   state = getMedicineByIdInitialState,
-  action,
+  action
 ) => {
   switch (action.type) {
     case MEDICINE_GET_BY_ID_REQUEST:
@@ -195,10 +195,11 @@ export const getMedicineByIdReducer = (
 };
 export const getMedicineAlternativeReducer = (
   state = getMedicineByIdInitialState,
-  action,
+  action
 ) => {
   switch (action.type) {
     case MEDICINE_ALTERNATIVE_REQUEST:
+      console.log(1111111111111);
       return {
         ...state,
         loading: true,
@@ -212,6 +213,7 @@ export const getMedicineAlternativeReducer = (
         error: null,
       };
     case MEDICINE_ALTERNATIVE_FAIL:
+      console.log(111113);
       return {
         ...state,
         loading: false,
@@ -224,7 +226,7 @@ export const getMedicineAlternativeReducer = (
 
 export const archiveMedicineReducer = (
   state = archiveMedicineInitialState,
-  action,
+  action
 ) => {
   switch (action.type) {
     case MEDICINE_ARCHIVE_REQUEST:

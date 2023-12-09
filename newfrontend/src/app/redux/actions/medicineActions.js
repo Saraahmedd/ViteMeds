@@ -43,7 +43,7 @@ export const addMedicine = (medicine) => async (dispatch) => {
     const { data } = await axios.post(
       `${baseURL}/api/v1/medicines/new-medicine`,
       medicine,
-      config,
+      config
     );
     console.log(data);
 
@@ -78,7 +78,7 @@ export const editMedicine = (id, medicine) => async (dispatch) => {
     const { data } = await axios.patch(
       `${baseURL}/api/v1/medicines/update/${id}`,
       medicine,
-      config,
+      config
     );
 
     dispatch({
@@ -109,7 +109,7 @@ export const deleteMedicine = (id) => async (dispatch) => {
     };
     const { data } = await axios.delete(
       `${baseURL}/api/v1/medicines/delete/${id}`,
-      config,
+      config
     );
     dispatch({
       type: MEDICINE_DELETE_SUCCESS,
@@ -139,7 +139,7 @@ export const getMedicineById = (id) => async (dispatch) => {
     };
     const { data } = await axios.get(
       `${baseURL}/api/v1/medicines/${id}`,
-      config,
+      config
     );
     dispatch({
       type: MEDICINE_GET_BY_ID_SUCCESS,
@@ -156,7 +156,7 @@ export const getMedicineById = (id) => async (dispatch) => {
 };
 
 export const getMedicinesAction = (queryObj) => async (dispatch) => {
-  console.log("...............")
+  console.log("...............");
   try {
     dispatch({
       type: MEDICINES_VIEW_REQUEST,
@@ -183,7 +183,7 @@ export const getMedicinesAction = (queryObj) => async (dispatch) => {
     const { data } = await axios.get(url, config);
     const { data: medUses } = await axios.get(
       `${baseURL}/api/v1/medicines/medUses`,
-      config,
+      config
     );
     data.data.medUses = medUses;
     console.log(medUses);
@@ -219,7 +219,7 @@ export const getMedicineAlternativeAction = (id) => async (dispatch) => {
     };
     const { data } = await axios.get(
       `${baseURL}/api/v1/medicines/alternative/${id}`,
-      config,
+      config
     );
     dispatch({
       type: MEDICINE_ALTERNATIVE_SUCCESS,
@@ -252,7 +252,7 @@ export const archiveMedicine = (id, status) => async (dispatch) => {
     const { data } = await axios.patch(
       `${baseURL}/api/v1/medicines/archive/${id}`,
       body,
-      config,
+      config
     );
 
     console.log(data);

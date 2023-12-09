@@ -103,12 +103,12 @@ exports.viewAlternative = catchAsync(async (req, res, next) => {
     });
   }
 
-  const mainActiveIngredients = medicine.mainActiveIngredients;
+  const medicineIngredients = medicine.medicineIngredients;
 
   // Find alternative medicines with the same main active ingredients
   const alternatives = await Medicine.find({
     _id: { $ne: medicineId }, // Exclude the current medicine
-    mainActiveIngredients: { $in: mainActiveIngredients },
+    medicineIngredients: { $elemMatch: { $in: medicineIngredients } },
   });
 
   if (alternatives.length > 0) {

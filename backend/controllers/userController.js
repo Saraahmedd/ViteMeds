@@ -29,3 +29,10 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllUsers = factory.getAll(userModel);
+
+exports.getMe = catchAsync(async (req, res, next) => {
+  const user = await userModel.findOne(req.user._id);
+  res.status(200).json({
+    user,
+  });
+});

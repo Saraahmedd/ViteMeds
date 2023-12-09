@@ -11,14 +11,14 @@ router
   .route("/getmedicines/pharmacist")
   .get(
     authController.restrictTo("pharmacist"),
-    medicineController.getAllMedicinesForPharmacist,
+    medicineController.getAllMedicinesForPharmacist
   );
 
 router
   .route("/getmedicines/admin")
   .get(
     authController.restrictTo("administrator"),
-    medicineController.getAllMedicinesForUserAndAdmin,
+    medicineController.getAllMedicinesForUserAndAdmin
   );
 
 router
@@ -29,7 +29,7 @@ router
   .route("/getarchivedmedicines/pharmacist")
   .get(
     authController.restrictTo("pharmacist"),
-    medicineController.getAllArchivedMedicinesForPharmacist,
+    medicineController.getAllArchivedMedicinesForPharmacist
   );
 
 router
@@ -37,7 +37,7 @@ router
   .post(
     authController.restrictTo("pharmacist"),
     medicineController.upload.single("image"),
-    medicineController.createNewMedicine,
+    medicineController.createNewMedicine
   );
 
 router
@@ -45,14 +45,14 @@ router
   .patch(
     authController.restrictTo("pharmacist"),
     medicineController.upload.single("image"),
-    medicineController.updateMedicine,
+    medicineController.updateMedicine
   );
 
 router
   .route("/delete/:id")
   .delete(
     authController.restrictTo("pharmacist"),
-    medicineController.deleteMedicine,
+    medicineController.deleteMedicine
   );
 
 router.get("/medUses", medicineController.allMedicinalUses);
@@ -63,14 +63,14 @@ router
   .route("/archive/:id")
   .patch(
     authController.restrictTo("pharmacist"),
-    medicineController.archiveMedicine,
+    medicineController.archiveMedicine
   );
 
 router
   .route("/alternative/:id")
   .get(
     authController.restrictTo("patient"),
-    medicineController.viewAlternative,
+    medicineController.viewAlternative
   );
 
 module.exports = router;

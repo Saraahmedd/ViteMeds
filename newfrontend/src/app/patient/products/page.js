@@ -1,7 +1,10 @@
 "use client";
 
 import { addToCart, viewCart } from "@/app/redux/actions/cartActions";
-import { getMedicinesAction } from "@/app/redux/actions/medicineActions";
+import {
+  editMedicine,
+  getMedicinesAction,
+} from "@/app/redux/actions/medicineActions";
 import { ProductCard } from "@/components/ProductCard";
 import { Card, Grid, Select, SelectItem, TextInput } from "@tremor/react";
 import { useEffect, useState } from "react";
