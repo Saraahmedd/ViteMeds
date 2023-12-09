@@ -391,7 +391,8 @@ exports.getFilteredOrders = catchAsync(async (req, res, next) => {
     filter["medicines.medicine"] = mongoose.Types.ObjectId(medicineId);
   }
 
-  const orders = await Order.find(filter);
+  const orders = await Order.find(filter).populate("medicines.medicine")
+  .exec();
 
   const totalSales = orders.reduce((sum, order) => {
     return sum + order.totalPrice;

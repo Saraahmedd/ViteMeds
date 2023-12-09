@@ -156,6 +156,7 @@ export const getMedicineById = (id) => async (dispatch) => {
 };
 
 export const getMedicinesAction = (queryObj) => async (dispatch) => {
+  console.log("...............")
   try {
     dispatch({
       type: MEDICINES_VIEW_REQUEST,
@@ -186,6 +187,7 @@ export const getMedicinesAction = (queryObj) => async (dispatch) => {
     );
     data.data.medUses = medUses;
     console.log(medUses);
+    console.log(data);
 
     console.log("hey");
     dispatch({
@@ -193,6 +195,7 @@ export const getMedicinesAction = (queryObj) => async (dispatch) => {
       payload: data.data,
     });
   } catch (error) {
+    console.log(error);
     dispatch({
       type: MEDICINES_VIEW_FAIL,
       payload: error.response
