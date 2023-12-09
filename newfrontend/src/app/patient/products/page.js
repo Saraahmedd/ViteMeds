@@ -157,13 +157,16 @@ export default function Products() {
           className="w-60"
           placeholder="Search For Medicine"
         />
-        <Button
-          variant="secondary"
-          className=" px-4 py-2 rounded"
-          onClick={() => setModalVisible(true)}
-        >
-          New Medicine
-        </Button>
+        {JSON.parse(localStorage.getItem("userInfo"))?.data.user.role ===
+          "pharmacist" && (
+          <Button
+            variant="secondary"
+            className=" px-4 py-2 rounded"
+            onClick={() => setModalVisible(true)}
+          >
+            New Medicine
+          </Button>
+        )}
       </div>
       <Modal visible={modalVisible} setVisible={setModalVisible}>
         <div className="p-4 flex flex-col">
@@ -262,6 +265,7 @@ export default function Products() {
             className="w-full my-4  px-8 py-4"
             placeholder="Image"
             callBackFiles={handleFileUpload}
+            buttonText={"Upload image (PNG, JPEG, PNG only)"}
             required
           />
           <br></br>
