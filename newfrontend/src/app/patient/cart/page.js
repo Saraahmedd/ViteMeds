@@ -83,7 +83,10 @@ export default function Cart() {
             ${cart?.totalPrice.toFixed(2)}
           </p>
           <Button
-            onClick={() => setError(true)}
+            onClick={() => {
+              window.history.pushState({}, "", "/patient/cart/checkout")
+              window.location.reload();
+            }}
             className="mt-3 self-end"
             size="xl"
             variant="secondary"

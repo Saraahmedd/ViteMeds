@@ -1,7 +1,9 @@
 "use client"
 
+import { viewCart } from "@/app/redux/actions/cartActions";
 import { ProductImage } from "@/components/ProductImage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const { Card, Grid, TextInput, Select, SelectItem, Button } = require("@tremor/react")
 
@@ -9,6 +11,24 @@ function Checkout() {
     const [governorate, setGovernorate] = useState("");
     const [paymentMethod, setPaymentMethod] = useState("COD");
     const [addNewAddress, setAddNewAddress] = useState(false);
+
+
+    const dispatch = useDispatch();
+    const cart = useSelector((state) => state.getCartReducer.cart?.cart);
+    const cartItems = useSelector(
+        (state) => state.getCartReducer.cart?.cart?.items
+    );
+
+    useEffect(() => {
+        dispatch(viewCart());
+    }, []);
+
+    useEffect(() => {
+        console.log("cart");
+        console.log(cart);
+    }, [cart]);
+
+
     return (
         <>
             <Card className="grow flex-1 flex flex-col">
@@ -110,7 +130,7 @@ function Checkout() {
                     <div className="border-l-1 border-gray-800 h-full w-full p-5">
                         <h1 className="font-bold text-xl">Cart Summary</h1>
                         <div className="rounded-lg border border-gray-800 mt-2 overflow-hidden">
-                            <div className={`bg-gray-900 h-[8rem] px-6 py-2 flex flex-row items-center`}>
+                            {/* <div className={`bg-gray-900 h-[8rem] px-6 py-2 flex flex-row items-center`}>
                                 <div className="w-[4rem] h-full">
                                     <ProductImage className="h-full" url={'/med1.png'} />
                                 </div>
@@ -145,10 +165,29 @@ function Checkout() {
                                 <div className="flex-1 grow justify-end">
                                     <p className="text-end font-bold">400 EGP</p>
                                 </div>
-                            </div>
+                            </div> */}
+
+                            {
+                                cart.items.map((item, index) => (
+                                    <div className={`${index !== 0 ? 'border-t-2' : ''} bg-gray-900 h-[8rem] px-6 py-2 flex flex-row items-center border-gray-800`}>
+                                        <div className="w-[4rem] h-full">
+                                            <ProductImage className="h-full" url={`http://localhost:8080/${item.medicine.imageURL}`} />
+                                        </div>
+                                        <div className="ml-6">
+                                            <h1 className="font-bold text-lg">{item.medicine.name}</h1>
+                                            <h1 className="font-semibold text-sm">{item.quantity} x {item.currentPrice} EGP</h1>
+                                        </div>
+                                        <div className="flex-1 grow justify-end">
+                                            <p className="text-end font-bold">{item.currentPrice} EGP</p>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+
+
                             <div className={`bg-gray-900 px-6 py-2 flex flex-row items-center border-t-2 border-gray-800`}>
                                 <p className="font-bold text-end">Total</p>
-                                <p className="ml-auto font-bold">1200 EGP</p>
+                                <p className="ml-auto font-bold">{cart.totalPrice} EGP</p>
                             </div>
 
 
