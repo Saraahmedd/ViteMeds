@@ -1,16 +1,18 @@
 "use client";
 
+import { EditButton } from "@/components/EditButton";
+import { FileUpload } from "@/components/FileUpload";
 import { Modal } from "@/components/Modal";
 import { ProductCard } from "@/components/ProductCard";
 import { ProductImage } from "@/components/ProductImage";
-import { Badge, Button, Card, Col, Grid, Italic, ProgressBar } from "@tremor/react";
+import { Badge, Button, Card, Col, Grid, Italic, ProgressBar, TextInput } from "@tremor/react";
 import { useParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SingleProduct() {
     const { id } = useParams();
 
-    const dummyData = {
+    const [dummyData, setDummyData] = useState({
         id: 0,
         name: "Medicine Example 1",
         price: 200,
@@ -34,7 +36,9 @@ export default function SingleProduct() {
                 image: '/med3.png'
             }
         ]
-    }
+    })
+
+    const [newIngredients, setNewIngredients] = useState([]);
 
     // const [MedicineNameElement]
 
@@ -47,24 +51,118 @@ export default function SingleProduct() {
     const [zoomStyle, setZoomStyle] = useState({
         transform: "scale(1)"
     });
+
+    function removeIngredient(id) {
+
+    }
+    
+    function newIngredient() {
+        setNewIngredients(prevState => [...prevState, ""]);
+    }
+
+    useEffect(() => {
+        if (newIngredients.length === 0) {
+            return;
+        }
+        const newIndex = newIngredients.length - 1;
+        const newId = `newingredient${newIndex}`;
+        const inputElement = document.getElementById(newId);
+
+
+        setTimeout(() => inputElement.focus(), 1);
+    }, [newIngredients]);
+
     const [zoom, setZoom] = useState(1);
     const [quantity, setQuantity] = useState(dummyData.quantity);
 
+    const [editIngredientsModal, setEditIngredientsModal] = useState(false);
+    const [editPriceModal, setEditPriceModal] = useState(false);
+    const [editPhotoModal, setEditPhotoModal] = useState(false);
+
+    // CAN EDIT!!!
+    const canEdit = true;
+
     return (
         <>
-            <Modal visible={true}>
-                Hello
+            <Modal visible={editIngredientsModal} setVisible={setEditIngredientsModal}>
+                <h1 className="font-bold text-xl mb-2">Add/Edit Ingredients</h1>
+                {dummyData.ingredients.map((ingredient, i) => {
+                    return (
+                        <div className="flex flex-row items-center justify-center">
+                            <TextInput id={`ingredient${i}`} className="my-2 me-2" key={`ing${i}`} defaultValue={ingredient} />
+                            <div role="button" onClick={() => setVisible(false)} className="ms-auto">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                                    <path fillRule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clipRule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                    )
+                })}
+                {newIngredients.map((ingredient, i) => {
+                    return (
+                        <div className="flex flex-row items-center justify-center">
+                            <TextInput id={`newingredient${i}`} className="my-2 me-2" key={`ing${i}`} defaultValue={ingredient} />
+                            <div role="button" onClick={() => setVisible(false)} className="ms-auto">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                                    <path fillRule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clipRule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                    )
+                })}
+
+                <div className="flex flex-row items-center justify-center">
+                    <TextInput onMouseDown={newIngredient} placeholder="New Ingredient" className="my-2 me-2" />
+                    <div role="button" style={{ visibility: 'hidden' }} className="ms-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                            <path fillRule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clipRule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div className="w-full flex flex-row align-end justify-end mt-3">
+                    <Button onClick={() => setEditIngredientsModal(false)} variant="secondary" className="self-end me-8">Close</Button>
+                </div>
+
+            </Modal>
+
+            <Modal visible={editPriceModal} setVisible={setEditPriceModal}>
+                <div className="flex flex-col h-full w-full">
+                    <h1 className="font-bold text-xl mb-2">Edit Item Price</h1>
+                    <div className="flex flex-row items-center justify-center">
+                        <TextInput defaultValue={dummyData.price} className="me-5" />
+                        EGP
+                    </div>
+
+                    <div className="mt-auto mb-5 w-full flex flex-row align-end justify-end">
+                        <Button onClick={() => setEditPriceModal(false)} variant="secondary" className="self-end">Close</Button>
+                    </div>
+                </div>
+            </Modal>
+
+            <Modal visible={editPhotoModal} setVisible={setEditPhotoModal}>
+                <div className="flex flex-col flex-1 grow w-full">
+                    <h1 className="font-bold text-xl mb-2">Edit Item Photo</h1>
+                    <FileUpload callBackFilePath={(path) => { }} />
+
+                    <div className="mt-auto w-full flex flex-row align-end justify-end">
+                        <Button onClick={() => setEditPriceModal(false)} variant="secondary" className="self-end">Close</Button>
+                    </div>
+                </div>
+
             </Modal>
 
             <Card
                 className="grow flex flex-1 flex-col"
-
             >
                 <Grid numItems={5} className="gap-4 grow flex-1 h-full">
                     <Col numColSpan={2} className="flex-1 grow h-full">
                         <Card
                             className="h-full flex flex-col items-center justify-center text-center cardBgColor">
                             <div className="w-full p-[5rem] flex grow-1 flex-1">
+                                <div className="absolute top-0 right-0 m-2">
+                                    <EditButton canEdit={canEdit} editFn={() => setEditPhotoModal(true)} />
+                                </div>
                                 <ProductImage style={{ transform: `scale(${zoom})` }} url={dummyData.image} />
                             </div>
                             <div className="flex flex-row items-center justify-center">
@@ -88,17 +186,20 @@ export default function SingleProduct() {
                                 <Italic>
                                     <span className="text-gray-500 text-sm text-italic">Used for {dummyData.medicinalUses.join(", ")}</span>
                                 </Italic>
-                                <h1 className="font-bold text-xl mt-2">{dummyData.price} EGP</h1>
-
+                                <div className="flex-row flex items-center">
+                                    <h1 className="font-bold text-xl mt-2 mr-2">{dummyData.price} EGP</h1>
+                                    <EditButton canEdit={canEdit} editFn={() => setEditPriceModal(true)} />
+                                </div>
                                 <p className="pr-8 mt-2">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                                 </p>
-                                <div className="flex flex-row mt-2">
+                                <div className="flex flex-row mt-2 items-center">
                                     {
                                         dummyData.ingredients.map((ing, i) => (
                                             <Badge className="mx-1" key={`badge${i}`} color={colors[i % colors.length]}>{ing}</Badge>
                                         ))
                                     }
+                                    <EditButton canEdit={canEdit} editFn={() => setEditIngredientsModal(true)} />
                                 </div>
                                 {
                                     dummyData.remaining <= 0 &&

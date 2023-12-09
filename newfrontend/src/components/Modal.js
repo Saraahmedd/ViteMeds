@@ -1,9 +1,6 @@
 const { Card } = require("@tremor/react")
 
 function Modal({ children, visible, setVisible }) {
-    if(!visible) {
-        return (<></>)
-    }
     return (
         <div
             style={{
@@ -13,7 +10,8 @@ function Modal({ children, visible, setVisible }) {
                 top: 0,
                 left: 0,
                 background: 'rgba(0,0,0,0.75)',
-                zIndex: 49
+                zIndex: 49,
+                display: visible ? 'block':'none',
             }}
         >
             <div
@@ -25,10 +23,10 @@ function Modal({ children, visible, setVisible }) {
                     transform: 'translate(-50%, -50%)',
                     minWidth: '500px',
                     minHeight: '500px',
-                    zIndex: 50
+                    zIndex: 50,
                 }}
             >
-                <Card className="flex-1 grow">
+                <Card className="flex flex-col flex-1 grow">
                     <div className="flex flex-row w-100">
                         <div role="button" onClick={() => setVisible(false)} className="ms-auto">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
