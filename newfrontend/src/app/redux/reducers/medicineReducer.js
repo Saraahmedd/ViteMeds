@@ -89,6 +89,7 @@ export const addMedicineReducer = (state = addMedicineInitialState, action) => {
         ...state,
         loading: true,
         error: null,
+        success: false,
       };
     case ADD_MEDICINE_SUCCESS:
       return {
@@ -96,12 +97,14 @@ export const addMedicineReducer = (state = addMedicineInitialState, action) => {
         medicine: action.payload,
         loading: false,
         error: null,
+        success: true,
       };
     case ADD_MEDICINE_FAIL:
       return {
         ...state,
         loading: false,
         error: action.payload,
+        success: false,
       };
     default:
       return state;
