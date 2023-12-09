@@ -1,146 +1,121 @@
-import React, { useState } from "react";
+"use client"
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { TextInput } from '@tremor/react';
+import { Button } from '@tremor/react';
+import { validatePassword } from '@/app/redux/validators';
+import { changePasswordAction } from '../app/redux/actions/authActions';
+import { changePasswordReducer } from '@/app/redux/reducers/authReducer';
+import { BottomCallout } from "@/components/BottomCallout";
 
-const ChangePasswordModal = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const ChangePassword = () => {
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  const dispatch = useDispatch();
+  const [visibleFeedback, setVisibleFeedback] = useState(false);
+
+
+  const {
+    loading: changeLoading,
+    success: changeSuccess,
+    error: changeError,
+  } = useSelector((state) => state.changePasswordReducer);
+
+  const [formData, setFormData] = useState({
+    passwordCurrent: "",
+    password: "",
+    passwordConfirm: "",
+  });
+  
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+    console.log(formData);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handlePasswordChange = (e) => {
-    // Handle password change logic here
+  const handleSubmit = (e) => {
     e.preventDefault();
-    closeModal();
+    dispatch(changePasswordAction({ ...formData}));
+    setFormData({
+      passwordCurrent: "",
+      password: "",
+      passwordConfirm: "",
+    });
   };
+
 
   return (
-    <div>
-      {/* Trigger button to open the modal */}
-      <button
-        onClick={openModal}
-        className="bg-blue-500 text-white py-2 px-4 rounded"
-      >
-        Change Password
-      </button>
-
-      {/* Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center">
-          <div className="w-full p-6 rounded-lg shadow md:w-96">
-            <h2 className="mb-4 text-xl font-bold text-gray-900">
-              Change Password
-            </h2>
-            <form onSubmit={handlePasswordChange} className="space-y-4">
-              <div>
-                <label
-                  htmlFor="currentPassword"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Current Password
-                </label>
-                <input
-                  type="password"
-                  name="currentPassword"
-                  id="currentPassword"
-                  placeholder="••••••••"
-                  className="input-field"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="newPassword"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  New Password
-                </label>
-                <input
-                  type="password"
-                  name="newPassword"
-                  id="newPassword"
-                  placeholder="••••••••"
-                  className="input-field"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="confirmPassword"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Confirm Password
-                </label>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  id="confirmPassword"
-                  placeholder="••••••••"
-                  className="input-field"
-                  required
-                />
-              </div>
-              <div className="flex items-start">
-                <div className="flex items-center h-5">
-                  {/* Checkbox for accepting terms and conditions */}
-                  <input
-                    id="acceptTerms"
-                    type="checkbox"
-                    className="w-4 h-4 border border-gray-300 rounded bg-gray-800 focus:ring-3 focus:ring-primary-300"
-                    required
-                  />
-                </div>
-                <div className="ml-3 text-sm">
-                  <label
-                    htmlFor="acceptTerms"
-                    className="font-light text-gray-500"
-                  >
-                    I accept the{" "}
-                    <a
-                      href="#"
-                      className="font-medium text-blue-600 hover:underline"
-                    >
-                      Terms and Conditions
-                    </a>
-                  </label>
-                </div>
-              </div>
-              <button
-                type="submit"
-                className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5"
-              >
-                Reset Password
-              </button>
-            </form>
-            {/* Close button */}
-            <button
-              onClick={closeModal}
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-            >
-              <span className="sr-only">Close</span>
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                ></path>
-              </svg>
-            </button>
-          </div>
-        </div>
+    <div className="prof h-96 w-[35rem] rounded-xl p-10">
+      {changeSuccess && (
+        <BottomCallout
+          message="Changing password was successful"
+          variant="success"
+          visible={true}
+          setVisible={setVisibleFeedback}
+        />
       )}
-    </div>
+
+      {changeError && (
+        <BottomCallout
+          message="Your Old password is not correct"
+          variant="error"
+          visible={true}
+          setVisible={setVisibleFeedback}
+        />
+      )}
+            <h1 className="text-center text-2xl text-white-200">Change Password</h1>
+            <TextInput
+              className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 mt-5"
+              type="password"
+              onChange={handleChange}
+              placeholder="Old Password"
+              error={changeError && "Old Password is incorrect"}
+              name="passwordCurrent"
+            />
+            <TextInput
+              className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400  mt-5"
+              type="password"
+              placeholder="Password"
+              onChange={handleChange}
+              name="password"
+              required
+              error={
+                !validatePassword(formData.password) && formData.password !== ""
+              }
+              errorMessage={
+                !validatePassword(formData.password) &&
+                formData.password !== "" &&
+                "Password must be at least 8 characters with 1 uppercase, 1 lowercase and 1 number"
+              }
+            />
+            <TextInput
+              className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400  mt-5"
+              type="password"
+              placeholder="Confirm Password"
+              onChange={handleChange}
+              name="passwordConfirm"
+              required
+              error={
+                formData.password !== formData.passwordConfirm &&
+                formData.passwordConfirm !== ""
+              }
+              errorMessage={
+                formData.password !== formData.passwordConfirm &&
+                formData.passwordConfirm !== "" &&
+                "Passwords do not match"
+              }
+            />
+           <Button
+              loading={changeLoading}
+              onClick={handleSubmit}
+              className="prof mt-5 tracking-wide font-semibold bg-purple-600 text-gray-100 w-full py-4 rounded-lg hover:bg-purple-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+            >
+              <span className="ml-3">Submit</span>
+            </Button>
+          </div>
   );
 };
 
-export default ChangePasswordModal;
+export default ChangePassword;
