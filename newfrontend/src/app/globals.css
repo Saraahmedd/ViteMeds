@@ -15,6 +15,10 @@
 
 * {
   font-family: 'GeneralSans', 'Times New Roman';
+  /* overflow-x: hidden; */
+}
+
+body { 
   overflow-x: hidden;
 }
 
