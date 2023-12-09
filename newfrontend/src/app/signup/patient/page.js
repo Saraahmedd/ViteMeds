@@ -134,7 +134,7 @@ const Signup = () => {
     )}
     <div className="min-h-screen flex items-center justify-center bg-gray-900 text-gray-300">
       <div className="max-w-screen-xl m-0 sm:m-10 shadow sm:rounded-lg flex justify-center flex-1">
-        {/* <Lottie animationData={pharmacyanimation} className='w-[550px] h-[550px]' loop={true} /> */}
+        <Lottie animationData={pharmacyanimation} className='w-[550px] h-[750px]' loop={true} />
         <div className="lg:w-2/3 xl:w-2/3 p-6 sm:p-12 transform scale-70">
           <div className="flex flex-col items-center rounded-lg border border-primary-600 px-8 pt-8 pb-12 shadow-lg w-full ">
             <h1 className="text-2xl xl:text-3xl font-extrabold">Sign Up</h1>
