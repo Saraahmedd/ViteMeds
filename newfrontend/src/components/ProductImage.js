@@ -1,4 +1,4 @@
-function ProductImage({ url, style }) {
+function ProductImage({ url, style, className }) {
     return (
         <div
             style={{
@@ -10,6 +10,8 @@ function ProductImage({ url, style }) {
                 width: '100%',
                 ...style
             }}
+
+            className={className}
         >
         </div>
     )
