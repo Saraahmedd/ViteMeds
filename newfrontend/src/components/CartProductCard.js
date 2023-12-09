@@ -1,11 +1,25 @@
 "use client";
 const { Card } = require("@tremor/react");
 const { default: Image } = require("next/image");
-const { useState } = require("react");
+const { useState, useEffect } = require("react");
 const { ErrorMsg } = require("./BottomCallout");
+const { deleteFromCart } = require("@/app/redux/actions/cartActions");
+const { useDispatch } = require("react-redux");
 
-function CartProductCard({ id, name, image, price, initialQuantity }) {
+function CartProductCard({
+  id,
+  name,
+  image,
+  price,
+  initialQuantity,
+  cartHandler,
+}) {
   const [quantity, setQuantity] = useState(initialQuantity);
+  const [btnClicked, setBtnClicked] = useState(false);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (btnClicked == false) setQuantity(initialQuantity);
+  }, [initialQuantity]);
 
   return (
     <div>
@@ -39,7 +53,11 @@ function CartProductCard({ id, name, image, price, initialQuantity }) {
           <div className="flex flex-row items-center self-end lg:self-center">
             <div
               role="button"
-              onClick={() => setQuantity((q) => (q - 1 > 0 ? q - 1 : 1))}
+              onClick={(e) => {
+                setBtnClicked(true);
+                setQuantity((q) => q - 1);
+                cartHandler(e, id, quantity - 1);
+              }}
               className="flex items-center justify-center text-2xl rounded-md border h-10 w-10 mx-3 hover:bg-white hover:text-black"
             >
               -
@@ -48,7 +66,11 @@ function CartProductCard({ id, name, image, price, initialQuantity }) {
             <span className="font-bold">{quantity}</span>
 
             <div
-              onClick={() => setQuantity((q) => q + 1)}
+              onClick={(e) => {
+                setBtnClicked(true);
+                setQuantity((q) => q + 1);
+                cartHandler(e, id, quantity + 1);
+              }}
               role="button"
               className="flex items-center justify-center text-2xl rounded-md border h-10 w-10 mx-3 hover:bg-white hover:text-black"
             >
@@ -68,6 +90,7 @@ function CartProductCard({ id, name, image, price, initialQuantity }) {
           <div
             className="lg:mx-2 my-2 lg:my-0 self-end lg:self-center"
             role="button"
+            onClick={() => dispatch(deleteFromCart(id))}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
