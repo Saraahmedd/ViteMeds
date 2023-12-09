@@ -1,7 +1,14 @@
 const nodemailer = require("nodemailer");
 const pug = require("pug");
 const htmlToText = require("html-to-text");
+//183a88ad461cee6e9e83d592b67dd549
+//cd2ffde987f6b1dc6913a839e43f8342
+const Mailjet = require("node-mailjet");
 
+const mailjet = Mailjet.apiConnect(
+  "183a88ad461cee6e9e83d592b67dd549",
+  "cd2ffde987f6b1dc6913a839e43f8342"
+);
 module.exports = class Email {
   constructor(user, OTP) {
     this.to = user.email;
@@ -20,6 +27,7 @@ module.exports = class Email {
         },
       });
     }
+    //183a88ad461cee6e9e83d592b67dd549
 
     return nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
@@ -50,7 +58,32 @@ module.exports = class Email {
     };
 
     // 3) Create a transport and send email
-    await this.newTransport().sendMail(mailOptions);
+    const request = mailjet.post("send", { version: "v3.1" }).request({
+      Messages: [
+        {
+          From: {
+            Email: "abdohatom2002@gmail.com",
+            Name: "Mailjet Pilot",
+          },
+          To: [
+            {
+              Email: "amir.ashraf16502@gmail.com",
+              Name: "",
+            },
+          ],
+          Subject: "subject",
+          TextPart:
+            template == "passwordReset"
+              ? "Your OTP is: ya amar " + this.OTP
+              : "This " + medicine + "is out of stock",
+          // HTMLPart:
+          //   '<h3>Dear passenger 1, welcome to <a href="https://www.mailjet.com/">Mailjet</a>!</h3><br />May the delivery force be with you!',
+        },
+      ],
+    });
+    request.then(() => {
+      console.log(request);
+    });
   }
 
   async sendWelcome() {
@@ -64,7 +97,7 @@ module.exports = class Email {
   async sendPasswordReset() {
     await this.send(
       "passwordReset",
-      "Your password reset token (valid for only 10 minutes)",
+      "Your password reset token (valid for only 10 minutes)"
     );
   }
 };
