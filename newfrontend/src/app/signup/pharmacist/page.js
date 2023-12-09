@@ -78,7 +78,7 @@ const SignupPharmacist = () => {
   
    if(isAuthenticated)
    { 
-    url="/patient/cart";
+    url="/pharmacist/profile";
     setTimeout(() => {
       window.history.pushState({},"",url)
       window.location.reload()

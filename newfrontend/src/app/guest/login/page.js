@@ -38,10 +38,10 @@ const Login = () => {
       const role = JSON.parse(localStorage.getItem("userInfo")).data.user.role;
       url =
         role === "administrator"
-          ? "/admin"
+          ? "/admin/manage-users"
           : role === "patient"
-          ? "/patient/cart"
-          : "/patient/cart";
+          ? "/patient/profile"
+          : "/pharmacist/profile";
           console.log(url)
       setTimeout(() => {
         window.history.pushState({},"",url)
@@ -53,11 +53,13 @@ const Login = () => {
   const handleLogin = () => {
     dispatch(login(formData.username, formData.password));
   };
-
+const [loadingSignUp,setLoadingSignUp]=useState(false);
   const handleSignup =()=>{
     url="/signup/patient"
     window.history.pushState({},"",url)
-        window.location.reload()
+     window.location.reload()
+     
+     setLoadingSignUp(true)
   }
   
   return (
@@ -115,7 +117,9 @@ const Login = () => {
           {/* Sign Up Button */}
           <Button className="mt-4 tracking-wide font-semibold bg-purple-600 text-gray-100 w-full py-4 rounded-lg hover:bg-purple-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
           variant="primary"
-          onClick={handleSignup}>
+          onClick={handleSignup}
+          loading={loadingSignUp}
+          loadingText="En Route To Sign Up">
             <span className="ml-3">Sign Up</span>
           </Button>
               </div>

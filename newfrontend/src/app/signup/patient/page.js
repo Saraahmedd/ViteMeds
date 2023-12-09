@@ -57,7 +57,7 @@ const Signup = () => {
   useEffect(() => {
     // Update overall form validity based on individual validations
    if(isAuthenticated)
-   { url="/patient/cart";
+   { url="/patient/profile";
     setTimeout(() => {
       window.history.pushState({},"",url)
       window.location.reload()
