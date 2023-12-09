@@ -4,8 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import GradientText from "./GradientText";
 
-export default function Sidebar({ role }) {
+export default function Sidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const role = JSON.parse(localStorage.getItem("userInfo"))?.data.user.role;
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -16,31 +17,37 @@ export default function Sidebar({ role }) {
 
   const menuItems = {
     patient: [
-      { icon: "profile", label: "Profile",href:"/patient/profile" },
-      { icon: "medicines", label: "Medicines",href:"/patient/products" },
-      { icon: "cart", label: "Cart",href:"/patient/cart" },
-      { icon: "logout", label: "Logout",href:"/guest/login" },
+      { icon: "profile", label: "Profile", href: "/patient/profile" },
+      { icon: "medicines", label: "Medicines", href: "/patient/products" },
+      { icon: "cart", label: "Cart", href: "/patient/cart" },
+      { icon: "logout", label: "Logout", href: "/guest/login" },
     ],
     pharmacist: [
-      { icon: "profile", label: "Profile",href:"/pharmacist/profile" },
-      { icon: "medicines", label: "Medicines",href:"/patient/products" },
-      { icon: "sales", label: "Sales Report" ,href:"/pharmacist/salesReport"},
-      { icon: "logout", label: "Logout",href:"/guest/login" },
+      { icon: "profile", label: "Profile", href: "/pharmacist/profile" },
+      { icon: "medicines", label: "Medicines", href: "/patient/products" },
+      { icon: "sales", label: "Sales Report", href: "/pharmacist/salesReport" },
+      { icon: "logout", label: "Logout", href: "/guest/login" },
     ],
     admin: [
-     
-      { icon: "medicines", label: "Medicines",href:"/patient/products" },
-      { icon: "sales", label: "Sales Report",href:"/pharmacist/salesReport" },
-      { icon: "users", label: "Manage Users",href:"/admin/manage-users" },
-      { icon: "profile", label: "Change Password",href:"/admin/changePassword" },
-      { icon: "logout", label: "Logout",href:"/guest/login" },
+      { icon: "medicines", label: "Medicines", href: "/patient/products" },
+      { icon: "sales", label: "Sales Report", href: "/pharmacist/salesReport" },
+      { icon: "users", label: "Manage Users", href: "/admin/manage-users" },
+      {
+        icon: "profile",
+        label: "Change Password",
+        href: "/admin/changePassword",
+      },
+      { icon: "logout", label: "Logout", href: "/guest/login" },
     ],
   };
 
   const renderMenuItems = (items) => {
     return items.map((item, index) => (
       <li key={index}>
-        <a href={item.href} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+        <a
+          href={item.href}
+          className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+        >
           <svg
             className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
             aria-hidden="true"
