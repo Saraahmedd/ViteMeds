@@ -7,7 +7,7 @@ import { login } from "@/app/redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import {useRouter} from "next/router";
 import { redirect } from "next/navigation";
-import { Button, TextInput } from "@tremor/react";
+import { Button, Grid, TextInput } from "@tremor/react";
 import { BottomCallout } from "@/components/BottomCallout";
 const Login = () => {
 
@@ -53,6 +53,13 @@ const Login = () => {
   const handleLogin = () => {
     dispatch(login(formData.username, formData.password));
   };
+
+  const handleSignup =()=>{
+    url="/signup/patient"
+    window.history.pushState({},"",url)
+        window.location.reload()
+  }
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 text-gray-300">
       <div className="max-w-screen-xl m-0 sm:m-10 shadow sm:rounded-lg flex justify-center flex-1">
@@ -62,8 +69,9 @@ const Login = () => {
             <div className="w-full flex-1 mt-8">
               <div className="mx-auto max-w-xs">
                 {/* Log In Form */}
+                <Grid numItems={1} className="gap-x-3 gap-y-4">
                 <TextInput
-                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-lg focus:outline-none focus:border-gray-400 mt-5"
+                  className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
                   type="username"
                   placeholder="Username"
                   name="username"
@@ -75,7 +83,7 @@ const Login = () => {
 
                 />
                 <TextInput
-                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-lg focus:outline-none focus:border-gray-400 mt-5"
+                  className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
                   type="password"
                   placeholder="Password"
                   name="password"
@@ -84,10 +92,11 @@ const Login = () => {
                   required
                   error={loginError}
                 />
+                </Grid>
                <Button className="mt-5 tracking-wide font-semibold bg-purple-600 text-gray-100 w-full py-4 rounded-lg hover:bg-purple-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                 onClick={handleLogin}
                 loading = {loginLoading}
-                color={"purple"}
+                variant="primary"
                 loadingText="Logging In...">
                 <span className="ml-3">Log In</span>
                 </Button>
@@ -105,7 +114,8 @@ const Login = () => {
           
           {/* Sign Up Button */}
           <Button className="mt-4 tracking-wide font-semibold bg-purple-600 text-gray-100 w-full py-4 rounded-lg hover:bg-purple-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
-          color={"purple"}>
+          variant="primary"
+          onClick={handleSignup}>
             <span className="ml-3">Sign Up</span>
           </Button>
               </div>
@@ -123,6 +133,15 @@ const Login = () => {
         <BottomCallout
           message="Invalid Username or Password"
           variant="error"
+          visible={true}
+          setVisible={setVisibleFeedback}
+        />
+      )}
+
+{loginSuccess && (
+        <BottomCallout
+          message="Login Successful"
+          variant="success"
           visible={true}
           setVisible={setVisibleFeedback}
         />

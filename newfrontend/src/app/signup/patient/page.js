@@ -15,25 +15,22 @@ import {
   validatePassword,
   validatePhoneNumber,
 } from "../../redux/validators";
-import { Divider } from "@tremor/react";
-import { FileUpload } from "@/components/FileUpload";
 
-const SignupPharmacist = () => {
+const Signup = () => {
   const [visibleFeedback, setVisibleFeedback] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     name: "",
     email: "",
     password: "",
-    educationalBackground: "",
-    affiliation: "",
-    hourlyRate: "",
-    dateOfBirth: "",
-    gender: "male",
     mobileNumber: "",
-    passwordConfirm: ""
+    gender: "male",
+    dateOfBirth: "",
+    eName: "",
+    eNumber: "",
+    erelationToPatient: "",
+    passwordConfirm: "",
   });
-  
   const {
     isAuthenticated,
     loading: registerLoading,
@@ -43,22 +40,7 @@ const SignupPharmacist = () => {
     (state) => state.registerReducer
   );
   const [showPassword, setShowPassword] = useState(false);
-  const [files, setFiles] = useState({
-    document1: null,
-    document2: null,
-    document3: null,
-  });
-  const setDocument1 = (file) => {
-    
-    setFiles({document1:file,...files})
-    
-  }
-  const setDocument2 = (file) => {
-    setFiles({...files,document2:file})
-  }
-  const setDocument3 = (file) => {
-    setFiles({...files,document3:file})
-  }
+
   const [showPasswordConfirm, setShowPasswordConfrim] = useState(false);
   const [passwordMatch, setPasswordMatch] = useState(true); // Passwords match state
   const [formValid, setFormValid] = useState(false);
@@ -74,17 +56,12 @@ const SignupPharmacist = () => {
   let url=""
   useEffect(() => {
     // Update overall form validity based on individual validations
-    //e.preventDefault();
-  
    if(isAuthenticated)
-   { 
-    url="/patient/cart";
+   { url="/patient/cart";
     setTimeout(() => {
       window.history.pushState({},"",url)
       window.location.reload()
-    }, 1000);
-
-}
+    }, 1000);}
   }, [registerLoading]);
 
   const togglePasswordVisibility = (field) => {
@@ -112,30 +89,26 @@ const SignupPharmacist = () => {
   const handleSignUp = (e) => {
     // Gather data in the formData object and send it to the backend
     e.preventDefault();
-    const combinedFormData = new FormData();
-    combinedFormData.append("username", formData.username);
-    combinedFormData.append("name", formData.name);
-    combinedFormData.append("email", formData.email);
-    combinedFormData.append("password", formData.password);
-    combinedFormData.append("passwordConfirm", formData.passwordConfirm);
-    combinedFormData.append("dateOfBirth", formData.dateOfBirth);
-    combinedFormData.append("gender", formData.gender);
-    combinedFormData.append("phoneNumber", formData.phoneNumber);
-    combinedFormData.append("hourlyRate", formData.hourlyRate);
-    combinedFormData.append(
-      "educationalBackground",
-      formData.educationalBackground
-    );
-    combinedFormData.append("role", "pharmacist");
-    combinedFormData.append("affiliation", formData.affiliation);
-    combinedFormData.append("documents", files.document1);
-    combinedFormData.append("documents", files.document2);
-    combinedFormData.append("documents", files.document3);
+    console.log("Form Data:", formData);
     // Add your code to send data to the backend here
 
     dispatch(
-      registerAction(
-        combinedFormData)
+      registerAction({
+        name: formData.name,
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
+        passwordConfirm: formData.passwordConfirm,
+        role: "patient",
+        dateOfBirth: formData.dateOfBirth,
+        gender: formData.gender,
+        mobileNumber: formData.mobileNumber,
+        emergencyContact: {
+          fullName: formData.eName,
+          mobileNumber: formData.eNumber,
+          relationToPatient: formData.erelationToPatient,
+        },
+      })
     );
   };
 
@@ -161,7 +134,7 @@ const SignupPharmacist = () => {
     )}
     <div className="min-h-screen flex items-center justify-center bg-gray-900 text-gray-300">
       <div className="max-w-screen-xl m-0 sm:m-10 shadow sm:rounded-lg flex justify-center flex-1">
-    {/* <Lottie animationData={pharmacyanimation} className='w-[550px] h-[800px]' loop={true} /> */}
+        {/* <Lottie animationData={pharmacyanimation} className='w-[550px] h-[550px]' loop={true} /> */}
         <div className="lg:w-2/3 xl:w-2/3 p-6 sm:p-12 transform scale-70">
           <div className="flex flex-col items-center rounded-lg border border-primary-600 px-8 pt-8 pb-12 shadow-lg w-full ">
             <h1 className="text-2xl xl:text-3xl font-extrabold">Sign Up</h1>
@@ -292,7 +265,6 @@ const SignupPharmacist = () => {
 
                   {/* Right column */}
                   {/* 3ayza aghayar el gender aslan akhalih icons lessa fa ma7atetsh code el integration  */}
-                  
                   <Col>
                     {/* <TextInput
                       className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
@@ -314,6 +286,7 @@ const SignupPharmacist = () => {
                   </Col>
 
 
+
                   {/* <Image src="/birthday.svg" height={25} width={25}></Image> <p className="ml-3 text-lg"></p> */}
                   <Col>
                     <TextInput
@@ -331,12 +304,12 @@ const SignupPharmacist = () => {
                     <TextInput
                       className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
                       type="text"
-                      placeholder="Affiliation*"
-                      name="affiliation"
-                      value={formData.affiliation}
+                      placeholder="Emergency Contact Name*"
+                      name="eName"
+                      value={formData.eName}
                       required
-                      error={registerError&& formData.affiliation===""}
-                      errorMessage={registerError&& formData.affiliation==="" && "Please fill in this field"}
+                      error={registerError&& formData.eName===""}
+                      errorMessage={registerError&& formData.eName==="" && "Please fill in this field"}
                       onChange={handleInputChange}
                     />
                   </Col>
@@ -344,14 +317,24 @@ const SignupPharmacist = () => {
                   <Col>
                     <TextInput
                       className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
-                      type="text"
-                      placeholder="Educational Background*"
-                      name="educationalBackground"
-                      value={formData.educationalBackground}
-                      onChange={handleInputChange}
-                      error={formData.educationalBackground==="" && registerError}
-                      errorMessage={formData.educationalBackground==="" && registerError && "Please fill in this field"}
+                      type="Number"
                       required
+                      placeholder="Emergency Contact Phone*"
+                      name="eNumber"
+                      value={formData.eNumber}
+                      onChange={handleInputChange}
+                      error={(
+                        formData.eNumber &&
+                        !validatePhoneNumber(formData.eNumber))
+                        || (registerError && formData.eNumber==="")
+                      }
+                      errorMessage={
+                        formData.eNumber!=="" ? (
+                        formData.eNumber &&
+                        !validatePhoneNumber(formData.eNumber)&&
+                      "Please enter 11 digits sarting by a zero") :(
+                        registerError && "Please fill in this field"
+                      )}
                     />
                   </Col>
 
@@ -359,25 +342,18 @@ const SignupPharmacist = () => {
                     <TextInput
                       className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
                       type="text"
-                      placeholder="Hourly Rate*"
-                      name="hourlyRate"
-                      value={formData.hourlyRate}
+                      placeholder="Relation To You*"
+                      name="erelationToPatient"
+                      value={formData.erelationToPatient}
                       onChange={handleInputChange}
-                      error={formData.hourlyRate==="" && registerError}
-                      errorMessage={formData.hourlyRate==="" && registerError && "Please fill in this field"}
+                      error={formData.erelationToPatient==="" && registerError}
+                      errorMessage={formData.erelationToPatient==="" && registerError && "Please fill in this field"}
                       required
                     />
                   </Col>
+
+                  
                 </Grid>
-               
-                <Divider></Divider>
-                <h1 className="text-2xl xl:text-3xl font-extrabold text-center">Required Documents</h1>
-                <FileUpload variant="secondary" buttonText="Upload ID" callBackFiles={setDocument1}></FileUpload>
-
-                <FileUpload variant="secondary" buttonText="Upload Pharmacy Degree" callBackFiles={setDocument2}></FileUpload>
-
-                <FileUpload variant="secondary" buttonText="Upload Working License" callBackFiles={setDocument3}></FileUpload>
-                
                 {/* Sign Up Button */}
                 <Button variant="primary" className="mt-5 tracking-wide font-semibold text-gray-100 w-full py-4 rounded-lg transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                   onClick={handleSignUp}
@@ -411,4 +387,4 @@ const SignupPharmacist = () => {
   );
 };
 
-export default SignupPharmacist;
+export default Signup;
