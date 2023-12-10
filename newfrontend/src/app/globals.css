@@ -74,3 +74,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   --tw-bg-opacity: 1;
   background-color: rgb(17, 24, 39, var(--tw-bg-opacity));
 }
+
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-right {
+  animation: slideInRight 2.5s ease-in-out; /* Adjust the duration and timing function as needed */
+}
+
+
