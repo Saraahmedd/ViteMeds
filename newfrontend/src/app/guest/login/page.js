@@ -55,6 +55,7 @@ const Login = () => {
   };
 const [loadingSignUp,setLoadingSignUp]=useState(false);
   const handleSignup =()=>{
+    
     url="/signup/patient"
     window.history.pushState({},"",url)
      window.location.reload()
@@ -105,7 +106,7 @@ const [loadingSignUp,setLoadingSignUp]=useState(false);
                 
                 {/* Forgot Password Link */}
                 <div className="mt-2 text-sm text-gray-500 text-center">
-                  <a href="#" className="hover:text-white">Forgot Password?</a>
+                  <a href="/guest/forgetPassword" className="hover:text-white">Forgot Password?</a>
                 </div>
                          {/* Partition */}
           <div className="flex items-center mt-4">

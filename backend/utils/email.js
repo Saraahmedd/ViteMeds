@@ -67,14 +67,14 @@ module.exports = class Email {
           },
           To: [
             {
-              Email: "amir.ashraf16502@gmail.com",
+              Email: this.to,
               Name: "",
             },
           ],
           Subject: "subject",
           TextPart:
             template == "passwordReset"
-              ? "Your OTP is: ya amar " + this.OTP
+              ? "Your OTP is: " + this.OTP
               : "This " + medicine + "is out of stock",
           // HTMLPart:
           //   '<h3>Dear passenger 1, welcome to <a href="https://www.mailjet.com/">Mailjet</a>!</h3><br />May the delivery force be with you!',
