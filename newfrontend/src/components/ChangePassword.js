@@ -47,7 +47,7 @@ const ChangePassword = () => {
 
 
   return (
-    <div className="prof h-96 w-[35rem] rounded-xl p-10">
+    <div className="prof w-[35rem] rounded-xl p-10">
       {changeSuccess && (
         <BottomCallout
           message="Changing password was successful"
@@ -67,7 +67,7 @@ const ChangePassword = () => {
       )}
             <h1 className="text-center text-2xl text-white-200">Change Password</h1>
             <TextInput
-              className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 mt-5"
+              className="w-full px-8 py-2 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 mt-5"
               type="password"
               onChange={handleChange}
               placeholder="Old Password"
@@ -75,7 +75,7 @@ const ChangePassword = () => {
               name="passwordCurrent"
             />
             <TextInput
-              className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400  mt-5"
+              className="w-full px-8 py-2 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400  mt-5"
               type="password"
               placeholder="Password"
               onChange={handleChange}
@@ -91,7 +91,7 @@ const ChangePassword = () => {
               }
             />
             <TextInput
-              className="w-full px-8 py-4 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400  mt-5"
+              className="w-full px-8 py-2 rounded-lg font-medium bg-gray-800 border border-gray-900 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400  mt-5"
               type="password"
               placeholder="Confirm Password"
               onChange={handleChange}

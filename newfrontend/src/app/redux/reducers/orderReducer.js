@@ -129,18 +129,22 @@ export const cancelOrderReducer = (state = {}, action) => {
       return {
         ...state,
         loading: true,
+        error: null,
+        success: false,
       };
     case ORDER_CANCEL_SUCCESS:
       return {
         ...state,
         loading: false,
         error: null,
+        success: true,
       };
     case ORDER_CANCEL_FAIL:
       return {
         ...state,
         loading: false,
         error: action.payload,
+        success: false,
       };
     default:
       return state;

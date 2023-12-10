@@ -166,7 +166,7 @@ function ProductCard({
             clipRule="evenodd"
           />
         </svg>
-        <span className="ml-2 colorColor text-md font-bold">{price} EGP</span>
+        <span className="ml-2 colorColor text-md font-bold">{price} USD</span>
       </div>
     </div>
   );

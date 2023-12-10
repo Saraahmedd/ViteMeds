@@ -15,7 +15,7 @@ import {
 
 const viewCartInitialState = {
   cart: null,
-  loading: false,
+  loading: true,
   error: null,
 };
 

@@ -245,7 +245,7 @@ export default function SingleProduct() {
               defaultValue={medicine?.price}
               className="me-5"
             />
-            EGP
+            USD
           </div>
 
           <div className="mt-auto mb-5 w-full flex flex-row align-end justify-end">
@@ -351,7 +351,7 @@ export default function SingleProduct() {
                 </Italic>
                 <div className="flex-row flex items-center">
                   <h1 className="font-bold text-xl mt-2 mr-2">
-                    {medicine?.price} EGP
+                    {medicine?.price} USD
                   </h1>
                   <EditButton
                     canEdit={canEdit}

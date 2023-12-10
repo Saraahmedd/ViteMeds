@@ -80,7 +80,7 @@ export default function Cart() {
 
           <p className="font-bold text-2xl mt-1">
             {" "}
-            ${cart?.totalPrice.toFixed(2)}
+            {cart?.totalPrice.toFixed(2)} USD
           </p>
           <Button
             onClick={() => {

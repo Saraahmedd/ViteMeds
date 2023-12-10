@@ -110,7 +110,7 @@ export const addAddressesReducer = (state = {}, action) => {
 
 export const viewMyDetailsReducer = (
   state = {
-    loading: false,
+    loading: true,
     error: null,
     patient: null, // or any other initial value
   },
