@@ -14,11 +14,14 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { BottomCallout } from "@/components/BottomCallout";
 import {
+  Badge,
   Button,
   Card,
   DateRangePicker,
   Select,
   SelectItem,
+  Subtitle,
+  Title,
 } from "@tremor/react";
 import { Modal } from "@tremor/react";
 import { viewOrderDetails } from "@/app/redux/actions/orderActions";
@@ -91,7 +94,6 @@ function SalesReport() {
   const [selectedMedicine, setSelectedMedicine] = useState(null);
   const [date, setDate] = useState("");
   useEffect(() => {
-    console.log(date);
     dispatch(getFilteredOrders(selectedMedicine, date.from, date.to));
     dispatch(getMedicinesAction({}));
   }, [dispatch, selectedMedicine, date]);
@@ -118,6 +120,7 @@ function SalesReport() {
               title="Sales Report"
               columns={columns}
               fields={fields}
+              children={<Badge>Total Sales: {Sales.totalSales} USD</Badge>}
               rows={orders?.map((order) => ({
                 _id: order._id,
                 status: order.status,

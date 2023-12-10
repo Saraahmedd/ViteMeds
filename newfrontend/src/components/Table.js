@@ -28,7 +28,7 @@ const TableComponent = ({
   title,
   setSelected,
   freeze,
-  children
+  children,
 }) => {
   // console.log(rows);
   return (
@@ -36,9 +36,13 @@ const TableComponent = ({
     // style={{ borderColor: "rgb(147 51 234 / var(--tw-border-opacity))" }}
     // className="border"
     >
-      <div justifyContent="start" className="flex flex-row items-center space-x-2">
+      <div
+        justifyContent="start"
+        className="flex flex-row items-center space-x-2"
+      >
         <Title>{title}</Title>
         <Badge>{rows?.length}</Badge>
+
         {children}
       </div>
       {/* <Text className="mt-2">Overview of this month's purchases</Text> */}

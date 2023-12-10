@@ -245,16 +245,16 @@ const data = {
   affiliation: "Denva Corp",
 };
 //OPTIONAL
-const buttons = {
-  right: {
-    label: "Reject",
-    onClick: () => // console.log("Purple button clicked"),
-  },
-  left: {
-    label: "Accept",
-    onClick: () => // console.log("Transparent button clicked"),
-  },
-};
+// const buttons = {
+//   right: {
+//     label: "Reject",
+//     onClick: () => // console.log("Purple button clicked"),
+//   },
+//   left: {
+//     label: "Accept",
+//     onClick: () => // console.log("Transparent button clicked"),
+//   },
+// };
 
 function Dashboard() {
   return (
