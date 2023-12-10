@@ -66,7 +66,7 @@ const createOrderCheckout = async (session) => {
   const cart = await Cart.findOne({ patient: userId });
 
   const deliveryAddress = user.deliveryAddress.id(
-    session.metadata.deliveryAddress,
+    session.metadata.deliveryAddress
   );
 
   const order = Order.create({
@@ -90,7 +90,7 @@ exports.webhookCheckout = async (req, res, next) => {
     event = stripe.webhooks.constructEvent(
       req.body,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET,
+      process.env.STRIPE_WEBHOOK_SECRET
     );
     console.log("2");
   } catch (err) {
@@ -208,7 +208,10 @@ exports.getTotalSales = catchAsync(async (req, res, next) => {
   const salesData = await Order.find({
     //isPaid: true,
     //status: { $ne: 'cancelled' },
-  });
+  })
+    .populate("medicines.medicine")
+    .exec();
+  console.log(salesData);
 
   const totalSales = salesData.reduce((sum, order) => {
     return sum + order.totalPrice;
@@ -349,51 +352,47 @@ exports.getTotalOrderCount = catchAsync(async (req, res, next) => {
 });
 
 exports.getFilteredOrders = catchAsync(async (req, res, next) => {
-  const { medicineId, year, month, day, time } = req.params;
+  const { medicineId } = req.params;
+  const { from, to } = req.query;
 
   let filter = {};
 
-  if (year) {
+  if (from) {
     filter.createdAt = {
-      $gte: new Date(year, 0, 1),
-      $lt: new Date(Number(year) + 1, 0, 1),
+      $gte: from,
     };
   }
 
-  if (month) {
-    const startOfMonth = new Date(year, month - 1, 1);
-    const endOfMonth = new Date(year, month, 1);
-    filter.createdAt = { $gte: startOfMonth, $lt: endOfMonth };
+  if (to) {
+    filter.createdAt = {
+      ...filter.createdAt,
+      $lte: to,
+    };
   }
 
-  if (day) {
-    const startOfDay = new Date(year, month - 1, day);
-    const endOfDay = new Date(year, month - 1, day + 1);
-    filter.createdAt = { $gte: startOfDay, $lt: endOfDay };
-  }
-
-  if (time) {
-    const exactDate = new Date(
-      year,
-      month - 1,
-      day,
-      new Date(time).getHours(),
-      0,
-      0,
-    );
-    filter.createdAt = exactDate;
-  }
-
+  console.log(filter);
   if (medicineId) {
     filter["medicines.medicine"] = mongoose.Types.ObjectId(medicineId);
   }
 
-  const orders = await Order.find(filter);
+  const orders = await Order.find(filter)
+    .populate("medicines.medicine")
+    .exec();
 
-  const totalSales = orders.reduce((sum, order) => {
-    return sum + order.totalPrice;
-  }, 0);
-
+  let totalSales = 0;
+  if (!medicineId)
+    totalSales = orders.reduce((sum, order) => {
+      return sum + order.totalPrice;
+    }, 0);
+  else {
+    totalSales = orders.reduce((sum, order) => {
+      const orderItem = order.medicines.find(
+        (orderItem) => orderItem.medicine._id.toString() === medicineId
+      );
+      if (orderItem) return sum + orderItem.quantity * orderItem.medicine.price;
+      else return sum;
+    }, 0);
+  }
   res.status(200).json({
     status: "success",
     data: {

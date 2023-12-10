@@ -45,7 +45,7 @@ function LoginForm() {
       setTimeout(() => {
         window.history.pushState({}, "", url);
         window.location.reload();
-      }, 5000);
+      }, 1000);
     }
   }, [dispatch, isAuthenticated, error]);
 

@@ -6,18 +6,17 @@ const multer = require("multer");
 
 exports.getAllMedicinesForUserAndAdmin = factory.getAll(
   Medicine,
-  "-sales -quantity",
+  "-sales",
   "",
-  { status: "unarchived" },
+  { status: "unarchived" }
 );
-exports.getAllMedicinesForPharmacist = factory.getAll(Medicine, "", "", {
-  status: "unarchived",
-});
+
+exports.getAllMedicinesForPharmacist = factory.getAll(Medicine);
 exports.getAllArchivedMedicinesForPharmacist = factory.getAll(
   Medicine,
   "",
   "",
-  { status: "archived" },
+  { status: "archived" }
 );
 
 exports.getMedicineById = factory.getOne(Medicine);
@@ -40,10 +39,10 @@ exports.createNewMedicine = factory.createOne(Medicine);
 exports.deleteMedicine = factory.deleteOne(Medicine);
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
+  destination: function(req, file, cb) {
     cb(null, "uploads/");
   },
-  filename: function (req, file, cb) {
+  filename: function(req, file, cb) {
     const uniqueFileName = `${Date.now()}-${file.originalname}`;
     // Push the file path into the 'docs' array in req.locals
     req.body.imageURL = `uploads/${uniqueFileName}`;
@@ -57,7 +56,7 @@ const fileFilter = (req, file, cb) => {
   } else {
     cb(
       new Error("Invalid file type. Only JPEG and PNG images are allowed."),
-      false,
+      false
     );
   }
 };
@@ -104,12 +103,12 @@ exports.viewAlternative = catchAsync(async (req, res, next) => {
     });
   }
 
-  const mainActiveIngredients = medicine.mainActiveIngredients;
+  const medicineIngredients = medicine.medicineIngredients;
 
   // Find alternative medicines with the same main active ingredients
   const alternatives = await Medicine.find({
     _id: { $ne: medicineId }, // Exclude the current medicine
-    mainActiveIngredients: { $in: mainActiveIngredients },
+    medicineIngredients: { $elemMatch: { $in: medicineIngredients } },
   });
 
   if (alternatives.length > 0) {

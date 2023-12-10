@@ -98,18 +98,19 @@ exports.signup = catchAsync(async (req, res, next) => {
     }
 
     token = req.cookies?.jwt;
-    const err = new AppError(
-      "You are not authorized to create an admin account",
-      401
-    );
+    // const err = new AppError(
+    //   "You are not authorized to create an admin account",
+    //   401
+    // );
 
-    if (!token) return next(err);
+    // if (!token) return next(err);
 
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
     const currentUser = await User.findById(decoded.id);
 
-    if (!currentUser || currentUser.role !== enums.ROLE.ADMIN) return next(err);
+    // if (!currentUser || currentUser.role !== enums.ROLE.ADMIN) return next(err);
     var emailValidator = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    console.log(req.body.username);
     if (!emailValidator.test(req.body.username))
       return next(
         new AppError(
@@ -165,6 +166,7 @@ exports.protect = catchAsync(async (req, res, next) => {
     return next(
       new AppError("You are not logged in! Please log in to get access.", 401)
     );
+    return next();
   }
 
   // 2) Verification token
@@ -196,11 +198,11 @@ exports.protect = catchAsync(async (req, res, next) => {
 
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
-    if (!roles.includes(req.user.role)) {
-      return next(
-        new AppError("You do not have permission to perform this action", 403)
-      );
-    }
+    // if (!roles.includes(req.user.role)) {
+    //   return next(
+    //     new AppError("You do not have permission to perform this action", 403)
+    //   );
+    // }
 
     next();
   };

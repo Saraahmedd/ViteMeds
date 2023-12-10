@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'GeneralSans';
+  src: url('/fonts/GeneralSans-Variable.woff2') format('woff2'),
+    url('/fonts/GeneralSans-Variable.woff') format('woff'),
+    url('/fonts/GeneralSans-Variable.ttf') format('truetype');
+  font-weight: 200 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+
+* {
+  font-family: 'GeneralSans', 'Times New Roman';
+  /* overflow-x: hidden; */
+}
+
+body { 
+  overflow-x: hidden;
+}
+
+
+:root {
+  --foreground-rgb: 255, 255, 255, 0.95;
+  --background-start-rgb: 23, 34, 48;
+  --background-end-rgb: 20, 30, 43;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: all 0.5s ease;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+svg {
+  transition: color 0.5s ease;
+}
+
+p,h1,h2,h3,h4,h5,h6,span {
+  transition: color 0.0s ease !important
+}
+
+
+body {
+  color: rgba(var(--foreground-rgb));
+  background: linear-gradient(to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: white;
+}
+
+::-ms-reveal {
+  filter: invert(100%);
+}
+
+
+.cardBgColor {
+  background-color: rgb(31,41,55) !important
+}
+
+.bgColor {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.colorColor {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.prof {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17, 24, 39, var(--tw-bg-opacity));
+}
+
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-right {
+  animation: slideInRight 2.5s ease-in-out; /* Adjust the duration and timing function as needed */
+}
+
+

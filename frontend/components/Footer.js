@@ -6,6 +6,16 @@ const Footer = () => {
   return (
     <div
       suppressHydrationWarning={true}
+      style={{
+        position: "fixed",
+        bottom: 0,
+        left: 0,
+        width: "100%",
+        backgroundColor: "#1a1a1a",
+        padding: "10px",
+        textAlign: "center",
+        zIndex: 1000, // Set a high z-index to ensure it's above other content
+      }}
       className="bg-primary text-white pt-4 pb-1"
     >
       <div className="container">

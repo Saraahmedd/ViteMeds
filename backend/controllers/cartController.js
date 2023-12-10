@@ -48,8 +48,17 @@ exports.addToCart = catchAsync(async (req, res, next) => {
   let resp;
 
   if (itemIndex > -1) {
-    if (quantity) cart.items[itemIndex].quantity += quantity;
-    else if (setQuantity) cart.items[itemIndex].quantity = setQuantity;
+    if (quantity && !setQuantity) {
+      console.log("here");
+      cart.items[itemIndex].quantity += quantity;
+    } else {
+      if (setQuantity * 1 <= 0) {
+        cart.items.splice(itemIndex, 1);
+        console.log(cart.items);
+      } else {
+        cart.items[itemIndex].quantity = setQuantity;
+      }
+    }
   } else if (medicine.prescription) {
     const config = {
       headers: {

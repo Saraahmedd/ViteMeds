@@ -8,7 +8,7 @@ const router = express.Router();
 router.get(
   "/checkout-session",
   authController.protect,
-  orderController.getCheckoutSession,
+  orderController.getCheckoutSession
 );
 
 router.post("/", authController.protect, orderController.createOrder);
@@ -21,7 +21,7 @@ router.route("/:id").patch(authController.protect, orderController.cancelOrder);
 
 router.route("/total-sales_month/:month").get(
   //authController.restrictTo('pharmacist'),//add for administartor too
-  orderController.getTotalSalesForMonth,
+  orderController.getTotalSalesForMonth
 );
 router.get("/allOrders", orderController.getAllOrders);
 router.get("/orderCount", orderController.getTotalOrderCount);
@@ -30,8 +30,5 @@ router.get("/profit", orderController.getOrderProfit);
 router.get("/profitPerMonth/:month", orderController.getOrderProfitForMonth);
 router.get("/expenses", orderController.getOrderExpenses);
 router.get("expensesPerMonth/:month", orderController.getOrderExpensesForMonth);
-router.get(
-  "/filtered-orders/:medicineId?/:year?/:month?/:day?/:time?",
-  orderController.getFilteredOrders,
-);
+router.get("/filtered-orders/:medicineId?", orderController.getFilteredOrders);
 module.exports = router;

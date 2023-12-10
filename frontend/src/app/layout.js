@@ -11,10 +11,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html suppressHydrationWarning={true} lang="en">
-      <body>
-        <ReduxProvider> {children} </ReduxProvider>
-      </body>
-      <Footer />
+      <div className="" style={{ minHeight: "100vh" }}>
+        <ReduxProvider className="redux"> {children} </ReduxProvider>
+        <Footer />
+      </div>
     </html>
   );
 }

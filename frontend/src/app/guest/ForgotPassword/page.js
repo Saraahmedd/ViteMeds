@@ -14,7 +14,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import { Alert, Form, Button, InputGroup } from "react-bootstrap";
-import { validateEmail, validatePassword } from "../validators";
+import {
+  validateEmail,
+  validatePassword,
+} from "../../../../../newfrontend/src/app/redux/validators";
 
 function ForgotPasswordForm() {
   const dispatch = useDispatch();
