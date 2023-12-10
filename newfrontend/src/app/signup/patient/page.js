@@ -89,7 +89,7 @@ const Signup = () => {
   const handleSignUp = (e) => {
     // Gather data in the formData object and send it to the backend
     e.preventDefault();
-    console.log("Form Data:", formData);
+    // console.log("Form Data:", formData);
     // Add your code to send data to the backend here
 
     dispatch(

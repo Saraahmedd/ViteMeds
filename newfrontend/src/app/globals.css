@@ -42,6 +42,10 @@ svg {
   transition: color 0.5s ease;
 }
 
+p,h1,h2,h3,h4,h5,h6,span {
+  transition: color 0.0s ease !important
+}
+
 
 body {
   color: rgba(var(--foreground-rgb));

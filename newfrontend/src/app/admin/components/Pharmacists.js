@@ -11,11 +11,11 @@ import { formatDateToDDMMYYYY } from "../../redux/validators";
 // const buttons = {
 //   right: {
 //     label: "Reject",
-//     onClick: () => console.log("Purple button clicked"),
+//     onClick: () => // console.log("Purple button clicked"),
 //   },
 //   left: {
 //     label: "Accept",
-//     onClick: () => console.log("Transparent button clicked"),
+//     onClick: () => // console.log("Transparent button clicked"),
 //   },
 // };
 

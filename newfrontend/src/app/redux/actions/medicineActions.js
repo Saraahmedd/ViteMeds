@@ -32,7 +32,7 @@ export const addMedicine = (medicine) => async (dispatch) => {
     dispatch({
       type: ADD_MEDICINE_REQUEST,
     });
-    console.log(medicine);
+    // console.log(medicine);
 
     const config = {
       headers: {
@@ -45,14 +45,14 @@ export const addMedicine = (medicine) => async (dispatch) => {
       medicine,
       config
     );
-    console.log(data);
+    // console.log(data);
 
     dispatch({
       type: ADD_MEDICINE_SUCCESS,
       payload: data.data,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
 
     dispatch({
       type: ADD_MEDICINE_FAIL,
@@ -156,7 +156,7 @@ export const getMedicineById = (id) => async (dispatch) => {
 };
 
 export const getMedicinesAction = (queryObj) => async (dispatch) => {
-  console.log("...............");
+  // console.log("...............");
   try {
     dispatch({
       type: MEDICINES_VIEW_REQUEST,
@@ -186,16 +186,16 @@ export const getMedicinesAction = (queryObj) => async (dispatch) => {
       config
     );
     data.data.medUses = medUses;
-    console.log(medUses);
-    console.log(data);
+    // console.log(medUses);
+    // console.log(data);
 
-    console.log("hey");
+    // console.log("hey");
     dispatch({
       type: MEDICINES_VIEW_SUCCESS,
       payload: data.data,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     dispatch({
       type: MEDICINES_VIEW_FAIL,
       payload: error.response
@@ -255,7 +255,7 @@ export const archiveMedicine = (id, status) => async (dispatch) => {
       config
     );
 
-    console.log(data);
+    // console.log(data);
 
     dispatch({
       type: MEDICINE_ARCHIVE_SUCCESS,

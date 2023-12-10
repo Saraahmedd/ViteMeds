@@ -35,14 +35,14 @@ function Checkout() {
     }, []);
 
     // useEffect(() => {
-    //     console.log("cart");
-    //     // console.log(cart);
-    //     console.log(patient);
+    //     // console.log("cart");
+    //     // // console.log(cart);
+    //     // console.log(patient);
     // }, [patient]);
 
     // useEffect(() => {
-    //     console.log('add');
-    //     console.log(address);
+    //     // console.log('add');
+    //     // console.log(address);
     // }, [address])
 
 

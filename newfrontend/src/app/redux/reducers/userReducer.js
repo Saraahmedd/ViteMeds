@@ -17,7 +17,7 @@ export const removeUserReducer = (state = {}, action) => {
         success: false,
       };
     case USER_REMOVE_SUCCESS: {
-      console.log("success");
+      // console.log("success");
       return {
         ...state,
         user: action.payload,
@@ -47,7 +47,7 @@ export const getUsersReducer = (state = {}, action) => {
         error: null,
       };
     case USERS_GET_SUCCESS: {
-      console.log("success");
+      // console.log("success");
       return {
         ...state,
         user: action.payload,

@@ -9,7 +9,7 @@ function FileUpload({
 }) {
   const [text, setText] = useState("");
   function onUpload(e) {
-    console.log(e);
+    // console.log(e);
     setText(e.target?.files[0]?.name);
     callBackFiles(e.target?.files[0]);
   }

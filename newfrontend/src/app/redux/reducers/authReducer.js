@@ -35,7 +35,7 @@ export const loginReducer = (state = initialState, action) => {
         error: null,
       };
     case USER_LOGIN_SUCCESS: {
-      console.log("success");
+      // console.log("success");
       return {
         ...state,
         user: action.payload,
@@ -66,7 +66,7 @@ export const registerReducer = (state = {}, action) => {
         success: false,
       };
     case USER_REGISTER_SUCCESS: {
-      console.log("success");
+      // console.log("success");
       return {
         ...state,
         user: action.payload,
@@ -163,7 +163,7 @@ export const resetPasswordReducer = (state = {}, action) => {
       };
     }
     case RESET_PASS_FAIL:
-      console.log(action.payload);
+      // console.log(action.payload);
       return {
         ...state,
         loading: false,

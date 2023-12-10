@@ -53,7 +53,7 @@ function SalesReport() {
       label: medicine.name,
     }))
   : [];
-console.log(options);
+// console.log(options);
   const  Sales  = useSelector((state) => state.getFilteredOrdersReducer?.filteredOrders);
   const orders = Sales?.orders;
   const totalsales = Sales?.totalSales;
@@ -61,8 +61,8 @@ console.log(options);
   const [showOrderDetailsModal, setShowOrderDetailsModal] = useState(false);
   const handleViewDetails = (orderId) => {
     const order = orders.find((order) => order._id === orderId);
-    console.log(order);
-    console.log(orderId);
+    // console.log(order);
+    // console.log(orderId);
     setSelectedOrder(order);
     setShowOrderDetailsModal(true);
     
@@ -80,12 +80,12 @@ console.log(options);
   useEffect(() => {
     dispatch(getFilteredOrders());
     dispatch(getMedicinesAction({}));
-    console.log(medicines);
+    // console.log(medicines);
   }, [dispatch]);
   
-console.log(orders);
-console.log(selectedOrder);
-console.log(medicines);
+// console.log(orders);
+// console.log(selectedOrder);
+// console.log(medicines);
 
   return (
   <div>
@@ -153,7 +153,7 @@ console.log(medicines);
       <div style={{ fontSize: "1.2rem", marginBottom: "5px"}}>
         <strong style={{fontSize: "1.5rem", marginBottom: "5px", color:"purple"}}>Medicines:</strong>
         {selectedOrder.medicines.map((item) => {
-            console.log(item)
+            // console.log(item)
         
           return (<div key={item._id}>
             <p style={{ marginBottom: "5px" }}>

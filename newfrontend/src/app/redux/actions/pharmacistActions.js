@@ -129,7 +129,7 @@ export const downloadPharmacistDocs = (pharmacistId) => async (dispatch) => {
     const fileName = "pharmacist_documents.zip";
 
     const blob = new Blob([response.data]);
-    console.log(blob);
+    // console.log(blob);
     const link = document.createElement("a");
     link.href = window.URL.createObjectURL(blob);
     link.download = fileName;

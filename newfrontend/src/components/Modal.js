@@ -5,8 +5,8 @@ function Modal({ children, visible, setVisible }) {
         <div
             style={{
                 position: 'absolute',
-                width: '100%',
-                height: '100%',
+                width: '100vw',
+                height: '100vmax',
                 top: 0,
                 left: 0,
                 background: 'rgba(0,0,0,0.75)',

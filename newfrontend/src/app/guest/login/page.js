@@ -42,7 +42,7 @@ const Login = () => {
           : role === "patient"
           ? "/patient/profile"
           : "/pharmacist/profile";
-          console.log(url)
+          // console.log(url)
       setTimeout(() => {
         window.history.pushState({},"",url)
         window.location.reload()

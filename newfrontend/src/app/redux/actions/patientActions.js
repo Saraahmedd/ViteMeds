@@ -76,7 +76,7 @@ export const addAddressesAction = (address, id) => async (dispatch) => {
     dispatch({
       type: ADD_ADDRESSES_REQUEST,
     });
-    console.log(address);
+    // console.log(address);
 
     const config = {
       headers: {
@@ -96,7 +96,7 @@ export const addAddressesAction = (address, id) => async (dispatch) => {
     });
   } catch (error) {
     // print error message
-    console.log(error);
+    // console.log(error);
 
     dispatch({
       type: ADD_ADDRESSES_FAIL,
@@ -124,7 +124,7 @@ export const viewMyDetails = () => async (dispatch) => {
       config,
     );
 
-    console.log(data.data.patient);
+    // console.log(data.data.patient);
 
     dispatch({
       type: VIEW_MY_DETAILS_SUCCESS,
