@@ -40,7 +40,7 @@ export default function SingleProduct() {
   const medicineAlt = useSelector(
     (state) => state.getMedicineAlternativeReducer?.medicine?.alternatives
   );
-  console.log(medicineAlt);
+  // console.log(medicineAlt);
 
   const [newIngredients, setNewIngredients] = useState([]);
   const cartLoading = useSelector((state) => state.addToCartReducer.loading);
@@ -96,7 +96,7 @@ export default function SingleProduct() {
   const [editPriceModal, setEditPriceModal] = useState(false);
   const [editPhotoModal, setEditPhotoModal] = useState(false);
   function handleCartClick(e, medicine, q) {
-    console.log(q);
+    // console.log(q);
     dispatch(addToCart(medicine, q, true));
   }
   // CAN EDIT!!!
@@ -107,16 +107,16 @@ export default function SingleProduct() {
     JSON.parse(localStorage.getItem("userInfo"))?.data.user.role ===
     "administrator";
   // JSON.parse(localStorage.getItem("user"))?.role === "pharmacist";
-  console.log(medicine?.medicineIngredients);
+  // console.log(medicine?.medicineIngredients);
 
   function handleEditMedicine(field, value) {
     const formData = new FormData();
     if (field == "medicineIngredients") {
-      console.log(document.getElementById(`ingredient0`).value);
+      // console.log(document.getElementById(`ingredient0`).value);
       for (let i = 0; i < medicine.medicineIngredients.length; i++) {
-        console.log("hena?????");
+        // console.log("hena?????");
         formData.append(field, document.getElementById(`ingredient${i}`).value);
-        console.log("here");
+        // console.log("here");
       }
       for (let i = 0; i < newIngredients.length; i++)
         formData.append(
@@ -124,7 +124,7 @@ export default function SingleProduct() {
           document.getElementById(`newIngredient${i}`).value
         );
     } else formData.append(field, value);
-    console.log(formData);
+    // console.log(formData);
     dispatch(editMedicine(id, formData));
   }
 
@@ -366,7 +366,7 @@ export default function SingleProduct() {
                       key={`badge${i}`}
                       color={colors[i % colors.length]}
                     >
-                      {ing}
+                      {ing.toUpperCase()}
                     </Badge>
                   ))}
                   <EditButton

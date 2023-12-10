@@ -12,11 +12,11 @@ import { viewPatients } from "@/app/redux/actions/patientActions";
 // const buttons = {
 //   right: {
 //     label: "Reject",
-//     onClick: () => console.log("Purple button clicked"),
+//     onClick: () => // console.log("Purple button clicked"),
 //   },
 //   left: {
 //     label: "Accept",
-//     onClick: () => console.log("Transparent button clicked"),
+//     onClick: () => // console.log("Transparent button clicked"),
 //   },
 // };
 
@@ -50,10 +50,10 @@ const Patients = () => {
         dateOfBirth: formatDateToDDMMYYYY(dateOfBirth),
       })
     );
-    console.log(t);
+    // console.log(t);
     return t;
   }, [removeError, patients]);
-  console.log(patientsList);
+  // console.log(patientsList);
 
   return (
     <>

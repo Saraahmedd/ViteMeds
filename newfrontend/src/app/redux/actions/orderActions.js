@@ -137,9 +137,9 @@ export const makeOrderFailure = (error) => ({
 });
 
 export const makeOrder = (body) => async (dispatch) => {
-  console.log(body);
+  // console.log(body);
   const stripeModule = await import("@stripe/stripe-js");
-  console.log("heree");
+  // console.log("heree");
   const stripe = await stripeModule.loadStripe(
     "pk_test_51LcefBHcGowY4Vx0nqxA3L6hCswMF2qxZ4Phr2T70nbrw4SKrMYQyayH05jG0vjObczx85nvSaF9iVxqC1aBFT9f00UPxN8UWY"
   );
@@ -161,7 +161,7 @@ export const makeOrder = (body) => async (dispatch) => {
         config
       );
 
-      console.log(data.session.id);
+      // console.log(data.session.id);
       await stripe.redirectToCheckout({
         sessionId: data.session.id,
       });
@@ -178,7 +178,7 @@ export const makeOrder = (body) => async (dispatch) => {
       window.location.href = "/patient/profile";
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     dispatch(
       makeOrderFailure(
         error.response

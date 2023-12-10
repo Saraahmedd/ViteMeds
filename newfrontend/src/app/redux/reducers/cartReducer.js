@@ -95,7 +95,7 @@ export const deleteFromCartReducer = (
 ) => {
   switch (action.type) {
     case DELETE_FROM_CART_REQUEST:
-      console.log("reqqqqqqqqqqq");
+      // console.log("reqqqqqqqqqqq");
       return {
         ...state,
         loading: true,

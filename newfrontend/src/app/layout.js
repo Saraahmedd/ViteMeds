@@ -3,8 +3,8 @@ import "./globals.css";
 import localFont from "next/font/local";
 
 export const metadata = {
-  title: "Seaats Panel - Login",
-  description: "Login to Seaats",
+  title: "Pharmacy",
+  description: "Pharmacy",
 };
 
 import { ReduxProvider } from "./redux/provider";

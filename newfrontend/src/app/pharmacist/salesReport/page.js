@@ -71,6 +71,7 @@ function SalesReport() {
     (state) => state.getMedicinesReducer.medicines?.data
   );
   const options = medicines
+<<<<<<< HEAD
     ? medicines.map((medicine) => ({
         value: medicine._id,
         label: medicine.name,
@@ -79,11 +80,25 @@ function SalesReport() {
   const Sales = useSelector(
     (state) => state.getFilteredOrdersReducer?.filteredOrders
   );
+=======
+  ? medicines.map((medicine) => ({
+      value: medicine.name,
+      label: medicine.name,
+    }))
+  : [];
+// console.log(options);
+  const  Sales  = useSelector((state) => state.getFilteredOrdersReducer?.filteredOrders);
+>>>>>>> 8c8951c39b6a3351b9f838e697b9494360294ca3
   const orders = Sales?.orders;
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [showOrderDetailsModal, setShowOrderDetailsModal] = useState(false);
   const handleViewDetails = (orderId) => {
     const order = orders.find((order) => order._id === orderId);
+<<<<<<< HEAD
+=======
+    // console.log(order);
+    // console.log(orderId);
+>>>>>>> 8c8951c39b6a3351b9f838e697b9494360294ca3
     setSelectedOrder(order);
     setShowOrderDetailsModal(true);
   };
@@ -94,7 +109,16 @@ function SalesReport() {
     console.log(date);
     dispatch(getFilteredOrders(selectedMedicine, date.from, date.to));
     dispatch(getMedicinesAction({}));
+<<<<<<< HEAD
   }, [dispatch, selectedMedicine, date]);
+=======
+    // console.log(medicines);
+  }, [dispatch]);
+  
+// console.log(orders);
+// console.log(selectedOrder);
+// console.log(medicines);
+>>>>>>> 8c8951c39b6a3351b9f838e697b9494360294ca3
 
   return (
     <div>
@@ -177,6 +201,7 @@ function SalesReport() {
                   {selectedOrder.deliveryAddress.zipCode}
                 </p>
 
+<<<<<<< HEAD
                 {/* Medicines */}
                 <div style={{ fontSize: "1.2rem", marginBottom: "5px" }}>
                   <strong
@@ -190,6 +215,26 @@ function SalesReport() {
                   </strong>
                   {selectedOrder.medicines.map((item) => {
                     console.log(item);
+=======
+      {/* Medicines */}
+      <div style={{ fontSize: "1.2rem", marginBottom: "5px"}}>
+        <strong style={{fontSize: "1.5rem", marginBottom: "5px", color:"purple"}}>Medicines:</strong>
+        {selectedOrder.medicines.map((item) => {
+            // console.log(item)
+        
+          return (<div key={item._id}>
+            <p style={{ marginBottom: "5px" }}>
+              <strong style={{marginRight:"3px"}}>Name:</strong> {item.medicine?.name}
+              <strong style={{marginRight:"10px", marginLeft:"30px"}}>Quantity:</strong> {item.quantity}
+            </p>
+          </div>
+          )
+})}
+      </div>
+    </>
+  )}
+</Card>
+>>>>>>> 8c8951c39b6a3351b9f838e697b9494360294ca3
 
                     return (
                       <div key={item._id}>

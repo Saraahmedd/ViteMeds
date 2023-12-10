@@ -35,7 +35,7 @@ const Admins = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
-    console.log(formData);
+    // console.log(formData);
   };
   const adminlist = useMemo(() => {
     if (admins && admins.data) {

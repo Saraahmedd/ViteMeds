@@ -2,7 +2,7 @@
 const { Card } = require("@tremor/react");
 const { default: Image } = require("next/image");
 const { useState, useEffect } = require("react");
-const { ErrorMsg } = require("./BottomCallout");
+const { ErrorMsg, BottomCallout } = require("./BottomCallout");
 const { deleteFromCart } = require("@/app/redux/actions/cartActions");
 const { useDispatch } = require("react-redux");
 
@@ -13,16 +13,22 @@ function CartProductCard({
   price,
   initialQuantity,
   cartHandler,
+  stock
 }) {
   const [quantity, setQuantity] = useState(initialQuantity);
   const [btnClicked, setBtnClicked] = useState(false);
+  const [stkError, setStkError] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     if (btnClicked == false) setQuantity(initialQuantity);
+    // console.log(name);
+    // console.log(stock);
   }, [initialQuantity]);
 
   return (
     <div>
+      <BottomCallout message="We have no more of this item" visible={stkError} setVisible={setStkError} />
+
       <Card
         className={`lg:h-[12rem]`}
         style={{
@@ -64,12 +70,20 @@ function CartProductCard({
             </div>
 
             <span className="font-bold">{quantity}</span>
-
             <div
               onClick={(e) => {
                 setBtnClicked(true);
-                setQuantity((q) => q + 1);
-                cartHandler(e, id, quantity + 1);
+                console.log("stock: " + stock);
+                console.log(quantity);
+                setQuantity((q) => {
+                  const canUpdate = stock >= q + 1;
+                  if (!canUpdate) {
+                    setStkError(true);
+                    return q;
+                  }
+                  cartHandler(e, id, quantity + 1);
+                  return q + 1
+                });
               }}
               role="button"
               className="flex items-center justify-center text-2xl rounded-md border h-10 w-10 mx-3 hover:bg-white hover:text-black"

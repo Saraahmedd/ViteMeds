@@ -305,7 +305,7 @@ export const getTotalSalesReducer = (state = {}, action) => {
   }
 };
 export const getTotalSalesPerMonthReducer = (state = {}, action) => {
-  console.log("reducer");
+  // console.log("reducer");
   switch (action.type) {
     case TOTAL_SALES_MONTH_REQUEST:
       return {

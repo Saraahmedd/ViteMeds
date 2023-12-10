@@ -55,7 +55,7 @@ const getMedicineByIdInitialState = {
 };
 
 export const getMedicinesReducer = (state = {}, action) => {
-  // console.log(action.payload);
+  // // console.log(action.payload);
   switch (action.type) {
     case MEDICINES_VIEW_REQUEST:
       return {
@@ -202,7 +202,7 @@ export const getMedicineAlternativeReducer = (
 ) => {
   switch (action.type) {
     case MEDICINE_ALTERNATIVE_REQUEST:
-      console.log(1111111111111);
+      // console.log(1111111111111);
       return {
         ...state,
         loading: true,
@@ -216,7 +216,7 @@ export const getMedicineAlternativeReducer = (
         error: null,
       };
     case MEDICINE_ALTERNATIVE_FAIL:
-      console.log(111113);
+      // console.log(111113);
       return {
         ...state,
         loading: false,
