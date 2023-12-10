@@ -260,7 +260,7 @@ function Profile() {
               <Image src="/mobile.svg" height={25} width={25}></Image> <p className="ml-3 text-lg">0{patient?.mobileNumber}</p>
             </div>
             <div className="flex mt-5">
-              <Image src="/wallet.svg" height={25} width={25}></Image> <p className="ml-3 text-lg">{patient?.user.wallet}$</p>
+              <Image src="/wallet.svg" height={25} width={25}></Image> <p className="ml-3 text-lg">{patient?.user.wallet} USD</p>
             </div>
           </Card>
           <Card>
