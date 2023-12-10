@@ -180,8 +180,6 @@ export const changePasswordAction = (reqBody) => async (dispatch) => {
       type: CHANGE_PASS_SUCCESS,
       payload: data.data,
     });
-
-    localStorage.clear();
   } catch (error) {
     dispatch({
       type: CHANGE_PASS_FAIL,

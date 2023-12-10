@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import GradientText from "./GradientText";
+import { useDispatch } from "react-redux";
+import { logoutAction } from "@/app/redux/actions/authActions";
 
 export default function Sidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -15,18 +17,29 @@ export default function Sidebar() {
       .classList.toggle("-translate-x-full");
   };
 
+  const dispatch = useDispatch();
   const menuItems = {
     patient: [
       { icon: "profile", label: "Profile", href: "/patient/profile" },
       { icon: "medicines", label: "Medicines", href: "/patient/products" },
       { icon: "cart", label: "Cart", href: "/patient/cart" },
-      { icon: "logout", label: "Logout", href: "/guest/login" },
+      {
+        icon: "logout",
+        label: "Logout",
+        href: "/guest/login",
+        onClick: () => dispatch(logoutAction()),
+      },
     ],
     pharmacist: [
       { icon: "profile", label: "Profile", href: "/pharmacist/profile" },
       { icon: "medicines", label: "Medicines", href: "/patient/products" },
       { icon: "sales", label: "Sales Report", href: "/pharmacist/salesReport" },
-      { icon: "logout", label: "Logout", href: "/guest/login" },
+      {
+        icon: "logout",
+        label: "Logout",
+        href: "/guest/login",
+        onClick: () => dispatch(logoutAction()),
+      },
     ],
     administrator: [
       { icon: "medicines", label: "Medicines", href: "/patient/products" },
@@ -37,7 +50,12 @@ export default function Sidebar() {
         label: "Change Password",
         href: "/admin/changePassword",
       },
-      { icon: "logout", label: "Logout", href: "/guest/login" },
+      {
+        icon: "logout",
+        label: "Logout",
+        href: "/guest/login",
+        onClick: () => dispatch(logoutAction()),
+      },
     ],
   };
 
@@ -46,6 +64,7 @@ export default function Sidebar() {
       <li key={index}>
         <a
           href={item.href}
+          onClick={item.onClick}
           className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
         >
           <svg

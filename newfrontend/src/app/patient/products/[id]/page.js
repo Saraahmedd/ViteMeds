@@ -95,6 +95,8 @@ export default function SingleProduct() {
   const [editIngredientsModal, setEditIngredientsModal] = useState(false);
   const [editPriceModal, setEditPriceModal] = useState(false);
   const [editPhotoModal, setEditPhotoModal] = useState(false);
+  const [editQModal, seteditQModal] = useState(false);
+  const [newQ, setNewQ] = useState("");
   function handleCartClick(e, medicine, q) {
     // console.log(q);
     dispatch(addToCart(medicine, q, true));
@@ -263,6 +265,32 @@ export default function SingleProduct() {
         </div>
       </Modal>
 
+      <Modal visible={editQModal} setVisible={seteditQModal}>
+        <div className="flex flex-col h-full w-full">
+          <h1 className="font-bold text-xl mb-2">Edit Item Quantity</h1>
+          <div className="flex flex-row items-center justify-center">
+            <TextInput
+              onChange={(e) => setNewQ(e.target.value)}
+              defaultValue={medicine?.quantity}
+              className="me-5"
+            />
+          </div>
+
+          <div className="mt-auto mb-5 w-full flex flex-row align-end justify-end">
+            <Button
+              onClick={() => {
+                seteditQModal(false);
+                handleEditMedicine("quantity", newQ);
+              }}
+              variant="secondary"
+              className="self-end"
+            >
+              Save
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
       <Modal visible={editPhotoModal} setVisible={setEditPhotoModal}>
         <div className="flex flex-col flex-1 grow w-full">
           <h1 className="font-bold text-xl mb-2">Edit Item Photo</h1>
@@ -299,7 +327,7 @@ export default function SingleProduct() {
                   url={"http://localhost:8080/" + medicine?.imageURL}
                 />
               </div>
-              <div className="flex flex-row items-center justify-center">
+              {/* <div className="flex flex-row items-center justify-center">
                 <svg
                   role="button"
                   onClick={() => setZoom((z) => Math.max(z - 0.5, 1))}
@@ -332,7 +360,7 @@ export default function SingleProduct() {
               </div>
               <div className="w-full px-8">
                 <ProgressBar className="mt-2" value={(zoom * 100) / 3} />
-              </div>
+              </div> */}
             </Card>
           </Col>
           <Col numColSpan={3} className="h-full">
@@ -403,17 +431,23 @@ export default function SingleProduct() {
                       <span className="text-white px-2">Add to Cart</span>
                     </Button>
                   )}
-                {getMedicineNumberInCart(medicine) > 0 &&
-                  medicine?.quantity > 0 && (
+                {   ((getMedicineNumberInCart(medicine) > 0) || (canEdit && (medicine?.quantity > 0)))
+                   &&  (
                     <>
                       <p className="font-bold text-lg mt-4">
-                        {!isAdmin && <strong> Quantity</strong>}
-                        {canEdit && medicine.quantity}&nbsp;
+                        {!isAdmin && <strong> Quantity: </strong>}
+                        {canEdit && medicine.quantity}
+                        <div className="flex items-center justify-end ">
+                          <EditButton
+                            canEdit={canEdit}
+                            editFn={() => seteditQModal(true)}
+                          />
+                        </div>
                         {canEdit && (
                           <>
                             {" "}
                             <br />
-                            <strong>Sales</strong> {medicine.sales}
+                            <strong>Sales: </strong> {medicine.sales}
                           </>
                         )}
                         &nbsp;
@@ -493,6 +527,7 @@ export default function SingleProduct() {
                   )}
                 {canEdit && (
                   <Button
+                    className="my-3"
                     onClick={(e) => {
                       medicine.status == "archived"
                         ? handleEditMedicine("status", "unarchived")
@@ -518,7 +553,7 @@ export default function SingleProduct() {
                             key={alternative._id}
                             id={alternative._id}
                             name={alternative.name}
-                            image={`http://localhost:8080/${alternative.imageURL}`}
+                            // image={`http://localhost:8080/${alternative.imageURL}`}
                             price={alternative.price}
                             initialQuantity={getMedicineNumberInCart(
                               alternative
