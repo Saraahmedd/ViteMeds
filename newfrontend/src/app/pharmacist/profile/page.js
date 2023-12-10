@@ -7,8 +7,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ChangePassword from "@/components/ChangePassword";
-import { Button } from "@tremor/react";
+import { Button, Card, Grid } from "@tremor/react";
 import { TextInput } from "@tremor/react";
+import { translateDate } from "@/util";
 
 
 
@@ -50,17 +51,17 @@ function Profile() {
         </div>
         <br />
 
-        <div className="flex flex-wrap gap-x-4 gap-y-8">
-          <div className="flex prof w-3/5 rounded-xl p-10">
-            <div>
-                <div className="flex mt-[2rem]">
+        <div numItems={2} className="flex flex-row gap-2">
+          <Card>
+            <h1 className="text-xl font-bold text-white-200">Personal Information</h1>
+            <div className="flex mt-[2rem]">
                 <Image src="/user.svg" height={25} width={25}></Image> <p className="ml-3 text-2xl">{pharmacist?.name}</p>
                 </div>
                 <div className="flex mt-5">
                 <Image src="/email.svg" height={25} width={25}></Image> <p className="ml-3 text-2xl">{pharmacist?.email}</p>
                 </div>
                 <div className="flex mt-5">
-                  <Image src="/birthday.svg" height={25} width={25}></Image> <p className="ml-3 text-2xl">{pharmacist?.dateOfBirth}</p>
+                  <Image src="/birthday.svg" height={25} width={25}></Image> <p className="ml-3 text-2xl">{translateDate(new Date(pharmacist?.dateOfBirth))[0]}</p>
                 </div>
                 <div className="flex mt-5">
                 <Image src="/mobile.svg" height={25} width={25}></Image> <p className="ml-3 text-2xl">{pharmacist?.phoneNumber}</p>
@@ -68,32 +69,22 @@ function Profile() {
                 <div className="flex mt-5">
                 <Image src="/wallet.svg" height={25} width={25}></Image> <p className="ml-3 text-2xl">{pharmacist?.user.wallet}$</p>
                 </div>
-              </div>
-            <div>
-            <div className="ml-[8rem] inline-block h-[270px] min-h-[1em] mt-5 w-0.5 self-stretch bg-purple-100 opacity-100 dark:opacity-50"></div>
-            </div>
-
-            <div>
-            <h1 className="ml-[6rem] mt-[2rem] text-3xl text-white-400">Employment</h1>
-            <div className="flex mt-[3rem] ml-[7.5rem]">
+          </Card>
+          <Card>
+          <h1 className="text-xl font-bold text-white-200">Employment</h1>
+            <div className="flex mt-[2rem]">
             <Image src="/hospital.svg" height={25} width={25}></Image> <p className="ml-3 text-2xl">{pharmacist?.affiliation}</p>
             </div>
-            <div className="flex mt-5 ml-[7.5rem]">
-            <Image src="/salary.svg" height={25} width={25}></Image> <p className="ml-3 text-2xl">{pharmacist?.salary}</p>
+            <div className="flex mt-5">
+            <Image src="/salary.svg" height={25} width={25}></Image> <p className="ml-3 text-2xl">{pharmacist?.salary}/month</p>
             </div>
-            <div className="flex mt-5 ml-[7.5rem]">
-            <Image src="/hourly.svg" height={25} width={25}></Image> <p className="ml-3 text-2xl">{pharmacist?.hourlyRate}</p>
+            <div className="flex mt-5">
+            <Image src="/hourly.svg" height={25} width={25}></Image> <p className="ml-3 text-2xl">{pharmacist?.hourlyRate}/hour</p>
             </div>
-            </div>
-            
+          </Card>
+          <div className="">
+            <ChangePassword />
           </div>
-          <div>
-          <ChangePassword></ChangePassword>
-          </div>
-      <div>
-    </div>
-
-         
         </div>
       </main>
     </div>
