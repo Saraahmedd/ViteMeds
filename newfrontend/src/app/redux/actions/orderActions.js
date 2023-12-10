@@ -45,7 +45,7 @@ export const viewOrderDetails = (id) => async (dispatch) => {
     };
     const { data } = await axios.get(
       `${baseURL}/api/v1/order/viewOrderDetails/${id}`,
-      config,
+      config
     );
 
     dispatch({
@@ -105,7 +105,7 @@ export const cancelOrder = (id) => async (dispatch) => {
     const { data } = await axios.patch(
       `${baseURL}/api/v1/order/${id}`,
       {},
-      config,
+      config
     );
 
     dispatch({
@@ -141,7 +141,7 @@ export const makeOrder = (body) => async (dispatch) => {
   const stripeModule = await import("@stripe/stripe-js");
   console.log("heree");
   const stripe = await stripeModule.loadStripe(
-    "pk_test_51LcefBHcGowY4Vx0nqxA3L6hCswMF2qxZ4Phr2T70nbrw4SKrMYQyayH05jG0vjObczx85nvSaF9iVxqC1aBFT9f00UPxN8UWY",
+    "pk_test_51LcefBHcGowY4Vx0nqxA3L6hCswMF2qxZ4Phr2T70nbrw4SKrMYQyayH05jG0vjObczx85nvSaF9iVxqC1aBFT9f00UPxN8UWY"
   );
   try {
     dispatch(makeOrderRequest());
@@ -158,7 +158,7 @@ export const makeOrder = (body) => async (dispatch) => {
     if (body.paymentMethod === "Stripe") {
       const { data } = await axios.get(
         `${baseURL}/api/v1/order/checkout-session?deliveryAddress=${body.deliveryAddress}`,
-        config,
+        config
       );
 
       console.log(data.session.id);
@@ -172,7 +172,7 @@ export const makeOrder = (body) => async (dispatch) => {
       const { data } = await axios.post(
         `${baseURL}/api/v1/order`,
         body,
-        config,
+        config
       );
       dispatch(makeOrderSuccess(data.data));
       window.location.href = "/patient/profile";
@@ -183,8 +183,8 @@ export const makeOrder = (body) => async (dispatch) => {
       makeOrderFailure(
         error.response
           ? error.response.data.message
-          : "Make order failed. Please try again.",
-      ),
+          : "Make order failed. Please try again."
+      )
     );
     // showAlert('error', error);
   }
@@ -204,7 +204,7 @@ export const getTotalSalesForMonth = (month) => async (dispatch) => {
 
     const { data } = await axios.get(
       `${baseURL}/api/v1/order/total-sales_month/${month}`,
-      config,
+      config
     );
 
     dispatch({
@@ -237,7 +237,7 @@ export const getAllOrders = () => async (dispatch) => {
 
     const { data } = await axios.get(
       `${baseURL}/api/v1/order/allOrders`,
-      config,
+      config
     );
 
     dispatch({
@@ -268,7 +268,7 @@ export const getTotalOrderCount = () => async (dispatch) => {
 
     const { data } = await axios.get(
       `${baseURL}/api/v1/order/orderCount`,
-      config,
+      config
     );
 
     dispatch({
@@ -301,7 +301,7 @@ export const getTotalSales = () => async (dispatch) => {
 
     const { data } = await axios.get(
       `${baseURL}/api/v1/order/total-sales`,
-      config,
+      config
     );
 
     dispatch({
@@ -318,50 +318,42 @@ export const getTotalSales = () => async (dispatch) => {
   }
 };
 
-export const getFilteredOrders =
-  (medicineId, year, month, day, time) => async (dispatch) => {
-    try {
-      dispatch({
-        type: FILTERED_ORDERS_REQUEST,
-      });
+export const getFilteredOrders = (medicineId, from, to) => async (dispatch) => {
+  try {
+    dispatch({
+      type: FILTERED_ORDERS_REQUEST,
+    });
 
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      };
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    };
 
-      let url = `${baseURL}/api/v1/order/filtered-orders`;
+    let url = `${baseURL}/api/v1/order/filtered-orders`;
 
-      const queryParams = [];
+    const params = [];
 
-      if (medicineId) {
-        url += `/` + `${medicineId}`;
-      }
-
-      if (year || month || day || time) {
-        if (year) queryParams.push(`year=${year}`);
-        if (month) queryParams.push(`month=${month}`);
-        if (day) queryParams.push(`day=${day}`);
-        if (time) queryParams.push(`time=${time}`);
-      }
-
-      if (queryParams.length > 0) {
-        url += `?${queryParams.join("&")}`;
-      }
-
-      const { data } = await axios.get(url, config);
-      dispatch({
-        type: FILTERED_ORDERS_SUCCESS,
-        payload: data.data,
-      });
-    } catch (error) {
-      dispatch({
-        type: FILTERED_ORDERS_FAIL,
-        payload: error.response
-          ? error.response.data.message
-          : "Get filtered orders failed. Please try again.",
-      });
+    if (medicineId) {
+      url += `/` + `${medicineId}`;
     }
-  };
+
+    if (from || to) url += "?";
+    if (from) url += "from=" + new Date(from);
+    if (to) url += "&to=" + new Date(to);
+
+    const { data } = await axios.get(url, config);
+    dispatch({
+      type: FILTERED_ORDERS_SUCCESS,
+      payload: data.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: FILTERED_ORDERS_FAIL,
+      payload: error.response
+        ? error.response.data.message
+        : "Get filtered orders failed. Please try again.",
+    });
+  }
+};
