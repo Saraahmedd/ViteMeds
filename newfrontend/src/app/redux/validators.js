@@ -8,7 +8,10 @@ export const validatePhoneNumber = (phoneNumber) => {
   // Validate phone number length
   return phoneNumber.length === 11;
 };
-
+export const validateOTP = (OTP) => {
+  // Validate phone number length
+  return OTP.length === 6;
+};
 export const validatePassword = (password) => {
   // Validate password (at least 8 characters, 1 uppercase, 1 digit)
   const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
