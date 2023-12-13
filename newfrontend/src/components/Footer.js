@@ -1,8 +1,17 @@
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 
-const Footer = () => {
+const Footer = ({ role }) => {
+  let fullFooter = false;
+
+  const dirs = window.location.href.split('/');
+  if (dirs.includes("signup") || dirs.includes("guest")) {
+    fullFooter = true;
+  }
+
+
   return (
-    <div className="mt-auto sm:ml-64 ">
+    <div className={`mt-auto ${fullFooter ? '' : 'sm:ml-64'}`}>
       <footer className="bg-white rounded-lg shadow dark:bg-gray-900 ">
         <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
           <div className="sm:flex sm:items-center sm:justify-between">

@@ -96,3 +96,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 
+.calloutOpacity {
+  --tw-bg-opacity: 0.6 !important;
+}
