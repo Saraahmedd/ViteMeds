@@ -319,6 +319,8 @@ export const getTotalSales = () => async (dispatch) => {
 };
 
 export const getFilteredOrders = (medicineId, from, to) => async (dispatch) => {
+
+  console.log("Actionssss");
   try {
     dispatch({
       type: FILTERED_ORDERS_REQUEST,
@@ -333,7 +335,7 @@ export const getFilteredOrders = (medicineId, from, to) => async (dispatch) => {
 
     let url = `${baseURL}/api/v1/order/filtered-orders`;
 
-    const params = [];
+    //const params = [];
 
     if (medicineId) {
       url += `/` + `${medicineId}`;

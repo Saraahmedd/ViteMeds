@@ -352,6 +352,7 @@ exports.getTotalOrderCount = catchAsync(async (req, res, next) => {
 });
 
 exports.getFilteredOrders = catchAsync(async (req, res, next) => {
+  console.log("///////nanna");
   const { medicineId } = req.params;
   const { from, to } = req.query;
 
@@ -379,13 +380,50 @@ exports.getFilteredOrders = catchAsync(async (req, res, next) => {
     .populate("medicines.medicine")
     .exec();
 
+const profits = await Order.find({
+  ...filter,
+  isPaid : true,
+  status :{$ne : "Cancelled"}
+}).populate("medicines.medicine").exec();
+
+const expenses = await Order.find({
+  ...filter,
+  isPaid : true,
+  status : "Cancelled"
+}).populate("medicines.medicine").exec();
+
   let totalSales = 0;
-  if (!medicineId)
+  if (!medicineId) {
     totalSales = orders.reduce((sum, order) => {
       return sum + order.totalPrice;
     }, 0);
+
+    totalProfit = profits.reduce((sum , order)=>{
+      return sum + order.totalPrice;
+    },0)
+
+    totalExpenses = expenses.reduce((sum , order)=>{
+      return sum + order.totalPrice;
+    },0)
+  }
   else {
     totalSales = orders.reduce((sum, order) => {
+      const orderItem = order.medicines.find(
+        (orderItem) => orderItem.medicine._id.toString() === medicineId
+      );
+      if (orderItem) return sum + orderItem.quantity * orderItem.medicine.price;
+      else return sum;
+    }, 0);
+
+    totalProfit = profits.reduce((sum, order) => {
+      const orderItem = order.medicines.find(
+        (orderItem) => orderItem.medicine._id.toString() === medicineId
+      );
+      if (orderItem) return sum + orderItem.quantity * orderItem.medicine.price;
+      else return sum;
+    }, 0);
+
+    totalExpenses = expenses.reduce((sum, order) => {
       const orderItem = order.medicines.find(
         (orderItem) => orderItem.medicine._id.toString() === medicineId
       );
@@ -399,6 +437,8 @@ exports.getFilteredOrders = catchAsync(async (req, res, next) => {
       orders,
       count: orders.length,
       totalSales,
+      totalProfit,
+      totalExpenses,
     },
   });
 });
