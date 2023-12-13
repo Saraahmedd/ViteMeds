@@ -1,14 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import GradientText from "./GradientText";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "@/app/redux/actions/authActions";
+import { getNotifications } from "@/app/redux/actions/notificationActions";
+import ActiveIconNotification from "./Notification";
 
 export default function Sidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const role = JSON.parse(localStorage.getItem("userInfo"))?.data.user.role;
+  
+  const notifications = useSelector((state)=> state. getNotificationsReducer?.notifications?.data)
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -16,6 +20,10 @@ export default function Sidebar() {
       .getElementById("default-sidebar")
       .classList.toggle("-translate-x-full");
   };
+
+  useEffect(() => { 
+    dispatch(getNotifications());
+  },[]);
 
   const dispatch = useDispatch();
   const menuItems = {
@@ -253,6 +261,8 @@ export default function Sidebar() {
               alt="Flowbite Logo"
             />
             <h1 className="font-bold text-xl">Harmony Meds</h1>
+            {role === "pharmacist" &&
+            <ActiveIconNotification notifications={notifications} isActive={notifications?.length >0} />}
           </div>
 
           <ul className="space-y-2 font-medium">

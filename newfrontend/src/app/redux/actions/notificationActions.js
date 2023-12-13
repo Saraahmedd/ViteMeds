@@ -1,5 +1,6 @@
 // notificationActions.js
 
+import baseURL from "../baseURL";
 import * as types from "../constants/notificationConstants";
 import axios from "axios";
 
@@ -48,13 +49,16 @@ export const getNotifications = () => async (dispatch) => {
       withCredentials: true,
     };
 
+    
     const { data } = await axios.get(`${baseURL}/api/v1/notifications`, config);
+    console.log(data)
 
     dispatch({
       type: types.GET_NOTIFICATIONS_SUCCESS,
       payload: data.data,
     });
   } catch (error) {
+    console.error(error)
     dispatch({
       type: types.GET_NOTIFICATIONS_FAILURE,
       payload: error.response
