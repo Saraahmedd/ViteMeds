@@ -35,13 +35,14 @@ const Login = () => {
   let url=""
   useEffect(() => {
     if (isAuthenticated) {
+      const userInfo = JSON.parse(localStorage.getItem("userInfo")).data.user;
       const role = JSON.parse(localStorage.getItem("userInfo")).data.user.role;
       url =
         role === "administrator"
           ? "/admin/manage-users"
           : role === "patient"
           ? "/patient/profile"
-          : "/pharmacist/profile";
+          : (userInfo.pharmacist?.isApproved ? "/pharmacist/profile" : "/pharmacistWaiting" );
           // console.log(url)
       setTimeout(() => {
         window.history.pushState({},"",url)
