@@ -35,20 +35,21 @@ const Login = () => {
   let url = ""
   useEffect(() => {
     if (isAuthenticated) {
+      const userInfo = JSON.parse(localStorage.getItem("userInfo")).data.user;
       const role = JSON.parse(localStorage.getItem("userInfo")).data.user.role;
       url =
         role === "administrator"
           ? "/admin/manage-users"
           : role === "patient"
-            ? "/patient/profile"
-            : "/pharmacist/profile";
-      // console.log(url)
+          ? "/patient/profile"
+          : (userInfo.data.isApproved ? "/pharmacist/profile" : "/pharmacistWaiting" );
       setTimeout(() => {
         window.history.pushState({}, "", url)
         window.location.reload()
-      }, 1000);
+      }, 500);
     }
   }, [dispatch, loginError, isAuthenticated]);
+
 
   const handleLogin = () => {
     dispatch(login(formData.username, formData.password));
