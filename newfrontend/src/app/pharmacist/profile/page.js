@@ -23,12 +23,6 @@ function Profile() {
   
   const pharmacist = JSON.parse(localStorage.getItem("userInfo")).data.user
     .data;
-
-
-
-
-
-
   return (
     <div className="h-full overflow-hidden pl-10">
       <main
