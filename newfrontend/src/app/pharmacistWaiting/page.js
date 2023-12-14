@@ -9,7 +9,7 @@ const ContractPage = () => {
 
     useEffect(() => {
         const userInfo = JSON.parse(localStorage?.getItem("userInfo")).data.user;
-        if (userInfo.pharmacist?.isApproved) {
+        if (userInfo.data.isApproved) {
           url = "/pharmacist/profile" ;
           setTimeout(() => {
             window.history.pushState({},"",url)

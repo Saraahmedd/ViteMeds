@@ -42,14 +42,14 @@ const Login = () => {
           ? "/admin/manage-users"
           : role === "patient"
           ? "/patient/profile"
-          : (userInfo.pharmacist?.isApproved ? "/pharmacist/profile" : "/pharmacistWaiting" );
-          // console.log(url)
+          : (userInfo.data.isApproved ? "/pharmacist/profile" : "/pharmacistWaiting" );
       setTimeout(() => {
         window.history.pushState({},"",url)
         window.location.reload()
       }, 1000);
     }
   }, [dispatch,  loginError,isAuthenticated]);
+
 
   const handleLogin = () => {
     dispatch(login(formData.username, formData.password));

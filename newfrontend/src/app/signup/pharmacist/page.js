@@ -73,19 +73,14 @@ const SignupPharmacist = () => {
   };
   let url=""
   useEffect(() => {
-    // Update overall form validity based on individual validations
-    //e.preventDefault();
-  
-   if(isAuthenticated)
-   { 
+   if(isAuthenticated){ 
     url="/pharmacistWaiting";
     setTimeout(() => {
       window.history.pushState({},"",url)
       window.location.reload()
     }, 1000);
 
-}
-  }, [registerLoading]);
+}}, [registerLoading]);
 
   const togglePasswordVisibility = (field) => {
     if (field === "password") {
