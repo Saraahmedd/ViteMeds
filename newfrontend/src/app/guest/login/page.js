@@ -46,7 +46,7 @@ const Login = () => {
       setTimeout(() => {
         window.history.pushState({},"",url)
         window.location.reload()
-      }, 1000);
+      }, 500);
     }
   }, [dispatch,  loginError,isAuthenticated]);
 
