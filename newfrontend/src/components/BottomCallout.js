@@ -16,22 +16,22 @@ function BottomCallout({ message, visible, setVisible, variant = "error" }) {
            
             ${
               variant === "error"
-                ? "bg-red-500 border-red-700 text-red-700"
-                : "bg-green-500 border-green-700 text-green-700"
+                ? "bg-red-500 border-red-700 text-white"
+                : "bg-green-500 border-green-700 text-white"
             }
-            dark:bg-opacity-10
-            bg-opacity-10
             fixed
             right-0
             bottom-[20px]
             mr-0
             lg:mr-${visible ? "[20px]" : "0"}
+            calloutOpacity
             `}
       title={variant === "error" ? "Error" : "Success"}
       id="errmsg"
       style={{
         transform: visible ? "none" : "translateX(100%)",
         marginRight: visible ? "20px" : "0px",
+        zIndex: 99,
       }}
       icon={() => (
         <>

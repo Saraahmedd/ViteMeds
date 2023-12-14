@@ -1,12 +1,7 @@
+"use client"
 import Header from "@/components/Header";
 import "./globals.css";
 import localFont from "next/font/local";
-
-export const metadata = {
-  title: "Pharmacy",
-  description: "Pharmacy",
-};
-
 import { ReduxProvider } from "./redux/provider";
 import Footer from "@/components/Footer";
 
@@ -35,13 +30,16 @@ const myFont = localFont({
   ],
 });
 
+const role = JSON.parse(localStorage.getItem("userInfo")).data.user.role;
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="dark">
-      <body className={myFont.className + " min-h-screen flex flex-col "}>
-        <ReduxProvider>{children} </ReduxProvider>
-        {/* <div className="flex-1 grow"></div> */}
-        <Footer />
+      <body className={myFont.className + " min-h-screen flex flex-col"}>
+        <ReduxProvider>
+          {children}
+        </ReduxProvider>
+        <Footer role={role} />
       </body>
     </html>
   );
