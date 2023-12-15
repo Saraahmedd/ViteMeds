@@ -361,6 +361,7 @@ export default function Products() {
                 initialQuantity={getMedicineNumberInCart(item)}
                 cartHandler={handleCartClick}
                 stock={item.quantity}
+                prescriptionRequired={item.prescription}
               />
             ))}
           </Grid>

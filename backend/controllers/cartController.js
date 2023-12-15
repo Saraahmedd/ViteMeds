@@ -3,6 +3,7 @@ const Medicine = require("../models/medicineModel");
 const User = require("../models/userModel");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
+const axios = require("axios");
 
 exports.getCart = catchAsync(async (req, res, next) => {
   let cart = await Cart.findOne({ patient: req.user.id }).populate(
@@ -60,25 +61,26 @@ exports.addToCart = catchAsync(async (req, res, next) => {
         cart.items[itemIndex].quantity = setQuantity;
       }
     }
-  }
-  // else if (medicine.prescription) {
-  //   const config = {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   };
-  //   resp = await axios.post(
-  //     "http://localhost:8000/api/v1/prescriptions/check",
-  //     { email: req.body.email },
-  //     config
-  //   );
-  //   if (resp?.statusCode === 200) {
-  //     cart.items.push({ medicine: medicineId, quantity });
-  //   } else {
-  //     return next(new AppError("Action not allowed", 400));
-  //   }
-  // }
-  else {
+  } else if (medicine.prescription) {
+    const { username } = await User.findById(req.user._id);
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      resp = await axios.post(
+        "http://localhost:8000/api/v1/prescriptions/check",
+        { username: username, medicine: medicine.name },
+        config
+      );
+
+      console.log("here??");
+      cart.items.push({ medicine: medicineId, quantity });
+    } catch (err) {
+      return next(new AppError("Action not allowed", 400));
+    }
+  } else {
     cart.items.push({ medicine: medicineId, quantity });
   }
 
