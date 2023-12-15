@@ -22,6 +22,7 @@ import Lottie from "lottie-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingAnimation from "../../../../public/loading.json";
+import "./button.css";
 
 export default function Products() {
   const dispatch = useDispatch();
@@ -332,7 +333,7 @@ export default function Products() {
 
               <FileUpload
                 // className="my-4  px-8 py-4"
-                style={{ height: "30px" }}
+
                 placeholder="Image"
                 callBackFiles={handleFileUpload}
                 buttonText={"Upload image (PNG, JPEG, PNG only)"}
