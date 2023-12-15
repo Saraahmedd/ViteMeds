@@ -164,6 +164,7 @@ export default function Products() {
 
             <Select
               placeholder={`\xa0\xa0\xa0Filter (By Medicinal Use)`}
+              enableClear={true}
               icon={() => (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -186,6 +187,10 @@ export default function Products() {
                 setMedUse(e ? { medicinalUses: { in: e } } : {});
               }}
             >
+              <SelectItem key={"blankmed"} value={""}>
+                {`\xa0\xa0\xa0`}
+                All
+              </SelectItem>
               {medUses?.map((medUse, index) => (
                 <SelectItem key={index} value={medUse}>
                   {`\xa0\xa0\xa0`}
@@ -353,20 +358,22 @@ export default function Products() {
             numItemsLg={3}
             className="mt-3 gap-4"
           >
-            {medicines?.map((item, index) => (
-             
-             item.status==="unarchived" && <ProductCard
-                key={item._id}
-                id={item._id}
-                name={item.name}
-                image={`http://localhost:8080/${item.imageURL}`}
-                price={item.price}
-                initialQuantity={getMedicineNumberInCart(item)}
-                cartHandler={handleCartClick}
-                stock={item.quantity}
-                prescriptionRequired={item.prescription}
-              />
-            ))}
+            {medicines?.map(
+              (item, index) =>
+                item.status === "unarchived" && (
+                  <ProductCard
+                    key={item._id}
+                    id={item._id}
+                    name={item.name}
+                    image={`http://localhost:8080/${item.imageURL}`}
+                    price={item.price}
+                    initialQuantity={getMedicineNumberInCart(item)}
+                    cartHandler={handleCartClick}
+                    stock={item.quantity}
+                    prescriptionRequired={item.prescription}
+                  />
+                )
+            )}
           </Grid>
         </>
       )}

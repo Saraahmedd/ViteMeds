@@ -83,8 +83,7 @@ export default function SingleProduct() {
     const newIndex = newIngredients.length - 1;
     const newId = `newingredient${newIndex}`;
     const inputElement = document.getElementById(newId);
-    if(inputElement)
-    setTimeout(() => inputElement.focus(), 1);
+    if (inputElement) setTimeout(() => inputElement.focus(), 1);
   }, [newIngredients]);
 
   const [zoom, setZoom] = useState(1);
@@ -229,7 +228,7 @@ export default function SingleProduct() {
             onClick={() => {
               setEditIngredientsModal(false);
               handleEditMedicine("medicineIngredients", 0);
-              setNewIngredients([])
+              setNewIngredients([]);
             }}
             variant="secondary"
             className="self-end me-8"
@@ -554,7 +553,7 @@ export default function SingleProduct() {
                             key={alternative._id}
                             id={alternative._id}
                             name={alternative.name}
-                            // image={`http://localhost:8080/${alternative.imageURL}`}
+                            image={`http://localhost:8080/${alternative.imageURL}`}
                             price={alternative.price}
                             initialQuantity={getMedicineNumberInCart(
                               alternative

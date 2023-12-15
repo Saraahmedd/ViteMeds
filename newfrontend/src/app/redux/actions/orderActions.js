@@ -156,8 +156,13 @@ export const makeOrder = (body) => async (dispatch) => {
     // 1) Get checkout session from API
 
     if (body.paymentMethod === "Stripe") {
-      const { data } = await axios.get(
-        `${baseURL}/api/v1/order/checkout-session?deliveryAddress=${body.deliveryAddress}`,
+      let s = "";
+      if (body.newDeliveryAddress) {
+        s += `?deliveryAddress=${body.deliveryAddress}`;
+      }
+      const { data } = await axios.post(
+        `${baseURL}/api/v1/order/checkout-session${s}`,
+        body,
         config
       );
 
@@ -319,7 +324,6 @@ export const getTotalSales = () => async (dispatch) => {
 };
 
 export const getFilteredOrders = (medicineId, from, to) => async (dispatch) => {
-
   console.log("Actionssss");
   try {
     dispatch({
