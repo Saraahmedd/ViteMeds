@@ -7,7 +7,11 @@ import {
   changePasswordReducer,
   resetPasswordReducer,
 } from "./reducers/authReducer";
-import { removeUserReducer, getUsersReducer } from "./reducers/userReducer";
+import {
+  removeUserReducer,
+  getUsersReducer,
+  autoClearSuccessReducer,
+} from "./reducers/userReducer";
 import {
   getPharmacistsReducer,
   getPharmacistReducer,
@@ -46,9 +50,7 @@ import {
   getNotificationsReducer,
   updateNotificationReducer,
 } from "./reducers/notificationReducer";
-import {
-  getTotalSalesReducer
-} from "./reducers/orderReducer";
+import { getTotalSalesReducer } from "./reducers/orderReducer";
 
 import { socketReducer } from "./reducers/socketReducer";
 
@@ -91,6 +93,7 @@ const store = configureStore({
     updateNotificationReducer,
     socketReducer,
     getTotalSalesReducer,
+    autoClearSuccessReducer,
   },
 });
 

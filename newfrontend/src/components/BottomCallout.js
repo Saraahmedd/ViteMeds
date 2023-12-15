@@ -1,10 +1,24 @@
+"use client";
 const { Callout } = require("@tremor/react");
-const { useEffect } = require("react");
+const { useEffect, useState } = require("react");
+const { useDispatch } = require("react-redux");
 
-function BottomCallout({ message, visible, setVisible, variant = "error" }) {
+function BottomCallout({ message, variant = "error" }) {
+  const dispatch = useDispatch();
+  const [visible, setVisible] = useState(true);
   useEffect(() => {
     if (visible) {
-      setTimeout(() => setVisible(false), 5000);
+      const resetAfterDelay = () => (dispatch) => {
+        setTimeout(() => {
+          dispatch({ type: "Reset" });
+        }, 5000);
+      };
+
+      // Inside your component or wherever you're dispatching the action
+      setTimeout(() => {
+        setVisible(false); // Assuming setVisible is some asynchronous function
+        dispatch(resetAfterDelay());
+      }, 5000);
     }
   }, [visible]);
   return (

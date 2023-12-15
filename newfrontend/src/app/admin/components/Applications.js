@@ -32,6 +32,7 @@ const Application = () => {
     success: removeSuccess,
     error: removeError,
   } = useSelector((state) => state.removeUserReducer);
+
   useEffect(() => {
     // dispatch(login("sysadmin","pass1234"));
     dispatch(getPharmacists());
