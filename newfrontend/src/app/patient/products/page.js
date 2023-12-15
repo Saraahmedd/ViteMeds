@@ -331,7 +331,8 @@ export default function Products() {
               />
 
               <FileUpload
-                className="w-full my-4  px-8 py-4"
+                // className="my-4  px-8 py-4"
+                style={{ height: "30px" }}
                 placeholder="Image"
                 callBackFiles={handleFileUpload}
                 buttonText={"Upload image (PNG, JPEG, PNG only)"}
