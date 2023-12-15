@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 "use client"
+=======
+"use client";
+>>>>>>> e06c7973eeb9d9aa088ef9dcc59603eb2e4518e5
 import Header from "@/components/Header";
 import "./globals.css";
 import localFont from "next/font/local";
@@ -30,16 +34,14 @@ const myFont = localFont({
   ],
 });
 
-const role = JSON.parse(localStorage.getItem("userInfo")).data.user.role;
+// const role = JSON.parse(localStorage.getItem("userInfo")).data.user.role;
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="dark">
       <body className={myFont.className + " min-h-screen flex flex-col"}>
-        <ReduxProvider>
-          {children}
-        </ReduxProvider>
-        <Footer role={role} />
+        <ReduxProvider>{children}</ReduxProvider>
+        <Footer />
       </body>
       <script src="/jquery-3.7.1.min.js" type="text/javascript"></script>
       <script>

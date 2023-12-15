@@ -2,7 +2,7 @@
 
 import { viewCart } from "@/app/redux/actions/cartActions";
 import { makeOrder } from "@/app/redux/actions/orderActions";
-import { viewMyDetails } from "@/app/redux/actions/patientActions";
+import { addAddressesAction, viewMyDetails } from "@/app/redux/actions/patientActions";
 import { ProductImage } from "@/components/ProductImage";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,6 +48,26 @@ function Checkout() {
 
     if (cartLoading || patientLoading) {
         return <></>
+    }
+
+    function submitOrder() {
+        if (addNewAddress) {
+            dispatch(
+                addAddressesAction({
+                    ...address,
+                    country: 'Egypt'
+                })
+            )
+        }
+        dispatch(
+            makeOrder({
+                paymentMethod: paymentMethod,
+                deliveryAddress: {
+                    ...address,
+                    country: 'Egypt'
+                }
+            })
+        )
     }
 
     return (
@@ -184,7 +204,7 @@ function Checkout() {
                                     if (patient.wallet < cart.totalPrice) return;
                                     setPaymentMethod("Wallet")
                                 }} role="button" className={`${paymentMethod === 'Wallet' ? 'bg-blue-950' : patient.wallet < cart?.totalPrice ? 'bg-gray-700' : 'bg-gray-900'} border-gray-800 border-t-2 h-[4rem] p-2 flex items-center`}>
-                                    <span className="text-gray-800">Wallet (Available Balance: {patient && patient.wallet} USD)</span>
+                                    <span className={paymentMethod==='Wallet' ? 'text-white' : `text-gray-800`}>Wallet (Available Balance: {patient && patient.wallet} USD)</span>
                                 </div>
                             </div>
                         </div>
@@ -224,17 +244,7 @@ function Checkout() {
                                 disabled={
                                     !paymentMethod || !address.streetAddress || !address.city || !address.state || !address.zipCode
                                 }
-                                onClick={() => {
-                                    dispatch(
-                                        makeOrder({
-                                            paymentMethod: paymentMethod,
-                                            deliveryAddress: {
-                                                ...address,
-                                                country: 'Egypt'
-                                            }
-                                        })
-                                    )
-                                }}
+                                onClick={submitOrder}
                             ><span className="text-white">Complete Order</span></Button>
                         </div>
                     </div>

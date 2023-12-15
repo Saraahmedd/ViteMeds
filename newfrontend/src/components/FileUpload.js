@@ -25,13 +25,12 @@ function FileUpload({
       />
 
       <label for={buttonText} id={buttonText + "label"}></label>
-      <p className="my-2"></p>
       <Button
         variant={variant}
         onClick={() => {
           document.getElementById(buttonText + "label").click();
         }}
-        className="w-full"
+        className="w-full h-full"
       >
         <span className="text-white">{text ? text : buttonText}</span>
       </Button>

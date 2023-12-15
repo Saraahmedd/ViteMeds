@@ -11,6 +11,7 @@ function ProductCard({
   initialQuantity,
   cartHandler,
   stock,
+  prescriptionRequired,
 }) {
   const [zoomStyle, setZoomStyle] = useState({
     transform: "scale(1)",
@@ -80,78 +81,80 @@ function ProductCard({
                         <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
                     </svg>
                 </div> */}
-        { JSON.parse(localStorage.getItem("userInfo"))?.data.user.role === "patient" &&
-          <div
-            role="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              if (stock <= 0) return;
-              if (quantity === 0) {
-                setBtnClicked(true);
-                setQuantity(1);
-                cartHandler(e, id, 1);
-              }
-            }}
-            className={`cartbtn w-auto h-7 text-center flex items-center justify-center rounded-[0.875rem] mx-1 px-2 ${quantity > 0 && stock > 0 ? "bg-green-600" : "bgColor"
-              }`}
-          >
-            {stock <= 0 && (
-              <Badge className="tw-dark" color="rose">
-                Out of Stock
-              </Badge>
-            )}
-
-            {quantity > 0 && stock > 0 && (
-              <svg
-                role="button"
-                onClick={(e) => {
+        {prescriptionRequired && (
+          <Badge color="rose">Prescripition Required</Badge>
+        )}
+        {stock <= 0 && <Badge color="rose">Out of Stock</Badge>}
+        {JSON.parse(localStorage.getItem("userInfo"))?.data.user.role ===
+          "patient" &&
+          stock > 0 && (
+            <div
+              role="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                if (stock <= 0) return;
+                if (quantity === 0) {
                   setBtnClicked(true);
-                  setQuantity((q) => q - 1);
-                  cartHandler(e, id, quantity - 1);
-                }}
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="white"
-                className="w-[0.85rem] h-[0.85rem]"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M3.75 12a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            )}
-            {stock > 0 && (
-              <>
-                <span
-                  className={`mx-2 text-sm ${quantity > 0 ? "text-white" : "text-black"
-                    }`}
-                >
-                  {quantity > 0 ? quantity : "Cart"}
-                </span>
-
+                  setQuantity(1);
+                  cartHandler(e, id, 1);
+                }
+              }}
+              className={`cartbtn w-auto h-7 text-center flex items-center justify-center rounded-[0.875rem] mx-1 px-2 ${
+                quantity > 0 && stock > 0 ? "bg-green-600" : "bgColor"
+              }`}
+            >
+              {quantity > 0 && stock > 0 && (
                 <svg
                   role="button"
                   onClick={(e) => {
                     setBtnClicked(true);
-                    setQuantity((q) => q + 1);
-                    cartHandler(e, id, quantity + 1);
+                    setQuantity((q) => q - 1);
+                    cartHandler(e, id, quantity - 1);
                   }}
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
-                  fill={quantity > 0 ? "white" : `rgba(23, 34, 48, 1)`}
+                  fill="white"
                   className="w-[0.85rem] h-[0.85rem]"
                 >
                   <path
                     fillRule="evenodd"
-                    d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z"
+                    d="M3.75 12a.75.75 0 01.75-.75h15a.75.75 0 010 1.5h-15a.75.75 0 01-.75-.75z"
                     clipRule="evenodd"
                   />
                 </svg>
-              </>
-            )}
-          </div>
-        }
+              )}
+              {stock > 0 && (
+                <>
+                  <span
+                    className={`mx-2 text-sm ${
+                      quantity > 0 ? "text-white" : "text-black"
+                    }`}
+                  >
+                    {quantity > 0 ? quantity : "Cart"}
+                  </span>
+
+                  <svg
+                    role="button"
+                    onClick={(e) => {
+                      setBtnClicked(true);
+                      setQuantity((q) => q + 1);
+                      cartHandler(e, id, quantity + 1);
+                    }}
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill={quantity > 0 ? "white" : `rgba(23, 34, 48, 1)`}
+                    className="w-[0.85rem] h-[0.85rem]"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </>
+              )}
+            </div>
+          )}
       </div>
       <div className="flex flex-row items-center">
         <svg
