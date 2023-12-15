@@ -186,13 +186,14 @@ export const getMedicinesAction = (queryObj) => async (dispatch) => {
       config
     );
     data.data.medUses = medUses;
+
     // console.log(medUses);
-    // console.log(data);
+    console.log(data);
 
     // console.log("hey");
     dispatch({
       type: MEDICINES_VIEW_SUCCESS,
-      payload: data.data,
+      payload: data,
     });
   } catch (error) {
     // console.log(error);

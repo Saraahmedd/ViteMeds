@@ -3,6 +3,9 @@ const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 const factory = require("./handlerFactory");
 const multer = require("multer");
+const APIFeatures = require("../utils/apiFeatures");
+const User = require("../models/userModel");
+const axios = require("axios");
 
 exports.getAllMedicinesForUserAndAdmin = factory.getAll(
   Medicine,
@@ -10,6 +13,32 @@ exports.getAllMedicinesForUserAndAdmin = factory.getAll(
   "",
   { status: "unarchived" }
 );
+
+exports.getAllMedsForUser = catchAsync(async (req, res, next) => {
+  const user = await User.findOne({ _id: req.user._id });
+  const features = new APIFeatures(Medicine.find(), req.query).filter();
+  const meds = await features.query;
+  console.log("here");
+  const { data } = await axios.get(
+    "http://localhost:8000/api/v1/healthPackages/discount?username=" +
+      user.username
+  );
+  const discount = await data.discount;
+  console.log("here");
+
+  meds?.forEach((med) => {
+    console.log(discount);
+    med.price = med.price * ((100 - discount) / 100);
+  });
+  res.status(200).json({
+    status: "success",
+    results: meds.length,
+    discount,
+    data: {
+      data: meds,
+    },
+  });
+});
 
 exports.getAllMedicinesForPharmacist = factory.getAll(Medicine);
 exports.getAllArchivedMedicinesForPharmacist = factory.getAll(

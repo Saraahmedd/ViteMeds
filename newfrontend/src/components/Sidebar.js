@@ -7,12 +7,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "@/app/redux/actions/authActions";
 import { getNotifications } from "@/app/redux/actions/notificationActions";
 import ActiveIconNotification from "./Notification";
+import { getMedicinesAction } from "@/app/redux/actions/medicineActions";
 
 export default function Sidebar() {
+  // const dispatch = useDispatch();
+
+  const dispatch = useDispatch();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const role = JSON.parse(localStorage.getItem("userInfo"))?.data.user.role;
-  
-  const notifications = useSelector((state)=> state. getNotificationsReducer?.notifications?.data)
+  const medicines = useSelector((state) => state.getMedicinesReducer);
+
+  useEffect(() => {
+    if (role == "patient") {
+      dispatch(getMedicinesAction({}));
+    }
+  }, [dispatch]);
+
+  const notifications = useSelector(
+    (state) => state.getNotificationsReducer?.notifications?.data
+  );
+  console.log(medicines.discount);
+  console.log("bheheh");
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -21,11 +36,10 @@ export default function Sidebar() {
       .classList.toggle("-translate-x-full");
   };
 
-  useEffect(() => { 
+  useEffect(() => {
     dispatch(getNotifications());
-  },[]);
+  }, []);
 
-  const dispatch = useDispatch();
   const menuItems = {
     patient: [
       { icon: "profile", label: "Profile", href: "/patient/profile" },
@@ -86,6 +100,10 @@ export default function Sidebar() {
             {getIcon(item.icon)}
           </svg>
           <span className="flex-1 ms-3 whitespace-nowrap">{item.label}</span>
+          {role == "patient" &&
+            item.label == "Medicines" &&
+            medicines?.discount &&
+            `${medicines.discount} % OFF`}
         </a>
       </li>
     ));
@@ -261,8 +279,12 @@ export default function Sidebar() {
               alt="Flowbite Logo"
             />
             <h1 className="font-bold text-xl">Harmony Meds</h1>
-            {role === "pharmacist" &&
-            <ActiveIconNotification notifications={notifications} isActive={notifications?.length >0} />}
+            {role === "pharmacist" && (
+              <ActiveIconNotification
+                notifications={notifications}
+                isActive={notifications?.length > 0}
+              />
+            )}
           </div>
 
           <ul className="space-y-2 font-medium">

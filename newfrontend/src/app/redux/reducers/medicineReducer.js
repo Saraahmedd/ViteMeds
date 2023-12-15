@@ -66,7 +66,8 @@ export const getMedicinesReducer = (state = {}, action) => {
     case MEDICINES_VIEW_SUCCESS: {
       return {
         ...state,
-        medicines: action.payload,
+        medicines: action.payload.data,
+        discount: action.payload.discount,
         loading: false,
         error: null,
       };
