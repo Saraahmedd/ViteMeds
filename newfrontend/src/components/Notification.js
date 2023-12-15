@@ -1,9 +1,12 @@
 // ActiveIconNotification.js
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const NotificationCard = ({ notifications, onClose }) => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center" style={{marginBottom:"400px"}}>
+    <div
+      className="fixed inset-0 flex items-center justify-center"
+      style={{ marginBottom: "400px" }}
+    >
       <div className="bg-gray-800 text-white p-4 rounded shadow-lg max-w-md">
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-semibold">Notifications</h2>
@@ -12,7 +15,7 @@ const NotificationCard = ({ notifications, onClose }) => {
           </button>
         </div>
         <div className="mt-2">
-          {notifications.map((notification, index) => (
+          {notifications?.map((notification, index) => (
             <div key={index} className="mb-2">
               <h3 className="text-lg font-semibold">{notification.title}</h3>
               <p className="text-gray-300">{notification.text}</p>
@@ -33,7 +36,7 @@ const ActiveIconNotification = ({ notifications }) => {
         className="text-white text-2xl cursor-pointer"
         onClick={() => setIsNotificationVisible(!isNotificationVisible)}
       >
-        {notifications?.length > 0 ?  '🔔': '🔕'  }
+        {notifications?.length > 0 ? "🔔" : "🔕"}
       </div>
       {isNotificationVisible && (
         <NotificationCard

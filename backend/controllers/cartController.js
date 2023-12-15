@@ -1,5 +1,6 @@
 const Cart = require("../models/cartModel");
 const Medicine = require("../models/medicineModel");
+const User = require("../models/userModel");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 
@@ -59,23 +60,25 @@ exports.addToCart = catchAsync(async (req, res, next) => {
         cart.items[itemIndex].quantity = setQuantity;
       }
     }
-  } else if (medicine.prescription) {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    resp = await axios.post(
-      "http://localhost:8000/api/v1/prescriptions/check",
-      { email: req.body.email },
-      config
-    );
-    if (resp?.statusCode === 200) {
-      cart.items.push({ medicine: medicineId, quantity });
-    } else {
-      return next(new AppError("Action not allowed", 400));
-    }
-  } else {
+  }
+  // else if (medicine.prescription) {
+  //   const config = {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   };
+  //   resp = await axios.post(
+  //     "http://localhost:8000/api/v1/prescriptions/check",
+  //     { email: req.body.email },
+  //     config
+  //   );
+  //   if (resp?.statusCode === 200) {
+  //     cart.items.push({ medicine: medicineId, quantity });
+  //   } else {
+  //     return next(new AppError("Action not allowed", 400));
+  //   }
+  // }
+  else {
     cart.items.push({ medicine: medicineId, quantity });
   }
 
@@ -87,6 +90,31 @@ exports.addToCart = catchAsync(async (req, res, next) => {
       cart,
     },
   });
+});
+
+exports.addToCartPresc = catchAsync(async (req, res, next) => {
+  const user = await User.findOne({ username: req.body.username });
+
+  let cart = await Cart.findOne({ patient: user._id });
+
+  if (!cart) {
+    cart = await Cart.create({ patient: user._id, items: [] });
+  }
+  const medicines = await Medicine.find({
+    name: { $in: req.body.medicines },
+  });
+
+  console.log(medicines);
+  console.log(req.body.medicines);
+  cart.items = cart.items.concat(
+    medicines.map((medicine) => ({
+      medicine: medicine._id,
+      quantity: 1,
+    }))
+  );
+  await cart.save();
+  console.log(cart);
+  res.status(200).json({ message: "success" });
 });
 
 exports.updateCartItem = catchAsync(async (req, res, next) => {

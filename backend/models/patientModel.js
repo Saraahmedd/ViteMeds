@@ -45,12 +45,12 @@ const patientSchema = new mongoose.Schema({
     },
     relationToPatient: {
       type: String,
-      required: true,
+      default: "N/A",
     },
   },
 });
 
-patientSchema.pre(/^find/, function (next) {
+patientSchema.pre(/^find/, function(next) {
   this.populate({
     path: "user",
     //   select: 'username email'  // Specify the fields you want to select from the referenced User model
