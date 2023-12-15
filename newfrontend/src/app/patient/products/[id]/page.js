@@ -403,7 +403,7 @@ export default function SingleProduct() {
                   />
                 </div>
                 {medicine?.quantity <= 0 && (
-                  <Button variant="secondary" className="mt-4" disabled>
+                  <Button variant="secondary" className="mt-4 mx-2" disabled>
                     Sold Out
                   </Button>
                 )}

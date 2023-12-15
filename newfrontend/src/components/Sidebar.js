@@ -101,9 +101,11 @@ export default function Sidebar() {
           </svg>
           <span className="flex-1 ms-3 whitespace-nowrap">{item.label}</span>
           {role == "patient" &&
-            item.label == "Medicines" &&
-            medicines?.discount &&
-            `${medicines.discount} % OFF`}
+          item.label == "Medicines" &&
+          medicines?.discount &&
+          medicines.discount !== 0
+            ? `${medicines.discount} % OFF`
+            : ""}
         </a>
       </li>
     ));

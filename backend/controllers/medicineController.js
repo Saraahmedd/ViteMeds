@@ -19,17 +19,22 @@ exports.getAllMedsForUser = catchAsync(async (req, res, next) => {
   const features = new APIFeatures(Medicine.find(), req.query).filter();
   const meds = await features.query;
   console.log("here");
-  const { data } = await axios.get(
-    "http://localhost:8000/api/v1/healthPackages/discount?username=" +
-      user.username
-  );
-  const discount = await data.discount;
-  console.log("here");
+  let discount = 0;
+  try {
+    const { data } = await axios.get(
+      "http://localhost:8000/api/v1/healthPackages/discount?username=" +
+        user.username
+    );
+    discount = await data.discount;
+    console.log("here");
 
-  meds?.forEach((med) => {
-    console.log(discount);
-    med.price = med.price * ((100 - discount) / 100);
-  });
+    meds?.forEach((med) => {
+      console.log(discount);
+      med.price = med.price * ((100 - discount) / 100);
+    });
+  } catch (err) {
+    console.error(err);
+  }
   res.status(200).json({
     status: "success",
     results: meds.length,

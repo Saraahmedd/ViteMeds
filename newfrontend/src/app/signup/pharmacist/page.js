@@ -40,7 +40,7 @@ const SignupPharmacist = () => {
     document3: null,
   });
   const setDocument1 = (file) => {
-    setFiles({ document1: file, ...files });
+    setFiles({ ...files, document1: file });
   };
   const setDocument2 = (file) => {
     setFiles({ ...files, document2: file });

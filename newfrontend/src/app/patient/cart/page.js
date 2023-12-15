@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart, viewCart } from "@/app/redux/actions/cartActions";
 import { Alert } from "@material-tailwind/react";
 import Lottie from "lottie-react";
-import LoadingAnimation from '../../../../public/loading.json';
+import LoadingAnimation from "../../../../public/loading.json";
 
 export default function Cart() {
   const [error, setError] = useState(false);
@@ -16,6 +16,7 @@ export default function Cart() {
   const cartItems = useSelector(
     (state) => state.getCartReducer.cart?.cart?.items
   );
+
   const deleteFromCartSel = useSelector(
     (state) => state.deleteFromCartReducer.cart
   );
@@ -46,28 +47,29 @@ export default function Cart() {
   }, [dispatch, cartLoading, deleteFromCartSel]);
 
   useEffect(() => {
-    if(cartItems) setInitialLoad(true);
-  }, [cartItems])
+    if (cartItems || getCartLoading == false) setInitialLoad(true);
+  }, [cartItems, getCartLoading]);
 
   return (
     <>
       <Card className="grow flex-1 flex flex-col">
         <h1 className="font-bold text-4xl">Cart</h1>
-        {initialLoad &&
+        {initialLoad && (
           <>
             <Grid numItems={1} className="mt-3 gap-4">
-              {cartItems && cartItems.length === 0 && (
-                <div className="flex items-center justify-center h-full">
-                  <a
-                    href="/patient/products"
-                    className="text-center text-2xl text-blue-500 hover:underline"
-                  >
-                    <Alert className="mx-auto">
-                      Your cart is empty. Let's do some shopping.
-                    </Alert>
-                  </a>
-                </div>
-              )}
+              {!cartItems ||
+                (cartItems && cartItems?.length === 0 && (
+                  <div className="flex items-center justify-center h-full">
+                    <a
+                      href="/patient/products"
+                      className="text-center text-2xl text-blue-500 hover:underline"
+                    >
+                      <Alert className="mx-auto">
+                        Your cart is empty. Let's do some shopping.
+                      </Alert>
+                    </a>
+                  </div>
+                ))}
               {cartItems?.map((item, index) => (
                 <CartProductCard
                   key={item.medicine._id}
@@ -90,9 +92,9 @@ export default function Cart() {
                 {cart?.totalPrice.toFixed(2)} USD
               </p>
               <Button
-              disabled={cartItems.length===0}
+                disabled={cartItems?.length === 0}
                 onClick={() => {
-                  window.history.pushState({}, "", "/patient/cart/checkout")
+                  window.history.pushState({}, "", "/patient/cart/checkout");
                   window.location.reload();
                 }}
                 className="mt-3 self-end"
@@ -103,13 +105,16 @@ export default function Cart() {
               </Button>
             </div>
           </>
-        }
+        )}
 
-        {!initialLoad &&
+        {!initialLoad && (
           <div className="flex-1 grow flex items-center justify-center">
-            <Lottie animationData={LoadingAnimation} className="w-[15rem] h-[15rem]" />
+            <Lottie
+              animationData={LoadingAnimation}
+              className="w-[15rem] h-[15rem]"
+            />
           </div>
-        }
+        )}
       </Card>
     </>
   );
