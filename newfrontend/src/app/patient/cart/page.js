@@ -90,6 +90,7 @@ export default function Cart() {
                 {cart?.totalPrice.toFixed(2)} USD
               </p>
               <Button
+              disabled={cartItems.length===0}
                 onClick={() => {
                   window.history.pushState({}, "", "/patient/cart/checkout")
                   window.location.reload();

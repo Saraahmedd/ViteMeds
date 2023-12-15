@@ -354,7 +354,8 @@ export default function Products() {
             className="mt-3 gap-4"
           >
             {medicines?.map((item, index) => (
-              <ProductCard
+             
+             item.status==="unarchived" && <ProductCard
                 key={item._id}
                 id={item._id}
                 name={item.name}
