@@ -58,6 +58,7 @@ export const getCartReducer = (state = viewCartInitialState, action) => {
         loading: false,
         error: action.payload,
       };
+
     default:
       return state;
   }
@@ -83,6 +84,12 @@ export const addToCartReducer = (state = addToCartInitialState, action) => {
         ...state,
         loading: false,
         error: action.payload,
+      };
+    case "Reset":
+      return {
+        ...state,
+        loading: false,
+        error: null,
       };
     default:
       return state;
