@@ -156,7 +156,7 @@ const Admins = () => {
                 {
                   size: "xs",
                   variant: "secondary",
-                  color: "gray",
+                  color: "red",
                   label: "Delete",
                   icon: () => (
                     <svg

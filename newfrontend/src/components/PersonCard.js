@@ -1,5 +1,5 @@
 import React from "react";
-import {} from "@heroicons/react/outline";
+import { } from "@heroicons/react/outline";
 import { Button } from "@tremor/react";
 
 const PersonalCard = ({
@@ -175,7 +175,7 @@ const PersonalCard = ({
   };
 
   return (
-    <div style={{ width: "120%" }} className="m-10  max-w-md">
+    <div className="m-10  max-w-md">
       <div className="rounded-lg border border-gray-800 px-4 pt-8 pb-10 shadow-lg">
         <div className="relative mx-auto w-28 rounded-full">
           <span className="absolute right-0 m-3 h-3 w-3 rounded-full bg-green-500 ring-2 ring-green-300 ring-offset-2"></span>
@@ -196,17 +196,24 @@ const PersonalCard = ({
         <p className="text-center text-sm leading-6 text-gray-500 hover:text-gray-600">
           {data?.educationalBackground}
         </p>
-        <div className="mt-3 flex flex-wrap justify-between md:space-x-1.2">
-          {fields.map((field, index) => (
-            <div
-              key={index}
-              className="flex items-center py-3 text-sm w-full md:w-1/2"
-            >
-              <span>{renderIcon(field)}</span>
-              <span className="ml-1 mr-1">{data && displayNames[index]}: </span>
-              <span className="mr-auto">{data && data[field]}</span>
-            </div>
-          ))}
+        <div className="mt-3 flex flex-row items-center justify-center">
+          <div>
+            {fields.map((field, index) => (
+              <div className="flex flex-row flex-nowrap whitespace-nowrap">
+                <span>{renderIcon(field)}</span>
+                <span className="ml-1 mr-1 font-semibold">{data && displayNames[index]} </span>
+              </div>
+            ))}
+          </div>
+
+
+          <div className="flex flex-col">
+            {fields.map((field, index) => (
+              <>
+                <span className="text-left ml-2 whitespace-nowrap">{data && data[field]}</span>
+              </>
+            ))}
+          </div>
         </div>
         {selected && buttons && (
           <div className="flex justify-between mt-3">

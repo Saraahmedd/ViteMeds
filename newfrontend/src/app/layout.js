@@ -44,7 +44,7 @@ export default function RootLayout({ children }) {
     forms.forEach((form) => {
       form.setAttribute("autocomplete", "off");
     });
-  }, []);
+  });
   return (
     <html lang="en" className="dark">
       <body className={myFont.className + " min-h-screen flex flex-col"}>

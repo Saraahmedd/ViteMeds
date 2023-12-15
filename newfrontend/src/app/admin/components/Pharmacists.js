@@ -95,7 +95,7 @@ const Pharmacists = () => {
       )}
 
       <>
-      <PromptMessage
+        <PromptMessage
           visible={showPrompt}
           setVisible={setShowPrompt}
           message="Are you sure you want to remove this pharmacist?"
@@ -104,7 +104,7 @@ const Pharmacists = () => {
           onCancel={cancelDelete}
         />
         <div className="flex overflow-hidden gap-x-4 gap-y-8">
-          <div className="prof h-400 overflow-hidden w-4/6 rounded-xl p-10">
+          <div className="prof flex-1 h-400 overflow-hidden w-4/6 rounded-xl p-10">
             <TableComponent
               setSelected={setSelected}
               rows={pharmacistList}
@@ -165,34 +165,37 @@ const Pharmacists = () => {
             />
           </div>
 
-          <div className="prof h-400 overflow-hidden w-2/6 rounded-xl p-10">
-            <PersonalCard
-              imageUrl="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
-              name={selected?.name}
-              title="Marketing Exec. at Denva Corp"
-              description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto, placeat!"
-              data={selected}
-              displayColumns={["Status", "Joined On"]}
-              actualColumns={["status", "joinedOn"]}
-              // buttons={buttons}
-              worker={true}
-              fields={[
-                "email",
-                "dateOfBirth",
-                "username",
-                "hourlyRate",
-                "affiliation",
-              ]}
-              displayNames={[
-                "Email",
-                "Birth Date",
-                "Username",
-                "Hourly Rate",
-                "Affiliation",
-              ]}
-            />
-          </div>
-        </div>{" "}
+          <>
+            <div className={`prof ${selected? 'min-w-[0px]' : 'w-[0px]'} h-400 overflow-hidden w-2/6 rounded-xl py-10`}>
+              <PersonalCard
+                imageUrl="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
+                name={selected?.name}
+                title="Marketing Exec. at Denva Corp"
+                description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto, placeat!"
+                data={selected}
+                displayColumns={["Status", "Joined On"]}
+                actualColumns={["status", "joinedOn"]}
+                // buttons={buttons}
+                worker={true}
+                fields={[
+                  "email",
+                  "dateOfBirth",
+                  "username",
+                  "hourlyRate",
+                  "affiliation",
+                ]}
+                displayNames={[
+                  "Email",
+                  "Birth Date",
+                  "Username",
+                  "Hourly Rate",
+                  "Affiliation",
+                ]}
+              />
+            </div>
+          </>
+
+        </div>
       </>
     </>
   );

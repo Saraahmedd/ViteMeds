@@ -169,7 +169,7 @@ const Application = () => {
           onCancel={cancelDelete}
         />
         <div className="flex overflow-hidden gap-x-4 gap-y-8">
-          <div className="prof h-400 overflow-hidden w-4/6 rounded-xl p-10">
+          <div className="prof flex-1 h-400 overflow-hidden w-4/6 rounded-xl p-10">
             <TableComponent
               setSelected={setSelected}
               rows={pharmacistList}
@@ -230,7 +230,7 @@ const Application = () => {
             />
           </div>
 
-          <div className="prof h-400 overflow-hidden w-2/6 rounded-xl p-10">
+          <div className={`prof h-400  ${selected? 'min-w-[0px]' : 'w-[0px]'} overflow-hidden w-2/6 rounded-xl`}>
             <PersonalCard
               imageUrl="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
               name={selected?.name}

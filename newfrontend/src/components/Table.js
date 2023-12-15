@@ -84,6 +84,7 @@ const TableComponent = ({
                       }
                       key={buttonIndex}
                       {...button}
+                      color={button.label === 'Delete' ? "red" : button.color}
                     >
                       {button.label}
                     </Button>
