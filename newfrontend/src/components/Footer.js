@@ -5,7 +5,7 @@ const Footer = ({ role }) => {
   let fullFooter = false;
 
   const dirs = window.location.href.split('/');
-  if (dirs.includes("signup") || dirs.includes("guest")) {
+  if (dirs.includes("signup") || dirs.includes("guest") || dirs.includes("pharmacistWaiting")) {
     fullFooter = true;
   }
 
@@ -25,7 +25,7 @@ const Footer = ({ role }) => {
                 alt="Flowbite Logo"
               />
               <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-                Pharmacy
+                Harmony Meds
               </span>
             </a>
             <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">

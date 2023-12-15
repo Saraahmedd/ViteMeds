@@ -1,4 +1,5 @@
 'use client'
+import Header from '@/components/Header';
 import React, { useEffect } from 'react';
 
 const ContractPage = () => {
@@ -24,6 +25,8 @@ const ContractPage = () => {
     
 
     return (
+        <>
+        <Header></Header>
         <div>
             <div className="text-center my-10 py-10">
                 <h1 style={{
@@ -37,6 +40,7 @@ const ContractPage = () => {
                 <h5 className='font-semibold my-3'>Thank you for your patience, we will get back to you soon.</h5>
             </div>
         </div>
+        </>
     );
 };
 
