@@ -6,6 +6,7 @@ import TableComponent from "@/components/Table";
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { formatDateToDDMMYYYY } from "../../redux/validators";
+import PromptMessage from "@/components/PromptMessage";
 
 //OPTIONAL
 // const buttons = {
@@ -57,7 +58,21 @@ const Pharmacists = () => {
       }))
       .filter((value) => value.isApproved);
   }, [removeError, pharmacists]);
-
+  const [showPrompt, setShowPrompt] = useState(false);
+  const [deleteID, setDeleteID] = useState("");
+  const handleDelete = (id) => {
+    setShowPrompt(true);
+    setDeleteID(id);
+  };
+  const confirmDelete = () => {
+    dispatch(removeUser(deleteID));
+    setShowPrompt(!showPrompt);
+    setSelected(null);
+    setFreeze(false);
+  };
+  const cancelDelete = () => {
+    setShowPrompt(!showPrompt);
+  };
   return (
     <>
       {removeSuccess && (
@@ -80,6 +95,14 @@ const Pharmacists = () => {
       )}
 
       <>
+      <PromptMessage
+          visible={showPrompt}
+          setVisible={setShowPrompt}
+          message="Are you sure you want to remove this pharmacist?"
+          onConfirm={confirmDelete}
+          confirmLoading={removeLoading}
+          onCancel={cancelDelete}
+        />
         <div className="flex overflow-hidden gap-x-4 gap-y-8">
           <div className="prof h-400 overflow-hidden w-4/6 rounded-xl p-10">
             <TableComponent
@@ -111,7 +134,7 @@ const Pharmacists = () => {
                       />
                     </svg>
                   ),
-                  function: (id) => dispatch(removeUser(id)),
+                  function: (id) => handleDelete(id),
                 },
                 {
                   size: "xs",

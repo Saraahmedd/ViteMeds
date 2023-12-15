@@ -144,19 +144,19 @@ const SignupPharmacist = () => {
 
   return (
     <>
-      <BottomCallout
+      {registerSuccess && <BottomCallout
         message="Registration successful"
         variant="success"
         visible={registerCallout}
         setVisible={setRegisterCallout}
-      />
-      <BottomCallout
+      />}
+      {registerError && <BottomCallout
 
         message="Please fill in the required fields correctly"
         variant="error"
         visible={errorCallout}
         setVisible={setErrorCallout}
-      />
+      />}
       <div className="flex flex-col grow flex-1 px-8">
         <Card className="grow flex-1">
           <Grid numItems={2} className="gap-x-3 gap-y-4">

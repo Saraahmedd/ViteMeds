@@ -11,6 +11,7 @@ const PersonalCard = ({
   fields,
   buttons,
   displayNames,
+  selected
 }) => {
   const renderIcon = (column) => {
     <svg
@@ -207,7 +208,7 @@ const PersonalCard = ({
             </div>
           ))}
         </div>
-        {buttons && (
+        {selected && buttons && (
           <div className="flex justify-between mt-3">
             <Button
               className="border border-purple-500 text-purple-500 px-4 py-2 rounded"

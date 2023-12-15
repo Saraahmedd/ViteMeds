@@ -23,7 +23,7 @@ const Header = () => {
               <li class="inline mx-2"><a href="/" className="hover:text-gray-400">Home</a></li>
               <li class="inline mx-2"><a href="/signup/pharmacist" className="hover:text-gray-400">Careers</a></li>
               <li class="inline mx-2"><a href="/signup/patient" className="hover:text-gray-400">Sign Up</a></li>
-              <li class="inline mx-2"><a href="/guest/Login" className="hover:text-gray-400">Login</a></li>
+              <li class="inline mx-2"><a href="/guest/login" className="hover:text-gray-400">Login</a></li>
             </ul>
           </div>
         </nav>

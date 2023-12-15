@@ -47,7 +47,11 @@ const Page = () => {
           <a
             href="#"
             onClick={() => handleTabClick("pharmacists")}
-            className={`inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300`}
+            className={`inline-block p-4 ${
+              selectedTab === "pharmacists"
+                ? "text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
+                : "rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+            }`}
           >
             Pharmacists
           </a>
@@ -56,7 +60,11 @@ const Page = () => {
           <a
             href="#"
             onClick={() => handleTabClick("patients")}
-            className={`inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300`}
+            className={`inline-block p-4 ${
+              selectedTab === "patients"
+                ? "text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
+                : "rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+            }`}
           >
             Patients
           </a>
@@ -65,7 +73,11 @@ const Page = () => {
           <a
             href="#"
             onClick={() => handleTabClick("applications")}
-            className={`inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300`}
+            className={`inline-block p-4 ${
+              selectedTab === "applications"
+                ? "text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
+                : "rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+            }`}
           >
             Applications
           </a>

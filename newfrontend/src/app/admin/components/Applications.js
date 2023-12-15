@@ -11,6 +11,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { formatDateToDDMMYYYY } from "../../redux/validators";
 import { DatePicker, DateRangePicker } from "@tremor/react";
+import PromptMessage from "@/components/PromptMessage";
 
 //OPTIONAL
 
@@ -39,11 +40,12 @@ const Application = () => {
   }, [dispatch, removeLoading, approvalLoading]);
 
   const [freeze, setFreeze] = useState(false);
-
+  const [pharmacistSelected,setPharmacistSelected]=useState(false)
   const handleSelect = (id) => {
     for (let i = 0; i < pharmacistList.length; i++) {
       if (pharmacistList[i]._id == id) {
         setSelected(pharmacistList[i]);
+        setPharmacistSelected(true)
         break;
       }
     }
@@ -73,7 +75,7 @@ const Application = () => {
           />
         </svg>
       ),
-      onClick: (e) => dispatch(removeUser(selected._id)),
+      onClick: (e) => handleDelete(selected._id),
     },
     left: {
       label: "Accept",
@@ -97,7 +99,10 @@ const Application = () => {
           />
         </svg>
       ),
-      onClick: (e) => dispatch(adminAcceptPharmacist(selected.pharmacistID)),
+      onClick: (e) => {dispatch(adminAcceptPharmacist(selected.pharmacistID))
+      setSelected(null)
+    setPharmacistSelected(false)
+  setFreeze(false)},
     },
   };
   const pharmacistList = useMemo(() => {
@@ -110,7 +115,21 @@ const Application = () => {
       }))
       .filter((value) => value.isApproved === false);
   }, [removeError, pharmacists, approvalLoading, approvalSuccess]);
-
+  const [showPrompt, setShowPrompt] = useState(false);
+  const [deleteID, setDeleteID] = useState("");
+  const handleDelete = (id) => {
+    setShowPrompt(true);
+    setDeleteID(id);
+  };
+  const confirmDelete = () => {
+    dispatch(rejectDoctor(deleteID));
+    setShowPrompt(!showPrompt);
+    setSelected(null);
+    setFreeze(false);
+  };
+  const cancelDelete = () => {
+    setShowPrompt(!showPrompt);
+  };
   return (
     <>
       {removeSuccess && (
@@ -141,6 +160,14 @@ const Application = () => {
       )}
 
       <>
+      <PromptMessage
+          visible={showPrompt}
+          setVisible={setShowPrompt}
+          message="Are you sure you want to reject this doctor?"
+          onConfirm={confirmDelete}
+          confirmLoading={removeLoading}
+          onCancel={cancelDelete}
+        />
         <div className="flex overflow-hidden gap-x-4 gap-y-8">
           <div className="prof h-400 overflow-hidden w-4/6 rounded-xl p-10">
             <TableComponent
@@ -213,6 +240,7 @@ const Application = () => {
               displayColumns={["Status", "Joined On"]}
               actualColumns={["status", "joinedOn"]}
               buttons={buttons}
+              selected={pharmacistSelected}
               worker={true}
               fields={[
                 "email",
