@@ -83,7 +83,7 @@ export default function SingleProduct() {
     const newIndex = newIngredients.length - 1;
     const newId = `newingredient${newIndex}`;
     const inputElement = document.getElementById(newId);
-
+    if(inputElement)
     setTimeout(() => inputElement.focus(), 1);
   }, [newIngredients]);
 
@@ -229,6 +229,7 @@ export default function SingleProduct() {
             onClick={() => {
               setEditIngredientsModal(false);
               handleEditMedicine("medicineIngredients", 0);
+              setNewIngredients([])
             }}
             variant="secondary"
             className="self-end me-8"
