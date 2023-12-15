@@ -122,7 +122,7 @@ const Application = () => {
     setDeleteID(id);
   };
   const confirmDelete = () => {
-    dispatch(rejectDoctor(deleteID));
+    dispatch(removeUser(deleteID));
     setShowPrompt(!showPrompt);
     setSelected(null);
     setFreeze(false);
