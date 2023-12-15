@@ -1,5 +1,5 @@
 "use client";
-
+import "../button.css";
 import { viewCart, addToCart } from "@/app/redux/actions/cartActions";
 import {
   editMedicine,
@@ -431,100 +431,100 @@ export default function SingleProduct() {
                       <span className="text-white px-2">Add to Cart</span>
                     </Button>
                   )}
-                {   ((getMedicineNumberInCart(medicine) > 0) || (canEdit && (medicine?.quantity > 0)))
-                   &&  (
-                    <>
-                      <p className="font-bold text-lg mt-4">
-                        {!isAdmin && <strong> Quantity: </strong>}
-                        {canEdit && medicine.quantity}
-                        <div className="flex items-center justify-end ">
-                          <EditButton
-                            canEdit={canEdit}
-                            editFn={() => seteditQModal(true)}
-                          />
-                        </div>
-                        {canEdit && (
-                          <>
-                            {" "}
-                            <br />
-                            <strong>Sales: </strong> {medicine.sales}
-                          </>
-                        )}
-                        &nbsp;
-                      </p>
-                      {!canEdit && !isAdmin && (
-                        <div className="flex flex-row items-center mt-2">
-                          <div
-                            role="button"
-                            onClick={(e) => {
-                              handleCartClick(e, id, quantityCart - 1);
-                              setQuantityCart((q) => q - 1);
-                            }}
-                            className="flex items-center justify-center text-2xl rounded-md border h-10 w-10 mr-3 hover:bg-white hover:text-black"
-                          >
-                            -
-                          </div>
-
-                          <span className="font-bold">
-                            {getMedicineNumberInCart(medicine)}
-                          </span>
-
-                          <div
-                            onClick={(e) => {
-                              handleCartClick(e, id, quantityCart + 1);
-                              setQuantityCart((q) => q + 1);
-                            }}
-                            role="button"
-                            className="flex items-center justify-center text-2xl rounded-md border h-10 w-10 ml-3 hover:bg-white hover:text-black"
-                          >
-                            +
-                          </div>
-                        </div>
+                {(getMedicineNumberInCart(medicine) > 0 ||
+                  (canEdit && medicine?.quantity > 0)) && (
+                  <>
+                    <p className="font-bold text-lg mt-4">
+                      {!isAdmin && <strong> Quantity: </strong>}
+                      {canEdit && medicine.quantity}
+                      <div className="flex items-center justify-end ">
+                        <EditButton
+                          canEdit={canEdit}
+                          editFn={() => seteditQModal(true)}
+                        />
+                      </div>
+                      {canEdit && (
+                        <>
+                          {" "}
+                          <br />
+                          <strong>Sales: </strong> {medicine.sales}
+                        </>
                       )}
-                      {!canEdit && !isAdmin && (
-                        <Button
-                          className="mt-4"
-                          onClick={(e) =>
-                            (window.location.href = "/patient/cart")
-                          }
-                          icon={function () {
-                            return (
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="white"
-                                className="w-4 h-4"
-                              >
-                                <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
-                              </svg>
-                            );
+                      &nbsp;
+                    </p>
+                    {!canEdit && !isAdmin && (
+                      <div className="flex flex-row items-center mt-2">
+                        <div
+                          role="button"
+                          onClick={(e) => {
+                            handleCartClick(e, id, quantityCart - 1);
+                            setQuantityCart((q) => q - 1);
                           }}
+                          className="flex items-center justify-center text-2xl rounded-md border h-10 w-10 mr-3 hover:bg-white hover:text-black"
                         >
-                          <span className="text-white px-2">View Cart</span>
-                        </Button>
-                      )}
-                      {!canEdit && !isAdmin && (
-                        <Button
-                          variant="secondary"
-                          className="mt-4 ml-2"
-                          icon={function () {
-                            return (
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="white"
-                                className="w-4 h-4"
-                              >
-                                <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
-                              </svg>
-                            );
+                          -
+                        </div>
+
+                        <span className="font-bold">
+                          {getMedicineNumberInCart(medicine)}
+                        </span>
+
+                        <div
+                          onClick={(e) => {
+                            handleCartClick(e, id, quantityCart + 1);
+                            setQuantityCart((q) => q + 1);
                           }}
+                          role="button"
+                          className="flex items-center justify-center text-2xl rounded-md border h-10 w-10 ml-3 hover:bg-white hover:text-black"
                         >
-                          <span className="text-white px-2">Checkout</span>
-                        </Button>
-                      )}
-                    </>
-                  )}
+                          +
+                        </div>
+                      </div>
+                    )}
+                    {!canEdit && !isAdmin && (
+                      <Button
+                        className="mt-4"
+                        onClick={(e) =>
+                          (window.location.href = "/patient/cart")
+                        }
+                        icon={function () {
+                          return (
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="white"
+                              className="w-4 h-4"
+                            >
+                              <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+                            </svg>
+                          );
+                        }}
+                      >
+                        <span className="text-white px-2">View Cart</span>
+                      </Button>
+                    )}
+                    {!canEdit && !isAdmin && (
+                      <Button
+                        variant="secondary"
+                        className="mt-4 ml-2"
+                        icon={function () {
+                          return (
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="white"
+                              className="w-4 h-4"
+                            >
+                              <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+                            </svg>
+                          );
+                        }}
+                      >
+                        <span className="text-white px-2">Checkout</span>
+                      </Button>
+                    )}
+                  </>
+                )}
                 {canEdit && (
                   <Button
                     className="my-3"
