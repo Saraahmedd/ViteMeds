@@ -23,7 +23,7 @@ const SignupPharmacist = () => {
     hourlyRate: "",
     dateOfBirth: "",
     gender: "male",
-    mobileNumber: "",
+    phoneNumber: "",
     passwordConfirm: ""
   });
 
@@ -273,17 +273,17 @@ const SignupPharmacist = () => {
                   placeholder="Phone Number *"
                   onChange={handleInputChange}
                   required
-                  name="mobileNumber"
-                  value={formData.mobileNumber}
+                  name="phoneNumber"
+                  value={formData.phoneNumber}
                   error={(
-                    formData.mobileNumber &&
-                    !validatePhoneNumber(formData.mobileNumber))
-                    || (registerError && formData.mobileNumber === "")
+                    formData.phoneNumber &&
+                    !validatePhoneNumber(formData.phoneNumber))
+                    || (registerError && formData.phoneNumber === "")
                   }
                   errorMessage={
-                    formData.mobileNumber !== "" ? (
-                      formData.mobileNumber &&
-                      !validatePhoneNumber(formData.mobileNumber) &&
+                    formData.phoneNumber !== "" ? (
+                      formData.phoneNumber &&
+                      !validatePhoneNumber(formData.phoneNumber) &&
                       "Please enter 11 digits sarting by a zero") : (
                       registerError && "Please fill in this field"
                     )}
