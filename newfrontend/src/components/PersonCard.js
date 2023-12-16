@@ -180,7 +180,7 @@ const PersonalCard = ({
         <div className="relative mx-auto w-28 rounded-full">
           <span className="absolute right-0 m-3 h-3 w-3 rounded-full bg-green-500 ring-2 ring-green-300 ring-offset-2"></span>
           <img
-            className="mx-auto h-auto w-full rounded-full"
+            className="mx-auto h-auto w-full rounded-full border border-neutral-500"
             src={imageUrl}
             alt=""
           />
@@ -218,14 +218,14 @@ const PersonalCard = ({
         {selected && buttons && (
           <div className="flex justify-between mt-3">
             <Button
-              className="border border-purple-500 text-purple-500 px-4 py-2 rounded"
+              className="border px-4 py-2 rounded"
               onClick={buttons.right.onClick}
               {...buttons.right}
             >
               {buttons.right.label}
             </Button>
             <Button
-              className="bg-purple-500 text-white px-4 py-2 rounded"
+              className="text-white px-4 py-2 rounded"
               onClick={buttons.left.onClick}
               {...buttons.left}
             >

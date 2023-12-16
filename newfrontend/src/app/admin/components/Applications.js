@@ -232,7 +232,7 @@ const Application = () => {
 
           <div className={`prof h-400  ${selected? 'min-w-[0px]' : 'w-[0px]'} overflow-hidden w-2/6 rounded-xl`}>
             <PersonalCard
-              imageUrl="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
+              imageUrl="/doc.png"
               name={selected?.name}
               title="Marketing Exec. at Denva Corp"
               description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto, placeat!"

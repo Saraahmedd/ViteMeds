@@ -64,11 +64,11 @@ module.exports = {
             DEFAULT: "#1f2937", // gray-800
           },
           content: {
-            subtle: "#4b5563", // gray-600
-            DEFAULT: "#6b7280", // gray-500
-            emphasis: "#e5e7eb", // gray-200
+            subtle: "#fff", // gray-600
+            DEFAULT: "#fff", // gray-500
+            emphasis: "#fff", // gray-200
             strong: "#f9fafb", // gray-50
-            inverted: "#000000", // black
+            inverted: "#fff", // black
           },
         },
       },

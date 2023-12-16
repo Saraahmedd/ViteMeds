@@ -47,7 +47,7 @@ const fields = [
 ];
 const badgeColumns = ["status"];
 const buttons = [
-  { size: "xs", variant: "secondary", color: "purple", label: "See details" },
+  { size: "xs", variant: "secondary", label: "See details" },
 ];
 function SalesReport() {
   const formatDate = (dateString) => {
@@ -138,7 +138,6 @@ function SalesReport() {
               {
                 size: "xs",
                 variant: "secondary",
-                color: "purple",
                 label: "See details",
                 function: (id) => handleViewDetails(id),
               },
