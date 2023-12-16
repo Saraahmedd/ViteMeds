@@ -35,13 +35,13 @@ const PharmacyLandingPage = () => {
   return (
     <>
       <div className="min-h-screen flex flex-col justify-center items-center ">
-        <div className="max-w-screen-xl m-0 sm:m-10 shadow sm:rounded-lg flex flex-col lg:flex-row gap-x-4">
+        <div className="m-0 sm:m-10 shadow sm:rounded-lg flex flex-col lg:flex-row gap-x-4">
           <div className="lg:w-full xl:w-full p-6 sm:p-12 transform scale-70">
            
             <Grid numItems={4} className="gap-x-3 gap-y-4">
                 <Col numColSpan={2}  className="flex items-center">
             
-              <div className="w-full flex-1 mt-8">
+              <div className="w-full justify-center items-center flex-1 mt-8">
               <h1 className="text-4xl xl:text-5xl font-extrabold text-left tracking-wide leading-relaxed mb-5 mt-5">The Best Pharmacy For You and Your Family</h1>
                 <div className="mx-auto max-w-l">
                   <h2 className="text-left text-2xl leading-relaxed mb-8">
@@ -63,7 +63,7 @@ const PharmacyLandingPage = () => {
 
               <Col numColSpan={2} >
               <div className="lg:w-1/3 xl:w-1/3 h-full">
-            <Lottie animationData={landinganim} className="w-[550px] h-[550px]" loop={true} />
+            <Lottie animationData={landinganim} className="w-[650px] h-[650px]" loop={true} />
           </div>
               </Col>
 
@@ -105,7 +105,7 @@ const PharmacyLandingPage = () => {
       </div>
       
 
-      <div className="mb-8 flex items-center justify-center flex-col">
+      <div className="mb-8 mt-5 flex items-center justify-center flex-col">
         <Image src="/clients.svg" height={40} width={40} alt="Clients" />
         <NumberCounter end={30000} duration={2500} />
         <h2 className="text-xl  font-extrabold leading-relaxed mb-2">Satisfied Customers</h2>
@@ -225,7 +225,7 @@ const PharmacyLandingPage = () => {
 
         <div className="w-full md:w-1/3 p-4 pt-0">
           <div className="flex flex-col items-center rounded-lg hover:scale-105 border border-blue-500 shadow-md hover:bg-[#1e2638]">
-            <Image src='/person8.png' height={160} width={160} className='mx-auto my-5'/>
+            <Image src='/person8.png' height={200} width={192} className='mx-auto my-5'/>
             <div className="p-4">
             <h5 className="text-xl font-bold text-blue-500 mb-2 text-center">David Johnson</h5>
               <p className="text-gray-100 mb-3">"Ordering my medications online has never been easier. The website is user-friendly, and the ordering process is straightforward. Plus, the delivery is quick, making it a convenient option for anyone with a busy schedule. I appreciate the efficiency and simplicity."</p>
