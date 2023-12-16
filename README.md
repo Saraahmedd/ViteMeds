@@ -1,4 +1,4 @@
-![image-1](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/6aecb5ea-a0f8-4482-b900-b64e198c6825)![Logo](https://flowbite.com/docs/images/logo.svg)
+![Logo](https://flowbite.com/docs/images/logo.svg)
 
 # Vite Meds
 
