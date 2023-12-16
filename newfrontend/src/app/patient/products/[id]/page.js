@@ -440,7 +440,7 @@ export default function SingleProduct() {
                     <p>
                       {canEdit && (
                         <>
-                          <strong>Sales: </strong> {medicine.sales}
+                          <strong>Sales: </strong> {medicine?.sales}
                         </>
                       )}
                     </p>
