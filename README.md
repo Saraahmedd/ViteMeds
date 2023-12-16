@@ -1,4 +1,4 @@
-![Logo](https://flowbite.com/docs/images/logo.svg)
+![image-1](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/6aecb5ea-a0f8-4482-b900-b64e198c6825)![Logo](https://flowbite.com/docs/images/logo.svg)
 
 # Vite Meds
 
@@ -37,17 +37,38 @@ The development team is utilizing GitHub for version control anlong with the Git
 
 ## Screenshots
 
-![Admin Dashboard](screenshots/image.png)
-![Admin Sales Report](screenshots/image-1.png)
-![Admin Medicines Page](screenshots/image-10.png)
-![Patient Profile Page](screenshots/image-2.png)
-![Patient Medicines Page](screenshots/image-4.png)
-![Patient Cart](screenshots/image-5.png)
-![Patient Checkout](screenshots/image-6.png)
-![Patient Checkout - Add Address](screenshots/image-7.png)
-![Patient View Order Details](screenshots/image-8.png)
-![Patient Cancel Order Warning](screenshots/image-9.png)
-![Pharmacist Profile Page](screenshots/image-11.png)
+#### Admin Dashboard
+![image](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/7829edb3-e871-4206-9fa2-d340c27c2d9e)
+
+#### Admin Sales Report
+![image-1](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/4c10f7ee-0639-4698-9f06-bb7105a0f92e)
+
+#### Admin Medicines Page
+![image-10](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/35962b75-b272-4463-92e2-9f54c3b7b115)
+
+#### Patient Profile Page
+![image-2](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/f51d3fc9-9ee4-4d9a-b2d1-5e4c88df9073)
+
+#### Patient Medicines Page
+![image-4](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/b172edc8-0f26-4fe5-b6b1-b384ab17b54b)
+
+#### Patient Cart
+![image-5](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/bf137795-9b91-468a-8c93-c6c98697aaea)
+
+####Patient Checkout
+![image-6](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/48f02aba-04a7-41ad-a574-1ba82b2ce0e6)
+
+####Patient Checkout - Add Address
+![image-7](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/c9b4867f-a50b-4961-aad9-83b9dde9546f)
+
+####Patient View Order Details
+![image-8](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/54ba68f9-6129-43d5-a482-bb6c36238440)
+
+####Patient Cancel Order Warning
+![image-9](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/ec31e941-d7ff-4085-8ae1-b73df80d8b3d)
+
+####Pharmacist Profile Page
+![image-11](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/c88acc71-c2e4-487a-8763-9fdb1068a965)
 
 ## Tech/Framework Used
 
