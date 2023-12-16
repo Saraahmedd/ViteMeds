@@ -20,6 +20,7 @@ function ProductCard({
     transform: "scale(1)",
   });
   // console.log(stock);
+  if (name == "Test22") console.log(image);
 
   const handleMouseMove = (e) => {
     const { left, top, width, height } =
@@ -53,7 +54,9 @@ function ProductCard({
   }, [initialQuantity]);
   const [stkError, setStkError] = useState(false);
   const handleAddClick = (e) => {
+    if (quantity == 0) return;
     setBtnClicked(true);
+    console.log("clickedmeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
     if (!prescriptionRequired) {
       setQuantity((q) => {
         const canUpdate = stock >= q + 1;
@@ -125,7 +128,7 @@ function ProductCard({
           <div
             className="w-100 h-[9rem] my-auto"
             style={{
-              backgroundImage: `url(${image})`,
+              backgroundImage: `url("${image}")`,
               backgroundSize: "contain",
               backgroundPosition: "50%",
               backgroundRepeat: "no-repeat",
@@ -156,6 +159,8 @@ function ProductCard({
                 onClick={(e) => {
                   e.stopPropagation();
                   if (stock <= 0) return;
+
+                  console.log("hereeeeeeeeeeeeeeeeeeee?????????????????");
                   if (quantity === 0) {
                     setBtnClicked(true);
                     setQuantity(1);
