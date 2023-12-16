@@ -468,7 +468,9 @@ const ChangePassword = () => {
 };
 
 export default ChangePassword;
-```## Installation
+```
+
+## Installation
 
 #### Install with npm
 
