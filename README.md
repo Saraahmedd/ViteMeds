@@ -96,7 +96,10 @@ The development team is utilizing GitHub for version control anlong with the Git
 - [MailJet](https://www.mailjet.com/)
 - [Github](https://github.com/)
 - [Postman](https://www.postman.com/)
-- [Axios](https://www.axios.com/)## Features
+- [Axios](https://www.axios.com/)
+
+
+## Features
 
 ### Guest Users
 
