@@ -561,6 +561,12 @@ export default ChangePassword;
 ## API References
 
 <details>
+<summary>Webhooks</summary>
+- **POST /webhook**
+  Handles Stripe webhook events.
+</details>
+
+<details>
 <summary>User Routes</summary>
 
 - **POST /api/v1/user/signup**
@@ -781,6 +787,7 @@ Contribution guidelines highlighting areas for improvement such as:
 - Using Mailjet templates for email communications.
 - Optimizing heavy endpoints with NoSQL queries instead of manual looping.
 - When a new cart is created, a lock should be aquired.
+- improve redirect-speed
 
 ## Credits
 
