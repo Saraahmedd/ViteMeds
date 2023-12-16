@@ -5,9 +5,7 @@ import ProfilePicture from "@/components/ProfilePicture";
 import Image from "next/image";
 import { useState } from "react";
 import { useEffect } from "react";
-import {
-  viewMyDetails,
-} from "@/app/redux/actions/patientActions";
+import { viewMyDetails } from "@/app/redux/actions/patientActions";
 import { cancelOrder, viewOrderList } from "@/app/redux/actions/orderActions";
 import { useDispatch, useSelector } from "react-redux";
 import ChangePassword from "@/components/ChangePassword";
@@ -21,18 +19,31 @@ import { cancelOrderReducer } from "@/app/redux/reducers/orderReducer";
 import { translateDate } from "@/util";
 import { ProductImage } from "@/components/ProductImage";
 
-
-
 // EXAMPLE USAGE
 
-const columns = ["Order ID", "Status", "Payment Method", "Total Price", "Created At", "Is Paid", ""];
-const fields = ["_id", "status", "paymentMethod", "totalPrice", "createdAt", "isPaid", "detailsButton"];
+const columns = [
+  "Order ID",
+  "Status",
+  "Payment Method",
+  "Total Price",
+  "Created At",
+  "Is Paid",
+  "",
+];
+const fields = [
+  "_id",
+  "status",
+  "paymentMethod",
+  "totalPrice",
+  "createdAt",
+  "isPaid",
+  "detailsButton",
+];
 const badgeColumns = ["status"];
-const boolean = false
+const boolean = false;
 const columns2 = ["Street", "City", "State", "Zip Code", "Country"];
 const fields2 = ["streetAddress", "city", "state", "zipCode", "country"];
 function Profile() {
-
   const formatDate = (dateString) => {
     const options = {
       weekday: "long",
@@ -58,10 +69,7 @@ function Profile() {
     (state) => state.viewMyDetailsReducer.patient?.patient
   );
 
-  const orders = useSelector(
-    (state) => state.viewOrderListReducer.orders
-  );
-
+  const orders = useSelector((state) => state.viewOrderListReducer.orders);
 
   const [open, setOpen] = useState(false);
 
@@ -84,7 +92,8 @@ function Profile() {
 
     setValidationErrors({
       ...validationErrors,
-      [e.target.name]: e.target.value.trim() === "" ? `${e.target.name} is required` : "",
+      [e.target.name]:
+        e.target.value.trim() === "" ? `${e.target.name} is required` : "",
     });
     // console.log(validationErrors);
   };
@@ -100,7 +109,6 @@ function Profile() {
     success: cancelOrderSuccess,
     error: cancelOrderError,
   } = useSelector((state) => state.cancelOrderReducer);
-
 
   const [selectedTab, setSelectedTab] = useState("Orders");
   const handleTabClick = (tab) => {
@@ -171,18 +179,15 @@ function Profile() {
         setModalOpen(!isModalOpen);
       }, 2000);
     }
-  }
-
-
+  };
 
   const [selectedOrder, setSelectedOrder] = useState(null);
-
 
   const [disable, setDisabled] = useState(false);
 
   const onConfirm = () => {
     setDisabled(true);
-    dispatch(cancelOrder(cancelId))
+    dispatch(cancelOrder(cancelId));
     // console.log("success is :", cancelOrderSuccess);
     setShow(true);
     setTimeout(() => {
@@ -192,42 +197,33 @@ function Profile() {
       setDisabled(!disable);
       setOpen(!open);
     }, 1000);
-  }
-
+  };
 
   const [cancelId, setCancelId] = useState(null);
 
   const handleCancel = (id) => {
     setOpen(true);
     setCancelId(id);
-  }
-
-
+  };
 
   const [visibleFeedback, setVisibleFeedback] = useState(false);
 
   const [orderModal, setOrderModal] = useState(false);
 
-
   const onCancel = () => {
     setOpen(!open);
-  }
+  };
 
   const handleSelectOrder = (order) => {
     setSelectedOrder(order);
     // console.log(order);
     // console.log(order.medicines[0].medicine.name);
     setOrderModal(true);
-  }
-
-
+  };
 
   return (
     <div className="h-full overflow-hidden pl-10">
-      <main
-        id="dashboard-main"
-        className=" overflow-auto px-4 py-10"
-      >
+      <main id="dashboard-main" className=" overflow-auto px-4 py-10">
         <div className="flex flex-wrap gap-x-4 gap-y-8">
           <div>
             <ProfilePicture
@@ -246,31 +242,46 @@ function Profile() {
 
         <div numItems={3} className="flex flex-row gap-2">
           <Card>
-            <h1 className="text-xl font-bold text-white-200">Personal Information</h1>
+            <h1 className="text-xl font-bold text-white-200">
+              Personal Information
+            </h1>
             <div className="flex mt-[2rem]">
-              <Image src="/user.svg" height={25} width={25}></Image> <p className="ml-3 text-lg">{patient?.name}</p>
+              <Image src="/user.svg" height={25} width={25}></Image>{" "}
+              <p className="ml-3 text-lg">{patient?.name}</p>
             </div>
             <div className="flex mt-5">
-              <Image src="/email.svg" height={25} width={25}></Image> <p className="ml-3 text-lg">{patient?.email}</p>
+              <Image src="/email.svg" height={25} width={25}></Image>{" "}
+              <p className="ml-3 text-lg">{patient?.email}</p>
             </div>
             <div className="flex mt-5">
-              <Image src="/birthday.svg" height={25} width={25}></Image> <p className="ml-3 text-lg">{translateDate(new Date(patient?.dateOfBirth))[0]}</p>
+              <Image src="/birthday.svg" height={25} width={25}></Image>{" "}
+              <p className="ml-3 text-lg">
+                {translateDate(new Date(patient?.dateOfBirth))[0]}
+              </p>
             </div>
             <div className="flex mt-5">
-              <Image src="/mobile.svg" height={25} width={25}></Image> <p className="ml-3 text-lg">0{patient?.mobileNumber}</p>
+              <Image src="/mobile.svg" height={25} width={25}></Image>{" "}
+              <p className="ml-3 text-lg">{patient?.mobileNumber}</p>
             </div>
             <div className="flex mt-5">
-              <Image src="/wallet.svg" height={25} width={25}></Image> <p className="ml-3 text-lg">{patient?.user.wallet} USD</p>
+              <Image src="/wallet.svg" height={25} width={25}></Image>{" "}
+              <p className="ml-3 text-lg">{patient?.user.wallet} USD</p>
             </div>
           </Card>
           <Card>
-            <h1 className="text-xl font-bold text-white-200">Emergency Contact</h1>
+            <h1 className="text-xl font-bold text-white-200">
+              Emergency Contact
+            </h1>
             <div className="flex mt-5">
-              <Image src="/user.svg" height={25} width={25}></Image> <p className="ml-3 text-lg">{patient?.emergencyContact.fullName}</p>
+              <Image src="/user.svg" height={25} width={25}></Image>{" "}
+              <p className="ml-3 text-lg">
+                {patient?.emergencyContact.fullName}
+              </p>
             </div>
             <div className="flex mt-5">
               <Image src="/mobile.svg" height={25} width={25} />
-              <p className="ml-3 text-lg">0{patient?.emergencyContact.mobileNumber}
+              <p className="ml-3 text-lg">
+                0{patient?.emergencyContact.mobileNumber}
               </p>
             </div>
           </Card>
@@ -278,7 +289,6 @@ function Profile() {
             <ChangePassword />
           </div>
         </div>
-
 
         <Grid className="mt-2">
           <div className="w-3/5">
@@ -288,10 +298,11 @@ function Profile() {
                   <a
                     role="button"
                     onClick={() => handleTabClick("Orders")}
-                    className={`inline-block p-4 ${selectedTab === "Orders"
-                      ? "text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
-                      : "rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
-                      }`}
+                    className={`inline-block p-4 ${
+                      selectedTab === "Orders"
+                        ? "text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
+                        : "rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+                    }`}
                   >
                     My Orders
                   </a>
@@ -300,10 +311,11 @@ function Profile() {
                   <a
                     role="button"
                     onClick={() => handleTabClick("Addresses")}
-                    className={`inline-block p-4 ${selectedTab === "Addresses"
-                      ? "text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
-                      : "rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
-                      }`}
+                    className={`inline-block p-4 ${
+                      selectedTab === "Addresses"
+                        ? "text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
+                        : "rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+                    }`}
                   >
                     My Addresses
                   </a>
@@ -312,7 +324,6 @@ function Profile() {
             </div>
           </div>
           <div>
-
             {/* Main modal */}
             {isModalOpen && (
               <Modal visible={isModalOpen} setVisible={setModalOpen}>
@@ -431,12 +442,9 @@ function Profile() {
                         </svg>
                       )}
                     >
-                      <span className="text-white">
-                        Add New Address
-                      </span>
+                      <span className="text-white">Add New Address</span>
                     </Button>
                   </form>
-                 
                 </div>
               </Modal>
             )}
@@ -480,7 +488,6 @@ function Profile() {
                 No, cancel
               </Button>
             </div>
-
           </Modal>
 
           <Modal visible={orderModal} setVisible={setOrderModal}>
@@ -488,11 +495,15 @@ function Profile() {
               <div className="mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-center">
                   <div>
-                    <h1 className="text-2xl font-semibold text-white-900">Your Order</h1>
+                    <h1 className="text-2xl font-semibold text-white-900">
+                      Your Order
+                    </h1>
                   </div>
                 </div>
                 <div>
-                  <h4 className="my-3 flex items-center justify-center text-md text-white-400">Order ID : {selectedOrder?._id}</h4>
+                  <h4 className="my-3 flex items-center justify-center text-md text-white-400">
+                    Order ID : {selectedOrder?._id}
+                  </h4>
                 </div>
 
                 <div className="mb-5 mx-auto  max-w-md md:mt-12">
@@ -500,15 +511,26 @@ function Profile() {
                     <div className="flow-root">
                       <ul className="">
                         {selectedOrder?.medicines?.map((medicine) => (
-                          <li className="flex flex-col space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0 " key={medicine?._id}>
+                          <li
+                            className="flex flex-col space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0 "
+                            key={medicine?._id}
+                          >
                             <div className="relative flex flex-1 flex-col justify-between">
                               <div className="sm:grid sm:grid-cols-2 my-2">
                                 <div className="">
-                                  <p className="text-base font-semibold text-white-900">{medicine?.medicine?.name}</p>
+                                  <p className="text-base font-semibold text-white-900">
+                                    {medicine?.medicine?.name}
+                                  </p>
                                 </div>
 
                                 <p className="font-semibold text-white-900 sm:order-2 sm:text-right">
-                                  {medicine?.quantity * medicine?.medicine?.price} USD <span className="ml-1 text-xs text-gray-400">({medicine?.quantity} x {medicine?.medicine?.price} USD)</span>
+                                  {medicine?.quantity *
+                                    medicine?.medicine?.price}{" "}
+                                  USD{" "}
+                                  <span className="ml-1 text-xs text-gray-400">
+                                    ({medicine?.quantity} x{" "}
+                                    {medicine?.medicine?.price} USD)
+                                  </span>
                                 </p>
                               </div>
                             </div>
@@ -518,17 +540,30 @@ function Profile() {
                     </div>
 
                     <div className="mt-2 space-y-3 border-t border-b py-4">
-                      <h4 className="my-3 text-xl font-semibold text-white-600">Delivery Address</h4>
-                      <h1>{selectedOrder?.deliveryAddress?.streetAddress}, {selectedOrder?.deliveryAddress?.state}, {selectedOrder?.deliveryAddress?.city} {selectedOrder?.deliveryAddress?.zipCode}, {selectedOrder?.deliveryAddress?.country}</h1>
+                      <h4 className="my-3 text-xl font-semibold text-white-600">
+                        Delivery Address
+                      </h4>
+                      <h1>
+                        {selectedOrder?.deliveryAddress?.streetAddress},{" "}
+                        {selectedOrder?.deliveryAddress?.state},{" "}
+                        {selectedOrder?.deliveryAddress?.city}{" "}
+                        {selectedOrder?.deliveryAddress?.zipCode},{" "}
+                        {selectedOrder?.deliveryAddress?.country}
+                      </h1>
                     </div>
                     <div className="mt-6 flex items-center justify-between">
-                      <p className="text-sm font-semibold text-white-900">Total Price</p>
-                      <p className="text-2xl font-semibold text-white-900"><span className="text-xs font-normal text-white-400">USD</span> {selectedOrder?.totalPrice}</p>
+                      <p className="text-sm font-semibold text-white-900">
+                        Total Price
+                      </p>
+                      <p className="text-2xl font-semibold text-white-900">
+                        <span className="text-xs font-normal text-white-400">
+                          USD
+                        </span>{" "}
+                        {selectedOrder?.totalPrice}
+                      </p>
                     </div>
 
-                    <div className="mt-6 text-center">
-
-                    </div>
+                    <div className="mt-6 text-center"></div>
                   </div>
                 </div>
               </div>
@@ -552,23 +587,23 @@ function Profile() {
               setVisible={setVisibleFeedback}
             />
           )}
- {addAddressSuccess && show && (
-                    <BottomCallout
-                      message="Adding Address was successful"
-                      variant="success"
-                      visible={true}
-                      setVisible={setVisibleFeedback}
-                    />
-                  )}
+          {addAddressSuccess && show && (
+            <BottomCallout
+              message="Adding Address was successful"
+              variant="success"
+              visible={true}
+              setVisible={setVisibleFeedback}
+            />
+          )}
 
-                  {addAddressError && show && (
-                    <BottomCallout
-                      message="There was an error adding your new address"
-                      variant="error"
-                      visible={true}
-                      setVisible={setVisibleFeedback}
-                    />
-                  )}
+          {addAddressError && show && (
+            <BottomCallout
+              message="There was an error adding your new address"
+              variant="error"
+              visible={true}
+              setVisible={setVisibleFeedback}
+            />
+          )}
           {selectedTab == "Orders" && orders ? (
             <TableComponent
               title="My Orders"
@@ -604,50 +639,48 @@ function Profile() {
                       </Button>
                     )}
                   </>
-
                 ),
               }))}
               badgeColumns={badgeColumns}
-            />) : (
-            null
-          )
-          }
+            />
+          ) : null}
 
           {selectedTab === "Addresses" && patient ? (
             <TableComponent
               title="My Addresses"
               columns={columns2}
               fields={fields2}
-              rows={
-                patient?.user.deliveryAddress
-                  .map((address) => ({
-                    streetAddress: address.streetAddress,
-                    city: address.city,
-                    state: address.state,
-                    zipCode: address.zipCode,
-                    country: address.country,
-                  }))
-              }
+              rows={patient?.user.deliveryAddress.map((address) => ({
+                streetAddress: address.streetAddress,
+                city: address.city,
+                state: address.state,
+                zipCode: address.zipCode,
+                country: address.country,
+              }))}
               badgeColumns={badgeColumns}
             >
               <div className="ml-[1rem]">
                 {selectedTab === "Addresses" ? (
                   <div role="button" onClick={handleToggleModal}>
                     <span className="">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                        <path fillRule="evenodd" d="M12 5.25a.75.75 0 01.75.75v5.25H18a.75.75 0 010 1.5h-5.25V18a.75.75 0 01-1.5 0v-5.25H6a.75.75 0 010-1.5h5.25V6a.75.75 0 01.75-.75z" clipRule="evenodd" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        className="w-6 h-6"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M12 5.25a.75.75 0 01.75.75v5.25H18a.75.75 0 010 1.5h-5.25V18a.75.75 0 01-1.5 0v-5.25H6a.75.75 0 010-1.5h5.25V6a.75.75 0 01.75-.75z"
+                          clipRule="evenodd"
+                        />
                       </svg>
                     </span>
                   </div>
-                ) : (
-                  null
-                )}
+                ) : null}
               </div>
             </TableComponent>
-          ) : (
-            null
-          )}
-
+          ) : null}
         </Grid>
       </main>
     </div>

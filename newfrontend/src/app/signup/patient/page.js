@@ -41,7 +41,7 @@ const Signup = () => {
     const confirmPassword = e.target.value;
     setPasswordMatch(
       formData.password === confirmPassword ||
-      formData.passwordConfirm === confirmPassword
+        formData.passwordConfirm === confirmPassword
     );
     handleInputChange(e);
   };
@@ -131,7 +131,7 @@ const Signup = () => {
         {registerError && (
           // Show success message for registration
           <BottomCallout
-            message="Please fill in the required fields correctly"
+            message={registerError}
             variant="error"
             visible={errorCallout}
             setVisible={setErrorCallout}
@@ -179,8 +179,8 @@ const Signup = () => {
                 errorMessage={
                   formData.email !== ""
                     ? !validateEmail(formData.email) &&
-                    formData.email !== "" &&
-                    "Please enter a valid email"
+                      formData.email !== "" &&
+                      "Please enter a valid email"
                     : registerError && "Please fill in this field"
                 }
               />
@@ -200,8 +200,8 @@ const Signup = () => {
                 errorMessage={
                   formData.password !== ""
                     ? !validatePassword(formData.password) &&
-                    formData.password !== "" &&
-                    "Password must be at least 8 characters with 1 uppercase, 1 lowercase and 1 number"
+                      formData.password !== "" &&
+                      "Password must be at least 8 characters with 1 uppercase, 1 lowercase and 1 number"
                     : registerError && "Please fill in this field"
                 }
                 onChange={handleInputChange}
@@ -223,8 +223,8 @@ const Signup = () => {
                 errorMessage={
                   formData !== ""
                     ? !passwordMatch &&
-                    formData.passwordConfirm !== "" &&
-                    "Passwords do not match"
+                      formData.passwordConfirm !== "" &&
+                      "Passwords do not match"
                     : registerError && "Please fill in this field"
                 }
                 onChange={handlePasswordConfirmChange}
@@ -272,8 +272,8 @@ const Signup = () => {
                 errorMessage={
                   formData.mobileNumber !== ""
                     ? formData.mobileNumber &&
-                    !validatePhoneNumber(formData.mobileNumber) &&
-                    "Please enter 11 digits sarting by a zero"
+                      !validatePhoneNumber(formData.mobileNumber) &&
+                      "Please enter 11 digits sarting by a zero"
                     : registerError && "Please fill in this field"
                 }
               />
@@ -288,8 +288,9 @@ const Signup = () => {
                       target: { name: "gender", value: "male" },
                     })
                   }
-                  className={`flex items-center justify-center flex-1 h-full text-center ${formData.gender === "male" ? "bg-blue-800" : "bg-gray-800"
-                    }`}
+                  className={`flex items-center justify-center flex-1 h-full text-center ${
+                    formData.gender === "male" ? "bg-blue-800" : "bg-gray-800"
+                  }`}
                 >
                   <span className="my-auto text-2xl">♂</span>
                 </div>
@@ -300,8 +301,9 @@ const Signup = () => {
                       target: { name: "gender", value: "female" },
                     })
                   }
-                  className={`flex items-center justify-center flex-1 h-full text-center ${formData.gender !== "male" ? "bg-pink-500" : "bg-gray-800"
-                    }`}
+                  className={`flex items-center justify-center flex-1 h-full text-center ${
+                    formData.gender !== "male" ? "bg-pink-500" : "bg-gray-800"
+                  }`}
                 >
                   <span className="my-auto text-2xl">♀</span>
                 </div>
@@ -371,8 +373,8 @@ const Signup = () => {
                 errorMessage={
                   formData.eNumber !== ""
                     ? formData.eNumber &&
-                    !validatePhoneNumber(formData.eNumber) &&
-                    "Please enter 11 digits sarting by a zero"
+                      !validatePhoneNumber(formData.eNumber) &&
+                      "Please enter 11 digits sarting by a zero"
                     : registerError && "Please fill in this field"
                 }
               />
