@@ -49,8 +49,6 @@ The development team is utilizing GitHub for version control anlong with the Git
 ![Patient Cancel Order Warning](screenshots/image-9.png)
 ![Pharmacist Profile Page](screenshots/image-11.png)
 
-(Include a few screenshots or a video link showcasing the system.)
-
 ## Tech/Framework Used
 
 ![Mongo DB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)![Expree.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![Node.JS](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white) ![Redux](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white) ![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) ![Stripe](https://img.shields.io/badge/Stripe-626CD9?style=for-the-badge&logo=Stripe&logoColor=white) ![VS code](https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
@@ -105,8 +103,6 @@ The development team is utilizing GitHub for version control anlong with the Git
 - **Application Review**: Admins play a crucial role in reviewing pharmacist applications, maintaining the quality and professionalism of the ViteMeds team.
 - **Product Oversight**: Admins can view and monitor pharmacy medicines, although with limited product details compared to pharmacists.
 - **Sales Analysis**: Access to sales reports and order summaries equips admins with critical data for strategic decision-making and operational insights.
-
-##
 
 **User Guide for Navigating the Platform:**
 Each user role on ViteMeds - Guest, Patient, Pharmacist, and Admin - has tailored features and functionalities designed to provide a seamless and efficient experience on the platform. Whether it's for healthcare needs, professional management, or administrative oversight, ViteMeds caters to a wide spectrum of user requirements with ease and precision.
