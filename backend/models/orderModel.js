@@ -76,7 +76,7 @@ orderSchema.post("save", async function(doc) {
 
       if (medicine) {
         console.log(medicine.quantity);
-        // medicine.quantity -= orderItem.quantity;
+        medicine.quantity -= orderItem.quantity;
         medicine.sales += orderItem.quantity * medicine.price;
         await medicine.save();
 
