@@ -7,7 +7,7 @@ import { fetchData } from "../redux/getMe";
 import { FaComment } from "react-icons/fa";
 import { useState } from "react";
 import ChatPanel from "@/components/chatModal";
-import { initSocket } from "../redux/actions/socketActions";
+import { CrossinitSocket, initSocket } from "../redux/actions/socketActions";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function DashboardLayout({ children }) {
@@ -20,6 +20,7 @@ export default function DashboardLayout({ children }) {
     setShowChatPanel(true);
 
     dispatch(initSocket());
+    dispatch(CrossinitSocket());
   };
 
   const handleCloseChatPanel = () => {

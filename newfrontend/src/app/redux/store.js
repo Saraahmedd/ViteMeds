@@ -53,6 +53,7 @@ import {
 import { getTotalSalesReducer } from "./reducers/orderReducer";
 
 import { socketReducer } from "./reducers/socketReducer";
+import { crossSocketReducer } from "./reducers/socketReducer";
 
 const store = configureStore({
   reducer: {
@@ -93,6 +94,7 @@ const store = configureStore({
     updateNotificationReducer,
     socketReducer,
     getTotalSalesReducer,
+    crossSocketReducer,
     autoClearSuccessReducer,
   },
 });

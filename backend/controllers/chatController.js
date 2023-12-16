@@ -34,3 +34,23 @@ exports.getChatHistory = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+exports.crossSendMessage = async (req, res) => {
+  const { content, sender } = req.body;
+
+  console.log(content);
+
+  try {
+    const newMessage = new Message({ content, sender });
+    req.io2.emit("crossnewMessage", newMessage);
+
+    await newMessage.save();
+
+    // Emit the new message through sockets
+
+    res.status(201).json({ message: "Message sent successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
