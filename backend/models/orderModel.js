@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 const Medicine = require("./medicineModel");
 const User = require("./userModel");
+const Email = require("../utils/email");
 const Notification = require("./notifiicationModel");
+const PharmacistModel = require("./pharmacistModel");
 
 const orderSchema = new mongoose.Schema({
   medicines: [
@@ -93,9 +95,9 @@ orderSchema.post("save", async function(doc) {
               text: notificationText,
               user: user._id, // Associate the notification with the current user
             });
-
+            const pharm = await PharmacistModel.findOne({ user: user._id });
             await newNotification.save();
-            sendEmails(medicine, user);
+            sendEmails(medicine.name, pharm);
           }
         }
       }
@@ -116,9 +118,7 @@ orderSchema.post("save", async function(doc) {
 const sendEmails = async (medicine, user) => {
   try {
     await new Email(user).sendMedOutfStock(medicine);
-  } catch (err) {
-    console.log(err);
-  }
+  } catch (err) {}
 };
 
 const Order = mongoose.model("Order", orderSchema);

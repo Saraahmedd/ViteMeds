@@ -77,8 +77,8 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     client_reference_id: user._id.toString(),
     line_items: lineItems,
     mode: "payment",
-    success_url: `http://localhost:3000/patients/medicines`, // Adjust success and cancel URLs
-    cancel_url: `http://localhost:3000/patients/profile`, // Adjust success and cancel URLs
+    success_url: `http://localhost:3001/patient/profile`, // Adjust success and cancel URLs
+    cancel_url: `http://localhost:3001/patient/profile`, // Adjust success and cancel URLs
     // customer_email: "abdullahhatem87@yahoo.com",
     metadata: {
       deliveryAddress:
@@ -137,7 +137,7 @@ exports.webhookCheckout = async (req, res, next) => {
   if (event.type === "checkout.session.completed") {
     console.log("here");
     createOrderCheckout(event.data.object);
-    console.log(event);
+    // console.log(event);
 
     res.status(200).json({ received: true });
   }

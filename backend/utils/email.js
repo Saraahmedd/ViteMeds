@@ -75,14 +75,14 @@ module.exports = class Email {
           TextPart:
             template == "passwordReset"
               ? "Your OTP is: " + this.OTP
-              : "This " + medicine + "is out of stock",
+              : "This " + this.medicine + " is out of stock",
           // HTMLPart:
           //   '<h3>Dear passenger 1, welcome to <a href="https://www.mailjet.com/">Mailjet</a>!</h3><br />May the delivery force be with you!',
         },
       ],
     });
     request.then(() => {
-      console.log(request);
+      // console.log(request);
     });
   }
 
@@ -90,7 +90,9 @@ module.exports = class Email {
     await this.send("welcome", "Welcome to elha2ny!");
   }
   async sendMedOutfStock(medicine) {
+    console.log(this.email);
     this.medicine = medicine;
+
     await this.send("medicineOutOfStock", "Medicine out of stock alert!");
   }
 
