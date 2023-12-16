@@ -82,7 +82,7 @@ export default function Sidebar() {
   };
 
   const renderMenuItems = (items) => {
-    return items.map((item, index) => (
+    return items?.map((item, index) => (
       <li key={index}>
         <a
           href={item.href}

@@ -6,6 +6,7 @@ import {
   getMedicineAlternativeAction,
   getMedicineById,
 } from "@/app/redux/actions/medicineActions";
+import { BottomCallout } from "@/components/BottomCallout";
 import { EditButton } from "@/components/EditButton";
 import { FileUpload } from "@/components/FileUpload";
 import { Modal } from "@/components/Modal";
@@ -31,6 +32,7 @@ export default function SingleProduct() {
   const dispatch = useDispatch();
   const [newFile, setNewFile] = useState({});
   const [newPrice, setNewPrice] = useState("");
+  const [stkError, setStkError] = useState(false);
   const medicine = useSelector(
     (state) => state.getMedicineByIdReducer.medicine?.data
   );
@@ -131,6 +133,13 @@ export default function SingleProduct() {
 
   return (
     <>
+      {stkError && (
+        <BottomCallout
+          message="We have no more of this item"
+          visible={stkError}
+          setVisible={setStkError}
+        />
+      )}
       <Modal
         visible={editIngredientsModal}
         setVisible={setEditIngredientsModal}
@@ -414,7 +423,8 @@ export default function SingleProduct() {
                     </Button>
                   )}
                 {(getMedicineNumberInCart(medicine) > 0 ||
-                  (canEdit && medicine?.quantity > 0)) && (
+                  canEdit ||
+                  medicine?.quantity > 0) && (
                   <>
                     <div className="flex flex-row items-center mt-4">
                       <p className="font-bold text-lg me-2">
@@ -453,8 +463,15 @@ export default function SingleProduct() {
 
                         <div
                           onClick={(e) => {
-                            handleCartClick(e, id, quantityCart + 1);
-                            setQuantityCart((q) => q + 1);
+                            setQuantityCart((q) => {
+                              const canUpdate = medicine?.quantity >= q + 1;
+                              if (!canUpdate) {
+                                setStkError(true);
+                                return q;
+                              }
+                              handleCartClick(e, id, quantityCart + 1);
+                              return q + 1;
+                            });
                           }}
                           role="button"
                           className="flex items-center justify-center text-2xl rounded-md border h-10 w-10 ml-3 hover:bg-white hover:text-black"
@@ -485,26 +502,7 @@ export default function SingleProduct() {
                         <span className="text-white px-2">View Cart</span>
                       </Button>
                     )}
-                    {!canEdit && !isAdmin && (
-                      <Button
-                        variant="secondary"
-                        className="mt-4 ml-2"
-                        icon={function () {
-                          return (
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              fill="white"
-                              className="w-4 h-4"
-                            >
-                              <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
-                            </svg>
-                          );
-                        }}
-                      >
-                        <span className="text-white px-2">Checkout</span>
-                      </Button>
-                    )}
+                    {!canEdit && !isAdmin && <> </>}
                   </>
                 )}
                 {canEdit && (

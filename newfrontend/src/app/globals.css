@@ -58,9 +58,12 @@ body {
 
 body {
   color: rgba(var(--foreground-rgb));
-  background: linear-gradient(to bottom,
+  background: linear-gradient(
+      to bottom,
       transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -68,7 +71,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 button.bg-tremor-brand {
-  background-image: linear-gradient(70deg, #fff -1%, #2466e4 0, #30f700 190%) !important;
+  color: white !important;
   border: 0;
 }
 
@@ -141,9 +144,7 @@ button.bg-tremor-brand {
   bottom: 0;
   left: 0;
   width: 100%;
-  transform: translate3d(0,
-      0,
-      0);
+  transform: translate3d(0, 0, 0);
   /* Ensure smooth transition on some devices */
 }
 
