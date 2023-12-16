@@ -1,5 +1,6 @@
 // pages/policy.js
 import React from 'react';
+import Header from "@/components/Header";
 
 const PolicySection = ({ title, description }) => (
   <div className="bg-gradient-to-r from-blue-900 to-blue-800 hover:to-blue-700 text-white p-8 rounded-xl mb-8 shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1">
@@ -16,6 +17,8 @@ const PolicySection = ({ title, description }) => (
 const PolicyPage = () => {
   return (
     <>
+      <Header />
+    
       <style>
         {`
           @keyframes moveBackground {
