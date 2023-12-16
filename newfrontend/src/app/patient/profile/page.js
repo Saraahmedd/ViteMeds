@@ -588,7 +588,7 @@ function Profile() {
                       className=" hover:underline focus:outline-none"
                       size="xs"
                       variant="secondary"
-                      color="gray"
+                      // color="gray"
                     >
                       See Details
                     </Button>

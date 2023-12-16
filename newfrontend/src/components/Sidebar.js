@@ -48,7 +48,7 @@ export default function Sidebar() {
       {
         icon: "logout",
         label: "Logout",
-        href: "/guest/login",
+        href: "/guest/Login",
         onClick: () => dispatch(logoutAction()),
       },
     ],
@@ -59,7 +59,7 @@ export default function Sidebar() {
       {
         icon: "logout",
         label: "Logout",
-        href: "/guest/login",
+        href: "/guest/Login",
         onClick: () => dispatch(logoutAction()),
       },
     ],
@@ -75,7 +75,7 @@ export default function Sidebar() {
       {
         icon: "logout",
         label: "Logout",
-        href: "/guest/login",
+        href: "/guest/Login",
         onClick: () => dispatch(logoutAction()),
       },
     ],

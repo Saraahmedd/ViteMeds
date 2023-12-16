@@ -1,29 +1,57 @@
 // ActiveIconNotification.js
-import React, { useState } from "react";
+import { Card } from "@tremor/react";
+import React, { useEffect, useState } from "react";
 
-const NotificationCard = ({ notifications, onClose }) => {
+const NotificationCard = ({ notifications, onClose, visible }) => {
   return (
-    <div
-      className="fixed inset-0 flex items-center justify-center"
-      style={{ marginBottom: "400px" }}
-    >
-      <div className="bg-gray-800 text-white p-4 rounded shadow-lg max-w-md">
-        <div className="flex justify-between items-center">
-          <h2 className="text-xl font-semibold">Notifications</h2>
-          <button className="text-white" onClick={onClose}>
-            &times;
-          </button>
+    // <div
+    //   className="z-50 flex items-center justify-center absolute top-0 right-0"
+    // >
+    //   <div className="bg-gray-800 text-white p-4 rounded shadow-lg max-w-md">
+    //     <div className="flex justify-between items-center">
+    //       <h2 className="text-xl font-semibold">Notifications</h2>
+    //       <button className="text-white" onClick={onClose}>
+    //         &times;
+    //       </button>
+    //     </div>
+    //     <div className="mt-2">
+    //       {notifications?.map((notification, index) => (
+    //         <div key={index} className="mb-2">
+    //           <h3 className="text-lg font-semibold">{notification.title}</h3>
+    //           <p className="text-gray-300">{notification.text}</p>
+    //         </div>
+    //       ))}
+    //     </div>
+    //   </div>
+    // </div>
+    <>
+      <aside
+        id="default-sidebar"
+        className={`fixed top-0 left-0 z-50 w-64 h-screen`}
+        aria-label="Sidebar"
+        style={{ transform: visible ? "translateX(0%)" : "translateX(-100%)" }}
+      >
+        <div className="h-full px-3 py-4 overflow-y-auto  dark:bg-gray-800">
+          <div className="w-full flex flex-row mb-3 items-center">
+            <svg role="button" onClick={onClose} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+              <path fillRule="evenodd" d="M7.72 12.53a.75.75 0 010-1.06l7.5-7.5a.75.75 0 111.06 1.06L9.31 12l6.97 6.97a.75.75 0 11-1.06 1.06l-7.5-7.5z" clipRule="evenodd" />
+            </svg>
+
+            <h1 className="font-bold text-xl ml-2">Notifications</h1>
+          </div>
+
+          <ul className="space-y-2 mt-4 font-medium">
+            {notifications?.map((notification, index) => (
+              <li key={index} className="mb-2 border-b pb-2 border-gray-700">
+                <h3 className="text-lg font-semibold">{notification.title}</h3>
+                <p className="text-gray-300">{notification.text}</p>
+              </li>
+            ))}
+
+          </ul>
         </div>
-        <div className="mt-2">
-          {notifications?.map((notification, index) => (
-            <div key={index} className="mb-2">
-              <h3 className="text-lg font-semibold">{notification.title}</h3>
-              <p className="text-gray-300">{notification.text}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+      </aside>
+    </>
   );
 };
 
@@ -51,12 +79,11 @@ const ActiveIconNotification = ({ notifications }) => {
           </>
         )}
       </div>
-      {isNotificationVisible && (
-        <NotificationCard
-          notifications={notifications}
-          onClose={() => setIsNotificationVisible(false)}
-        />
-      )}
+      <NotificationCard
+        visible={isNotificationVisible}
+        notifications={notifications}
+        onClose={() => setIsNotificationVisible(false)}
+      />
     </div>
   );
 };

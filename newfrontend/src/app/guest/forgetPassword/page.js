@@ -49,7 +49,7 @@ const forgetPassword = () => {
       setCounter(1)
     if (resetSuccess) {
 
-      url = "/guest/login"
+      url = "/guest/Login"
       console.log(url)
       setTimeout(() => {
         window.history.pushState({}, "", url)

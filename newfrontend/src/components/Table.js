@@ -69,7 +69,7 @@ const TableComponent = ({
                       {item[fields[fieldIndex]]}
                     </Badge>
                   ) : (
-                    item[fields[fieldIndex]]
+                    <span className="text-white">{item[fields[fieldIndex]]}</span>
                   )}
                 </TableCell>
               ))}
