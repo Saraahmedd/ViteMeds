@@ -9,6 +9,7 @@ import { TextInput } from "@tremor/react";
 import Image from "next/image";
 import { registerAction } from "@/app/redux/actions/authActions";
 import { validateEmail, validatePassword } from "@/app/redux/validators";
+import PromptMessage from "@/components/PromptMessage";
 
 const Admins = () => {
   const admins = useSelector((state) => state.getUsersReducer.user);
@@ -71,7 +72,19 @@ const Admins = () => {
     dispatch(getAllUsers());
   }, [dispatch, removeLoading, registerLoading]);
   const [visibleFeedback, setVisibleFeedback] = useState(false);
-
+  const [showPrompt, setShowPrompt] = useState(false);
+  const [deleteID, setDeleteID] = useState("");
+  const handleDelete = (id) => {
+    setShowPrompt(true);
+    setDeleteID(id);
+  };
+  const confirmDelete = () => {
+    dispatch(removeUser(deleteID));
+    setShowPrompt(!showPrompt);
+  };
+  const cancelDelete = () => {
+    setShowPrompt(!showPrompt);
+  };
   return (
     <>
       {registerSuccess && (
@@ -125,6 +138,14 @@ const Admins = () => {
       )}
 
       <>
+      <PromptMessage
+      visible={showPrompt}
+      setVisible={setShowPrompt}
+      message="Are you sure you want to remove this admin?"
+      onConfirm={confirmDelete}
+      confirmLoading={removeLoading}
+      onCancel={cancelDelete}
+      />
         <div className="flex overflow-hidden gap-x-4 gap-y-8">
           <div className="prof h-400 overflow-hidden w-4/6 rounded-xl p-10">
             <TableComponent
@@ -135,7 +156,7 @@ const Admins = () => {
                 {
                   size: "xs",
                   variant: "secondary",
-                  color: "gray",
+                  color: "red",
                   label: "Delete",
                   icon: () => (
                     <svg
@@ -153,7 +174,7 @@ const Admins = () => {
                       />
                     </svg>
                   ),
-                  function: (id) => dispatch(removeUser(id)),
+                  function: (id) => handleDelete(id),
                 },
               ]}
               badgeColumns={[]}
@@ -217,7 +238,7 @@ const Admins = () => {
             <Button
               loading={registerLoading}
               onClick={handleSubmit}
-              className="mt-5 tracking-wide font-semibold bg-purple-600 text-gray-100 w-full py-4 rounded-lg hover:bg-purple-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+              className="mt-5 tracking-wide font-semibold text-gray-100 w-full py-4 rounded-lg hover:bg-blue-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
             >
               <span className="ml-3">Submit</span>
             </Button>

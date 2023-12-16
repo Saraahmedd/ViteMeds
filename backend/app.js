@@ -49,7 +49,12 @@ app.enable("trust proxy");
 // 1) GLOBAL MIDDLEWARES
 
 var corsOptions = {
-  origin: ["http://localhost:3000"],
+  origin: [
+    "http://localhost:3000",
+    "http://localhost:8000",
+    "http://localhost:3001",
+  ],
+
   credentials: true,
   optionsSuccessStatus: 200,
 };

@@ -436,23 +436,7 @@ function Profile() {
                       </span>
                     </Button>
                   </form>
-                  {addAddressSuccess && show && (
-                    <BottomCallout
-                      message="Adding Address was successful"
-                      variant="success"
-                      visible={true}
-                      setVisible={setVisibleFeedback}
-                    />
-                  )}
-
-                  {addAddressError && show && (
-                    <BottomCallout
-                      message="There was an error adding your new address"
-                      variant="error"
-                      visible={true}
-                      setVisible={setVisibleFeedback}
-                    />
-                  )}
+                 
                 </div>
               </Modal>
             )}
@@ -568,7 +552,23 @@ function Profile() {
               setVisible={setVisibleFeedback}
             />
           )}
+ {addAddressSuccess && show && (
+                    <BottomCallout
+                      message="Adding Address was successful"
+                      variant="success"
+                      visible={true}
+                      setVisible={setVisibleFeedback}
+                    />
+                  )}
 
+                  {addAddressError && show && (
+                    <BottomCallout
+                      message="There was an error adding your new address"
+                      variant="error"
+                      visible={true}
+                      setVisible={setVisibleFeedback}
+                    />
+                  )}
           {selectedTab == "Orders" && orders ? (
             <TableComponent
               title="My Orders"
@@ -588,7 +588,7 @@ function Profile() {
                       className=" hover:underline focus:outline-none"
                       size="xs"
                       variant="secondary"
-                      color="gray"
+                      // color="gray"
                     >
                       See Details
                     </Button>

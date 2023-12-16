@@ -14,6 +14,7 @@ import {
   Button,
   Card,
   Grid,
+  NumberInput,
   Select,
   SelectItem,
   TextInput,
@@ -22,6 +23,7 @@ import Lottie from "lottie-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingAnimation from "../../../../public/loading.json";
+import "./button.css";
 
 export default function Products() {
   const dispatch = useDispatch();
@@ -135,7 +137,31 @@ export default function Products() {
 
   return (
     <Card className="grow flex-1 flex flex-col">
-      <h1 className="font-bold text-2xl mb-4">Medicines</h1>
+      <div className="flex-row flex items-center mb-4">
+        <h1 className="font-bold text-2xl">Medicines</h1>
+
+        {JSON.parse(localStorage.getItem("userInfo"))?.data.user.role ===
+          "pharmacist" && (
+          // <svg role="button" onClick={() => setModalVisible(true)} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 ms-1">
+          //   <path fillRule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clipRule="evenodd" />
+          // </svg>
+
+          <svg
+            role="button"
+            onClick={() => setModalVisible(true)}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="w-6 h-6 ms-1 hover:text-blue-400"
+          >
+            <path
+              fillRule="evenodd"
+              d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z"
+              clipRule="evenodd"
+            />
+          </svg>
+        )}
+      </div>
 
       {initialLoad && (
         <>
@@ -163,6 +189,7 @@ export default function Products() {
 
             <Select
               placeholder={`\xa0\xa0\xa0Filter (By Medicinal Use)`}
+              enableClear={true}
               icon={() => (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -185,6 +212,10 @@ export default function Products() {
                 setMedUse(e ? { medicinalUses: { in: e } } : {});
               }}
             >
+              <SelectItem key={"blankmed"} value={""}>
+                {`\xa0\xa0\xa0`}
+                All
+              </SelectItem>
               {medUses?.map((medUse, index) => (
                 <SelectItem key={index} value={medUse}>
                   {`\xa0\xa0\xa0`}
@@ -213,25 +244,13 @@ export default function Products() {
             />
           )}
 
-          <div className="flex justify-between">
-            {JSON.parse(localStorage.getItem("userInfo"))?.data.user.role ===
-              "pharmacist" && (
-              <Button
-                variant="secondary"
-                className=" px-4 py-2 my-2 rounded"
-                onClick={() => setModalVisible(true)}
-              >
-                New Medicine
-              </Button>
-            )}
-          </div>
           <Modal visible={modalVisible} setVisible={setModalVisible}>
             <div className="p-4 flex flex-col">
               <h1 className="text-center">New Medicine</h1>
               <br />
               <TextInput
                 placeholder="Name"
-                className="w-full my-4 px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
+                className="w-full my-2"
                 value={formData.name}
                 error={
                   addError &&
@@ -248,7 +267,7 @@ export default function Products() {
               />
               <TextInput
                 placeholder="Description"
-                className="w-full my-4 px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
+                className="w-full my-2"
                 value={formData.description}
                 onChange={(e) =>
                   handleInputChange("description", e.target.value)
@@ -259,9 +278,9 @@ export default function Products() {
                   "Please fill in this field"
                 }
               />
-              <TextInput
+              <NumberInput
                 placeholder="Quantity"
-                className="w-full my-4 px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
+                className="w-full my-2"
                 type="number"
                 value={formData.quantity}
                 onChange={(e) => handleInputChange("quantity", e.target.value)}
@@ -278,8 +297,8 @@ export default function Products() {
               />
 
               <TextInput
-                placeholder="Medicine uses (Enter them comma separated)"
-                className="w-full my-4 px-8 py-4 rounded-lg font-medium placeholder-gray-500 text-lg"
+                placeholder="Medicininal uses (Comma Separated Values)"
+                className="w-full my-2"
                 value={formData.medicinalUses?.join(",")}
                 onChange={(e) =>
                   handleInputChange("medicinalUses", e.target.value)
@@ -294,7 +313,7 @@ export default function Products() {
               />
               <TextInput
                 placeholder="Price"
-                className="w-full my-4  px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
+                className="w-full my-2"
                 type="number"
                 value={formData.price}
                 onChange={(e) => handleInputChange("price", e.target.value)}
@@ -311,8 +330,8 @@ export default function Products() {
                 }
               />
               <TextInput
-                className="w-full my-4 px-8 py-4 rounded-lg font-medium placeholder-gray-500 text-lg"
-                placeholder="Medicine Ingredients (Enter them comma separated)"
+                className="w-full my-2"
+                placeholder="Medicine Ingredients (Comma Separated Values)"
                 value={formData.medicineIngredients?.join(",")}
                 onChange={(e) =>
                   handleInputChange("medicineIngredients", e.target.value)
@@ -331,7 +350,8 @@ export default function Products() {
               />
 
               <FileUpload
-                className="w-full my-4  px-8 py-4"
+                className="w-full my-2"
+                variant="secondary"
                 placeholder="Image"
                 callBackFiles={handleFileUpload}
                 buttonText={"Upload image (PNG, JPEG, PNG only)"}
@@ -340,7 +360,7 @@ export default function Products() {
               <br></br>
 
               <Button className="self-end" onClick={handleAddMedicine}>
-                Add Medicine
+                <span className="text-white">Add Medicine</span>
               </Button>
             </div>
           </Modal>
@@ -351,18 +371,28 @@ export default function Products() {
             numItemsLg={3}
             className="mt-3 gap-4"
           >
-            {medicines?.map((item, index) => (
-              <ProductCard
-                key={item._id}
-                id={item._id}
-                name={item.name}
-                image={`http://localhost:8080/${item.imageURL}`}
-                price={item.price}
-                initialQuantity={getMedicineNumberInCart(item)}
-                cartHandler={handleCartClick}
-                stock={item.quantity}
-              />
-            ))}
+            {medicines?.map(
+              (item, index) =>
+                ((item.status === "unarchived" &&
+                  JSON.parse(localStorage.getItem("userInfo"))?.data.user
+                    .role === "patient") ||
+                  JSON.parse(localStorage.getItem("userInfo"))?.data.user
+                    .role === "pharmacist" ||
+                  JSON.parse(localStorage.getItem("userInfo"))?.data.user
+                    .role === "administrator") && (
+                  <ProductCard
+                    key={item._id}
+                    id={item._id}
+                    name={item.name}
+                    image={`http://localhost:8080/${item.imageURL}`}
+                    price={item.price}
+                    initialQuantity={getMedicineNumberInCart(item)}
+                    cartHandler={handleCartClick}
+                    stock={item.quantity}
+                    prescriptionRequired={item.prescription}
+                  />
+                )
+            )}
           </Grid>
         </>
       )}

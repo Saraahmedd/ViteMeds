@@ -41,7 +41,7 @@ export const loginReducer = (state = initialState, action) => {
         user: action.payload,
         isAuthenticated: true,
         loading: false,
-        success:true,
+        success: true,
         error: null,
       };
     }
@@ -50,6 +50,13 @@ export const loginReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.payload,
+      };
+    case "Reset":
+      return {
+        ...state,
+        success: false,
+        loading: false,
+        error: null,
       };
     default:
       return state;

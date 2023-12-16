@@ -13,7 +13,7 @@ function CartProductCard({
   price,
   initialQuantity,
   cartHandler,
-  stock
+  stock,
 }) {
   const [quantity, setQuantity] = useState(initialQuantity);
   const [btnClicked, setBtnClicked] = useState(false);
@@ -27,7 +27,13 @@ function CartProductCard({
 
   return (
     <div>
-      <BottomCallout message="We have no more of this item" visible={stkError} setVisible={setStkError} />
+      {stkError && (
+        <BottomCallout
+          message="We have no more of this item"
+          visible={stkError}
+          setVisible={setStkError}
+        />
+      )}
 
       <Card
         className={`lg:h-[12rem]`}
@@ -82,7 +88,7 @@ function CartProductCard({
                     return q;
                   }
                   cartHandler(e, id, quantity + 1);
-                  return q + 1
+                  return q + 1;
                 });
               }}
               role="button"

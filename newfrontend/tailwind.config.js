@@ -47,7 +47,7 @@ module.exports = {
             faint: "#0B1229", // custom
             muted: "#172554", // blue-950
             subtle: "#1e40af", // blue-800
-            DEFAULT: "#3b82f6", // blue-500
+            DEFAULT: "#2466e4", // blue-500
             emphasis: "#60a5fa", // blue-400
             inverted: "#030712", // gray-950
           },
@@ -64,11 +64,11 @@ module.exports = {
             DEFAULT: "#1f2937", // gray-800
           },
           content: {
-            subtle: "#4b5563", // gray-600
-            DEFAULT: "#6b7280", // gray-500
-            emphasis: "#e5e7eb", // gray-200
+            subtle: "#fff", // gray-600
+            DEFAULT: "#fff", // gray-500
+            emphasis: "#fff", // gray-200
             strong: "#f9fafb", // gray-50
-            inverted: "#000000", // black
+            inverted: "#fff", // black
           },
         },
       },

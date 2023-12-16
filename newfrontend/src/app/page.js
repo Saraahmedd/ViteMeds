@@ -46,7 +46,7 @@ export default function Home() {
   }, [])
 
   return (
-    <main className='container mx-auto min-h-screen text-center flex justify-center items-center'>
+    <main className='container mx-auto min-h-screen text-center flex justify-center items-center bg-gray-800'>
       <div className='container w-fit mx-auto'>
         <GradientText wclass='text-9xl' text="seaats" />
         <form onSubmit={handleLogin}>

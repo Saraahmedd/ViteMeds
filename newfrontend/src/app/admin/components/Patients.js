@@ -7,6 +7,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { formatDateToDDMMYYYY } from "../../redux/validators";
 import { viewPatients } from "@/app/redux/actions/patientActions";
+import PromptMessage from "@/components/PromptMessage";
 
 //OPTIONAL
 // const buttons = {
@@ -54,7 +55,19 @@ const Patients = () => {
     return t;
   }, [removeError, patients]);
   // console.log(patientsList);
-
+  const [showPrompt, setShowPrompt] = useState(false);
+  const [deleteID, setDeleteID] = useState("");
+  const handleDelete = (id) => {
+    setShowPrompt(true);
+    setDeleteID(id);
+  };
+  const confirmDelete = () => {
+    dispatch(removeUser(deleteID));
+    setShowPrompt(!showPrompt);
+  };
+  const cancelDelete = () => {
+    setShowPrompt(!showPrompt);
+  };
   return (
     <>
       {removeSuccess && (
@@ -77,6 +90,14 @@ const Patients = () => {
       )}
 
       <>
+      <PromptMessage
+          visible={showPrompt}
+          setVisible={setShowPrompt}
+          message="Are you sure you want to remove this patient?"
+          onConfirm={confirmDelete}
+          confirmLoading={removeLoading}
+          onCancel={cancelDelete}
+        />
         <TableComponent
           setSelected={setSelected}
           rows={patientsList}
@@ -85,9 +106,9 @@ const Patients = () => {
             "Name",
             "Email",
             "Birth Date",
-            "Emergency Contact Number",
-            "Emergency Contact Email",
-            "Emergency Contact Relation",
+            "Contact Name",
+            "Contact Email",
+            "Contact Relation",
           ]}
           fields={[
             "username",
@@ -122,7 +143,7 @@ const Patients = () => {
                   />
                 </svg>
               ),
-              function: (id) => dispatch(removeUser(id)),
+              function: (id) => handleDelete(id),
             },
           ]}
           badgeColumns={[]}

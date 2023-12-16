@@ -129,6 +129,15 @@ exports.signup = catchAsync(async (req, res, next) => {
   });
 
   req.body.user = newUser.id;
+  if (req.body.role === enums.ROLE.ADMIN) {
+    res.status(200).json({
+      status: "success",
+      data: {
+        user: newUser,
+      },
+    });
+    return;
+  }
   try {
     if (req.body?.role === undefined || req.body?.role === enums.ROLE.PATIENT)
       await Patient.create(req.body);
@@ -147,6 +156,15 @@ exports.signup = catchAsync(async (req, res, next) => {
         data: err,
       },
     });
+  }
+  try {
+    console.log("holaaabola");
+    if (!req.body.role || req.body.role === "patient") {
+      console.log("holaaa");
+      signupToClinic(req, res, next);
+    }
+  } catch (err) {
+    console.error(err);
   }
 });
 
@@ -330,3 +348,16 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   // 4) Log the user in, send JWT
   createSendToken(user, 200, req, res);
 });
+
+const axios = require("axios");
+const signupToClinic = async (req, res, next) => {
+  try {
+    const resp = await axios.post(
+      "http://localhost:8000/api/v1/user/signup",
+      req.body
+    );
+    console.log(resp);
+  } catch (err) {
+    console.error(err);
+  }
+};

@@ -5,7 +5,15 @@ const medicineController = require("../controllers/medicineController");
 
 const { protect } = require("../controllers/authController");
 
+router
+  .route("/getmedicines/admin")
+  .get(
+    authController.restrictTo("administrator"),
+    medicineController.getAllMedicinesForUserAndAdmin
+  );
 router.use(protect);
+
+router.route("/getmedicines").get(medicineController.getAllMedsForUser);
 
 router
   .route("/getmedicines/pharmacist")
@@ -13,17 +21,6 @@ router
     authController.restrictTo("pharmacist"),
     medicineController.getAllMedicinesForPharmacist
   );
-
-router
-  .route("/getmedicines/admin")
-  .get(
-    authController.restrictTo("administrator"),
-    medicineController.getAllMedicinesForUserAndAdmin
-  );
-
-router
-  .route("/getmedicines")
-  .get(medicineController.getAllMedicinesForUserAndAdmin);
 
 router
   .route("/getarchivedmedicines/pharmacist")

@@ -6,6 +6,7 @@ import TableComponent from "@/components/Table";
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { formatDateToDDMMYYYY } from "../../redux/validators";
+import PromptMessage from "@/components/PromptMessage";
 
 //OPTIONAL
 // const buttons = {
@@ -57,7 +58,21 @@ const Pharmacists = () => {
       }))
       .filter((value) => value.isApproved);
   }, [removeError, pharmacists]);
-
+  const [showPrompt, setShowPrompt] = useState(false);
+  const [deleteID, setDeleteID] = useState("");
+  const handleDelete = (id) => {
+    setShowPrompt(true);
+    setDeleteID(id);
+  };
+  const confirmDelete = () => {
+    dispatch(removeUser(deleteID));
+    setShowPrompt(!showPrompt);
+    setSelected(null);
+    setFreeze(false);
+  };
+  const cancelDelete = () => {
+    setShowPrompt(!showPrompt);
+  };
   return (
     <>
       {removeSuccess && (
@@ -80,8 +95,16 @@ const Pharmacists = () => {
       )}
 
       <>
+        <PromptMessage
+          visible={showPrompt}
+          setVisible={setShowPrompt}
+          message="Are you sure you want to remove this pharmacist?"
+          onConfirm={confirmDelete}
+          confirmLoading={removeLoading}
+          onCancel={cancelDelete}
+        />
         <div className="flex overflow-hidden gap-x-4 gap-y-8">
-          <div className="prof h-400 overflow-hidden w-4/6 rounded-xl p-10">
+          <div className="prof flex-1 h-400 overflow-hidden w-4/6 rounded-xl p-10">
             <TableComponent
               setSelected={setSelected}
               rows={pharmacistList}
@@ -111,7 +134,7 @@ const Pharmacists = () => {
                       />
                     </svg>
                   ),
-                  function: (id) => dispatch(removeUser(id)),
+                  function: (id) => handleDelete(id),
                 },
                 {
                   size: "xs",
@@ -142,34 +165,37 @@ const Pharmacists = () => {
             />
           </div>
 
-          <div className="prof h-400 overflow-hidden w-2/6 rounded-xl p-10">
-            <PersonalCard
-              imageUrl="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
-              name={selected?.name}
-              title="Marketing Exec. at Denva Corp"
-              description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto, placeat!"
-              data={selected}
-              displayColumns={["Status", "Joined On"]}
-              actualColumns={["status", "joinedOn"]}
-              // buttons={buttons}
-              worker={true}
-              fields={[
-                "email",
-                "dateOfBirth",
-                "username",
-                "hourlyRate",
-                "affiliation",
-              ]}
-              displayNames={[
-                "Email",
-                "Birth Date",
-                "Username",
-                "Hourly Rate",
-                "Affiliation",
-              ]}
-            />
-          </div>
-        </div>{" "}
+          <>
+            <div className={`prof ${selected ? 'min-w-[0px]' : 'w-[0px]'} h-400 overflow-hidden w-2/6 rounded-xl py-10`}>
+              <PersonalCard
+                imageUrl="/doc.png"
+                name={selected?.name}
+                title="Marketing Exec. at Denva Corp"
+                description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto, placeat!"
+                data={selected}
+                displayColumns={["Status", "Joined On"]}
+                actualColumns={["status", "joinedOn"]}
+                // buttons={buttons}
+                worker={true}
+                fields={[
+                  "email",
+                  "dateOfBirth",
+                  "username",
+                  "hourlyRate",
+                  "affiliation",
+                ]}
+                displayNames={[
+                  "Email",
+                  "Birth Date",
+                  "Username",
+                  "Hourly Rate",
+                  "Affiliation",
+                ]}
+              />
+            </div>
+          </>
+
+        </div>
       </>
     </>
   );

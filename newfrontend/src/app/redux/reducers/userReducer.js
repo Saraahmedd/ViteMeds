@@ -16,8 +16,7 @@ export const removeUserReducer = (state = {}, action) => {
         error: null,
         success: false,
       };
-    case USER_REMOVE_SUCCESS: {
-      // console.log("success");
+    case USER_REMOVE_SUCCESS:
       return {
         ...state,
         user: action.payload,
@@ -25,7 +24,6 @@ export const removeUserReducer = (state = {}, action) => {
         error: null,
         success: true,
       };
-    }
     case USER_REMOVE_FAIL:
       return {
         ...state,
@@ -33,10 +31,32 @@ export const removeUserReducer = (state = {}, action) => {
         error: action.payload,
         success: false,
       };
+    case "Reset":
+      console.log("here");
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        success: null,
+      };
+
     default:
       return state;
   }
 };
+
+// Reducer to automatically clear success after 5 seconds
+// export const autoClearSuccessReducer = (state = { success: true }, action) => {
+//   switch (action.type) {
+//     case USER_REMOVE_SUCCESS:
+//       setTimeout(() => {
+//         useDispatch({ type: "Reset" });
+//       }, 5000);
+//       return state;
+//     default:
+//       return state;
+//   }
+// };
 
 export const getUsersReducer = (state = {}, action) => {
   switch (action.type) {

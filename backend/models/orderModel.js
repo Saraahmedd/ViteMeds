@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Medicine = require("./medicineModel");
+const User = require("./userModel");
+const Notification = require("./notifiicationModel");
 
 const orderSchema = new mongoose.Schema({
   medicines: [
@@ -65,7 +67,7 @@ const orderSchema = new mongoose.Schema({
   },
 });
 
-orderSchema.post("save", async function (doc) {
+orderSchema.post("save", async function(doc) {
   if (doc.status === "Pending") {
     // Check if the order is newly created
 
@@ -73,7 +75,8 @@ orderSchema.post("save", async function (doc) {
       const medicine = await Medicine.findById(orderItem.medicine);
 
       if (medicine) {
-        medicine.quantity -= orderItem.quantity;
+        console.log(medicine.quantity);
+        // medicine.quantity -= orderItem.quantity;
         medicine.sales += orderItem.quantity * medicine.price;
         await medicine.save();
 
@@ -103,7 +106,7 @@ orderSchema.post("save", async function (doc) {
 
       if (medicine) {
         medicine.quantity += orderItem.quantity;
-        medicine.sales -= orderItem.quantity * medicine.price; //Is this the intended behaviour, we need to ask;Abdullah
+        // medicine.sales -= orderItem.quantity * medicine.price; //Is this the intended behaviour, we need to ask;Abdullah
         await medicine.save();
       }
     }
@@ -112,7 +115,7 @@ orderSchema.post("save", async function (doc) {
 
 const sendEmails = async (medicine, user) => {
   try {
-    await new Email(user, OTP).sendMedOutfStock(medicine);
+    await new Email(user).sendMedOutfStock(medicine);
   } catch (err) {
     console.log(err);
   }

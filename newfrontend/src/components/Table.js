@@ -69,7 +69,7 @@ const TableComponent = ({
                       {item[fields[fieldIndex]]}
                     </Badge>
                   ) : (
-                    item[fields[fieldIndex]]
+                    <span className="text-white">{item[fields[fieldIndex]]}</span>
                   )}
                 </TableCell>
               ))}
@@ -84,6 +84,7 @@ const TableComponent = ({
                       }
                       key={buttonIndex}
                       {...button}
+                      color={button.label === 'Delete' ? "red" : button.color}
                     >
                       {button.label}
                     </Button>

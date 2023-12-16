@@ -16,7 +16,7 @@ const medicineSchema = new mongoose.Schema({
     type: Number,
     required: [true, "A medicine must have a price"],
     validate: {
-      validator: function (value) {
+      validator: function(value) {
         return value >= 0;
       },
       message: "Price cannot be negative",
@@ -26,7 +26,7 @@ const medicineSchema = new mongoose.Schema({
     type: Number,
     required: [true, "A medicine must have a quantity"],
     validate: {
-      validator: function (value) {
+      validator: function(value) {
         return value >= 0;
       },
       message: "Quantity cannot be negative",
@@ -64,9 +64,10 @@ const medicineSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  realPrice: Number,
 });
 
-medicineSchema.statics.getAllMedicinalUses = async function () {
+medicineSchema.statics.getAllMedicinalUses = async function() {
   try {
     const medicines = await this.find();
     const allMedicinalUsesSet = new Set();

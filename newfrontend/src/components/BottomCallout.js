@@ -1,10 +1,24 @@
+"use client";
 const { Callout } = require("@tremor/react");
-const { useEffect } = require("react");
+const { useEffect, useState } = require("react");
+const { useDispatch } = require("react-redux");
 
-function BottomCallout({ message, visible, setVisible, variant = "error" }) {
+function BottomCallout({ message, variant = "error" }) {
+  const dispatch = useDispatch();
+  const [visible, setVisible] = useState(true);
   useEffect(() => {
     if (visible) {
-      setTimeout(() => setVisible(false), 5000);
+      const resetAfterDelay = () => (dispatch) => {
+        setTimeout(() => {
+          dispatch({ type: "Reset" });
+        }, 5000);
+      };
+
+      // Inside your component or wherever you're dispatching the action
+      setTimeout(() => {
+        setVisible(false); // Assuming setVisible is some asynchronous function
+        dispatch(resetAfterDelay());
+      }, 5000);
     }
   }, [visible]);
   return (
@@ -16,22 +30,22 @@ function BottomCallout({ message, visible, setVisible, variant = "error" }) {
            
             ${
               variant === "error"
-                ? "bg-red-500 border-red-700 text-red-700"
-                : "bg-green-500 border-green-700 text-green-700"
+                ? "bg-red-500 border-red-700 text-white"
+                : "bg-green-500 border-green-700 text-white"
             }
-            dark:bg-opacity-10
-            bg-opacity-10
             fixed
             right-0
             bottom-[20px]
             mr-0
             lg:mr-${visible ? "[20px]" : "0"}
+            calloutOpacity
             `}
       title={variant === "error" ? "Error" : "Success"}
       id="errmsg"
       style={{
         transform: visible ? "none" : "translateX(100%)",
         marginRight: visible ? "20px" : "0px",
+        zIndex: 99,
       }}
       icon={() => (
         <>

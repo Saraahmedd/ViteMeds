@@ -37,8 +37,41 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
       quantity: item.quantity,
     };
   });
-  console.log(lineItems);
-  console.log("hey?");
+
+  let deliveryAddress = "";
+  if (req.body.newDeliveryAddress) {
+    const userId = req.user._id; // Assuming you have orderId as a route parameter
+    const {
+      streetAddress,
+      city,
+      state,
+      zipCode,
+      country,
+    } = req.body.newDeliveryAddress;
+    const user = await User.findById(userId);
+
+    // Add the provided delivery address to the order
+    if (user) {
+      deliveryAddress = {
+        streetAddress,
+        city,
+        state,
+        zipCode,
+        country,
+      };
+
+      // Initialize existingArray if it's empty or undefined
+      user.deliveryAddress = user.deliveryAddress || [];
+
+      // Append the new object to the existing array
+      user.deliveryAddress.push(deliveryAddress);
+      await user.save({ validateBeforeSave: false });
+      console.log(user.deliveryAddress);
+      console.log("heyyy");
+      deliveryAddress = user.deliveryAddress[user.deliveryAddress.length - 1];
+    }
+  }
+  console.log(deliveryAddress);
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     client_reference_id: user._id.toString(),
@@ -48,7 +81,10 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     cancel_url: `http://localhost:3000/patients/profile`, // Adjust success and cancel URLs
     // customer_email: "abdullahhatem87@yahoo.com",
     metadata: {
-      deliveryAddress: req.query.deliveryAddress,
+      deliveryAddress:
+        req.query.deliveryAddress != "undefined"
+          ? req.query.deliveryAddress
+          : deliveryAddress._id.toString(),
     },
   });
   // console.log("hey?")
@@ -122,8 +158,38 @@ exports.createOrder = catchAsync(async (req, res, next) => {
   }
 
   // const {userId} = await Patient.findOne({user: user._id})
+  let deliveryAddress;
+  if (req.body.newDeliveryAddress) {
+    const userId = req.user._id; // Assuming you have orderId as a route parameter
+    const {
+      streetAddress,
+      city,
+      state,
+      zipCode,
+      country,
+    } = req.body.newDeliveryAddress;
+    const user = await User.findById(userId);
 
-  const deliveryAddress = user.deliveryAddress.id(req.body.deliveryAddress);
+    // Add the provided delivery address to the order
+    if (user) {
+      deliveryAddress = {
+        streetAddress,
+        city,
+        state,
+        zipCode,
+        country,
+      };
+
+      // Initialize existingArray if it's empty or undefined
+      user.deliveryAddress = user.deliveryAddress || [];
+
+      // Append the new object to the existing array
+      user.deliveryAddress.push(deliveryAddress);
+      await user.save({ validateBeforeSave: false });
+    }
+  } else {
+    deliveryAddress = user.deliveryAddress.id(req.body.deliveryAddress);
+  }
   const order = await Order.create({
     medicines: cart.items,
     user: user._id,
@@ -352,6 +418,7 @@ exports.getTotalOrderCount = catchAsync(async (req, res, next) => {
 });
 
 exports.getFilteredOrders = catchAsync(async (req, res, next) => {
+  console.log("///////nanna");
   const { medicineId } = req.params;
   const { from, to } = req.query;
 
@@ -379,13 +446,53 @@ exports.getFilteredOrders = catchAsync(async (req, res, next) => {
     .populate("medicines.medicine")
     .exec();
 
+  const profits = await Order.find({
+    ...filter,
+    isPaid: true,
+    status: { $ne: "Cancelled" },
+  })
+    .populate("medicines.medicine")
+    .exec();
+
+  const expenses = await Order.find({
+    ...filter,
+    isPaid: true,
+    status: "Cancelled",
+  })
+    .populate("medicines.medicine")
+    .exec();
+
   let totalSales = 0;
-  if (!medicineId)
+  if (!medicineId) {
     totalSales = orders.reduce((sum, order) => {
       return sum + order.totalPrice;
     }, 0);
-  else {
+
+    totalProfit = profits.reduce((sum, order) => {
+      return sum + order.totalPrice;
+    }, 0);
+
+    totalExpenses = expenses.reduce((sum, order) => {
+      return sum + order.totalPrice;
+    }, 0);
+  } else {
     totalSales = orders.reduce((sum, order) => {
+      const orderItem = order.medicines.find(
+        (orderItem) => orderItem.medicine._id.toString() === medicineId
+      );
+      if (orderItem) return sum + orderItem.quantity * orderItem.medicine.price;
+      else return sum;
+    }, 0);
+
+    totalProfit = profits.reduce((sum, order) => {
+      const orderItem = order.medicines.find(
+        (orderItem) => orderItem.medicine._id.toString() === medicineId
+      );
+      if (orderItem) return sum + orderItem.quantity * orderItem.medicine.price;
+      else return sum;
+    }, 0);
+
+    totalExpenses = expenses.reduce((sum, order) => {
       const orderItem = order.medicines.find(
         (orderItem) => orderItem.medicine._id.toString() === medicineId
       );
@@ -399,6 +506,8 @@ exports.getFilteredOrders = catchAsync(async (req, res, next) => {
       orders,
       count: orders.length,
       totalSales,
+      totalProfit,
+      totalExpenses,
     },
   });
 });
