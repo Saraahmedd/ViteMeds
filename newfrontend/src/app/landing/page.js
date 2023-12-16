@@ -63,7 +63,7 @@ const PharmacyLandingPage = () => {
 
               <Col numColSpan={2} >
               <div className="lg:w-1/3 xl:w-1/3 h-full">
-            <Lottie animationData={landinganim} className="w-[650px] h-[650px]" loop={true} />
+            <Lottie animationData={landinganim} className="w-[800px] h-[700px]" loop={true} />
           </div>
               </Col>
 
