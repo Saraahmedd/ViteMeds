@@ -509,7 +509,7 @@ export default function SingleProduct() {
                   <Button
                     className="my-3"
                     onClick={(e) => {
-                      medicine.status == "archived"
+                      medicine?.status == "archived"
                         ? handleEditMedicine("status", "unarchived")
                         : handleEditMedicine("status", "archived");
                     }}
