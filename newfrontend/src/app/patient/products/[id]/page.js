@@ -429,7 +429,7 @@ export default function SingleProduct() {
                     <div className="flex flex-row items-center mt-4">
                       <p className="font-bold text-lg me-2">
                         {!isAdmin && <strong> Quantity: </strong>}
-                        {canEdit && medicine.quantity}
+                        {canEdit && medicine?.quantity}
                       </p>
                       <EditButton
                         canEdit={canEdit}
