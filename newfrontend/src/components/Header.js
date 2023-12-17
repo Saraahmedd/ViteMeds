@@ -20,27 +20,27 @@ const Header = () => {
           <div>
             <ul class="list-none">
               <li class="inline mx-2">
-                <a href="/" className="hover:text-gray-400">
+                <a href="/" className="font-medium hover:text-blue-500">
                   Home
                 </a>
               </li>
               <li class="inline mx-2">
-                <a href="/signup/pharmacist" className="hover:text-gray-400">
+                <a href="/signup/pharmacist" className="font-medium hover:text-blue-500">
                   Careers
                 </a>
               </li>
               <li class="inline mx-2">
-                <a href="/policy" className="hover:text-gray-400">
+                <a href="/policy" className="font-medium hover:text-blue-500">
                   Policy
                 </a>
               </li>
               <li class="inline mx-2">
-                <a href="/signup/patient" className="hover:text-gray-400">
+                <a href="/signup/patient" className="font-medium hover:text-blue-500">
                   Sign Up
                 </a>
               </li>
               <li class="inline mx-2">
-                <a href="/guest/login" className="hover:text-gray-400">
+                <a href="/guest/login" className="font-medium hover:text-blue-500">
                   Login
                 </a>
               </li>

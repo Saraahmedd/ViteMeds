@@ -6,7 +6,7 @@ export default async function DashboardLayout({ children }) {
   return (
     <>
       <Header />
-      <div className="px-5 pb-5 flex flex-col grow flex-1">
+      <div className="p-10 flex flex-col grow flex-1">
         {children}
         
       </div>
