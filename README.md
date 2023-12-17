@@ -132,32 +132,40 @@ The development team is utilizing GitHub for version control anlong with the Git
 
 ## Features
 
-### Guest Users
+<details>
+<summary>Guest Users</summary>
 
 - **Informative Exploration**: Guests can learn more about ViteMeds' offerings, policies, and practices through the Home and Policy pages, ensuring transparency and informed decisions.
 - **Sign Up Opportunities**: Guests can easily sign up to become a patient on ViteMeds, expanding their access to healthcare services.
 - **Career Pathways**: Aspiring pharmacists can apply directly through ViteMeds, making it a gateway to professional opportunities.
+</details>
 
-### Patients
+<details>
+<summary> Patients </summary>
 
 - **Medicine Browsing**: Patients have the convenience of browsing through an extensive range of medicines available on ViteMeds, view the details of each product and even get alternative suggestions if the item is sold out.
 - **Cart Functionality**: The ability to add medicines to a cart facilitates a smooth shopping experience, allowing patients to manage and summarize their selections effectively.
 - **Flexible Checkout Options**: Patients can finalize their purchases using their wallet or Stripe, offering flexibility and ease in transactions.
 - **Profile Management**: Patients can access their user-profiles to view and manage personal details, including password changes.
+</details>
 
-### Pharmacists
+<details>
+<summary> Pharmacists </summary>
 
 - **Medicine Management**: Pharmacists have the capability to edit existing medicines or introduce new ones, ensuring the pharmacy's inventory is up-to-date.
 - **Inventory Oversight**: A vital feature allowing pharmacists to monitor pharmacy medicines, ensuring adequate stock and variety.
 - **Sales Insights**: Access to sales reports and order breakdowns provides pharmacists with valuable insights into pharmacy operations and customer preferences.
+</details>
 
-### Administrators
+<details>
+<summary> Administrators </summary>
 
 - **Comprehensive User Management**: Admins have the authority to manage patient and pharmacist accounts, ensuring proper oversight of the platform's users.
 - **Admin Account Management**: Besides managing other users, admins can manage existing admin accounts or create new ones, as well as update their own passwords.
 - **Application Review**: Admins play a crucial role in reviewing pharmacist applications, maintaining the quality and professionalism of the ViteMeds team.
 - **Product Oversight**: Admins can view and monitor pharmacy medicines, although with limited product details compared to pharmacists.
 - **Sales Analysis**: Access to sales reports and order summaries equips admins with critical data for strategic decision-making and operational insights.
+</details>
 
 **User Guide for Navigating the Platform:**
 Each user role on ViteMeds - Guest, Patient, Pharmacist, and Admin - has tailored features and functionalities designed to provide a seamless and efficient experience on the platform. Whether it's for healthcare needs, professional management, or administrative oversight, ViteMeds caters to a wide spectrum of user requirements with ease and precision.
