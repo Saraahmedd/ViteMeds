@@ -13,7 +13,7 @@ const Header = () => {
             />
 
             <span className="ms-2 self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-              Harmony Meds
+              Vite
             </span>
           </div>
 

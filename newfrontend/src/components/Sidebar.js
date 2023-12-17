@@ -280,7 +280,7 @@ export default function Sidebar() {
               className="h-8 mr-2"
               alt="Flowbite Logo"
             />
-            <h1 className="font-bold text-xl">Harmony Meds</h1>
+            <h1 className="font-bold text-xl">Vite</h1>
             {role === "pharmacist" && (
               <ActiveIconNotification
                 notifications={notifications}

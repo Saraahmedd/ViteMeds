@@ -22,10 +22,10 @@ const Footer = ({ role }) => {
               <img
                 src="https://flowbite.com/docs/images/logo.svg"
                 className="h-8"
-                alt="Harmony Logo"
+                alt="Vite Logo"
               />
               <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-                Harmony Meds
+                Vite
               </span>
             </a>
             <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
