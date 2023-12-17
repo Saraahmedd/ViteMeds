@@ -133,7 +133,9 @@ Each user role on ViteMeds - Guest, Patient, Pharmacist, and Admin - has tailore
 
 ## Code Examples
 
-### User Signup
+<details>
+<summary>
+  ### User Signup </summary>
 
 #### backend/controllers/authController
 
@@ -209,8 +211,11 @@ exports.signup = catchAsync(async (req, res, next) => {
   }
 });
 ```
+</details>
 
-### Order Checkout
+<details>
+<summary>
+### Order Checkout </summary>
 
 #### backend/controllers/orderController
 
@@ -237,8 +242,11 @@ const createOrderCheckout = async (session) => {
   // res.status(200).json({message: 'Order created successfully'});
 };
 ```
+</details>
 
-### Send Message in Chat
+<details>
+<summary>
+### Send Message in Chat </summary>
 
 #### backend/controllers/chatController
 
@@ -261,8 +269,11 @@ exports.sendMessage = async (req, res) => {
   }
 };
 ```
+</details>
 
-### Add Medicine Action
+<details>
+<summary>
+### Add Medicine Action </summary>
 
 #### newfrontend/src/app/redux/actions/medicineActions
 
@@ -303,8 +314,11 @@ export const addMedicine = (medicine) => async (dispatch) => {
   }
 };
 ```
+</details>
 
-### Add To Cart Reducer
+<details>
+<summary>
+### Add To Cart Reducer </summary>
 
 #### newfrontend/src/app/redux/reducers/cartReducer
 
@@ -341,10 +355,13 @@ export const addToCartReducer = (state = addToCartInitialState, action) => {
   }
 };
 ```
+</details>
 
-### Change Password Component
+<details>
+<summary>
+### Change Password Component </summary>
 
-####newfrontend/src/components/ChangePassword.js
+#### newfrontend/src/components/ChangePassword.js
 
 ````javascript
 "use client"
@@ -469,6 +486,7 @@ const ChangePassword = () => {
 
 export default ChangePassword;
 ````
+</details>
 
 ## Installation
 
