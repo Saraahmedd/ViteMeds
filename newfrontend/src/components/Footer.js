@@ -5,7 +5,7 @@ const Footer = ({ role }) => {
   let fullFooter = false;
 
   const dirs = window.location.href.split('/');
-  if (dirs.includes("signup") || dirs.includes("guest") || dirs.includes("pharmacistWaiting")) {
+  if (dirs.includes("signup") || dirs.includes("guest") || dirs.includes("pharmacistWaiting") || window.location.href == "http://localhost:3000/landing" || window.location.href == "http://127.0.0.1:3000/landing") {
     fullFooter = true;
   }
 

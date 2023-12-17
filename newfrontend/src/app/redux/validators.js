@@ -9,7 +9,6 @@ export const validatePhoneNumber = (phoneNumber) => {
   const regex = /^(\+201|01|00201)[0-2,5]{1}[0-9]{8}/;
 
   return regex.test(phoneNumber);
-  return phoneNumber.length === 11;
 };
 export const validateOTP = (OTP) => {
   // Validate phone number length
