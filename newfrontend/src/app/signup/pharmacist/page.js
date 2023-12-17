@@ -5,6 +5,8 @@ import { FileUpload } from "@/components/FileUpload";
 import { Button, Card, Col, Divider, Grid, TextInput } from "@tremor/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import pharmacyanimation from "../../../../public/animationlogin.json";
+import Lottie from "lottie-react";
 import {
   validateEmail,
   validatePassword,
@@ -149,12 +151,22 @@ const SignupPharmacist = () => {
           setVisible={setErrorCallout}
         />
       )}
-      <div className="flex flex-col grow flex-1 px-8">
-        <Card className="grow flex-1">
+      <div className="flex flex-row">
+      <div className="flex flex-col flex-1 mx-auto">
+      <Lottie
+            animationData={pharmacyanimation}
+            className="w-[620px] h-[750px]"
+            loop={true}
+          />
+      </div>
+      <div className="flex flex-col grow flex-1 p-10 ">
+        <Card className="grow flex-1 border border-gray-700">
+          <p className="font-bold text-3xl text-center py-5 pb-3">Sign Up</p>
+          <hr className="pb-5"/>
           <Grid numItems={2} className="gap-x-3 gap-y-4">
             <>
               <Col numColSpan={2}>
-                <p className="font-bold text-xl">Account Information</p>
+                <p className="font-semibold mt-4 text-xl">Account Information</p>
               </Col>
               <Col>
                 <TextInput
@@ -247,7 +259,7 @@ const SignupPharmacist = () => {
 
             <>
               <Col numColSpan={2}>
-                <p className="font-bold text-xl mt-4">Personal Information</p>
+                <p className="font-semibold text-xl mt-4">Personal Information</p>
               </Col>
 
               <Col>
@@ -324,15 +336,6 @@ const SignupPharmacist = () => {
               </Col>
 
               <Col>
-                {/* <TextInput
-                  className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
-                  type="text"
-                  placeholder="Date of Birth (DD/MM/YY) *"
-                  name="dateOfBirth"
-                  value={formData.dateOfBirth}
-                  onChange={handleInputChange}
-                  required
-                /> */}
                 <div className="relative bg-gray-800">
                   <input
                     name="dateOfBirth"
@@ -349,7 +352,7 @@ const SignupPharmacist = () => {
 
             <>
               <Col numColSpan={2}>
-                <p className="font-bold text-xl mt-4">Work Information</p>
+                <p className="font-semibold text-xl mt-4">Work Information</p>
               </Col>
 
               <Col>
@@ -408,7 +411,7 @@ const SignupPharmacist = () => {
             </>
             <>
               <Col numColSpan={2}>
-                <p className="font-bold text-xl mt-4">Required Documents</p>
+                <p className="font-semibold text-xl mt-4">Required Documents</p>
               </Col>
 
               <Col>
@@ -457,7 +460,7 @@ const SignupPharmacist = () => {
                   loadingText="Signing Up..."
                 >
                   <div className="flex flex-row items-center justify-center">
-                    <p className="font-bold text-white mr-2 ">Apply Now</p>
+                    <p className="font-semibold text-md text-white mr-2 ">Apply Now</p>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -477,28 +480,8 @@ const SignupPharmacist = () => {
           </Grid>
         </Card>
       </div>
+      </div>
 
-      {/* <div className="min-h-screen flex items-center justify-center bg-gray-900 text-gray-300">
-        <div className="max-w-screen-xl m-0 sm:m-10 shadow sm:rounded-lg flex justify-center flex-1">
-          <div className="lg:w-2/3 xl:w-2/3 p-6 sm:p-12 transform scale-70">
-            <div className="flex flex-col items-center rounded-lg border border-primary-600 px-8 pt-8 pb-12 shadow-lg w-full ">
-              <h1 className="text-2xl xl:text-3xl font-extrabold">Sign Up</h1>
-              <div className="w-full flex-1 mt-8">
-                <div className="mx-auto max-w-l">
-
-
-                  <Divider></Divider>
-                  <h1 className="text-2xl xl:text-3xl font-extrabold text-center">Required Documents</h1>
-
-
-                </div>
-              </div>
-            </div>
-
-
-          </div>
-        </div >
-      </div > */}
     </>
   );
 };
