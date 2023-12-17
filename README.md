@@ -772,6 +772,28 @@ git clone https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy.git
 cd ay-haga-pharmacy/
 ```
 
+#### Configuration Variables
+
+<details> <summary> Make sure to configure the following environment variables in your `config.env` file: </summary>
+
+- **NODE_ENV**: Set to "development" for the development environment.
+- **PORT**: Port on which the server will run (e.g., 8000).
+- **DATABASE**: MongoDB database connection URI.
+- **DATABASE_PASSWORD**: Password for the MongoDB database.
+- **JWT_SECRET**: Secret key for JWT token generation.
+- **JWT_EXPIRES_IN**: JWT token expiration time (e.g., "90d" for 90 days).
+- **JWT_COOKIES_EXPIRES_IN**: JWT cookie expiration time (e.g., "90").
+- **EMAIL_USERNAME**: SMTP email username.
+- **EMAIL_PASSWORD**: SMTP email password.
+- **EMAIL_PORT**: SMTP email port.
+- **EMAIL_HOST**: SMTP email host.
+- **EMAIL_FROM**: Default "from" email address for outgoing emails.
+- **SENDGRID_USERNAME**: SendGrid API username.
+- **SENDGRID_PASSWORD**: SendGrid API password.
+- **STRIPE_SECRET_KEY**: Stripe secret API key.
+- **STRIPE_WEBHOOK_SECRET**: Stripe webhook secret.
+</details>
+
 - Then open 2 terminals
 
 #### First Terminal
