@@ -9,10 +9,11 @@ import { Button } from "@tremor/react";
 const ChatPanel = ({ isOpen, handleClose }) => {
   const [message, setMessage] = useState("");
   const [crossMessage,setCrossMessage] = useState("");
-  const [pharmacy,setPharmacy] = useState("");
-  const [clinic,setClinic] = useState("");
+  const [pharmacy,setPharmacy] = useState(true);
+  const [clinic,setClinic] = useState(false);
   const messages = useSelector((state) => state.socketReducer.messages);
   const crossMessages = useSelector((state) => state.crossSocketReducer.messages);
+  const role = JSON.parse(localStorage.getItem("userInfo"))?.data.user.role;
 
   useEffect(() => {
     console.log(messages);
@@ -76,14 +77,19 @@ const ChatPanel = ({ isOpen, handleClose }) => {
         <div className="close-button" onClick={handleClose}>
           <FaTimes />
         </div>
-        <div className="chat-title">
-          <Button onClick={selectPharmacy}>
-              Pharmacy
-          </Button>
-          <Button onClick={selectClinic}>
-              Clinic
-          </Button>
-        </div>
+      {role === "pharmacist" ? (
+          <div className="flex">
+          <div className="mr-3">
+          <Button color="white" variant="secondary"onClick={selectClinic}> <p className="text-xl" >Clinic</p> </Button>
+          </div>
+          <div>
+          <Button color="white" variant="secondary"onClick={selectPharmacy}> <p className="text-xl">Pharmacy</p></Button>
+          </div>
+          </div>
+      ) : (
+          <p className="xl">Customer Service</p>
+      )}
+        
       </div>
       <div style={{ height: isOpen ? "400px" : "0px" }} className="chat-body">
         {pharmacy ? (

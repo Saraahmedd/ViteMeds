@@ -13,6 +13,8 @@ import PromptMessage from "@/components/PromptMessage";
 
 const Admins = () => {
   const admins = useSelector((state) => state.getUsersReducer.user);
+  const [showRegister,setShowRegister] = useState(false);
+
   const {
     loading: registerLoading,
     success: registerSuccess,
@@ -65,6 +67,7 @@ const Admins = () => {
     e.preventDefault();
     // Dispatch register action with form data
     dispatch(registerAction({ ...formData, role: "administrator" }));
+    setShowRegister(true);
     // Clear form fields
   };
 
@@ -92,8 +95,8 @@ const Admins = () => {
         <BottomCallout
           message="Registration successful"
           variant="success"
-          visible={true}
-          setVisible={setVisibleFeedback}
+          visible={showRegister}
+          setVisible={setShowRegister}
         />
       )}
 
@@ -102,7 +105,7 @@ const Admins = () => {
         <BottomCallout
           message="User removed successfully"
           variant="success"
-          visible={true}
+          visible={visibleFeedback}
           setVisible={setVisibleFeedback}
         />
       )}
@@ -110,10 +113,10 @@ const Admins = () => {
       {registerError && (
         // Show error message for registration failure
         <BottomCallout
-          message="Registration failed"
+          message="Registration failed. Please fill in all the required fields."
           variant="error"
-          visible={true}
-          setVisible={setVisibleFeedback}
+          visible={showRegister}
+          setVisible={setShowRegister}
         />
       )}
 
@@ -122,7 +125,7 @@ const Admins = () => {
         <BottomCallout
           message="Error removing user"
           variant="error"
-          visible={true}
+          visible={visibleFeedback}
           setVisible={setVisibleFeedback}
         />
       )}
