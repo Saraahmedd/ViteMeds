@@ -135,7 +135,7 @@ Each user role on ViteMeds - Guest, Patient, Pharmacist, and Admin - has tailore
 
 <details>
 <summary>
-  ### User Signup </summary>
+  User Signup </summary>
 
 #### backend/controllers/authController
 
@@ -215,7 +215,7 @@ exports.signup = catchAsync(async (req, res, next) => {
 
 <details>
 <summary>
-### Order Checkout </summary>
+Order Checkout </summary>
 
 #### backend/controllers/orderController
 
@@ -246,7 +246,7 @@ const createOrderCheckout = async (session) => {
 
 <details>
 <summary>
-### Send Message in Chat </summary>
+Send Message in Chat </summary>
 
 #### backend/controllers/chatController
 
@@ -273,7 +273,7 @@ exports.sendMessage = async (req, res) => {
 
 <details>
 <summary>
-### Add Medicine Action </summary>
+Add Medicine Action </summary>
 
 #### newfrontend/src/app/redux/actions/medicineActions
 
@@ -318,7 +318,7 @@ export const addMedicine = (medicine) => async (dispatch) => {
 
 <details>
 <summary>
-### Add To Cart Reducer </summary>
+Add To Cart Reducer </summary>
 
 #### newfrontend/src/app/redux/reducers/cartReducer
 
@@ -359,7 +359,7 @@ export const addToCartReducer = (state = addToCartInitialState, action) => {
 
 <details>
 <summary>
-### Change Password Component </summary>
+Change Password Component </summary>
 
 #### newfrontend/src/components/ChangePassword.js
 
