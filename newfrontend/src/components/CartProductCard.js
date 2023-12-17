@@ -57,7 +57,12 @@ function CartProductCard({
           </Card>
           <div className="mt-2 lg:my-0 lg:mx-5 w-full lg:w-auto">
             <p className="font-bold colorColor text-xl">{name}</p>
-            <p className="font-bold colorColor text-lg">{price} USD</p>
+            <p className="font-bold colorColor text-lg">
+              {localStorage.getItem("discount")
+                ? price * localStorage.getItem("discount") * 1
+                : price}{" "}
+              USD
+            </p>
           </div>
 
           <div className="flex-1 grow" />
@@ -100,10 +105,17 @@ function CartProductCard({
 
           <div className="lg:mx-6 my-2 lg:my-0 self-end lg:self-center text-end">
             <p className="text-xs text-gray-200 my-1 lg:my-0">
-              {quantity} x {price} USD
+              {quantity} x{" "}
+              {localStorage.getItem("discount")
+                ? price * localStorage.getItem("discount") * 1
+                : price}{" "}
+              USD
             </p>
             <span className="font-bold text-xl my-1 lg:my-0">
-              {quantity * price} USD
+              {localStorage.getItem("discount")
+                ? quantity * price * localStorage.getItem("discount") * 1
+                : quantity * price}{" "}
+              USD
             </span>
           </div>
 

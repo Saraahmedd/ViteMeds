@@ -18,6 +18,12 @@ export default function Sidebar() {
   const medicines = useSelector((state) => state.getMedicinesReducer);
 
   useEffect(() => {
+    if (medicines?.discount) {
+      localStorage.setItem("discount", 1 - medicines.discount / 100);
+    }
+  }, [medicines]);
+
+  useEffect(() => {
     if (role == "patient") {
       dispatch(getMedicinesAction({}));
     }
