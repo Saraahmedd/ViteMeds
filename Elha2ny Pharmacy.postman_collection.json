@@ -1,0 +1,1223 @@
+{
+	"info": {
+		"_postman_id": "d3898676-25e8-43af-b998-d84924b2bb84",
+		"name": "Elha2ny Pharmacy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26366023"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "RegisterPatient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n  \"username\": \"mailU\",\r\n  \"name\": \"John Doe\",\r\n  \"email\": \"john.doeeEe5@example.com\",\r\n  \"password\": \"Password123\",\r\n  \"passwordConfirm\": \"Password123\",\r\n  \"dateOfBirth\": \"1990-01-01\",\r\n  \"gender\": \"male\",\r\n  \"mobileNumber\": \"1234567890\",\r\n  \"emergencyContact\": {\r\n    \"fullName\": \"Jane Doe\",\r\n    \"mobileNumber\": \"9876543210\",\r\n    \"relationToPatient\": \"omo\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/user/signup",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RegisterDr",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"username\": \"amir\",\r\n  \"name\": \"abdullah hatem\",\r\n  \"email\": \"john.dog@example.com\",\r\n  \"password\": \"password123\",\r\n  \"passwordConfirm\": \"password123\",\r\n  \"DateOfbirth\": \"2002-01-01\",\r\n  \"gender\": \"male\",\r\n  \"mobileNumber\": \"1234567890\",\r\n  \"HourlyRate\": \"120\",\r\n  \"educationalbackground\": \"wala ay\",\r\n  \"speciality\": \"wala ay\",\r\n  \"role\": \"doctor\",\r\n  \"affiliation\": \"keke\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/user/signup",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RegisterPharmacist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "testt555",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@gmail.kommmmmsff",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "pass1234",
+									"type": "text"
+								},
+								{
+									"key": "passwordConfirm",
+									"value": "pass1234",
+									"type": "text"
+								},
+								{
+									"key": "dateOfBirth",
+									"value": "2002-01-01",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "01099149449",
+									"type": "text"
+								},
+								{
+									"key": "hourlyRate",
+									"value": "60",
+									"type": "text"
+								},
+								{
+									"key": "educationalBackground",
+									"value": "none",
+									"type": "text"
+								},
+								{
+									"key": "speciality",
+									"value": "none",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "pharmacist",
+									"type": "text"
+								},
+								{
+									"key": "affiliation",
+									"value": "hospital",
+									"type": "text"
+								},
+								{
+									"key": "workinghours",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "documents",
+									"type": "file",
+									"src": [
+										"/C:/Users/ABDULLAH/Downloads/GUC_314_61_37736_2023-11-01T07_55_54 (1).pdf",
+										"/C:/Users/ABDULLAH/Downloads/GUC_314_61_37736_2023-11-01T07_55_31 (2).pdf"
+									]
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/user/signup",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"uniqueU233\",\r\n    \"password\": \"Pass1234\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/user/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update password",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"passwordCurrent\": \"password123\",\r\n    \"password\": \"pass1234\",\r\n    \"passwordConfirm\": \"pass1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/user/changePassword",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user",
+								"changePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sendOTP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"john.doe2@example.com\",\r\n    \"role\": \"patient\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/user/forgotPassword",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user",
+								"forgotPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ResetPass",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"OTP\": 292378,\r\n    \"email\": \"abdohatom2002@gmail.com\",\r\n    \"role\": \"patient\",\r\n    \"password\": \"pass1235\",\r\n    \"passwordConfirm\": \"pass1235\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/user/forgotPassword",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user",
+								"forgotPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/user/logout",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patients",
+			"item": [
+				{
+					"name": "Get patient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/patient/filter-Patients-Based-On-Upcoming-Appointments",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"patient",
+								"filter-Patients-Based-On-Upcoming-Appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Address To Patient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/patient",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Details",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get Spacific Patient",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pharmacist",
+			"item": [
+				{
+					"name": "Get Pharmacist",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Spasific Pharmacist",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accept Spasific pharmacist",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/acceptpharmacist/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"acceptpharmacist",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download Doc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/pharmacist/docs/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pharmacist",
+								"docs",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Medicines",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"price\": 53.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/medicines/update/6520a19fa6b64c072c82a380",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"medicines",
+								"update",
+								"6520a19fa6b64c072c82a380"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Medicine",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/ABDULLAH/Pictures/Screenshots/Screenshot (561).png"
+								},
+								{
+									"key": "name",
+									"value": "test555",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "20",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "20",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/medicines/new-medicine",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"medicines",
+								"new-medicine"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Medicines Pharmacist",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/medicines/getmedicines/pharmacist",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"medicines",
+								"getmedicines",
+								"pharmacist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Mediciens",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sender\": \"6562804807324d3fd0c80f0b\",\r\n    \"receiver\": \"6561f0afe7f8af153e56f1f3\",\r\n    \"content\": \"Hello bitch\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/medicines/getmedicines",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"medicines",
+								"getmedicines"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Get Medicine",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/medicines/getmedicines/admin",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"medicines",
+								"getmedicines",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Medicine",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/medicines/delete/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"medicines",
+								"delete",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Using Medicine",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/medicines/medUses",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"medicines",
+								"medUses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Spacific Medicnce",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/medicines/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"medicines",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Archive Medicine",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/medicines/archive/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"medicines",
+								"archive",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alternative Medicine",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/medicines/alternative/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"medicines",
+								"alternative",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Add Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/order/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"order",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Order Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/order/viewOrderDetails/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"order",
+								"viewOrderDetails",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/order/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"order",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Order",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/order/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"order",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sales Month",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/order/total-sales_month/:month",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"order",
+								"total-sales_month",
+								":month"
+							],
+							"variable": [
+								{
+									"key": "month",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/order/allOrders",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"order",
+								"allOrders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order Count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/order/orderCount",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"order",
+								"orderCount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Total Sales",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/order/total-sales",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"order",
+								"total-sales"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Profit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/order/profit",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"order",
+								"profit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profit Per Month",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/order/profitPerMonth/:month",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"order",
+								"profitPerMonth",
+								":month"
+							],
+							"variable": [
+								{
+									"key": "month",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Expenses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/order/expenses",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"order",
+								"expenses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Expenses Per Month",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/order/expensesPerMonth/:month",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"order",
+								"expensesPerMonth",
+								":month"
+							],
+							"variable": [
+								{
+									"key": "month",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter Order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/order/filtered-orders/:medicineId?",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"order",
+								"filtered-orders",
+								":medicineId"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							],
+							"variable": [
+								{
+									"key": "medicineId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Get Cart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/cart/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cart",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Presc",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/order/presc",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"order",
+								"presc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Order",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Items",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Medicine On Cart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/order/items/:medicineId",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"order",
+								"items",
+								":medicineId"
+							],
+							"variable": [
+								{
+									"key": "medicineId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notification",
+			"item": [
+				{
+					"name": "Get Notification",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/notifications/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"notifications",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Notification",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/notifications/:id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"notifications",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Chat",
+			"item": [
+				{
+					"name": "Send In Chat",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/chat/send",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"chat",
+								"send"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Request Cross",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/cart/sendCross",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"cart",
+								"sendCross"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get History",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/order/history/:userId",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"order",
+								"history",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://localhost:8080/api/v1",
+			"type": "string"
+		}
+	]
+}
