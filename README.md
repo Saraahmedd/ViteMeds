@@ -794,7 +794,7 @@ cd ay-haga-pharmacy/
 - **STRIPE_WEBHOOK_SECRET**: Stripe webhook secret.
 </details>
 
-- Then open 2 terminals
+** Then open 2 terminals **
 
 #### First Terminal
 
