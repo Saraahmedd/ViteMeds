@@ -37,6 +37,28 @@ The development team is utilizing GitHub for version control anlong with the Git
 
 ## Screenshots
 
+
+#### Patient Profile Page
+![image-2](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/f51d3fc9-9ee4-4d9a-b2d1-5e4c88df9073)
+
+#### Patient Medicines Page
+![image-4](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/b172edc8-0f26-4fe5-b6b1-b384ab17b54b)
+
+#### Patient View Single Medicine
+![singleMed](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/68a41612-098d-4425-8851-d2c51b834795)
+
+#### Patient Cart
+![image-5](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/bf137795-9b91-468a-8c93-c6c98697aaea)
+
+#### Patient Checkout
+![checkout](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/67f07d38-99d5-4a60-bee2-4b384f5ff48a)
+
+#### Patient View Order Details
+![image-8](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/54ba68f9-6129-43d5-a482-bb6c36238440)
+
+#### Patient Cancel Order Warning
+![image-9](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/ec31e941-d7ff-4085-8ae1-b73df80d8b3d)
+
 #### Admin Dashboard
 ![image](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/7829edb3-e871-4206-9fa2-d340c27c2d9e)
 
@@ -45,28 +67,6 @@ The development team is utilizing GitHub for version control anlong with the Git
 
 #### Admin Medicines Page
 ![image-10](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/35962b75-b272-4463-92e2-9f54c3b7b115)
-
-#### Patient Profile Page
-![image-2](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/f51d3fc9-9ee4-4d9a-b2d1-5e4c88df9073)
-
-#### Patient Medicines Page
-![image-4](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/b172edc8-0f26-4fe5-b6b1-b384ab17b54b)
-
-#### Patient Cart
-![image-5](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/bf137795-9b91-468a-8c93-c6c98697aaea)
-
-#### Patient Checkout
-![image-6](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/48f02aba-04a7-41ad-a574-1ba82b2ce0e6)
-
-#### Patient Checkout - Add Address
-![image-7](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/c9b4867f-a50b-4961-aad9-83b9dde9546f)
-
-#### Patient View Order Details
-![image-8](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/54ba68f9-6129-43d5-a482-bb6c36238440)
-
-#### Patient Cancel Order Warning
-![image-9](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/ec31e941-d7ff-4085-8ae1-b73df80d8b3d)
-
 #### Pharmacist Profile Page
 ![image-11](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/c88acc71-c2e4-487a-8763-9fdb1068a965)
 
