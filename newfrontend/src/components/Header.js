@@ -30,6 +30,11 @@ const Header = () => {
                 </a>
               </li>
               <li class="inline mx-2">
+                <a href="/policy" className="hover:text-gray-400">
+                  Policy
+                </a>
+              </li>
+              <li class="inline mx-2">
                 <a href="/signup/patient" className="hover:text-gray-400">
                   Sign Up
                 </a>
