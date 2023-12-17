@@ -55,19 +55,19 @@ The development team is utilizing GitHub for version control anlong with the Git
 #### Patient Cart
 ![image-5](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/bf137795-9b91-468a-8c93-c6c98697aaea)
 
-####Patient Checkout
+#### Patient Checkout
 ![image-6](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/48f02aba-04a7-41ad-a574-1ba82b2ce0e6)
 
-####Patient Checkout - Add Address
+#### Patient Checkout - Add Address
 ![image-7](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/c9b4867f-a50b-4961-aad9-83b9dde9546f)
 
-####Patient View Order Details
+#### Patient View Order Details
 ![image-8](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/54ba68f9-6129-43d5-a482-bb6c36238440)
 
-####Patient Cancel Order Warning
+#### Patient Cancel Order Warning
 ![image-9](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/ec31e941-d7ff-4085-8ae1-b73df80d8b3d)
 
-####Pharmacist Profile Page
+#### Pharmacist Profile Page
 ![image-11](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/c88acc71-c2e4-487a-8763-9fdb1068a965)
 
 ## Tech/Framework Used
