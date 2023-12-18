@@ -37,6 +37,28 @@ The development team is utilizing GitHub for version control anlong with the Git
 
 ## Screenshots
 
+
+#### Patient Profile Page
+![image-2](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/f51d3fc9-9ee4-4d9a-b2d1-5e4c88df9073)
+
+#### Patient Medicines Page
+![image-4](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/b172edc8-0f26-4fe5-b6b1-b384ab17b54b)
+
+#### Patient View Single Medicine
+![singleMed](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/68a41612-098d-4425-8851-d2c51b834795)
+
+#### Patient Cart
+![image-5](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/bf137795-9b91-468a-8c93-c6c98697aaea)
+
+#### Patient Checkout
+![checkout](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/67f07d38-99d5-4a60-bee2-4b384f5ff48a)
+
+#### Patient View Order Details
+![image-8](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/54ba68f9-6129-43d5-a482-bb6c36238440)
+
+#### Patient Cancel Order Warning
+![image-9](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/ec31e941-d7ff-4085-8ae1-b73df80d8b3d)
+
 #### Admin Dashboard
 ![image](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/7829edb3-e871-4206-9fa2-d340c27c2d9e)
 
@@ -45,29 +67,7 @@ The development team is utilizing GitHub for version control anlong with the Git
 
 #### Admin Medicines Page
 ![image-10](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/35962b75-b272-4463-92e2-9f54c3b7b115)
-
-#### Patient Profile Page
-![image-2](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/f51d3fc9-9ee4-4d9a-b2d1-5e4c88df9073)
-
-#### Patient Medicines Page
-![image-4](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/b172edc8-0f26-4fe5-b6b1-b384ab17b54b)
-
-#### Patient Cart
-![image-5](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/bf137795-9b91-468a-8c93-c6c98697aaea)
-
-####Patient Checkout
-![image-6](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/48f02aba-04a7-41ad-a574-1ba82b2ce0e6)
-
-####Patient Checkout - Add Address
-![image-7](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/c9b4867f-a50b-4961-aad9-83b9dde9546f)
-
-####Patient View Order Details
-![image-8](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/54ba68f9-6129-43d5-a482-bb6c36238440)
-
-####Patient Cancel Order Warning
-![image-9](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/ec31e941-d7ff-4085-8ae1-b73df80d8b3d)
-
-####Pharmacist Profile Page
+#### Pharmacist Profile Page
 ![image-11](https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy/assets/121675951/c88acc71-c2e4-487a-8763-9fdb1068a965)
 
 ## Tech/Framework Used
@@ -83,50 +83,89 @@ The development team is utilizing GitHub for version control anlong with the Git
 
 ### Other technologies used
 
-- [Javascript](https://www.javascript.com/)
-- [Next](https://nextjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [tremor](https://www.tremor.so/)
 - [Mongoose](https://mongoosejs.com/)
-- [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
 - [Redux](https://redux.js.org/)
-- [VSCode](https://code.visualstudio.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
 - [Stripe](https://stripe.com/)
-- [Mailtrap](https://mailtrap.io/)
-- [MailJet](https://www.mailjet.com/)
+- [Javascript](https://www.javascript.com/)
 - [Github](https://github.com/)
+- [Mailjet](https://www.mailjet.com/)
+- [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
 - [Postman](https://www.postman.com/)
-- [Axios](https://www.axios.com/)
+- [VSCode](https://code.visualstudio.com/)
+- [tremor](https://www.tremor.so/)
+- [axios](https://www.npmjs.com/package/axios)
+- [Mailtrap](https://mailtrap.io/)
+- [Archiver](https://www.npmjs.com/package/archiver)
+- [bcryptjs](https://www.npmjs.com/package/bcryptjs)
+- [Compression](https://www.npmjs.com/package/compression)
+- [Cookie-parser](https://www.npmjs.com/package/cookie-parser)
+- [CORS](https://www.npmjs.com/package/cors)
+- [dotenv](https://www.npmjs.com/package/dotenv)
+- [Express Mongo Sanitize](https://www.npmjs.com/package/express-mongo-sanitize)
+- [Express Rate Limit](https://www.npmjs.com/package/express-rate-limit)
+- [Express Validator](https://express-validator.github.io/docs/)
+- [Helmet](https://helmetjs.github.io/)
+- [hpp](https://www.npmjs.com/package/hpp)
+- [html-to-text](https://www.npmjs.com/package/html-to-text)
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+- [Morgan](https://www.npmjs.com/package/morgan)
+- [Multer](https://www.npmjs.com/package/multer)
+- [Node-Mailjet](https://www.npmjs.com/package/node-mailjet)
+- [Nodemailer](https://nodemailer.com/)
+- [Nodemon](https://nodemon.io/)
+- [PDFKit](https://pdfkit.org/)
+- [Pug](https://pugjs.org/api/getting-started.html)
+- [Sharp](https://sharp.pixelplumbing.com/)
+- [Slugify](https://www.npmjs.com/package/slugify)
+- [Socket.IO](https://socket.io/)
+- [Validator](https://www.npmjs.com/package/validator)
+- [XSS-clean](https://www.npmjs.com/package/xss-clean)
+- [Material-UI](https://material-ui.com/)
+- [i18next](https://www.i18next.com/)
+- [React Bootstrap](https://react-bootstrap.github.io/)
+- [React Cookie](https://www.npmjs.com/package/react-cookie)
+- [React Router DOM](https://reactrouter.com/)
+- [React Scripts](https://create-react-app.dev/docs/adding-a-css-preprocessor/)
+- [Web Vitals](https://web.dev/vitals/)
 
 
 ## Features
 
-### Guest Users
+<details>
+<summary>Guest Users</summary>
 
 - **Informative Exploration**: Guests can learn more about ViteMeds' offerings, policies, and practices through the Home and Policy pages, ensuring transparency and informed decisions.
 - **Sign Up Opportunities**: Guests can easily sign up to become a patient on ViteMeds, expanding their access to healthcare services.
 - **Career Pathways**: Aspiring pharmacists can apply directly through ViteMeds, making it a gateway to professional opportunities.
+</details>
 
-### Patients
+<details>
+<summary> Patients </summary>
 
 - **Medicine Browsing**: Patients have the convenience of browsing through an extensive range of medicines available on ViteMeds, view the details of each product and even get alternative suggestions if the item is sold out.
 - **Cart Functionality**: The ability to add medicines to a cart facilitates a smooth shopping experience, allowing patients to manage and summarize their selections effectively.
 - **Flexible Checkout Options**: Patients can finalize their purchases using their wallet or Stripe, offering flexibility and ease in transactions.
 - **Profile Management**: Patients can access their user-profiles to view and manage personal details, including password changes.
+</details>
 
-### Pharmacists
+<details>
+<summary> Pharmacists </summary>
 
 - **Medicine Management**: Pharmacists have the capability to edit existing medicines or introduce new ones, ensuring the pharmacy's inventory is up-to-date.
 - **Inventory Oversight**: A vital feature allowing pharmacists to monitor pharmacy medicines, ensuring adequate stock and variety.
 - **Sales Insights**: Access to sales reports and order breakdowns provides pharmacists with valuable insights into pharmacy operations and customer preferences.
+</details>
 
-### Administrators
+<details>
+<summary> Administrators </summary>
 
 - **Comprehensive User Management**: Admins have the authority to manage patient and pharmacist accounts, ensuring proper oversight of the platform's users.
 - **Admin Account Management**: Besides managing other users, admins can manage existing admin accounts or create new ones, as well as update their own passwords.
 - **Application Review**: Admins play a crucial role in reviewing pharmacist applications, maintaining the quality and professionalism of the ViteMeds team.
 - **Product Oversight**: Admins can view and monitor pharmacy medicines, although with limited product details compared to pharmacists.
 - **Sales Analysis**: Access to sales reports and order summaries equips admins with critical data for strategic decision-making and operational insights.
+</details>
 
 **User Guide for Navigating the Platform:**
 Each user role on ViteMeds - Guest, Patient, Pharmacist, and Admin - has tailored features and functionalities designed to provide a seamless and efficient experience on the platform. Whether it's for healthcare needs, professional management, or administrative oversight, ViteMeds caters to a wide spectrum of user requirements with ease and precision.
@@ -759,9 +798,10 @@ MailTrap -- Testing alert emails & transactional emails
 MailJet -- Implementating alert emails & transactional emails
 Stripe -- creditcard payment gateway
 
-## Tests
+## Testing
 
-For details refer to the [postman collection](./Elha2ny.postman_collection.json)
+We used [Postman](./Elha2ny.postman_collection.json) for API testing. We also tested the UI by trying to perform every action, and see the results, also by assessing the design and theme.
+refer to [Postman Collection](./Elha2ny.postman_collection.json) for more...
 
 ## How to Use
 
@@ -772,7 +812,29 @@ git clone https://github.com/advanced-computer-lab-2023/ay-haga-Pharmacy.git
 cd ay-haga-pharmacy/
 ```
 
-- Then open 2 terminals
+#### Configuration Variables
+
+<details> <summary> Make sure to configure the following environment variables in your `config.env` file: </summary>
+
+- **NODE_ENV**: Set to "development" for the development environment.
+- **PORT**: Port on which the server will run (e.g., 8000).
+- **DATABASE**: MongoDB database connection URI.
+- **DATABASE_PASSWORD**: Password for the MongoDB database.
+- **JWT_SECRET**: Secret key for JWT token generation.
+- **JWT_EXPIRES_IN**: JWT token expiration time (e.g., "90d" for 90 days).
+- **JWT_COOKIES_EXPIRES_IN**: JWT cookie expiration time (e.g., "90").
+- **EMAIL_USERNAME**: SMTP email username.
+- **EMAIL_PASSWORD**: SMTP email password.
+- **EMAIL_PORT**: SMTP email port.
+- **EMAIL_HOST**: SMTP email host.
+- **EMAIL_FROM**: Default "from" email address for outgoing emails.
+- **SENDGRID_USERNAME**: SendGrid API username.
+- **SENDGRID_PASSWORD**: SendGrid API password.
+- **STRIPE_SECRET_KEY**: Stripe secret API key.
+- **STRIPE_WEBHOOK_SECRET**: Stripe webhook secret.
+</details>
+
+** Then open 2 terminals **
 
 #### First Terminal
 

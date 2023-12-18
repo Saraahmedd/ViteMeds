@@ -9,6 +9,8 @@ import {
   validatePassword,
   validatePhoneNumber,
 } from "../../redux/validators";
+import pharmacyanimation from "../../../../public/animationlogin.json";
+import Lottie from "lottie-react";
 
 const Signup = () => {
   const [visibleFeedback, setVisibleFeedback] = useState(false);
@@ -117,8 +119,16 @@ const Signup = () => {
   }, [registerError]);
 
   return (
-    <div className="flex flex-col grow flex-1 px-8">
-      <Card className="grow flex-1">
+    <div className="flex flex-row">
+    <div className="flex flex-col flex-1 mx-auto">
+    <Lottie
+          animationData={pharmacyanimation}
+          className="w-[620px] h-[750px]"
+          loop={true}
+        />
+    </div>
+    <div className="flex flex-col grow flex-1 p-10 ">
+      <Card className="grow flex-1 border border-gray-200">
         {registerSuccess && (
           // Show success message for registration
           <BottomCallout
@@ -138,12 +148,12 @@ const Signup = () => {
           />
         )}
 
-        <Grid numItems={2} className="gap-x-3 gap-y-4">
-          {/* Log In Form */}
-          {/* Left column */}
+        <p className="font-bold text-3xl text-center py-5 pb-3">Sign Up</p>
+        <hr className="pb-5"/>
+        <Grid numItems={2} className="gap-x-3 gap-y-4 ">
           <>
             <Col numColSpan={2}>
-              <p className="font-bold text-xl">Account Information</p>
+              <p className="font-semibold mt-4 text-xl">Account Information</p>
             </Col>
 
             <Col>
@@ -234,7 +244,7 @@ const Signup = () => {
 
           <>
             <Col numColSpan={2}>
-              <p className="font-bold text-xl">Personal Information</p>
+              <p className="font-semibold mt-4 text-xl">Personal Information</p>
             </Col>
 
             <Col>
@@ -311,16 +321,6 @@ const Signup = () => {
             </Col>
 
             <Col>
-              {/* <TextInput
-                className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
-                type="text"
-                placeholder="Date of Birth (DD/MM/YY) *"
-                name="dateOfBirth"
-                value={formData.dateOfBirth}
-                onChange={handleInputChange}
-                required
-              /> */}
-
               <div className="relative">
                 <input
                   name="dateOfBirth"
@@ -336,7 +336,7 @@ const Signup = () => {
 
           <>
             <Col numColSpan={2}>
-              <p className="font-bold text-xl">Emergency Contact Information</p>
+              <p className="font-semibold mt-4 text-xl">Emergency Contact Information</p>
             </Col>
             <Col>
               <TextInput
@@ -400,13 +400,13 @@ const Signup = () => {
 
             <Button
               variant="primary"
-              className="tracking-wide font-semibold text-gray-100 w-full rounded-lg transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+              className="tracking-wide font-semibold mt-4 text-gray-100 w-full rounded-lg transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
               onClick={handleSignUp}
               loading={registerLoading}
               loadingText="Signing Up..."
             >
               <div className="flex flex-row items-center justify-center">
-                <p className="font-bold text-white mr-2 ">Sign Up</p>
+                <p className="font-semibold mt-4 text-md text-white mr-2 ">Sign Up</p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -424,6 +424,7 @@ const Signup = () => {
           </>
         </Grid>
       </Card>
+    </div>
     </div>
   );
 };

@@ -18,6 +18,12 @@ export default function Sidebar() {
   const medicines = useSelector((state) => state.getMedicinesReducer);
 
   useEffect(() => {
+    if (medicines?.discount) {
+      localStorage.setItem("discount", 1 - medicines.discount / 100);
+    }
+  }, [medicines]);
+
+  useEffect(() => {
     if (role == "patient") {
       dispatch(getMedicinesAction({}));
     }
@@ -280,7 +286,7 @@ export default function Sidebar() {
               className="h-8 mr-2"
               alt="Flowbite Logo"
             />
-            <h1 className="font-bold text-xl">Harmony Meds</h1>
+            <h1 className="font-bold text-xl">Vite</h1>
             {role === "pharmacist" && (
               <ActiveIconNotification
                 notifications={notifications}

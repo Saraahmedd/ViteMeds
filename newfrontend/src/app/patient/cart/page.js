@@ -89,7 +89,12 @@ export default function Cart() {
 
               <p className="font-bold text-2xl mt-1">
                 {" "}
-                {cart?.totalPrice.toFixed(2)} USD
+                {localStorage.getItem("discount")
+                  ? cart?.totalPrice.toFixed(2) *
+                    localStorage.getItem("discount") *
+                    1
+                  : cart?.totalPrice.toFixed(2)}{" "}
+                USD
               </p>
               <Button
                 disabled={cartItems?.length === 0}

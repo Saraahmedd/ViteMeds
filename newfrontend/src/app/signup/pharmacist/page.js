@@ -5,6 +5,8 @@ import { FileUpload } from "@/components/FileUpload";
 import { Button, Card, Col, Divider, Grid, TextInput } from "@tremor/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import pharmacyanimation from "../../../../public/animationlogin.json";
+import Lottie from "lottie-react";
 import {
   validateEmail,
   validatePassword,
@@ -149,356 +151,351 @@ const SignupPharmacist = () => {
           setVisible={setErrorCallout}
         />
       )}
-      <div className="flex flex-col grow flex-1 px-8">
-        <Card className="grow flex-1">
-          <Grid numItems={2} className="gap-x-3 gap-y-4">
-            <>
-              <Col numColSpan={2}>
-                <p className="font-bold text-xl">Account Information</p>
-              </Col>
-              <Col>
-                <TextInput
-                  className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
-                  type="text"
-                  placeholder="Email *"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  error={
-                    (!validateEmail(formData.email) && formData.email !== "") ||
-                    (formData.email === "" && registerError)
-                  }
-                  errorMessage={
-                    formData.email !== ""
-                      ? !validateEmail(formData.email) &&
-                        formData.email !== "" &&
-                        "Please enter a valid email"
-                      : registerError && "Please fill in this field"
-                  }
-                />
-              </Col>
-
-              <Col>
-                <TextInput
-                  className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
-                  type="username"
-                  placeholder="Username *"
-                  name="username"
-                  value={formData.username}
-                  error={registerError && formData.username === ""}
-                  errorMesssage={
-                    registerError &&
-                    formData.username === "" &&
-                    "Please fill in this field"
-                  }
-                  onChange={handleInputChange}
-                  required
-                />
-              </Col>
-
-              <Col>
-                <TextInput
-                  className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
-                  type="password"
-                  placeholder="Password *"
-                  name="password"
-                  value={formData.password}
-                  error={
-                    (!validatePassword(formData.password) &&
-                      formData.password !== "") ||
-                    (registerError && formData.password === "")
-                  }
-                  errorMessage={
-                    formData.password !== ""
-                      ? !validatePassword(formData.password) &&
-                        formData.password !== "" &&
-                        "Password must be at least 8 characters with 1 uppercase, 1 lowercase and 1 number"
-                      : registerError && "Please fill in this field"
-                  }
-                  onChange={handleInputChange}
-                  required
-                />
-              </Col>
-
-              <Col>
-                <TextInput
-                  className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
-                  type={"password"}
-                  placeholder="Confirm Password *"
-                  name="passwordConfirm"
-                  value={formData.passwordConfirm}
-                  required
-                  error={
-                    (!passwordMatch && formData.passwordConfirm !== "") ||
-                    (registerError && formData.passwordConfirm === "")
-                  }
-                  errorMessage={
-                    formData !== ""
-                      ? !passwordMatch &&
-                        formData.passwordConfirm !== "" &&
-                        "Passwords do not match"
-                      : registerError && "Please fill in this field"
-                  }
-                  onChange={handlePasswordConfirmChange}
-                />
-              </Col>
-            </>
-
-            <>
-              <Col numColSpan={2}>
-                <p className="font-bold text-xl mt-4">Personal Information</p>
-              </Col>
-
-              <Col>
-                <TextInput
-                  className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
-                  type="text"
-                  placeholder="Full Name *"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  error={registerError && formData.name === ""}
-                  errorMessage={
-                    registerError &&
-                    formData.name === "" &&
-                    "Please fill in this field"
-                  }
-                  required
-                />
-              </Col>
-
-              <Col>
-                <TextInput
-                  className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
-                  type="Number"
-                  placeholder="Phone Number *"
-                  onChange={handleInputChange}
-                  required
-                  name="phoneNumber"
-                  value={formData.phoneNumber}
-                  error={
-                    (formData.phoneNumber &&
-                      !validatePhoneNumber(formData.phoneNumber)) ||
-                    (registerError && formData.phoneNumber === "")
-                  }
-                  errorMessage={
-                    formData.phoneNumber !== ""
-                      ? formData.phoneNumber &&
-                        !validatePhoneNumber(formData.phoneNumber) &&
-                        "Please enter 11 digits sarting by a zero"
-                      : registerError && "Please fill in this field"
-                  }
-                />
-              </Col>
-
-              <Col>
-                <div className="flex flex-row h-full w-full rounded-lg overflow-hidden">
-                  <div
-                    role="button"
-                    onClick={() =>
-                      handleInputChange({
-                        target: { name: "gender", value: "male" },
-                      })
-                    }
-                    className={`flex items-center justify-center flex-1 h-full text-center ${
-                      formData.gender === "male" ? "bg-blue-800" : "bg-gray-800"
-                    }`}
-                  >
-                    <span className="my-auto text-2xl">♂</span>
-                  </div>
-                  <div
-                    role="button"
-                    onClick={() =>
-                      handleInputChange({
-                        target: { name: "gender", value: "female" },
-                      })
-                    }
-                    className={`flex items-center justify-center flex-1 h-full text-center ${
-                      formData.gender !== "male" ? "bg-pink-500" : "bg-gray-800"
-                    }`}
-                  >
-                    <span className="my-auto text-2xl">♀</span>
-                  </div>
-                </div>
-              </Col>
-
-              <Col>
-                {/* <TextInput
-                  className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
-                  type="text"
-                  placeholder="Date of Birth (DD/MM/YY) *"
-                  name="dateOfBirth"
-                  value={formData.dateOfBirth}
-                  onChange={handleInputChange}
-                  required
-                /> */}
-                <div className="relative bg-gray-800">
-                  <input
-                    name="dateOfBirth"
-                    value={formData.dateOfBirth}
+      <div className="flex flex-row">
+        <div className="flex flex-col flex-1 mx-auto">
+          <Lottie
+            animationData={pharmacyanimation}
+            className="w-[620px] h-[750px]"
+            loop={true}
+          />
+        </div>
+        <div className="flex flex-col grow flex-1 p-10 ">
+          <Card className="grow flex-1 border border-gray-700">
+            <p className="font-bold text-3xl text-center py-5 pb-3">Sign Up</p>
+            <hr className="pb-5" />
+            <Grid numItems={2} className="gap-x-3 gap-y-4">
+              <>
+                <Col numColSpan={2}>
+                  <p className="font-semibold mt-4 text-xl">
+                    Account Information
+                  </p>
+                </Col>
+                <Col>
+                  <TextInput
+                    className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
+                    type="text"
+                    placeholder="Email *"
+                    name="email"
+                    value={formData.email}
                     onChange={handleInputChange}
-                    type="date"
                     required
-                    className="p-2 bg-gray-800 text-white border border-gray-700 rounded-md outline-none w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg focus:shadow-outline focus:border-blue-500"
-                    // Add other date picker props and event handlers as needed
+                    error={
+                      (!validateEmail(formData.email) &&
+                        formData.email !== "") ||
+                      (formData.email === "" && registerError)
+                    }
+                    errorMessage={
+                      formData.email !== ""
+                        ? !validateEmail(formData.email) &&
+                          formData.email !== "" &&
+                          "Please enter a valid email"
+                        : registerError && "Please fill in this field"
+                    }
                   />
-                </div>
-              </Col>
-            </>
+                </Col>
 
-            <>
-              <Col numColSpan={2}>
-                <p className="font-bold text-xl mt-4">Work Information</p>
-              </Col>
+                <Col>
+                  <TextInput
+                    className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
+                    type="username"
+                    placeholder="Username *"
+                    name="username"
+                    value={formData.username}
+                    error={registerError && formData.username === ""}
+                    errorMesssage={
+                      registerError &&
+                      formData.username === "" &&
+                      "Please fill in this field"
+                    }
+                    onChange={handleInputChange}
+                    required
+                  />
+                </Col>
 
-              <Col>
-                <TextInput
-                  className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
-                  type="text"
-                  placeholder="Affiliation *"
-                  name="affiliation"
-                  value={formData.affiliation}
-                  required
-                  error={registerError && formData.affiliation === ""}
-                  errorMessage={
-                    registerError &&
-                    formData.affiliation === "" &&
-                    "Please fill in this field"
-                  }
-                  onChange={handleInputChange}
-                />
-              </Col>
+                <Col>
+                  <TextInput
+                    className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
+                    type="password"
+                    placeholder="Password *"
+                    name="password"
+                    value={formData.password}
+                    error={
+                      (!validatePassword(formData.password) &&
+                        formData.password !== "") ||
+                      (registerError && formData.password === "")
+                    }
+                    errorMessage={
+                      formData.password !== ""
+                        ? !validatePassword(formData.password) &&
+                          formData.password !== "" &&
+                          "Password must be at least 8 characters with 1 uppercase, 1 lowercase and 1 number"
+                        : registerError && "Please fill in this field"
+                    }
+                    onChange={handleInputChange}
+                    required
+                  />
+                </Col>
 
-              <Col>
-                <TextInput
-                  className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
-                  type="text"
-                  placeholder="Educational Background *"
-                  name="educationalBackground"
-                  value={formData.educationalBackground}
-                  onChange={handleInputChange}
-                  error={formData.educationalBackground === "" && registerError}
-                  errorMessage={
-                    formData.educationalBackground === "" &&
-                    registerError &&
-                    "Please fill in this field"
-                  }
-                  required
-                />
-              </Col>
+                <Col>
+                  <TextInput
+                    className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
+                    type={"password"}
+                    placeholder="Confirm Password *"
+                    name="passwordConfirm"
+                    value={formData.passwordConfirm}
+                    required
+                    error={
+                      (!passwordMatch && formData.passwordConfirm !== "") ||
+                      (registerError && formData.passwordConfirm === "")
+                    }
+                    errorMessage={
+                      formData !== ""
+                        ? !passwordMatch &&
+                          formData.passwordConfirm !== "" &&
+                          "Passwords do not match"
+                        : registerError && "Please fill in this field"
+                    }
+                    onChange={handlePasswordConfirmChange}
+                  />
+                </Col>
+              </>
 
-              <Col>
-                <TextInput
-                  className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
-                  type="text"
-                  placeholder="Hourly Rate *"
-                  name="hourlyRate"
-                  value={formData.hourlyRate}
-                  onChange={handleInputChange}
-                  error={formData.hourlyRate === "" && registerError}
-                  errorMessage={
-                    formData.hourlyRate === "" &&
-                    registerError &&
-                    "Please fill in this field"
-                  }
-                  required
-                />
-              </Col>
-            </>
-            <>
-              <Col numColSpan={2}>
-                <p className="font-bold text-xl mt-4">Required Documents</p>
-              </Col>
+              <>
+                <Col numColSpan={2}>
+                  <p className="font-semibold text-xl mt-4">
+                    Personal Information
+                  </p>
+                </Col>
 
-              <Col>
-                <FileUpload
-                  variant="secondary"
-                  buttonText="Upload ID"
-                  callBackFiles={setDocument1}
-                ></FileUpload>
-              </Col>
+                <Col>
+                  <TextInput
+                    className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
+                    type="text"
+                    placeholder="Full Name *"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    error={registerError && formData.name === ""}
+                    errorMessage={
+                      registerError &&
+                      formData.name === "" &&
+                      "Please fill in this field"
+                    }
+                    required
+                  />
+                </Col>
 
-              <Col className="flex">
-                <div className="w-[0px] overflow-hidden">
-                  <TextInput className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  " />
-                </div>
+                <Col>
+                  <TextInput
+                    className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
+                    type="Number"
+                    placeholder="Phone Number *"
+                    onChange={handleInputChange}
+                    required
+                    name="phoneNumber"
+                    value={formData.phoneNumber}
+                    error={
+                      (formData.phoneNumber &&
+                        !validatePhoneNumber(formData.phoneNumber)) ||
+                      (registerError && formData.phoneNumber === "")
+                    }
+                    errorMessage={
+                      formData.phoneNumber !== ""
+                        ? formData.phoneNumber &&
+                          !validatePhoneNumber(formData.phoneNumber) &&
+                          "Please enter 11 digits sarting by a zero"
+                        : registerError && "Please fill in this field"
+                    }
+                  />
+                </Col>
 
-                <FileUpload
-                  variant="secondary"
-                  buttonText="Upload Pharmacy Degree"
-                  callBackFiles={setDocument2}
-                ></FileUpload>
-              </Col>
-
-              <Col className="flex">
-                <div className="w-[0px] overflow-hidden">
-                  <TextInput className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  " />
-                </div>
-
-                <FileUpload
-                  variant="secondary"
-                  buttonText="Upload Working License"
-                  callBackFiles={setDocument3}
-                ></FileUpload>
-              </Col>
-
-              <Col>
-                <Button
-                  disabled={
-                    files.document1 === null ||
-                    files.document2 === null ||
-                    files.document3 === null
-                  }
-                  variant="primary"
-                  className="h-full tracking-wide font-semibold text-gray-100 w-full py-4 rounded-lg transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
-                  onClick={handleSignUp}
-                  loading={registerLoading}
-                  loadingText="Signing Up..."
-                >
-                  <div className="flex flex-row items-center justify-center">
-                    <p className="font-bold text-white mr-2 ">Apply Now</p>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="white"
-                      className="w-4 h-4"
+                <Col>
+                  <div className="flex flex-row h-full w-full rounded-lg overflow-hidden">
+                    <div
+                      role="button"
+                      onClick={() =>
+                        handleInputChange({
+                          target: { name: "gender", value: "male" },
+                        })
+                      }
+                      className={`flex items-center justify-center flex-1 h-full text-center ${
+                        formData.gender === "male"
+                          ? "bg-blue-800"
+                          : "bg-gray-800"
+                      }`}
                     >
-                      <path
-                        fillRule="evenodd"
-                        d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                      <span className="my-auto text-2xl">♂</span>
+                    </div>
+                    <div
+                      role="button"
+                      onClick={() =>
+                        handleInputChange({
+                          target: { name: "gender", value: "female" },
+                        })
+                      }
+                      className={`flex items-center justify-center flex-1 h-full text-center ${
+                        formData.gender !== "male"
+                          ? "bg-pink-500"
+                          : "bg-gray-800"
+                      }`}
+                    >
+                      <span className="my-auto text-2xl">♀</span>
+                    </div>
                   </div>
-                </Button>
-              </Col>
-            </>
-          </Grid>
-        </Card>
+                </Col>
+
+                <Col>
+                  <div className="relative bg-gray-800">
+                    <input
+                      name="dateOfBirth"
+                      value={formData.dateOfBirth}
+                      onChange={handleInputChange}
+                      type="date"
+                      required
+                      className="p-2 bg-gray-800 text-white border border-gray-700 rounded-md outline-none w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg focus:shadow-outline focus:border-blue-500"
+                      // Add other date picker props and event handlers as needed
+                    />
+                  </div>
+                </Col>
+              </>
+
+              <>
+                <Col numColSpan={2}>
+                  <p className="font-semibold text-xl mt-4">Work Information</p>
+                </Col>
+
+                <Col>
+                  <TextInput
+                    className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
+                    type="text"
+                    placeholder="Affiliation *"
+                    name="affiliation"
+                    value={formData.affiliation}
+                    required
+                    error={registerError && formData.affiliation === ""}
+                    errorMessage={
+                      registerError &&
+                      formData.affiliation === "" &&
+                      "Please fill in this field"
+                    }
+                    onChange={handleInputChange}
+                  />
+                </Col>
+
+                <Col>
+                  <TextInput
+                    className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
+                    type="text"
+                    placeholder="Educational Background *"
+                    name="educationalBackground"
+                    value={formData.educationalBackground}
+                    onChange={handleInputChange}
+                    error={
+                      formData.educationalBackground === "" && registerError
+                    }
+                    errorMessage={
+                      formData.educationalBackground === "" &&
+                      registerError &&
+                      "Please fill in this field"
+                    }
+                    required
+                  />
+                </Col>
+
+                <Col>
+                  <TextInput
+                    className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  "
+                    type="text"
+                    placeholder="Hourly Rate *"
+                    name="hourlyRate"
+                    value={formData.hourlyRate}
+                    onChange={handleInputChange}
+                    error={formData.hourlyRate === "" && registerError}
+                    errorMessage={
+                      formData.hourlyRate === "" &&
+                      registerError &&
+                      "Please fill in this field"
+                    }
+                    required
+                  />
+                </Col>
+              </>
+              <>
+                <Col numColSpan={2}>
+                  <p className="font-semibold text-xl mt-4">
+                    Required Documents (JPEG, PNG , PDF)
+                  </p>
+                </Col>
+
+                <Col>
+                  <FileUpload
+                    variant="secondary"
+                    buttonText="Upload ID"
+                    callBackFiles={setDocument1}
+                  ></FileUpload>
+                </Col>
+
+                <Col className="flex">
+                  <div className="w-[0px] overflow-hidden">
+                    <TextInput className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  " />
+                  </div>
+
+                  <FileUpload
+                    variant="secondary"
+                    buttonText="Upload Pharmacy Degree"
+                    callBackFiles={setDocument2}
+                  ></FileUpload>
+                </Col>
+
+                <Col className="flex">
+                  <div className="w-[0px] overflow-hidden">
+                    <TextInput className="w-full px-8 py-4 rounded-lg font-medium   placeholder-gray-500 text-lg  " />
+                  </div>
+
+                  <FileUpload
+                    variant="secondary"
+                    buttonText="Upload Working License"
+                    callBackFiles={setDocument3}
+                  ></FileUpload>
+                </Col>
+
+                <Col>
+                  <Button
+                    disabled={
+                      files.document1 === null ||
+                      files.document2 === null ||
+                      files.document3 === null
+                    }
+                    variant="primary"
+                    className="h-full tracking-wide font-semibold text-gray-100 w-full py-4 rounded-lg transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+                    onClick={handleSignUp}
+                    loading={registerLoading}
+                    loadingText="Signing Up..."
+                  >
+                    <div className="flex flex-row items-center justify-center">
+                      <p className="font-semibold text-md text-white mr-2 ">
+                        Apply Now
+                      </p>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="white"
+                        className="w-4 h-4"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M12.97 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06l6.22-6.22H3a.75.75 0 010-1.5h16.19l-6.22-6.22a.75.75 0 010-1.06z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                  </Button>
+                </Col>
+              </>
+            </Grid>
+          </Card>
+        </div>
       </div>
-
-      {/* <div className="min-h-screen flex items-center justify-center bg-gray-900 text-gray-300">
-        <div className="max-w-screen-xl m-0 sm:m-10 shadow sm:rounded-lg flex justify-center flex-1">
-          <div className="lg:w-2/3 xl:w-2/3 p-6 sm:p-12 transform scale-70">
-            <div className="flex flex-col items-center rounded-lg border border-primary-600 px-8 pt-8 pb-12 shadow-lg w-full ">
-              <h1 className="text-2xl xl:text-3xl font-extrabold">Sign Up</h1>
-              <div className="w-full flex-1 mt-8">
-                <div className="mx-auto max-w-l">
-
-
-                  <Divider></Divider>
-                  <h1 className="text-2xl xl:text-3xl font-extrabold text-center">Required Documents</h1>
-
-
-                </div>
-              </div>
-            </div>
-
-
-          </div>
-        </div >
-      </div > */}
     </>
   );
 };

@@ -311,12 +311,23 @@ function Checkout() {
                   <div className="ml-6">
                     <h1 className="font-bold text-lg">{item.medicine.name}</h1>
                     <h1 className="font-semibold text-sm">
-                      {item.quantity} x {item.currentPrice} USD
+                      {item.quantity} x{" "}
+                      {localStorage.getItem("discount")
+                        ? item.currentPrice *
+                          localStorage.getItem("discount") *
+                          1
+                        : item.currentPrice}{" "}
+                      USD
                     </h1>
                   </div>
                   <div className="flex-1 grow justify-end">
                     <p className="text-end font-bold">
-                      {item.currentPrice} USD
+                      {localStorage.getItem("discount")
+                        ? item.currentPrice *
+                          localStorage.getItem("discount") *
+                          1
+                        : item.currentPrice}{" "}
+                      USD
                     </p>
                   </div>
                 </div>
@@ -327,7 +338,12 @@ function Checkout() {
             >
               <p className="font-bold text-end">Total</p>
               <p className="ml-auto font-bold">
-                {cart && cart?.totalPrice} USD
+                {cart && localStorage.getItem("discount")
+                  ? cart?.totalPrice.toFixed(2) *
+                    localStorage.getItem("discount") *
+                    1
+                  : cart?.totalPrice.toFixed(2)}{" "}
+                USD
               </p>
             </div>
           </div>
